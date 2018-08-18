@@ -6,7 +6,7 @@ include('include/header.php');
         <li class="breadcrumb-item">
           <a href="index.php">Resumen</a>
         </li>
-        <li class="breadcrumb-item active">InicioInicio</li>
+        <li class="breadcrumb-item active">InicioInicioInicio</li>
       </ol>
       
 
