@@ -48,4 +48,4 @@ elseif(isset($_POST['ajax']) && isset($_POST['id_mov'])):
     else:
         echo "false";// no eliminado
     endif;
-endif;
+endif;//fin
