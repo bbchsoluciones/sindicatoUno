@@ -105,11 +105,9 @@
   <script src="../../../assets/vendor/chart/Chart.bundle.min.js"></script>
   <script src="../../../assets/vendor/chart/Chart.js"></script> 
   <script src="../../../assets/vendor/chart/Chart.min.js"></script>
-  <script src="../../../assets/js/barChartEntry.js"></script>
   <script src="../../../assets/js/moveManager.js"></script>
   <script src="../../../assets/js/modal.js"></script>
 <?php elseif ($pageName[0]=="barChartExit"): ?>
-  <script src="../../../assets/js/barChartExit.js"></script>
   <script src="../../../assets/vendor/chart/Chart.bundle.js"></script>
   <script src="../../../assets/vendor/chart/Chart.bundle.min.js"></script>
   <script src="../../../assets/vendor/chart/Chart.js"></script>
