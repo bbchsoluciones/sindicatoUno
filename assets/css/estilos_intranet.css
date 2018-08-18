@@ -1,0 +1,263 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500);
+@import url(https://fonts.googleapis.com/css?family=Poppins:400,700);
+/*clases generales */
+
+.cover {
+    object-fit: cover;
+    height: 250px;
+}
+.cover_miniatura{
+    object-fit: cover;
+    height: 60px;
+    width: 100px;
+    
+}
+/* Bootstrap Toggle v2.2.2 corrections for Bootsrtap 4*/
+.toggle-off {
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+}
+.toggle.off {
+    border-color: rgba(0, 0, 0, .25);
+}
+
+.toggle-handle {
+    background-color: white;
+    border: thin rgba(0, 0, 0, .25) solid;
+}
+
+/*fin clases generales*/
+/* List user */
+.userManage-page .activeU{
+    background-color: #495057;
+    color: #ffffff;
+}
+.userManage-page .btn-group-vertical{
+    width: 100%;
+    overflow: hidden;
+}
+.userManage-page .btn-group-vertical >.btn {
+    background-color: #ffffff;
+    color: #495057;
+    border-radius: 0;
+    border: 1px solid #ced4da;
+    text-align: left;
+    width: 100%;
+    outline: none !important;
+}
+
+.userManage-page .buttons-users >.btn {
+    background-color: #ffffff;
+    color: #495057;
+    border-radius: 0;
+    border: 1px solid #ced4da;
+    border-bottom: 0;
+    padding: 10px 20px;
+    outline: none !important;
+}
+
+.userManage-page .btn-group div {
+    border-top: 1px solid #cccccc;
+    border-left: 1px solid #ced4da;
+    vertical-align: middle;
+    padding: 10px 20px;
+    font-size: 14px;
+}
+
+.userManage-page .width {
+    background: #e9ecef;
+    width: 60px;
+}
+
+.userManage-page .width .btn {
+    background: #e9ecef;
+    border: 1px solid #ced4da;
+    color: #495057;
+}
+
+.userManage-page .btn-group-lg .btn {
+    border: 1px solid #ced4da;
+    background: #ffffff;
+    font-size: 14px;
+}
+
+.userManage-page .label {
+    font-size: 16px;
+    padding: 10px 20px;
+    font-weight: 400;
+    border-top: 1px solid #ced4da;
+    border-left: 1px solid #ced4da;
+    border-right: 1px solid #ced4da;
+    border-bottom: 1px solid rgb(108, 192, 115);
+    width: 100%;
+    position: relative;
+}
+.userManage-page .message{
+    font-size: 16px;
+    padding: 10px 20px;
+    font-weight: 400;
+    border: 1px solid #ced4da;
+    width: 100%;
+    position: relative;
+
+}
+
+.userManage-page .fa-clipboard-list, .userManage-page .fa-sort {
+    font-size: 20px;
+    position: absolute;
+    right: 26px;
+}
+
+.userManage-page .fa-edit {
+    font-size: 20px;
+    position: absolute;
+    right: 20px;
+}
+
+.userManage-page .container-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.userManage-page .card .card-img-top,
+.userManage-page .card .card-body {
+    width: 100%;
+    height: 100px;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.userManage-page .card .card-img-top {
+    background: #495057;
+}
+.userManage-page .card .object-fill{
+    object-fit: cover;
+    position: absolute;
+}
+.userManage-page .container-image .img-thumbnail {
+    height: 160px;
+    width: 160px;
+}
+
+.userManage-page #loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.userManage-page #loading img {
+    margin: 10px 0;
+}
+.userManage-page .pager{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.userManage-page .dangerFocus:focus {
+    border-color: #FF0000;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);
+  }
+  .userManage-page.custom-file{
+    overflow: hidden;
+}
+.userManage-page .custom-file-input ~ .custom-file-label::after {
+    content: "Elegir";
+}
+/* END list User*/
+/* son */
+.son-register-page{
+    color: #495057;
+}
+.son-register-page .buscar-padre{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.son-register-page .title{
+    font-weight: 300;
+    font-size: 30px;
+    padding-bottom: 10px;
+}
+.son-register-page .buscar-padre .input-group{
+    max-width: 600px;
+}
+.son-register-page #contenedorH {
+    position: relative;
+    margin-top: 20px;
+    padding-top: 30px;
+}
+.son-register-page #contenedorH .overlay{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    background: rgba(255,255,255,.3);
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 600;
+}
+.son-register-page .container-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0;
+    box-shadow: none;
+}
+
+.son-register-page .card .card-img-top,
+.son-register-page .card .card-body {
+    width: 100%;
+    height: 100px;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.son-register-page .card .card-img-top {
+    background: #495057;
+}
+.son-register-page .card .object-fill{
+    object-fit: cover;
+    position: absolute;
+}
+.son-register-page .container-image .img-thumbnail {
+    height: 160px;
+    width: 160px;
+}
+.son-register-page .list-group li{
+     position: relative;
+}
+.son-register-page .list-group li label{
+    position: absolute;
+    right: 0;
+    padding-right: 20px;
+    text-align: left;
+}
+.son-register-page .no-registros{
+    width: 100%;
+    font-weight: 300;
+    font-size: 20px;
+    text-align: center;
+    padding-top: 30px;
+}
+.son-register-page #sons button{
+    text-align: right;
+}
+.son-register-page #sons i{
+    font-size: 20px;
+    position: absolute;
+    left: 20px;
+}
+/* END son*/
+
+
+
+
+.saldo-movimiento{
+    font-size: 30px;
+    color: green;
+    font-weight: bold;
+}

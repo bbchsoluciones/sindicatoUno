@@ -1,0 +1,826 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500);
+@import url(https://fonts.googleapis.com/css?family=Poppins:400,700);
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+/* GENERALES */
+
+html,
+body {
+    height: 100%;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #ebeeef;
+    margin: 0;
+}
+
+.wrap {
+    min-height: 100%;
+    position: relative;
+}
+
+main {
+    overflow: auto;
+    padding-bottom: 150px;
+}
+
+.toTop {
+    background: #0a4f75;
+    border-radius: 50px;
+    border: 5px solid #ccc;
+    color: #FFF;
+    font-size: 30px;
+    position: fixed;
+    /*       top  right down left */
+    padding: 7px 20px 5px 20px;
+    z-index: 120;
+    bottom: 10px;
+    right: 20px;
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+.no-scroll {
+    overflow: hidden;
+}
+
+/* FIN GENERALES */
+
+/* HEADER */
+
+.navbar-brand {
+    padding: 0;
+}
+
+.navbar {
+    background: rgba(0, 0, 0, .6) !important;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    z-index: 600;
+}
+
+.logo img {
+    margin-top: 5px;
+    max-width: 135px;
+    max-height: 55px;
+}
+
+@media only screen and (max-width: 670px) {
+    .navbar {
+        background: rgba(0, 0, 0, .9) !important;
+    }
+    .carousel {
+        margin-top: 66px;
+    }
+}
+
+/* FIN HEADER */
+
+/* FOOTER */
+
+.footer {
+    position: relative;
+    margin-top: -100px;
+    /* negative value of footer height */
+    height: 100px;
+    clear: both;
+}
+
+/* FIN FOOTER */
+
+/* INICIO */
+
+.home-page .home-text {
+    margin: 5rem 0 !important;
+}
+
+.home-page .cards {
+    margin-bottom: 5rem !important;
+}
+
+.home-page .card {
+    position: relative;
+}
+
+.home-page .card a {
+    background: #3A7290;
+    border-radius: 0;
+    padding: 5px 20px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, .2);
+    color: #fff;
+    font-size: 20px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.home-page .card .card-body {
+    background: #495969;
+    color: #fff;
+}
+
+.home-page .carousel-caption {
+    bottom: 3rem;
+    z-index: 600;
+}
+
+.home-page .carousel-caption h1 {
+    -webkit-animation-delay: 0.3s;
+    -moz-animation-delay: 0.3s;
+    -ms-animation-delay: 0.3s;
+}
+
+.home-page .carousel-caption p {
+    -webkit-animation-delay: 0.5s;
+    -moz-animation-delay: 0.5s;
+    -ms-animation-delay: 0.5s;
+}
+
+.home-page .carousel-caption button {
+    -webkit-animation-delay: 0.7s;
+    -moz-animation-delay: 0.7s;
+    -ms-animation-delay: 0.7s;
+}
+
+/* Declare heights because of positioning of img element */
+
+.home-page .carousel-item {
+    height: 450px;
+    background-color: #777;
+}
+
+.home-page .carousel-item .overlay-image {
+    background: rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    height: 450px;
+    z-index: 500;
+}
+
+.home-page .carousel-item>div {
+    /*box-shadow: 0 0 50px 8px white inset;*/
+    width: 100%;
+    height: 450px;
+    background-size: cover !important;
+    -webkit-background-size: cover !important;
+    -moz-background-size: cover !important;
+    -o-background-size: cover !important;
+    flex-shrink: 0 !important;
+    backface-visibility: hidden !important;
+}
+
+/* RESPONSIVE CSS
+    -------------------------------------------------- */
+
+@media only screen and (max-width: 670px) {
+    .home-page .carousel {
+        margin-top: 66px;
+    }
+}
+
+@media (min-width: 40em) {
+    /* Bump up size of carousel content */
+    .home-page .carousel-caption p {
+        margin-bottom: 1.25rem;
+        font-size: 1.25rem;
+        line-height: 1.4;
+    }
+    .home-page .featurette-heading {
+        font-size: 50px;
+    }
+}
+
+/* FIN INICIO */
+
+.fondo-contact {
+    /*background-color: #17a2b8;*/
+    background-color: #4C4C4C;
+    padding: 30px;
+    /*arriba-derecha-abajo-izquierda*/
+}
+
+.form-contact {
+    background-color: white;
+    border-radius: 10px;
+}
+
+.margin-contact {
+    margin-top: 66px;
+    padding-top: 70px;
+}
+
+.mapa {
+    width: 100%;
+    height: 100%;
+}
+
+.no-padding {
+    padding: 0 !important;
+}
+
+.no-margin {
+    margin: 0 !important;
+}
+
+.text-size-headers {
+    font-size: 40px;
+    color: white;
+}
+
+.text-size-sub-headers {
+    font-weight: bold;
+    font-size: 20px;
+    color: #ccc;
+}
+
+.text-content-contact {
+    color: #ccc;
+}
+
+@media only screen and (min-width:576px) and (max-width:767px) {
+    /*Se ejecutará sólo cuando la resolución horizontal se encuentre entre 320 y 480 píxeles*/
+    .mapa {
+        width: 100%;
+        height: 350px;
+    }
+}
+
+.font-size-icon {
+    font-size: 18px;
+}
+
+@media only screen and (min-width:200px) and (max-width:575px) {
+    /*Se ejecutará sólo cuando la resolución horizontal se encuentre entre 200 y 575 píxeles*/
+    .mapa {
+        width: 100%;
+        height: 250px;
+    }
+    .fondo-general {
+        margin: 8px;
+    }
+    .text-size-headers {
+        font-size: 32px !important;
+    }
+}
+
+/* about-page*/
+
+.img-about {
+    height: 450px;
+    background-color: #777;
+}
+
+.img-about>div {
+    /*box-shadow: 0 0 50px 8px white inset;*/
+    width: 100%;
+    height: 450px;
+    background-size: cover !important;
+    -webkit-background-size: cover !important;
+    -moz-background-size: cover !important;
+    -o-background-size: cover !important;
+    flex-shrink: 0 !important;
+    backface-visibility: hidden !important;
+    background-color: #777;
+}
+
+.text-img-about {
+    color: white;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.img-ab {
+    background: url('http://nubeall.com/wp-content/uploads/2017/11/1quienenessomos.jpg') top center;
+}
+
+.padding-about {
+    padding-top: 100px;
+    padding-bottom: 10px;
+}
+
+.card-content {
+    background-color: #4C4C4C;
+    padding: 10px;
+    color: #ccc;
+    border-radius: 5px;
+    font-size: 1.25rem;
+}
+
+/* about-page*/
+
+/*INICIO GALERIA*/
+
+.gallery {
+    background-image: url('../../assets/images/background.jpg') top center !important;
+    width: 100%;
+    height: 100%;
+    padding-top: 66px;
+    z-index: 2;
+}
+
+.gallery .gallery-header {
+    background: #4C4C4C;
+    width: 100%;
+    height: 200px;
+}
+
+.gallery .gallery-header h4 {
+    color: #FFF;
+}
+
+.gallery .gallery-header p {
+    color: #ccc;
+}
+
+.gallery .card {
+    border-radius: 0;
+    background-size: cover !important;
+    -webkit-background-size: cover !important;
+    -moz-background-size: cover !important;
+    -o-background-size: cover !important;
+    flex-shrink: 0 !important;
+    backface-visibility: hidden !important;
+}
+
+.gallery .big {
+    height: 400px;
+}
+
+.gallery .small {
+    height: 200px;
+}
+
+.gallery .normal {
+    height: 200px;
+}
+
+.gallery a {
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
+}
+
+.gallery .container {
+    padding-top: 20px;
+}
+
+.gallery a:hover>.overlay-card {
+    display: block !important;
+    background: rgba(0, 0, 0, .5);
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.gallery a i {
+    color: rgba(255, 255, 255, .4);
+    font-size: 50px;
+}
+
+.gallery .title {
+    background: rgba(0, 0, 0, 0.3);
+    color: rgba(255, 255, 255, 0.5);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 15px 0;
+}
+
+.gallery .overlay-carousel {
+    background: rgba(0, 0, 0, .7);
+    width: 100%;
+    min-height: 100vh;
+    position: absolute;
+    z-index: 700;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gallery .overlay-container-carousel {
+    background: #ffff;
+}
+
+/* Hide the images by default */
+
+.gallery .overlay-container-carousel .container {
+    background: black;
+    padding: 0;
+    margin: 0;
+    position: relative;
+}
+
+.gallery .overlay-container-carousel .mySlides {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.gallery .overlay-container-carousel .mySlides>img {
+    max-width: 100%;
+    max-height: 100vh;
+    margin: auto;
+}
+
+
+
+/* Next & previous buttons */
+.gallery .overlay-container-carousel .arrows{
+    color: #fff;
+}
+.gallery .overlay-container-carousel .arrows span{
+    width: 100%;
+    padding: 5px 0;
+    text-align: center;
+    font-size: 25px;
+}
+.gallery .overlay-container-carousel .arrows span:hover{
+    background: rgba(255,255,255,0.3);
+}
+.gallery .overlay-container-carousel .left-arrow{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.gallery .overlay-container-carousel .right-arrow{
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* Number text (1/3 etc) */
+
+.gallery .overlay-container-carousel .numbertext {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+}
+
+.gallery .overlay-container-carousel .overlay-close{
+    position: absolute;
+    -webkit-z-index: 702;
+    -moz-z-index: 702;
+    -ms-z-index: 702;
+    -o-z-index: 702;
+    z-index: 702;
+    top: 0;
+    right: 0;
+    padding-top: 5px;
+    padding-right: 15px;
+    font-size: 30px;
+    color: #ffff;
+}
+
+/*FIN GALERA */
+
+/*estilos login*/
+
+.login-page input[type="text"],
+.login-page input[type="password"],
+.login-page textarea {
+    outline: none;
+    box-shadow: none !important;
+    border: 0;
+}
+
+.clear {
+    clear: both;
+}
+
+.login-page textarea:focus,
+.login-page textarea.form-control:focus,
+.login-page input.form-control:focus,
+.login-page input[type=text]:focus,
+.login-page input[type=password]:focus,
+.login-page input[type=email]:focus,
+.login-page input[type=number]:focus,
+.login-page [type=text].form-control:focus,
+.login-page [type=password].form-control:focus,
+.login-page [type=email].form-control:focus,
+.login-page [type=tel].form-control:focus,
+.login-page [contenteditable].form-control:focus {
+    outline: none;
+    box-shadow: none !important;
+    border: 0;
+}
+
+.login-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.login-page .login {
+    width: 670px;
+    position: relative;
+}
+
+.login-page .back {
+    color: #ffffff;
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    
+}
+
+.login-page .form-login {
+    background-color: white;
+    padding: 40px;
+}
+
+.login-page .fondo-login {
+    background-color: #ebeeef;
+}
+
+.login-page .cabecera {
+    width: 100%;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('../../assets/images/Security.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.login-page .overlay-image {
+    background-color: rgba(54, 84, 99, 0.7);
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 180px;
+}
+
+.login-page .cabecera span {
+    font-size: 30px;
+    position: absolute;
+    color: #fff;
+    text-transform: uppercase;
+    line-height: 1.2;
+    text-align: center;
+    font-weight: 700;
+}
+
+.login-page .form-login {
+    max-width: 670px;
+    padding: 50px 100px;
+}
+
+.login-page .fill-line:nth-child(3) {
+    margin-top: 20px;
+}
+
+.login-page .fill-line .line1,
+.login-page .fill-line .line2 {
+    background: linear-gradient(to left, #b2b2b2 50%, #43AD29 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    transition: all 1s ease;
+    height: 1px;
+}
+
+.login-page .fill-line input[type="text"]:focus+.line1,
+.login-page .fill-line input[type="password"]:focus+.line2 {
+    background-position: left bottom;
+}
+
+.login-page .fill-line label {
+    font-family: 'Poppins';
+    font-size: 15px;
+    color: #808080;
+    width: 25%;
+    padding-top: 15px;
+    padding-right: 25px;
+    float: left;
+    text-align: right;
+}
+
+.login-page .fill-line .input-container {
+    width: 75%;
+    float: left;
+}
+
+.login-page .fill-line .input-container input {
+    font-family: 'Poppins';
+    font-size: 15px;
+    display: block;
+    margin: 0 !important;
+    padding: 15px;
+    width: 100%;
+}
+
+.login-page .remember {
+    color: #999999;
+    font-family: 'Poppins';
+    font-size: 13px;
+    width: 75%;
+    margin-top: 20px;
+    margin-left: 25%;
+}
+
+.login-page .remember>div:first-child {
+    width: 45%;
+}
+
+.login-page .remember>div:last-child {
+    width: 55%;
+    text-align: right;
+}
+
+.login-page .btn-container {
+    height: 50px;
+}
+
+.login-page .btn-container button {
+    padding: 10px 30px;
+    float: right;
+    margin-top: 20px;
+}
+
+.login-page .customcheck {
+    display: block;
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 13px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+
+.login-page .customcheck input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom checkbox */
+
+.login-page .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    border: 1px solid #ccc;
+    background-color: #FFF;
+    border-radius: 5px;
+}
+
+/* On mouse-over, add a grey background color */
+
+.login-page .customcheck:hover input~.checkmark {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+
+.login-page .customcheck input:checked~.checkmark {
+    border-radius: 5px;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+
+.login-page .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+
+.login-page .customcheck input:checked~.checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+
+.login-page .customcheck .checkmark:after {
+    left: 7px;
+    top: 4px;
+    width: 5px;
+    height: 10px;
+    border: solid #02cf32;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+@media(max-width:650px) {
+    .login-page .form-login {
+        padding: 40px 30px;
+    }
+}
+
+@media(max-width:500px) {
+    .login-page .remember {
+        width: 100%;
+        margin-left: 0;
+    }
+    .login-page .fill-line label,
+    .login-page .fill-line .input-container {
+        clear: both;
+    }
+    .login-page .fill-line .input-container {
+        width: 100%;
+        float: left;
+    }
+}
+
+@media(max-width:400px) {
+    .login-page .remember>div {
+        clear: both;
+    }
+    .login-page .remember>div:first-child {
+        width: 100%;
+    }
+    .login-page .remember>div:last-child {
+        width: 100%;
+        text-align: left;
+    }
+}
+
+/*estilos login*/
+/* NEWS PAGE */
+
+.news-page{
+    padding-top: 100px;
+}
+.news-page .news-time{
+    font-size: 15px;
+}
+.news-page .news-time span{
+    color: #4C4C4C;
+}
+.news-page .card {
+    border-radius: 0;
+    border:0;
+    margin-bottom: 2px;
+    background-size: cover !important;
+    -webkit-background-size: cover !important;
+    -moz-background-size: cover !important;
+    -o-background-size: cover !important;
+    flex-shrink: 0 !important;
+    backface-visibility: hidden !important;
+    height:150px;
+}
+.news-page a{
+    background: rgba(1,31,75, 0.1);
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
+    
+}
+.news-page .card .overlay-title{
+    color: white;
+    font-size: 16px;
+    font-family: 'Poppins';
+    text-shadow: 0.125rem 0.125rem 0.25rem #000000;
+    position: absolute;
+    bottom:0;
+    width: 100%;
+    padding: 15px;
+}
+/* FIN NEWS PAGE */
