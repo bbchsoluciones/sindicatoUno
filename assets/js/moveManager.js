@@ -197,40 +197,6 @@ function selectMovimiento() {
     });
 
 }
-function deleteMovimiento(id_mov) {
-    var parametros = {
-        "ajax": 'true',
-        "func": 'deleteMov',
-        "id_mov": id_mov
-    };
-    
-    $.ajax({
-        url: '../../../controller/MovimientoEliminarC.php',
-        type: 'GET',
-        data: parametros,
-        success: function (response) {
-            try {
-               //$(".breadcrumb").children().remove();
-               //$(".breadcrumb").append('<div>'+response+'</div>"');
-               
-               if(response=="true"){
-                   //alert('SI eliminado');
-                   selectMovimiento();
-                   mostrarFondo();
-               }else{
-                    alert('NO eliminado');
-               }
-
-            } catch (err) {
-                alert(err);
-            }
-
-        }
-       
-    });
-  
-
-}
 function updateMovimiento(folio) {
 
 
@@ -254,7 +220,7 @@ function updateMovimiento(folio) {
     };
     
      $.ajax({
-        url: '../../../controller/MovimientoActualizarC.php',
+        url: '../../../controller/MovimientoC.php',
         type: 'POST',
         data: parametros,
         success: function (response) {
@@ -284,6 +250,41 @@ function updateMovimiento(folio) {
   
 
 }
+function deleteMovimiento(id_mov) {
+    var parametros = {
+        "ajax": 'true',
+        "id_mov": id_mov
+    };
+    
+    $.ajax({
+        url: '../../../controller/MovimientoC.php',
+        type: 'POST',
+        data: parametros,
+        success: function (response) {
+            try {
+               //$(".breadcrumb").children().remove();
+               //$(".breadcrumb").append('<div>'+response+'</div>"');
+               
+               if(response=="true"){
+                   //alert('SI eliminado');
+                   selectMovimiento();
+                   mostrarFondo();
+               }else{
+                   
+                    alert('NO eliminado');
+               }
+
+            } catch (err) {
+                alert(err);
+            }
+
+        }
+       
+    });
+  
+
+}
+
 function habilitar(folio){
 
 
