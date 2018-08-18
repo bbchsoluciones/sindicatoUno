@@ -4,7 +4,7 @@ include('include/header.php');
 <!-- Breadcrumbs-->
 <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="index.php">Resumen</a>
+          <a href="index.php">BRAULIO</a>
         </li>
         <li class="breadcrumb-item active">Inicio</li>
       </ol>
