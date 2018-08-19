@@ -28,7 +28,7 @@ include('include/header.php');
                                                             <div class="form-group">
                                                                 <label>Categoria Egreso</label>
                                                                 <select id="categoriaTM" name="categoriaTM" class="form-control" onchange="graficoEgreso($('#categoriaTM option:selected').val(),$('#anioIngreso option:selected').val())">
-                                                                    <option selected value="0">Seleccione una...</option>
+                                                                    <option selected value="0">TODOS</option>
                                                                 </select>
                                                             </div>
                                                         </div>

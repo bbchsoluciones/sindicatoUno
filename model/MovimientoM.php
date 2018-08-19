@@ -459,7 +459,46 @@ class MovimientoM{
 			echo "Fallo: " . $ex->getMessage();
         }	
 
-    }// Cierra total_egreso
+	}// Cierra total_egreso
+	
+	public function mostrar_movimientos_totales($id_tipo, $anio){
+        
+		$this->movimientos = array();
+		try{
+			$pdo = PDOConnection::instance();
+			$conn = $pdo->getConnection();
+			//$sql = "SELECT * FROM movimiento";
+			$sql = "SELECT
+					tm.tipo_movimiento,
+					m.monto_movimiento,
+					YEAR(m.fecha_movimiento) AS anio,
+					MONTH(m.fecha_movimiento) AS mes
+					FROM movimiento m
+					JOIN nombre_movimiento nm
+					ON m.nombre_movimiento_id_nombre_movimiento = nm.id_nombre_movimiento
+					JOIN categoria_movimiento cm
+					ON nm.categoria_movimiento_id_categoria_movimiento = cm.id_categoria_movimiento
+					JOIN tipo_movimiento tm
+					ON cm.tipo_movimiento_id_tipo_movimiento = tm.id_tipo_movimiento
+					WHERE YEAR(m.fecha_movimiento)=:anio
+					AND tm.id_tipo_movimiento=:id_tipo_movimiento;";
+			$consulta = $conn->prepare($sql);	
+			$consulta->bindValue(':anio', $anio);					
+			$consulta->bindValue(':id_tipo_movimiento', $id_tipo);					
+			$consulta->execute();
+			$resultado = $consulta->fetchAll();
+			foreach ($resultado as $registros):
+                array_push($this->movimientos, array_map('utf8_encode',$registros));
+            endforeach;
+			$conn = null;
+			$consulta = null;
+
+		}catch (Exception $ex) {
+			echo "Fallo: " . $ex->getMessage();
+        }	
+            
+
+	}// Cierra mostrar_movimientos_totales
 	
 
 

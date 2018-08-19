@@ -58,4 +58,14 @@ elseif(isset($_POST['id_categoria']) && isset($_POST['anio'])):
         $m = array("data" => "");
         echo json_encode($m);
     endif;
+elseif(isset($_POST['id_tipo']) && isset($_POST['anio'])):
+    $m = new MovimientoM();
+    $m->mostrar_movimientos_totales($_POST['id_tipo'], $_POST['anio']);
+    if (!empty($m->getMovimientos())):
+        $m = array("data" => $m->getMovimientos());
+        echo json_encode($m);
+    else:
+        $m = array("data" => "");
+        echo json_encode($m);
+    endif;
 endif;//fin
