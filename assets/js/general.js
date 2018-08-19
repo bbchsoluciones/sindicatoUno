@@ -38,10 +38,13 @@ function limpiarCampos(id_contenedor,elemento,excepcion) {
                 $(id_contenedor).find(elemento).not(excepcion).append(' <option value="0" selected>Seleccionar una...</option>');
                 break;
             case "span":
-                $(id_contenedor).find(elemento).text("");
+                $(id_contenedor).find(elemento).empty();
                 break;
             case "div":
-                $(id_contenedor).find(elemento).text("");
+                $(id_contenedor).find(elemento).empty();
+                break;
+            case "small":
+                $(id_contenedor).find(elemento).empty();
                 break;
             default:
                 break;
@@ -66,6 +69,9 @@ function limpiarCampo(id_contenedor, elemento) {
             break;
         case "div":
             $(id_contenedor).empty();
+            break;
+        case "small":
+        $(id_contenedor).empty();
             break;
         default:
             break;

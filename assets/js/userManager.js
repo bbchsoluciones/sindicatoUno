@@ -83,8 +83,10 @@ function mostrarTrabajador(buttonId, rut) {
 
     $('.info_user').addClass("d-none");
     limpiarFormulario("#save-form");
+    limpiarCampo("#mensaje","div");
     limpiarCampos("#allDataUser", "select", ".listaHTML");
     limpiarCampos("#allDataUser", "input", ".disabled");
+    limpiarCampos("#allDataUser", "small");
     limpiarSeleccionados("#allDataUser");
 
     var parametros = {
