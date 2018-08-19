@@ -49,7 +49,8 @@
 <script src="../../../assets/vendor/gijgo/js/gijgo.min.js"></script>
 <script src="../../../assets/vendor/gijgo/js/messages.es-es.js"></script>
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-
+<script src="../../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../../../assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 <!-- Core plugin JavaScript-->
 
 <script src="../../../assets/js/sb-admin.min.js"></script>
@@ -124,8 +125,6 @@
   <script src="../../../assets/js/newsManager.js"></script> 
   <script src="../../../assets/js/row.js"></script>
 <?php endif; ?>
-<script src="../../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="../../../assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 <script src="../../../assets/js/general.js"></script>
 
 

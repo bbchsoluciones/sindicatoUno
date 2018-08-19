@@ -10,10 +10,7 @@ include('include/header.php');
         <li class="breadcrumb-item active">Nuevo Usuario</li>
     </ol>
     <div class="container p-5">
-        <div class="row mb-5">
-            <div class="col-md-4">
-                <img src="../../../assets/images/registerSide3.png" style="width: 100%">
-            </div>
+        <div class="row mb-5" id="usernew_wrap">
             <div class="col-md-8" id="usernew_container">
                 <form action="" method="POST" id="register_form">
                     <div class="form-group">
@@ -23,9 +20,6 @@ include('include/header.php');
                             </div>
                         </div>
                     </div>
-
-                    
-
                     <div class="form-group ">
                         <label for="rut">Rut</label>
                         <input type="text" class="form-control dataUser" placeholder="Rut" id="rut_trabajador" name="run_trabajador">
@@ -45,14 +39,14 @@ include('include/header.php');
                         <label for="nomb">Nombres</label>
                         <input type="text" class="form-control dataUser" placeholder="Nombres" name="nombres_trabajador">
                     </div>
-                    <div class="form-group "
+                    <div class="form-group">
                         <label for="ape">Apellidos</label>
                         <input type="text" class="form-control dataUser" placeholder="Apellidos" name="apellidos_trabajador">
                     </div>
                     <div class="form-group ">
                         <label>Tipo de Usuario </label>
                         <select id="tipo_usuario" class="form-control dataUser" name="tipo_usuario">
-                            <option selected>Seleccionar uno...</option>
+                            <option value="0" selected>Seleccionar una...</option>
                             <option value="1">Administrador</option>
                             <option value="2">Usuario</option>
                         </select>

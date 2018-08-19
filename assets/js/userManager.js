@@ -1,8 +1,35 @@
-// mostrar listado trabajadores
 var registrosPorPagina = 4;
-$(function(){
-    if($('body').hasClass('userManage')){
-      mostrarTrabajadores();
+$(function () {
+    if ($('body').hasClass('userManage')) {
+        mostrarTrabajadores();
+
+        $(document).on('change', '.custom-file :file', function () {
+            var input = $(this),
+                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+            input.trigger('fileselect', [label]);
+        });
+        $('.custom-file :file').on('fileselect', function (event, label) {
+            var text = $('.custom-file-label'),
+                log = label;
+            if (text.length) {
+                text.text(log);
+            } else {
+                if (log) alert(log);
+            }
+        });
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('.img-thumbnail').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#image").change(function () {
+            readURL(this);
+        });
     }
 });
 
@@ -19,18 +46,18 @@ function mostrarTrabajadores(pagina) {
     };
     $.ajax({
         data: parametros,
-        url: '../../../controller/TrabajadorListarC.php', //archivo que recibe la peticion
-        type: 'GET', //método de envio
+        url: '../../../controller/TrabajadorC.php',
+        type: 'GET',
         beforeSend: function () {
             $('#loading').removeClass("d-none");
         },
-        success: function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+        success: function (response) {
             $('#loading').addClass("d-none");
-            //debug
-            //$("#allDataUser").children().remove();
-            //$("#allDataUser").append('<div>'+response+'</div>"');
             try {
+                console.log(response);
                 var json = JSON.parse(response);
+                $("#accion").text(json.accion.valor);
+                $("#objeto").text(json.objeto.valor);
                 paginador(json.cantidad_total[0], pagina, registrosPorPagina);
                 for (i = 0; i < json.trabajador[0].length; i++) {
                     $('#listUsers').append('<button type="button" class="btn btn-secondary" id="worker' + i + '" onclick="mostrarTrabajador(' + i + ',' + json.trabajador[0][i].run_trabajador + ')">' + $.formatRut(json.trabajador[0][i].run_trabajador) + " " + json.trabajador[0][i].nombres_trabajador + '<i class="fa fa-edit text-secondary"></i></button>');
@@ -38,67 +65,72 @@ function mostrarTrabajadores(pagina) {
                         mostrarTrabajador(i, json.trabajador[0][i].run_trabajador);
                     }
                 }
-
             } catch (err) {
-                //alert(err);
                 $('#listUsers').html('<div class="message">No hay usuarios registrados!</div>');
             }
 
         }
     });
 }
-// fin mostrar trabajadores
 
-// boton activo
 function activeUser(buttonId) {
     $(".btn").removeClass("active");
     var id = "worker" + buttonId;
     $("#" + id).addClass("active");
 }
-// fin boton activo
 
-// informacion trabajador
 function mostrarTrabajador(buttonId, rut) {
-    $("#save-form")[0].reset();
-    $('.msj').empty();
+
+    $('.info_user').addClass("d-none");
+    limpiarFormulario("#save-form");
+    limpiarCampos("#allDataUser", "select", ".listaHTML");
+    limpiarCampos("#allDataUser", "input", ".disabled");
+    limpiarSeleccionados("#allDataUser");
+
+    var parametros = {
+        "run_trabajador": rut,
+        "detalle": 1,
+    };
     activeUser(buttonId);
-    limpiarCampos("div#allDataUser","input");
-    limpiarCampos("div#allDataUser","select");
-    limpiarCampos("div#allDataUser","img");
-    $("#mensaje").empty();
     $.ajax({
         type: 'GET',
-        url: '../../../controller/TrabajadorListarC.php',
-        data: "run_trabajador=" + rut,
+        url: '../../../controller/TrabajadorC.php',
+        data: parametros,
         contentType: 'application/json; charset=utf-8',
+        timeout: 3000,
+        beforeSend: function () {
+            $('.overlay_data_trabajador').removeClass("d-none");
+        },
         success: function (response) {
-            try {
-                var json = JSON.parse(response);
-                json = json.trabajador[0];
-                if (json.id_sub_cargo != "") {
-                    mostrarCargos(json.id_cargo, json.id_sub_cargo);;
-                } else {
-                    mostrarCargos();
-                }
-                if (json.id_comuna != "") {
-                    mostrarRegiones(json.id_region, json.id_provincia, json.id_comuna);
-                } else {
-                    mostrarRegiones();
-                }
+            setTimeout(function () {
+                try {
+                    $('.overlay_data_trabajador').addClass("d-none");
+                    $('.info_user').removeClass("d-none");
+                    var json = JSON.parse(response);
+                    json = json.trabajador[0];
+                    if (json.id_sub_cargo !== "") {
+                        mostrarCargos(json.id_cargo, json.id_sub_cargo);;
+                    } else {
+                        mostrarCargos();
+                    }
+                    if (json.id_comuna !== "") {
+                        mostrarRegiones(json.id_region, json.id_provincia, json.id_comuna);
+                    } else {
+                        mostrarRegiones();
+                    }
 
-                Object.keys(json).forEach(function (nombreColumna) {
-                    asignarMultiplesValores(json, nombreColumna);
-                });
+                    Object.keys(json).forEach(function (nombreColumna) {
+                        asignarMultiplesValores(json, nombreColumna);
+                    });
 
-            } catch (err) {
-                //alert(err)
-            }
+                } catch (err) {
+                    //alert(err)
+                }
+            }, 500);
         }
     });
 }
-// fin informacion trabajador
 
-// asignarMultiplesValores
 function asignarMultiplesValores(array, nombreColumna) {
     $(".dataUser").each(function () {
         if ($(this).is("input")) {
@@ -127,15 +159,16 @@ function asignarMultiplesValores(array, nombreColumna) {
             if (array[nombreColumna].length != 0 && $(this).attr("id") == nombreColumna) {
                 $(this).attr("src", array[nombreColumna]);
             } else if (array[nombreColumna].length == 0 && $(this).attr("id") == nombreColumna) {
-                //$(this).attr("src", "../../../assets/images/500x500.png");
+                $(this).attr("src", "../../../assets/images/500x500.png");
             }
         }
     });
 }
-// fin asignarMultiplesValores
 
-// filtro trabajadores (ASC, DESC)
 function ordenarTrabajadores(pagina, accion, objeto, bool) {
+
+    limpiarCampo("#listUsers", "div");
+
     if (pagina === null || pagina === undefined || pagina === "") {
         pagina = 1;
     }
@@ -145,16 +178,16 @@ function ordenarTrabajadores(pagina, accion, objeto, bool) {
     if (objeto === null || objeto === undefined || objeto === "") {
         objeto = bool;
     }
+  
     var parametros = {
         "accion": accion,
         "objeto": objeto,
         "pagina": pagina,
         "r_pagina": registrosPorPagina
     };
-    $('#listUsers').empty();
     $.ajax({
         type: 'GET',
-        url: '../../../controller/TrabajadorListarC.php',
+        url: '../../../controller/TrabajadorC.php',
         data: parametros,
         beforeSend: function () {
             $('#loading').removeClass("d-none");
@@ -163,6 +196,8 @@ function ordenarTrabajadores(pagina, accion, objeto, bool) {
             $('#loading').addClass("d-none");
             try {
                 var json = JSON.parse(response);
+                $("#accion").text(json.accion.valor);
+                $("#objeto").text(json.objeto.valor);
                 paginador(json.cantidad_total[0], pagina, registrosPorPagina);
                 for (i = 0; i < json.trabajador[0].length; i++) {
                     $('#listUsers').append('<button type="button" class="btn btn-secondary" id="worker' + i + '" onclick="mostrarTrabajador(' + i + ',' + json.trabajador[0][i].run_trabajador + ')">' + $.formatRut(json.trabajador[0][i].run_trabajador) + " " + json.trabajador[0][i].nombres_trabajador + '<i class="fa fa-edit text-secondary"></i></button>');
@@ -171,17 +206,12 @@ function ordenarTrabajadores(pagina, accion, objeto, bool) {
                     }
                 }
             } catch (err) {
-                // alert(err)
                 $('#listUsers').html('<div class="message">No hay coincidencias!</div>');
             }
         }
     });
 
 }
-// FIN filtro trabajadores
-
-
-// buscador de trabajadores
 $("#bsearch").click(function () {
     buscarTrabajador();
 });
@@ -193,6 +223,7 @@ $('#isearch').keydown(function (e) {
 });
 
 function buscarTrabajador(pagina, accion, objeto) {
+    
     var text = $('#isearch').val();
     if (pagina === null || pagina === undefined || pagina === "") {
         pagina = 1;
@@ -210,15 +241,17 @@ function buscarTrabajador(pagina, accion, objeto) {
         "r_pagina": registrosPorPagina
     };
     if (text != "") {
-        $('#listUsers').empty();
+        limpiarCampo("#listUsers", "div");
         $.ajax({
             type: 'GET',
-            url: '../../../controller/TrabajadorListarC.php',
+            url: '../../../controller/TrabajadorC.php',
             data: parametros,
             success: function (response) {
                 try {
-                    
+
                     var json = JSON.parse(response);
+                    $("#accion").text(json.accion.valor);
+                    $("#objeto").text(json.objeto.valor);
                     paginador(json.cantidad_total[0], pagina, registrosPorPagina);
                     for (i = 0; i < json.trabajador[0].length; i++) {
                         $('#listUsers').append('<button type="button" class="btn btn-secondary" id="worker' + i + '" onclick="mostrarTrabajador(' + i + ',' + json.trabajador[0][i].run_trabajador + ')">' + $.formatRut(json.trabajador[0][i].run_trabajador) + " " + json.trabajador[0][i].nombres_trabajador + '<i class="fa fa-edit text-secondary"></i></button>');
@@ -227,7 +260,6 @@ function buscarTrabajador(pagina, accion, objeto) {
                         }
                     }
                 } catch (err) {
-                    // alert(err)
                     $('#listUsers').html('<div class="message">No hay coincidencias!</div>');
                 }
             }
@@ -237,39 +269,41 @@ function buscarTrabajador(pagina, accion, objeto) {
     }
 }
 
-$(document).ready(function () {
-    $(document).on('change', '.custom-file :file', function () {
-        var input = $(this),
-            label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-        input.trigger('fileselect', [label]);
-    });
+$("#registrar").click(function (event) {
+    event.preventDefault();
+    limpiarCampos(".msj","span");
+    var form = $('#register_form')[0];
+    form = new FormData(form);
+    form.append("registrar", 1);
+    $("#registrar").prop("disabled", true);
+    $.ajax({
+        type: "POST",
+        url: "../../../controller/TrabajadorC.php",
+        processData: false, // Important!
+        contentType: false,
+        cache: false,
+        data: form,
+        timeout: 600000,
+        success: function (response) {
+            console.log(response);
+            $("#registrar").prop("disabled", false);
+            var json = JSON.parse(response);
+            modalRegistroHijo(json);
+            if (json['clase'] === "danger") {
 
-    $('.custom-file :file').on('fileselect', function (event, label) {
-
-        var text = $('.custom-file-label'),
-            log = label;
-        if (text.length) {
-            text.text(log);
-        } else {
-            if (log) alert(log);
-        }
-
-    });
-
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                $('.img-thumbnail').attr('src', e.target.result);
+                Object.keys(json).forEach(function (indice) {
+                    validacion_campos(json, indice);
+                });
+            } else {
+                limpiarCampos("#usernew_container", "input");
+                limpiarSeleccionado("#tipo_usuario");
             }
 
-            reader.readAsDataURL(input.files[0]);
+        },
+        error: function (e) {
+            $("#registrar").prop("disabled", false);
         }
-    }
 
-    $("#image").change(function () {
-        readURL(this);
     });
 });
 
@@ -277,23 +311,24 @@ function validacion_campos(array, indice) {
     $(".dataUser").each(function () {
         if ($(this).attr("name") === indice) {
             if ($(this).parent().hasClass("form-group")) {
-                $(this).parent().append(" <small class='msj text-danger'>"+array[indice]+"</small>");
+                $(this).parent().append(" <small class='msj text-danger'>" + array[indice] + "</small>");
             } else {
-                $(this).parent().parent().append(" <small class='msj text-danger'>"+array[indice]+"</small>");
+                $(this).parent().parent().append(" <small class='msj text-danger'>" + array[indice] + "</small>");
             }
         }
     });
 }
-function modalEliminarUser(){
 
-    $("#titleConfirm").text("¿Realmente desea eliminar a "+$('#nombres').val()+"?");
-	$("#cuerpoConfirm").html('Presione "Borrar" si esta seguro de eliminar a este usuario.');
-	$("#cancelarConfirm").text("Cancelar");
-	$("#cancelarConfirm").addClass("btn-success");
+function modalEliminarUser() {
+
+    $("#titleConfirm").text("¿Realmente desea eliminar a " + $('#nombres').val() + "?");
+    $("#cuerpoConfirm").html('Presione "Borrar" si esta seguro de eliminar a este usuario.');
+    $("#cancelarConfirm").text("Cancelar");
+    $("#cancelarConfirm").addClass("btn-success");
     $("#aceptarConfirm").text("Borrar");
     $("#aceptarConfirm").addClass("btn-danger");
-	$("#aceptarConfirm").attr("onclick", "eliminarT('"+$('#rut').val()+"')");
-	$('#confirm').modal('show');
+    $("#aceptarConfirm").attr("onclick", "eliminarT('" + $('#rut').val() + "')");
+    $('#confirm').modal('show');
 }
 
 $("#eliminar").click(function (event) {
@@ -301,9 +336,9 @@ $("#eliminar").click(function (event) {
     modalEliminarUser();
 });
 
-function eliminarT(rut){
+function eliminarT(rut) {
     $("#eliminar").prop("disabled", true);
-    $('.msj').empty();
+    limpiarCampos(".msj","span");
     $('#mensaje').empty();
     $.ajax({
         type: 'GET',
@@ -312,42 +347,48 @@ function eliminarT(rut){
         success: function (response) {
             try {
                 var json = JSON.parse(response);
-                $('html, body').animate({scrollTop: 0}, 0);
+                $('html, body').animate({
+                    scrollTop: 0
+                }, 0);
                 mostrarTrabajador();
                 mostrarTrabajadores();
                 $("#mensaje1").html('<div class="alert alert-' + json['clase'] + '" role="alert">' +
                     '<strong>' + json['titulo'] + '</strong> ' + json['mensaje'] + '' +
                     '</div>').fadeIn().delay(3000).fadeOut();
-                    $("#eliminar").prop("disabled", false);
+                $("#eliminar").prop("disabled", false);
             } catch (err) {
-               
+
                 $("#eliminar").prop("disabled", false);
             }
         }
     });
 }
 
-$("#guardar").click(function (event) {
+$("#actualizar").click(function (event) {
     event.preventDefault();
-    $('.msj').empty();
+    limpiarCampos(".msj","span");
     $('#mensaje').empty();
     var form = $('#save-form')[0];
     form = new FormData(form);
-    $("#guardar").prop("disabled", true);
+    form.append("actualizar", 1);
+    $("#actualizar").prop("disabled", true);
     $.ajax({
         type: "POST",
         enctype: 'multipart/form-data',
-        url: "../../../controller/TrabajadorModificarC.php",
+        url: "../../../controller/TrabajadorC.php",
         processData: false, // Important!
         contentType: false,
         cache: false,
         data: form,
         timeout: 600000,
         success: function (response) {
-            $("#guardar").prop("disabled", false);
+            $("#actualizar").prop("disabled", false);
+            console.log(response);
             var json = JSON.parse(response);
-            $('html, body').animate({scrollTop: 0}, 0);
-            $("#mensaje2").html('<div class="alert alert-' + json['clase'] + '" role="alert">' +
+            $('html, body').animate({
+                scrollTop: 0
+            }, 0);
+            $("#mensaje").html('<div class="alert alert-' + json['clase'] + '" role="alert">' +
                 '<strong>' + json['titulo'] + '</strong> ' + json['mensaje'] + '' +
                 '</div>').fadeIn().delay(3000).fadeOut();
             if (json['clase'] === "danger") {
@@ -358,7 +399,7 @@ $("#guardar").click(function (event) {
 
         },
         error: function (e) {
-            $("#guardar").prop("disabled", false);
+            $("#actualizar").prop("disabled", false);
 
         }
 
@@ -367,7 +408,8 @@ $("#guardar").click(function (event) {
 
 
 });
-function modalRegistroTrabajador(json){
+
+function modalRegistroTrabajador(json) {
     $("#aceptarMsg").removeClass("btn-danger");
     $("#aceptarMsg").removeClass("btn-success");
     $("#titleMsg").text(json.titulo);
@@ -379,43 +421,4 @@ function modalRegistroTrabajador(json){
 $("input#rut_trabajador").rut({
     formatOn: 'keyup',
     ignoreControlKeys: false
-});
-$("#registrar").click(function (event) {
-    event.preventDefault();
-    $('.msj').empty();
-    $('#mensaje').empty();
-    var form = $('#register_form')[0];
-    form = new FormData(form);
-    $("#registrar").prop("disabled", true);
-    $.ajax({
-        type: "POST",
-        url: "../../../controller/TrabajadorRegistrarC.php",
-        processData: false, // Important!
-        contentType: false,
-        cache: false,
-        data: form,
-        timeout: 600000,
-        success: function (response) {
-            $("#registrar").prop("disabled", false);
-            var json = JSON.parse(response);
-            modalRegistroHijo(json);
-            if (json['clase'] === "danger") {
-                
-                Object.keys(json).forEach(function (indice) {
-                    validacion_campos(json, indice);
-                });
-            }else{
-                limpiarCampos("#usernew_container","input");
-                limpiarSeleccionado("#tipo_usuario");
-            }
-
-        },
-        error: function (e) {
-            $("#registrar").prop("disabled", false);
-        }
-
-    });
-
-
-
 });
