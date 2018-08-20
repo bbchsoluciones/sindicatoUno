@@ -91,3 +91,24 @@ $('#msg').modal('show');
 
 
 }
+
+function modalConfirmarEliminar(nombre, funcion) {
+
+    $("#titleConfirm").text("¿Realmente desea eliminar a " + nombre + "?");
+    $("#cuerpoConfirm").html('Presione "Borrar" si esta seguro de eliminar a este usuario.');
+    $("#cancelarConfirm").text("Cancelar");
+    $("#cancelarConfirm").addClass("btn-success");
+    $("#aceptarConfirm").text("Borrar");
+    $("#aceptarConfirm").addClass("btn-danger");
+    $("#aceptarConfirm").attr("onclick", funcion);
+    $('#confirm').modal('show');
+}
+function modalInformacion(json) {
+    $("#aceptarMsg").removeClass("btn-danger");
+    $("#aceptarMsg").removeClass("btn-success");
+    $("#titleMsg").text(json.titulo);
+    $("#cuerpoMsg").html(json.mensaje);
+    $("#aceptarMsg").text("Aceptar");
+    $("#aceptarMsg").addClass("btn-" + json.clase);
+    $('#msg').modal('show');
+}

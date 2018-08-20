@@ -70,7 +70,8 @@
 <?php elseif ($pageName[0]=="userNew"): ?>
   <script src="../../../assets/js/jquery.rut.min.js"></script>
   <script src="../../../assets/js/userManager.js"></script>
-  <script src="../../../assets/js/sonManager.js"></script>  
+  <script src="../../../assets/js/sonManager.js"></script> 
+  <script src="../../../assets/js/modal.js"></script> 
 <?php elseif ($pageName[0]=="userManage"): ?>
   <script src="../../../assets/js/jquery.rut.min.js"></script>
   <script src="../../../assets/js/userManager.js"></script>
@@ -78,14 +79,17 @@
   <script src="../../../assets/js/cargo.js"></script>
   <script src="../../../assets/js/comuna.js"></script>
   <script src="../../../assets/js/dataPicker.js"></script>
+  <script src="../../../assets/js/modal.js"></script>
 <?php elseif ($pageName[0]=="sonNew"): ?>
   <script src="../../../assets/js/jquery.rut.min.js"></script>
   <script src="../../../assets/js/sonManager.js"></script>
   <script src="../../../assets/js/dataPicker.js"></script>
+  <script src="../../../assets/js/modal.js"></script>
 <?php elseif ($pageName[0]=="sonManage"): ?>
   <script src="../../../assets/js/jquery.rut.min.js"></script>
   <script src="../../../assets/js/sonManager.js"></script>
   <script src="../../../assets/js/dataPicker.js"></script>
+  <script src="../../../assets/js/modal.js"></script>
 <?php elseif ($pageName[0]=="moveNew"): ?>
   <script src="../../../assets/js/moveManager.js"></script>
   <script src="../../../assets/js/modal.js"></script>
