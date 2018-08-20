@@ -8,6 +8,24 @@ $(function () {
     }else if ($('body').hasClass('barChartEntry')) {
         mostrarCategoriaMovimiento(0); 
         graficoIngreso(); 
+        download.addEventListener("click", function() {
+            // only jpeg is supported by jsPDF
+            var canvas = document.getElementById('graficoIngreso');
+            var imgData = canvas.toDataURL("image/jpeg", 1.0);
+            var pdf = new jsPDF();
+          
+            pdf.addImage(imgData, 'JPEG', 0, 0);
+            pdf.save("download.pdf");
+          }, false);
+
+          $('#save-btn').click(function(){
+            var canvas = document.getElementById("graficoIngreso"), ctx = canvas.getContext("2d");
+            // draw to canvas...
+            canvas.toBlob(function(blob) {
+                saveAs(blob, "pretty image.png");
+            });
+          });
+
     }else if ($('body').hasClass('barChartExit')) {
         mostrarCategoriaMovimiento(1);      
         graficoEgreso();      

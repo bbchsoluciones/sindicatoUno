@@ -49,6 +49,8 @@ include('include/header.php');
                                             <div id="contenedorGraficoIngreso" class="row">
                                                 
                                             </div>
+                                            <button id="download">download</button>
+                                            <button id="save-btn">image</button>
 
                                         <!-- /.col-lg-6 (nested) -->
                                     </div>
