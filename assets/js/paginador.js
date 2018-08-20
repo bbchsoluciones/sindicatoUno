@@ -1,5 +1,5 @@
 function paginador(totalRegistros, paginaActual, registrosPorPagina) {
-    var rango = 1;
+    var rango = 5;
     var start = 0;
     var end = 0;
     var cantPaginas = Math.ceil(totalRegistros / registrosPorPagina);
@@ -72,7 +72,7 @@ function cambiarPagina(pagina) {
         if ($("#accion").text() === "buscar") {
             buscarTrabajador(pagina,$("#accion").text(),$("#objeto").text());
         } else {
-            ordenarTrabajadores(pagina,$("#accion").text(),$("#objeto").text(),"bo");
+            ordenarTrabajadores(pagina,$("#accion").text(),$("#objeto").text());
         }
     }
 }

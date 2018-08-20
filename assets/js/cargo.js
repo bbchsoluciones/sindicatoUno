@@ -20,8 +20,8 @@ function mostrarCargos(id_cargo, id_sub_cargo) {
                 }
             } catch (err) {
                 //alert(err);
-                $('#cargo').html(' <option selected>Seleccionar una...</option>');
-                $('#subcargo').html(' <option selected>Seleccionar una...</option>');
+                $('#cargo').html(' <option value="0" selected>Seleccionar una...</option>');
+                $('#subcargo').html(' <option value="0" selected>Seleccionar una...</option>');
             }
 
         }
@@ -60,7 +60,7 @@ function mostrarSubCargos(id_cargo, id_sub_cargo) {
                 }
             } catch (err) {
                 //alert(err);
-                $('#subcargo').html(' <option selected>Seleccionar una...</option>');
+                $('#subcargo').html(' <option value="0" selected>Seleccionar una...</option>');
             }
             
             if(id_cargo==="3"){
