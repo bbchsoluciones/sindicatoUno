@@ -8,24 +8,6 @@ $(function () {
     }else if ($('body').hasClass('barChartEntry')) {
         mostrarCategoriaMovimiento(0); 
         graficoIngreso(); 
-        download.addEventListener("click", function() {
-            // only jpeg is supported by jsPDF
-            var canvas = document.getElementById('graficoIngreso');
-            var imgData = canvas.toDataURL("image/jpeg", 1.0);
-            var pdf = new jsPDF();
-          
-            pdf.addImage(imgData, 'JPEG', 0, 0);
-            pdf.save("download.pdf");
-          }, false);
-
-          $('#save-btn').click(function(){
-            var canvas = document.getElementById("graficoIngreso"), ctx = canvas.getContext("2d");
-            // draw to canvas...
-            canvas.toBlob(function(blob) {
-                saveAs(blob, "pretty image.png");
-            });
-          });
-
     }else if ($('body').hasClass('barChartExit')) {
         mostrarCategoriaMovimiento(1);      
         graficoEgreso();      
@@ -344,11 +326,10 @@ function deshabilitar(folio){
 
 } 
 function graficoIngreso() {// no olvidar recibir parametros
+    
     var id_tipo = $('#categoriaTM option:selected').val();
-    if (id_tipo === "0") {
-
+    if (id_tipo === "0") {       
         
-        $('#contenedorGraficoIngreso').html('<canvas id="graficoIngreso"></canvas>');
 
         var categoria = $('#categoriaTM option:selected').text();
         var anio = $('#anioIngreso option:selected').val();
@@ -363,6 +344,11 @@ function graficoIngreso() {// no olvidar recibir parametros
             data: parametros,
             success: function (response) {
                 try {
+                    $('#contenedorGraficoIngreso').html('<canvas class=" border rounded" id="graficoIngreso"></canvas>');        
+                    val="'pngIngreso'";            
+                    $('#contenedorBotonesIngreso').html('<div class="col-auto">'+
+                                                            '<button id="pngIngreso" class="btn btn-success mt-4" onclick="exportar('+val+')">Exportar a PNG</button>'+
+                                                        '</div>');
                     var json = JSON.parse(response);
                     //console.log(json);
                     //alert(json.data[2].monto_movimiento);
@@ -510,6 +496,7 @@ function graficoIngreso() {// no olvidar recibir parametros
                 } catch (err) {
                     //graficoVacio(categoria, anio);
                     $('#contenedorGraficoIngreso').html('<div class="col-12 text-center">Sin resultados</div>');
+                    $('#contenedorBotonesIngreso').empty();
                 }
 
             }
@@ -521,7 +508,7 @@ function graficoIngreso() {// no olvidar recibir parametros
         //graficoVacio('', '');
         var id_categoria = $('#categoriaTM option:selected').val();
     
-        $('#contenedorGraficoIngreso').html('<canvas id="graficoIngreso"></canvas>');
+        
 
         var categoria = $('#categoriaTM option:selected').text();
         var anio = $('#anioIngreso option:selected').val();
@@ -536,6 +523,11 @@ function graficoIngreso() {// no olvidar recibir parametros
             data: parametros,
             success: function (response) {
                 try {
+                    $('#contenedorGraficoIngreso').html('<canvas class=" border rounded" id="graficoIngreso"></canvas>');
+                    val="'pngIngreso'";            
+                    $('#contenedorBotonesIngreso').html('<div class="col-auto">'+
+                                                            '<button id="pngIngreso" class="btn btn-success mt-4" onclick="exportar('+val+')">Exportar a PNG</button>'+
+                                                        '</div>');
                     var json = JSON.parse(response);
                     //console.log(json);
                     //alert(json.data[2].monto_movimiento);
@@ -683,6 +675,9 @@ function graficoIngreso() {// no olvidar recibir parametros
                 } catch (err) {
                     //graficoVacio(categoria, anio);
                     $('#contenedorGraficoIngreso').html('<div class="col-12 text-center">Sin resultados</div>');
+                    $('#contenedorBotonesIngreso').empty();
+
+                    
                 }
 
             }
@@ -696,7 +691,6 @@ function graficoEgreso(){// no olvidar recibir parametros
     if (id_tipo === "0") {
 
         id_tipo=1;
-        $('#contenedorGraficoEgreso').html('<canvas id="graficoEgreso"></canvas>');
 
         var categoria = $('#categoriaTM option:selected').text();
         var anio = $('#anioIngreso option:selected').val();
@@ -711,6 +705,11 @@ function graficoEgreso(){// no olvidar recibir parametros
             data: parametros,
             success: function (response) {
                 try {
+                    $('#contenedorGraficoEgreso').html('<canvas class=" border rounded" id="graficoEgreso"></canvas>');                    
+                    val="'pngEgreso'";            
+                    $('#contenedorBotonesEgreso').html('<div class="col-auto">'+
+                                                            '<button id="pngEgreso" class="btn btn-success mt-4" onclick="exportar('+val+')">Exportar a PNG</button>'+
+                                                        '</div>');
                     var json = JSON.parse(response);
                     //console.log(json);
                     //alert(json.data[2].monto_movimiento);
@@ -858,7 +857,8 @@ function graficoEgreso(){// no olvidar recibir parametros
 
                 } catch (err) {
                     //graficoVacio(categoria, anio);
-                    $('#contenedorGraficoEgreso').html('<div class="col-12 text-center">Sin resultados</div>');
+                    $('#contenedorGraficoEgreso').html('<div class="col-12 text-center">Sin resultados</div>');                 
+                    $('#contenedorBotonesEgreso').empty();
                 }
 
             }
@@ -869,7 +869,6 @@ function graficoEgreso(){// no olvidar recibir parametros
 
         var id_categoria = $('#categoriaTM option:selected').val();
     
-        $('#contenedorGraficoEgreso').html('<canvas id="graficoEgreso"></canvas>');
         
         var categoria = $('#categoriaTM option:selected').text();
     var anio = $('#anioIngreso option:selected').val();
@@ -884,6 +883,11 @@ function graficoEgreso(){// no olvidar recibir parametros
         data: parametros,
         success: function (response) {
             try {
+                $('#contenedorGraficoEgreso').html('<canvas class=" border rounded" id="graficoEgreso"></canvas>');                    
+                val="'pngEgreso'";            
+                $('#contenedorBotonesEgreso').html('<div class="col-auto">'+
+                                                            '<button id="pngEgreso" class="btn btn-success mt-4" onclick="exportar('+val+')">Exportar a PNG</button>'+
+                                                        '</div>');
                 var json = JSON.parse(response);
                 //console.log(json);
                 //alert(json.data[2].monto_movimiento);
@@ -1027,7 +1031,8 @@ function graficoEgreso(){// no olvidar recibir parametros
 
             } catch (err) {
                 //graficoVacio(categoria,anio);
-                $('#contenedorGraficoEgreso').html('<div class="col-12 text-center">Sin resultados</div>');
+                $('#contenedorGraficoEgreso').html('<div class="col-12 text-center">Sin resultados</div>');                 
+                $('#contenedorBotonesEgreso').empty();
             }
 
         }
@@ -1039,3 +1044,15 @@ function graficoEgreso(){// no olvidar recibir parametros
 
     
 }// graficoEgreso()
+function exportar(val){
+    switch(val){
+        case 'pngIngreso': $("#graficoIngreso").get(0).toBlob(function(blob){
+                                saveAs(blob, "graficoIngreso.png")
+                            });
+                            break;
+        case 'pngEgreso': $("#graficoEgreso").get(0).toBlob(function(blob){
+                                saveAs(blob, "graficoEgreso.png")
+                            });
+                            break;
+    }//ciera switch
+}

@@ -42,14 +42,14 @@ include('include/header.php');
                                                             <option value="2018">2018</option>
                                                         </select>
                                                     </div>
+                                                </div>                                                
+                                            </div>
+                                            <div class="row">
+                                                <div id="contenedorGraficoEgreso" class="col-12">                                                
                                                 </div>
-                                                
+                                            </div>                                            
+                                            <div id="contenedorBotonesEgreso" class="row">                                                                                                   
                                             </div>
-
-                                            <div id="contenedorGraficoEgreso" class="row">
-                                                
-                                            </div>
-
                                         <!-- /.col-lg-6 (nested) -->
                                     </div>
                                     <!-- /.row (nested) -->

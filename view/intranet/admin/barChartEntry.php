@@ -45,13 +45,12 @@ include('include/header.php');
                                                 </div>
                                                 
                                             </div>
-
-                                            <div id="contenedorGraficoIngreso" class="row">
-                                                
+                                            <div class="row">
+                                                <div id="contenedorGraficoIngreso" class="col-12">
+                                                </div>
                                             </div>
-                                            <button id="download">download</button>
-                                            <button id="save-btn">image</button>
-
+                                            <div id="contenedorBotonesIngreso" class="row">                            
+                                            </div>
                                         <!-- /.col-lg-6 (nested) -->
                                     </div>
                                     <!-- /.row (nested) -->

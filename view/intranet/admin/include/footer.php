@@ -52,11 +52,8 @@
 <script src="../../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="../../../assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 <!-- Core plugin JavaScript-->
-
 <script src="../../../assets/js/sb-admin.min.js"></script>
-
-
-<?php if ($pageName[0]=="index"): ?>
+<?php     if ($pageName[0]=="index"): ?>
   <script src="../../../assets/vendor/datatables/jquery.dataTables.js"></script>
   <script src="../../../assets/vendor/datatables/dataTables.bootstrap4.js"></script>
   <script src="../../../assets/vendor/datatables/dataTables.bootstrap4.js"></script>
@@ -107,26 +104,24 @@
   <script src="../../../assets/vendor/chart/Chart.js"></script> 
   <script src="../../../assets/vendor/chart/Chart.min.js"></script>
   <script src="../../../assets/js/moveManager.js"></script>
-  <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>  
-  <script src="../../../assets/vendor/canvas-toBlob.js-master/canvas-toBlob.js"></script>
-  <script src="../../../assets/vendor/FileSaver/FileSaver.js"></script>
+  <script src="../../../assets/vendor/FileSaver/FileSaver.js"></script>  
 <?php elseif ($pageName[0]=="barChartExit"): ?>
   <script src="../../../assets/vendor/chart/Chart.bundle.js"></script>
   <script src="../../../assets/vendor/chart/Chart.bundle.min.js"></script>
   <script src="../../../assets/vendor/chart/Chart.js"></script>
   <script src="../../../assets/vendor/chart/Chart.min.js"></script>
   <script src="../../../assets/js/moveManager.js"></script>
-  <script src="../../../assets/js/modal.js"></script>
+  <script src="../../../assets/vendor/FileSaver/FileSaver.js"></script>
 <?php elseif ($pageName[0]=="newNews"): ?>
   <script src="../../../assets/vendor/tinymce/tinymce.min.js?apiKey=ayksm51eyqs90o6zhleyi56fsus6pi22mfludruzls5hqhbk"></script> 
   <script src="../../../assets/js/newsManager.js"></script> 
 <?php elseif ($pageName[0]=="newsManage"): ?> 
-<script src="../../../assets/vendor/datatables/jquery.dataTables.js"></script>
+  <script src="../../../assets/vendor/datatables/jquery.dataTables.js"></script>
   <script src="../../../assets/vendor/datatables/dataTables.bootstrap4.js"></script>
   <script src="../../../assets/vendor/datatables/dataTables.bootstrap4.js"></script>
   <script src="../../../assets/js/newsManager.js"></script> 
   <script src="../../../assets/js/row.js"></script>
-<?php endif; ?>
+<?php  endif; ?>
 <script src="../../../assets/js/general.js"></script>
 
 
