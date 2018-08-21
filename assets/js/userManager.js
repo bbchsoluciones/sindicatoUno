@@ -54,7 +54,6 @@ function mostrarTrabajadores(pagina) {
         success: function (response) {
             $('#loading').addClass("d-none");
             try {
-                console.log(response);
                 var json = JSON.parse(response);
                 $("#accion").text(json.accion.valor);
                 $("#objeto").text(json.objeto.valor);
@@ -88,6 +87,7 @@ function mostrarTrabajador(buttonId, rut) {
     limpiarCampos("#allDataUser", "input", ".disabled");
     limpiarCampos("#allDataUser", "small");
     limpiarSeleccionados("#allDataUser");
+    limpiarCampo(".custom-file-label", "label")
 
     var parametros = {
         "run_trabajador": rut,
@@ -271,9 +271,23 @@ function buscarTrabajador(pagina, accion, objeto) {
     }
 }
 
+
+function validacion_campos(array, indice) {
+    $(".dataUser").each(function () {
+        if ($(this).attr("name") === indice) {
+            if ($(this).parent().hasClass("form-group")) {
+                $(this).parent().append(" <small class='msj text-danger'>" + array[indice] + "</small>");
+            } else {
+                $(this).parent().parent().append(" <small class='msj text-danger'>" + array[indice] + "</small>");
+            }
+        }
+    });
+}
+
+
 $("#registrar").click(function (event) {
     event.preventDefault();
-    limpiarCampos(".msj","span");
+    limpiarCampo(".msj", "small");
     var form = $('#register_form')[0];
     form = new FormData(form);
     form.append("registrar", 1);
@@ -287,10 +301,9 @@ $("#registrar").click(function (event) {
         data: form,
         timeout: 600000,
         success: function (response) {
-            console.log(response);
             $("#registrar").prop("disabled", false);
             var json = JSON.parse(response);
-            modalRegistroHijo(json);
+            modalInformacion(json)
             if (json['clase'] === "danger") {
 
                 Object.keys(json).forEach(function (indice) {
@@ -309,71 +322,14 @@ $("#registrar").click(function (event) {
     });
 });
 
-function validacion_campos(array, indice) {
-    $(".dataUser").each(function () {
-        if ($(this).attr("name") === indice) {
-            if ($(this).parent().hasClass("form-group")) {
-                $(this).parent().append(" <small class='msj text-danger'>" + array[indice] + "</small>");
-            } else {
-                $(this).parent().parent().append(" <small class='msj text-danger'>" + array[indice] + "</small>");
-            }
-        }
-    });
-}
-
-function modalEliminarUser() {
-
-    $("#titleConfirm").text("¿Realmente desea eliminar a " + $('#nombres').val() + "?");
-    $("#cuerpoConfirm").html('Presione "Borrar" si esta seguro de eliminar a este usuario.');
-    $("#cancelarConfirm").text("Cancelar");
-    $("#cancelarConfirm").addClass("btn-success");
-    $("#aceptarConfirm").text("Borrar");
-    $("#aceptarConfirm").addClass("btn-danger");
-    $("#aceptarConfirm").attr("onclick", "eliminarT('" + $('#rut').val() + "')");
-    $('#confirm').modal('show');
-}
-
-$("#eliminar").click(function (event) {
+$("#actualizar_trabajador").click(function (event) {
     event.preventDefault();
-    modalEliminarUser();
-});
-
-function eliminarT(rut) {
-    $("#eliminar").prop("disabled", true);
-    limpiarCampos(".msj","span");
-    $('#mensaje').empty();
-    $.ajax({
-        type: 'GET',
-        url: '../../../controller/TrabajadorEliminarC.php',
-        data: "run_trabajador=" + rut,
-        success: function (response) {
-            try {
-                var json = JSON.parse(response);
-                $('html, body').animate({
-                    scrollTop: 0
-                }, 0);
-                mostrarTrabajador();
-                mostrarTrabajadores();
-                $("#mensaje1").html('<div class="alert alert-' + json['clase'] + '" role="alert">' +
-                    '<strong>' + json['titulo'] + '</strong> ' + json['mensaje'] + '' +
-                    '</div>').fadeIn().delay(3000).fadeOut();
-                $("#eliminar").prop("disabled", false);
-            } catch (err) {
-
-                $("#eliminar").prop("disabled", false);
-            }
-        }
-    });
-}
-
-$("#actualizar").click(function (event) {
-    event.preventDefault();
-    limpiarCampos(".msj","span");
-    $('#mensaje').empty();
+    limpiarCampo(".msj", "small");
+    limpiarCampo("#mensaje","div");
     var form = $('#save-form')[0];
     form = new FormData(form);
     form.append("actualizar", 1);
-    $("#actualizar").prop("disabled", true);
+    $("#actualizar_trabajador").prop("disabled", true);
     $.ajax({
         type: "POST",
         enctype: 'multipart/form-data',
@@ -384,8 +340,7 @@ $("#actualizar").click(function (event) {
         data: form,
         timeout: 600000,
         success: function (response) {
-            $("#actualizar").prop("disabled", false);
-            console.log(response);
+            $("#actualizar_trabajador").prop("disabled", false);
             var json = JSON.parse(response);
             $('html, body').animate({
                 scrollTop: 0
@@ -401,25 +356,49 @@ $("#actualizar").click(function (event) {
 
         },
         error: function (e) {
-            $("#actualizar").prop("disabled", false);
+            $("#actualizar_trabajador").prop("disabled", false);
 
         }
 
     });
 
-
-
 });
+$("#eliminar_trabajador").click(function (event) {
+    event.preventDefault();
+    var nombres = $("#nombres").val();
+    var funcion = "eliminarTrabajador('"+$("#rut").val()+"')";
+    modalConfirmarEliminar(nombres,funcion);
+});
+function eliminarTrabajador(rut) {
+    $("#eliminar_trabajador").prop("disabled", true);
+    limpiarCampo(".msj", "small");
+    limpiarCampo("#mensaje","div");
+    var parametros = {
+        "run_trabajador": rut,
+        "eliminar": 1
+    };
+    $.ajax({
+        type: 'GET',
+        url: '../../../controller/TrabajadorC.php',
+        data: parametros,
+        success: function (response) {
+            try {
+                var json = JSON.parse(response);
+                $('html, body').animate({
+                    scrollTop: 0
+                }, 0);
+                mostrarTrabajador();
+                mostrarTrabajadores();
+                modalInformacion(json)
+                $("#eliminar_trabajador").prop("disabled", false);
+            } catch (err) {
 
-function modalRegistroTrabajador(json) {
-    $("#aceptarMsg").removeClass("btn-danger");
-    $("#aceptarMsg").removeClass("btn-success");
-    $("#titleMsg").text(json.titulo);
-    $("#cuerpoMsg").html(json.mensaje);
-    $("#aceptarMsg").text("Aceptar");
-    $("#aceptarMsg").addClass("btn-" + json.clase);
-    $('#msg').modal('show');
+                $("#eliminar_trabajador").prop("disabled", false);
+            }
+        }
+    });
 }
+
 $("input#rut_trabajador").rut({
     formatOn: 'keyup',
     ignoreControlKeys: false

@@ -16,28 +16,34 @@ function buscarPadre() {
     limpiarCampos('div#contenedorH', "input");
     limpiarCampo('div.no-registros', "div");
     limpiarSeleccionado("#genero_hijo");
-    $("#save-child")[0].reset();
-    $('#sons').empty();
-    $('.msj').empty();
+    limpiarFormulario("#save-child");
+    limpiarCampo("#sons", "div");
+    limpiarCampo(".msj", "small");
     var action = "";
     var rut = "";
+    var accion = "";
+    var parametros = {};
     if ($('body').hasClass("sonNew")) {
-        action = "../../../controller/TrabajadorListarC.php";
+        action = "../../../controller/TrabajadorC.php";
         rut = 'run_trabajador';
-    } else {
-        action = "../../../controller/HijoTrabajadorListarC.php";
+        accion = "detalle";
+    } else if($('body').hasClass("sonManage")) {
+        action = "../../../controller/HijoC.php";
         rut = 'run';
     }
     if (text != "") {
+        parametros[rut] = text;
+        parametros[accion] = 1;
         $.ajax({
             type: 'GET',
             url: action,
-            data: rut + "=" + text,
+            data: parametros,
             beforeSend: function () {
                 $('.overlay').removeClass("d-none");
             },
             success: function (response) {
                 try {
+                    console.log(response)
                     var json = JSON.parse(response);
             
                     if (json.clase == "danger" || response == "false") {
@@ -84,11 +90,11 @@ function activeSon(buttonId) {
     $("#" + id).addClass("active");
 }
 function mostrar_datos_hijo(buttonId, rut) {
-    $('.msj').empty();
     limpiarCampos('div#contenedorH', "input");
+    limpiarCampo(".msj");
+    limpiarCampo("#mensaje");
     limpiarSeleccionado("#genero_hijo");
     activeSon(buttonId);
-    $("#mensaje").empty();
     $.ajax({
         type: 'GET',
         url: '../../../controller/HijoTrabajadorListarC.php',

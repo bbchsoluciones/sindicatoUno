@@ -216,8 +216,8 @@ include('include/header.php');
                             <input type="text" class="form-control dataUser" id="celular" placeholder="Celular" name="celular_trabajador" value="">
                         </div>
                     </div>
-                    <button class="btn btn-success" id="actualizar">Guardar</button>
-                    <button class="btn btn-danger" id="eliminar">Eliminar</button>
+                    <button class="btn btn-success" id="actualizar_trabajador">Guardar</button>
+                    <button class="btn btn-danger" id="eliminar_trabajador">Eliminar</button>
                 </form>
             </div>
         </div>

@@ -29,53 +29,30 @@ $("#genPass").on("click", function () {
 
 function limpiarCampos(id_contenedor,elemento,excepcion) {
 
-         switch (elemento) {
-            case "input":
-                $(id_contenedor).find(elemento).not(excepcion).val("");
-                break;
-            case "select":
-                $(id_contenedor).find(elemento).not(excepcion).empty();
-                $(id_contenedor).find(elemento).not(excepcion).append(' <option value="0" selected>Seleccionar una...</option>');
-                break;
-            case "span":
-                $(id_contenedor).find(elemento).empty();
-                break;
-            case "div":
-                $(id_contenedor).find(elemento).empty();
-                break;
-            case "small":
-                $(id_contenedor).find(elemento).empty();
-                break;
-            default:
-                break;
-        } 
+       if(elemento == "input"){
+            $(id_contenedor).find(elemento).not(excepcion).val("");
+        }else if(elemento == "select"){
+            $(id_contenedor).find(elemento).not(excepcion).empty();
+            $(id_contenedor).find(elemento).not(excepcion).append(' <option value="0" selected>Seleccionar una...</option>');
+        }else{
+            $(id_contenedor).find(elemento).empty();
+        }
 
 }
 
 function limpiarCampo(id_contenedor, elemento) {
-    switch (elemento) {
-        case "input":
-            $(id_contenedor).val("");
-            break;
-        case "select":
-            $(id_contenedor).empty();
-            $(id_contenedor).append(' <option selected>Seleccionar una...</option>');
-            break;
-        case "img":
-            $(id_contenedor).attr("src", "../../../assets/images/500x500.png");
-            break;
-        case "span":
-            $(id_contenedor).empty();
-            break;
-        case "div":
-            $(id_contenedor).empty();
-            break;
-        case "small":
-        $(id_contenedor).empty();
-            break;
-        default:
-            break;
 
+    if(elemento == "input"){
+        $(id_contenedor).val("");
+    }else if(elemento == "select"){
+        $(id_contenedor).empty();
+        $(id_contenedor).append(' <option value="0" selected>Seleccionar una...</option>');
+    }else if(elemento== "img"){
+        $(id_contenedor).attr("src", "../../../assets/images/500x500.png");
+    }else if(elemento== "label"){
+        $(id_contenedor).text("Seleccionar Archivo");
+    }else{
+        $(id_contenedor).empty();
     }
 }
 
