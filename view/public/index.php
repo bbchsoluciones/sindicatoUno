@@ -71,7 +71,7 @@
 
   <div class="home-text">
     <div class="container">
-      <h1>Find a quality and right headphones not easy</h1>
+      <h1>Sindicato de trabajadores N°1 Brink´s Chile</h1>
       <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores porro ad earum est voluptates consequatur quam.
         Qui id illo nisi dolores quidem maxime, ab, nobis consectetur, dolore placeat similique! Animi.A nesciunt, eius dolores
         magnam facere consectetur totam cupiditate, rem et quam commodi fugit rerum magni debitis sit quasi deleniti. Atque
@@ -81,7 +81,7 @@
 
   <div class="home-text bg-info text-white">
     <div class="container">
-      <h1 class="text-center p-5">We will help you to choose the best headphones!</h1>
+      <h1 class="text-center p-5">Se parte de uno de los mejores sindicatos de Chile!</h1>
     </div>
   </div>
 

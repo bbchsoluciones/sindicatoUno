@@ -8,14 +8,18 @@ require_once($ruta_raiz . '/model/MovimientoM.php');
 //Dentro de Controlador
 
 
-if(isset($_POST['monto']) && isset($_POST['id_nom']) && isset($_POST['run']) && isset($_POST['fecha'])):
+if(isset($_POST['monto']) && isset($_POST['id_nom']) && isset($_POST['run']) && isset($_POST['fecha']) && isset($_POST['desc'])):
     $monto = (int) $_POST['monto'];//to int
     $id_nom = $_POST['id_nom'];    
     $run = $_POST['run'];
     $fecha = $_POST['fecha'];
-    $date = new DateTime($fecha);      
+    $date = new DateTime($fecha);    
+    $desc = $_POST['desc'];   
+    if($desc == ""):
+        $desc = NULL;
+    endif;
     $m = new MovimientoM();//Crea objeto MovimientoM    
-    if($m->registrar_movimiento($monto, $id_nom, $run, $date->format('Y-m-d H:i:s'))):
+    if($m->registrar_movimiento($monto, $id_nom, $run, $date->format('Y-m-d H:i:s'), $desc)):
         echo "true";//registrado con éxito        
     else:
         echo "false";//no registrado    

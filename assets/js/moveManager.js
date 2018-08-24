@@ -125,11 +125,12 @@ function mostrarFondo() {
     });
 
 }
-function insertMovimiento() {
+function insertMovimiento(run) {
     
     var monto = $("#monto").val();
     var id_nom = $("#nombreTM").val();
     var fecha = $("#datepickerMov").val();
+    var desc = $("#des_mov").val();
 
     if (monto==="0" || monto===""){
         camposVacios();
@@ -138,8 +139,9 @@ function insertMovimiento() {
         var parametros = {
             "monto": monto,
             "id_nom": id_nom,
-            "run": 193412130,
-            "fecha":fecha
+            "run": run,
+            "fecha":fecha,
+            "desc": desc
         };
         
         $.ajax({
@@ -182,7 +184,7 @@ function selectMovimiento() {
             clearTable('#tableMov');
             try {
                 var json = JSON.parse(response);
-                console.log('JSON: '+json);
+                //console.log('JSON: '+json);
 
 
                 for (i = 0; i < json.data.length; i++) {
@@ -192,6 +194,7 @@ function selectMovimiento() {
                         json.data[i].tipo_movimiento,
                         json.data[i].categoria_movimiento,
                         json.data[i].nombre_movimiento,
+                        json.data[i].descripcion_movimiento,
                         json.data[i].monto_movimiento,
                         json.data[i].fecha_movimiento,
                         json.data[i].nombres_trabajador

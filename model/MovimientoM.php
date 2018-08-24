@@ -172,7 +172,7 @@ class MovimientoM{
 
 	}// Cierra encontrar_movimiento
 
-	public function registrar_movimiento($monto, $id_nom_mov, $run, $fecha) {	
+	public function registrar_movimiento($monto, $id_nom_mov, $run, $fecha, $desc) {	
         
         
 		
@@ -181,17 +181,20 @@ class MovimientoM{
 			$conn = $pdo->getConnection();
 			$sql = "INSERT INTO movimiento (fecha_movimiento, 
                                             monto_movimiento,
+											descripcion_movimiento,
                                             fondo_id_fondo,
                                             trabajador_run_trabajador,
                                             nombre_movimiento_id_nombre_movimiento) 
 					VALUES (:fecha_movimiento, 
-                            :monto_movimiento, 
+                            :monto_movimiento,
+							:descripcion_movimiento, 
                             :fondo_id_fondo,
                             :trabajador_run_trabajador,
                             :nombre_movimiento_id_nombre_movimiento);";
 			$consulta = $conn->prepare($sql);
 			$consulta->bindValue(':fecha_movimiento', $fecha);
 			$consulta->bindValue(':monto_movimiento', $monto);
+			$consulta->bindValue(':descripcion_movimiento', $desc);
 			$consulta->bindValue(':fondo_id_fondo', 1);
 			$consulta->bindValue(':trabajador_run_trabajador', $run);
 			$consulta->bindValue(':nombre_movimiento_id_nombre_movimiento', $id_nom_mov);
@@ -223,6 +226,7 @@ class MovimientoM{
 			tm.tipo_movimiento,
 			cm.categoria_movimiento,
 			nm.nombre_movimiento,
+			IFNULL(m.descripcion_movimiento, 'No Aplica') AS descripcion_movimiento,
 			m.monto_movimiento,
 			m.fecha_movimiento,
 			t.nombres_trabajador

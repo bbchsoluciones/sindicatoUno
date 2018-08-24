@@ -79,7 +79,7 @@ include('include/header.php');
               </div>
 
               <div class="row">
-                <div class="col-4">              
+                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">              
                   <!-- Area Chart Example-->
                   <div class="card mb-3">
                     <div class="card-header">
@@ -91,7 +91,7 @@ include('include/header.php');
                     <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
                   </div>              
                 </div>    
-                <div class="col-4">              
+                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">              
                     <!-- Area Chart Example-->
                     <div class="card mb-3">
                       <div class="card-header">
@@ -103,7 +103,7 @@ include('include/header.php');
                       <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
                     </div>              
                   </div> 
-                  <div class="col-4">              
+                  <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">              
                       <!-- Area Chart Example-->
                       <div class="card mb-3">
                         <div class="card-header">

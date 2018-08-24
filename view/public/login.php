@@ -26,11 +26,11 @@
             <div class="cabecera">
                 <span data-animation="animated bounceOut">Autentificar</span>
             </div>
-            <form class="form-login">
+            <form class="form-login" action="../../controller/LoginC.php" method="post">
                 <div class="form-group fill-line">
                     <label for="title">Identificador</label>
                     <div class="input-container">
-                        <input type="text" id="title" name="title" placeholder="Ingrese identificador">
+                        <input type="text" id="user" name="user" placeholder="Ingrese identificador">
                         <div class="line1"></div>
                     </div>
                 </div>
@@ -38,7 +38,7 @@
                 <div class="form-group fill-line">
                     <label for="title">Contraseña</label>
                     <div class="input-container">
-                        <input type="password" id="title" name="title" placeholder="Ingrese contraseña">
+                        <input type="password" id="pass" name="pass" placeholder="Ingrese contraseña">
                         <div class="line2"></div>
                     </div>
                 </div>

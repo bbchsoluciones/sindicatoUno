@@ -112,3 +112,13 @@ function modalInformacion(json) {
     $("#aceptarMsg").addClass("btn-" + json.clase);
     $('#msg').modal('show');
 }
+
+function modalCrearNoticia(json){
+    $("#aceptarMsg").removeClass("btn-danger");
+    $("#aceptarMsg").removeClass("btn-success");
+    $("#titleMsg").text(json.titulo);
+    $("#cuerpoMsg").html(json.mensaje);
+    $("#aceptarMsg").text("Aceptar");
+    $("#aceptarMsg").addClass("btn-" + json.clase);
+    $('#msg').modal('show');
+}

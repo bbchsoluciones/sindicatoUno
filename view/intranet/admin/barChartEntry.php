@@ -27,7 +27,7 @@ include('include/header.php');
                                                     <div class="col-lg-6">
                                                             <div class="form-group">
                                                                 <label>Categoria Ingreso</label>
-                                                                <select id="categoriaTM" name="categoriaTM" class="form-control" onchange="graficoIngreso($('#categoriaTM option:selected').val(),$('#anioIngreso option:selected').val())">
+                                                                <select id="categoriaTM" name="categoriaTM" class="form-control" onchange="graficoIngreso()">
                                                                     <option selected value="0">TODOS</option>
                                                                 </select>
                                                             </div>
@@ -35,7 +35,7 @@ include('include/header.php');
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label>Año</label>
-                                                        <select id="anioIngreso" name="anioIngreso" class="form-control" onchange="graficoIngreso($('#categoriaTM option:selected').val(),$('#anioIngreso option:selected').val())">
+                                                        <select id="anioIngreso" name="anioIngreso" class="form-control" onchange="graficoIngreso()">
                                                             <option selected value="2015">2015</option>
                                                             <option value="2016">2016</option>
                                                             <option value="2017">2017</option>

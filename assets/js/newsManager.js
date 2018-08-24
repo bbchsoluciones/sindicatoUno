@@ -1,5 +1,8 @@
-$(document).ready(function () {
-    selectNoticia();
+$(function () {
+    if ($('body').hasClass('newsManage')) {
+        selectNoticia();
+    }
+
     $(document).on('change', '.custom-file :file', function () {
         var input = $(this),
             label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
@@ -33,16 +36,9 @@ $(document).ready(function () {
     $("#image").change(function () {
         readURL(this);
     });
+
 });
-function modalCrearNoticia(json){
-    $("#aceptarMsg").removeClass("btn-danger");
-    $("#aceptarMsg").removeClass("btn-success");
-    $("#titleMsg").text(json.titulo);
-    $("#cuerpoMsg").html(json.mensaje);
-    $("#aceptarMsg").text("Aceptar");
-    $("#aceptarMsg").addClass("btn-" + json.clase);
-    $('#msg').modal('show');
-}
+
 
 $("#crear").click(function (event) {
     event.preventDefault();
@@ -52,18 +48,24 @@ $("#crear").click(function (event) {
     $.ajax({
         type: "POST",
         enctype: 'multipart/form-data',
-        url: "../../../controller/NoticiaRegisterC.php",
+        url: "../../../controller/NoticiaC.php",
         processData: false, // Important!
         contentType: false,
         cache: false,
         data: form,
         timeout: 600000,
         success: function (response) {
-            console.log(response);
+
+            try{
+                console.log(response);
             $("#crear").prop("disabled", false);
             var json = JSON.parse(response);
-            
+
               modalCrearNoticia(json);
+            }catch(err){
+                alert(err);
+            }
+            
         },
         error: function (e) {
             $("#crear").prop("disabled", false);
@@ -78,9 +80,14 @@ $("#crear").click(function (event) {
 
 function selectNoticia() {
     //alert('mostrarMovimientos.js');
+    var parametros = {
+        "ajax": 'true',
+        "selectNoticia": 'selectNoticia'
+    };
   $.ajax({
-      url: '../../../controller/NoticiaMostrarC.php',
-      type: 'GET',
+      url: '../../../controller/NoticiaC.php',
+      type: 'POST',
+      data: parametros,
       success: function (response) {
 
         clearTable('#tableNot');
