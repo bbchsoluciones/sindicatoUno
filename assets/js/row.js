@@ -1,4 +1,4 @@
-function addRowMovimiento(nombreTabla, folio, tipo, categoria, nombre, monto, fecha, por) {
+function addRowMovimiento(nombreTabla, folio, tipo, categoria, nombre, desc, monto, fecha, por) {
     var t = $(nombreTabla).DataTable();
 
     var idMonto="montoRow"+folio;
@@ -11,8 +11,9 @@ function addRowMovimiento(nombreTabla, folio, tipo, categoria, nombre, monto, fe
         tipo,      
         categoria,
         nombre,
+        desc,
         '<input id="'+idMonto+'" class="form-control" type="number" id="monto" name="'+idMonto+'" value="'+monto+'" disabled>',
-        fecha,
+        fecha.substr(0, 10),
         por,
         '<div class="d-flex flex-row">'+
         '<button id="'+idBtnEdit+'" name="'+idBtnEdit+'" onClick="habilitar('+folio+')" class="btn btn-dark"><i class="fas fa-pen-alt"></i></button>'+              

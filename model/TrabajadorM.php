@@ -9,6 +9,11 @@ require_once($ruta_raiz . '/connection/PDOConnection.php');
 require_once($ruta_raiz . '/controller/EncriptadorC.php');
 //Dentro de Modelo
 
+/*  $t = new TrabajadorM();
+$t->setRun_trabajador('193412130');
+$t->login();
+var_dump($t->getTrabajador()['run_trabajador']);  */
+
 
 //Clase
 class TrabajadorM{
@@ -465,73 +470,73 @@ class TrabajadorM{
 
 	public function actualizar_trabajador() {
 		
-	try{
-		$pdo = PDOConnection::instance();
-		$conn = $pdo->getConnection();
-		$accion = "UPDATE trabajador SET ";
+		try{
+			$pdo = PDOConnection::instance();
+			$conn = $pdo->getConnection();
+			$accion = "UPDATE trabajador SET ";
 
-		$cuerpo =          "tipo_usuario_id_tipo_usuario = :tipo_usuario_id_tipo_usuario,
-							email_trabajador = :email_trabajador,
-							nombres_trabajador = :nombres_trabajador,
-							apellidos_trabajador = :apellidos_trabajador,
-							sub_cargo_id_sub_cargo = :sub_cargo_id_sub_cargo,
-							direccion_trabajador = :direccion_trabajador,
-							comuna_id_comuna = :comuna_id_comuna,
-							fec_nac_trabajador = :fec_nac_trabajador,
-							genero_trabajador = :genero_trabajador,
-							estado_civil_trabajador = :estado_civil_trabajador,
-							fec_ing_emp_trabajador = :fec_ing_emp_trabajador,
-							fec_ing_sin_trabajador = :fec_ing_sin_trabajador,
-							estado_trabajador_id_estado_trabajador = :estado_trabajador_id_estado_trabajador,
-							telefono_trabajador = :telefono_trabajador,
-							celular_trabajador = :celular_trabajador,
-							placa_trabajador = :placa_trabajador ";
+			$cuerpo =          "tipo_usuario_id_tipo_usuario = :tipo_usuario_id_tipo_usuario,
+								email_trabajador = :email_trabajador,
+								nombres_trabajador = :nombres_trabajador,
+								apellidos_trabajador = :apellidos_trabajador,
+								sub_cargo_id_sub_cargo = :sub_cargo_id_sub_cargo,
+								direccion_trabajador = :direccion_trabajador,
+								comuna_id_comuna = :comuna_id_comuna,
+								fec_nac_trabajador = :fec_nac_trabajador,
+								genero_trabajador = :genero_trabajador,
+								estado_civil_trabajador = :estado_civil_trabajador,
+								fec_ing_emp_trabajador = :fec_ing_emp_trabajador,
+								fec_ing_sin_trabajador = :fec_ing_sin_trabajador,
+								estado_trabajador_id_estado_trabajador = :estado_trabajador_id_estado_trabajador,
+								telefono_trabajador = :telefono_trabajador,
+								celular_trabajador = :celular_trabajador,
+								placa_trabajador = :placa_trabajador ";
 
-		$clausula = "WHERE run_trabajador = :run_trabajador";
+			$clausula = "WHERE run_trabajador = :run_trabajador";
 
-		if($this->contrasena_trabajador!=="nula"){
-			$cuerpo .= ",contrasena_trabajador = :contrasena_trabajador ";
-		}
+			if($this->contrasena_trabajador!=="nula"){
+				$cuerpo .= ",contrasena_trabajador = :contrasena_trabajador ";
+			}
 
-						
-		$sql = $accion . $cuerpo .$clausula;
-		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$consulta = $conn->prepare($sql);
+							
+			$sql = $accion . $cuerpo .$clausula;
+			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$consulta = $conn->prepare($sql);
 
-		if($this->contrasena_trabajador!=="nula"):
-			$consulta->bindParam(':contrasena_trabajador', $this->contrasena_trabajador, PDO::PARAM_STR);
-		endif;
-
-		$consulta->bindParam(':placa_trabajador', $this->placa_trabajador, PDO::PARAM_STR);
-		$consulta->bindParam(':tipo_usuario_id_tipo_usuario', $this->tipo_usuario_id_tipo_usuario, PDO::PARAM_INT);
-		$consulta->bindParam(':email_trabajador', $this->email_trabajador, PDO::PARAM_STR);
-		$consulta->bindParam(':nombres_trabajador', $this->nombres_trabajador, PDO::PARAM_STR);
-		$consulta->bindParam(':apellidos_trabajador', $this->apellidos_trabajador, PDO::PARAM_STR);
-		$consulta->bindParam(':sub_cargo_id_sub_cargo', $this->sub_cargo_id_sub_cargo, PDO::PARAM_INT);
-		$consulta->bindParam(':direccion_trabajador', $this->direccion_trabajador, PDO::PARAM_STR);
-		$consulta->bindParam(':comuna_id_comuna', $this->comuna_id_comuna, PDO::PARAM_INT);
-		$consulta->bindParam(':fec_nac_trabajador', $this->fec_nac_trabajador, PDO::PARAM_STR);
-		$consulta->bindParam(':genero_trabajador', $this->genero_trabajador, PDO::PARAM_STR);
-		$consulta->bindParam(':estado_civil_trabajador', $this->estado_civil_trabajador, PDO::PARAM_STR);
-		$consulta->bindParam(':fec_ing_emp_trabajador', $this->fec_ing_emp_trabajador, PDO::PARAM_STR);
-		$consulta->bindParam(':fec_ing_sin_trabajador', $this->fec_ing_sin_trabajador, PDO::PARAM_STR);
-		$consulta->bindParam(':estado_trabajador_id_estado_trabajador', $this->estado_trabajador_id_estado_trabajador, PDO::PARAM_INT);
-		$consulta->bindParam(':telefono_trabajador', $this->telefono_trabajador, PDO::PARAM_STR);
-		$consulta->bindParam(':celular_trabajador', $this->celular_trabajador, PDO::PARAM_STR);
-		$consulta->bindParam(':run_trabajador', $this->run_trabajador, PDO::PARAM_STR);
-		if($consulta->execute()):
-				return true;
-            else:
-				return false;
+			if($this->contrasena_trabajador!=="nula"):
+				$consulta->bindParam(':contrasena_trabajador', $this->contrasena_trabajador, PDO::PARAM_STR);
 			endif;
 
-		$conn = null;
-		$consulta = null;
+			$consulta->bindParam(':placa_trabajador', $this->placa_trabajador, PDO::PARAM_STR);
+			$consulta->bindParam(':tipo_usuario_id_tipo_usuario', $this->tipo_usuario_id_tipo_usuario, PDO::PARAM_INT);
+			$consulta->bindParam(':email_trabajador', $this->email_trabajador, PDO::PARAM_STR);
+			$consulta->bindParam(':nombres_trabajador', $this->nombres_trabajador, PDO::PARAM_STR);
+			$consulta->bindParam(':apellidos_trabajador', $this->apellidos_trabajador, PDO::PARAM_STR);
+			$consulta->bindParam(':sub_cargo_id_sub_cargo', $this->sub_cargo_id_sub_cargo, PDO::PARAM_INT);
+			$consulta->bindParam(':direccion_trabajador', $this->direccion_trabajador, PDO::PARAM_STR);
+			$consulta->bindParam(':comuna_id_comuna', $this->comuna_id_comuna, PDO::PARAM_INT);
+			$consulta->bindParam(':fec_nac_trabajador', $this->fec_nac_trabajador, PDO::PARAM_STR);
+			$consulta->bindParam(':genero_trabajador', $this->genero_trabajador, PDO::PARAM_STR);
+			$consulta->bindParam(':estado_civil_trabajador', $this->estado_civil_trabajador, PDO::PARAM_STR);
+			$consulta->bindParam(':fec_ing_emp_trabajador', $this->fec_ing_emp_trabajador, PDO::PARAM_STR);
+			$consulta->bindParam(':fec_ing_sin_trabajador', $this->fec_ing_sin_trabajador, PDO::PARAM_STR);
+			$consulta->bindParam(':estado_trabajador_id_estado_trabajador', $this->estado_trabajador_id_estado_trabajador, PDO::PARAM_INT);
+			$consulta->bindParam(':telefono_trabajador', $this->telefono_trabajador, PDO::PARAM_STR);
+			$consulta->bindParam(':celular_trabajador', $this->celular_trabajador, PDO::PARAM_STR);
+			$consulta->bindParam(':run_trabajador', $this->run_trabajador, PDO::PARAM_STR);
+			if($consulta->execute()):
+					return true;
+				else:
+					return false;
+				endif;
 
-	}catch (Exception $ex) {
-		echo "Fallo: " . $ex->getMessage();
-	}		
-}
+			$conn = null;
+			$consulta = null;
+
+		}catch (Exception $ex) {
+			echo "Fallo: " . $ex->getMessage();
+		}		
+	}
 
 	public function listar_trabajadores() {		
 		$this->trabajadores = array();
@@ -608,47 +613,32 @@ class TrabajadorM{
 			echo "Fallo: " . $ex->getMessage();
         }	
 
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	}
 	
-	/*
-    public function login() {
-        $pdo = PDOConnection::instance();
-        $conn = $pdo->getConnection();
-        $consulta = $conn->prepare("SELECT * FROM " 
-                                    . self::TABLA . 
-                                    " usuario join perfil on usuario.id_perfil=perfil.id_perfil 
-                                    where usuario.nombre=:nombre 
-                                    OR usuario.correo=:nombre");
-        $consulta->bindParam(':nombre', $this->nombre);
-        $consulta->execute();
-        $row = $consulta->fetch();
-        $this->row[] = $row;
-        $conn = null;
-        $consulta = null;
-    }// Cierra login()   
-*/
+	public function login() {
 
+		$this->trabajador = array();
+		try{
+			$pdo = PDOConnection::instance();
+			$conn = $pdo->getConnection();
+			$sql = "SELECT 
+					* 
+					FROM trabajador t
+					WHERE t.run_trabajador=:run_trabajador;";
+			$consulta = $conn->prepare($sql);
+			$consulta->bindParam(':run_trabajador', $this->run_trabajador);			
+			$consulta->execute();
+			$resultado= $consulta->fetch(PDO::FETCH_ASSOC);
+			if($resultado){
+				$this->trabajador = array_map('utf8_encode', $resultado);
+			}
+			$conn = null;
+			$consulta = null;
 
+		}catch (Exception $ex) {
+			echo "Fallo: " . $ex->getMessage();
+        }	
+		
+	}// Cierra login()   
+	
 }// Cierra clase TrabajadorM.php

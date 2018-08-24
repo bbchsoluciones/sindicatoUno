@@ -279,3 +279,19 @@
     color: green;
     font-weight: bold;
 }
+
+/*moveManage*/
+.table-mov{
+
+    font-size: 16px;
+
+}
+.table-mov>tbody>tr>td>input{
+    font-size: 16px;
+    width: 117px;
+
+}
+.table-mov>tbody>tr>td>div>button{
+    font-size: 16px;
+}
+/*moveManage*/

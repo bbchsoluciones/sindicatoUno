@@ -72,13 +72,14 @@ include('include/header.php');
                         Movimientos</div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered display" id="tableMov" width="100%" cellspacing="0">
+                            <table class="table table-bordered display table-mov" id="tableMov" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
                                         <th>Folio</th>
                                         <th>Tipo</th>
                                         <th>Categoria</th>
                                         <th>Nombre</th>
+                                        <th>Descripción</th>
                                         <th>Monto</th>
                                         <th>Fecha</th>
                                         <th>Por</th>
@@ -91,6 +92,7 @@ include('include/header.php');
                                         <th>Tipo</th>
                                         <th>Categoria</th>
                                         <th>Nombre</th>
+                                        <th>Descripción</th>
                                         <th>Monto</th>
                                         <th>Fecha</th>
                                         <th>Por</th>

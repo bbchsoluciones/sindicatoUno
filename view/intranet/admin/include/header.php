@@ -1,3 +1,14 @@
+<?php
+if(!isset($_SESSION)):
+  session_start();//inicia sesion si está vacío
+endif;
+
+if(!isset($_SESSION['tipo_usuario']))://Detectar salto de login
+  header("Location: ../../public/login.php");
+elseif($_SESSION['tipo_usuario'] != 1):// no es usuario administrador
+  header("Location: ../../public/login.php");
+endif;
+?>
 <!DOCTYPE html>
 <html lang="es">
 
