@@ -13,7 +13,7 @@
     
 }
 .blur{
-    filter: blur(3px);
+    filter: blur(20px);
 }
 /* Bootstrap Toggle v2.2.2 corrections for Bootsrtap 4*/
 .toggle-off {
@@ -27,14 +27,9 @@
     background-color: white;
     border: thin rgba(0, 0, 0, .25) solid;
 }
-.register-page  #usernew_wrap{
-    justify-content: center;
-    display: flex;
-    align-items: center;
-}
-/*fin clases generales*/
-/* List user */
-.userManage-page .overlay_data_trabajador{
+
+.overlay_data_trabajador{
+    background: #ffffff;
     position: absolute;
     display: flex;
     justify-content: center;
@@ -44,6 +39,28 @@
     z-index: 700;
     top:0;
     left: 0;
+}
+.overlay_data_hijo{
+    background: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 700;
+    top:0;
+    left: 0;
+}
+.no-registros{
+    width: 100%;
+    font-weight: 300;
+    font-size: 20px;
+    text-align: center;
+}
+/*fin clases generales*/
+/* List user */
+.register-page  #usernew_wrap{
+    justify-content: center;
+    display: flex;
+    align-items: center;
 }
 .userManage-page .activeU{
     background-color: #495057;
@@ -186,85 +203,62 @@
 }
 /* END list User*/
 /* son */
-.son-register-page{
-    color: #495057;
-}
-.son-register-page .buscar-padre{
+.buscar-padre{
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.son-register-page .title{
+.title{
     font-weight: 300;
     font-size: 30px;
     padding-bottom: 10px;
 }
-.son-register-page .buscar-padre .input-group{
+.buscar-padre .input-group{
     max-width: 600px;
 }
-.son-register-page #contenedorH {
-    position: relative;
-    margin-top: 20px;
-    padding-top: 30px;
+.info_trabajador, .info_hijo {
+    color: #495057;
 }
-.son-register-page #contenedorH .overlay{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    background: rgba(255,255,255,.3);
-    top: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 600;
-}
-.son-register-page .container-image {
+.profile .container-image {
     display: flex;
     justify-content: center;
     align-items: center;
     border: 0;
     box-shadow: none;
 }
-
-.son-register-page .card .card-img-top,
-.son-register-page .card .card-body {
+.profile .container-image .img-thumbnail {
+    height: 160px;
+    width: 160px;
+}
+.profile .card-img-top,
+.profile .card-body {
     width: 100%;
     height: 100px;
     padding: 0 !important;
     margin: 0 !important;
 }
 
-.son-register-page .card .card-img-top {
+.profile .card-img-top {
     background: #495057;
 }
-.son-register-page .card .object-fill{
-    object-fit: cover;
+.profile .object-fill{
     position: absolute;
 }
-.son-register-page .container-image .img-thumbnail {
-    height: 160px;
-    width: 160px;
-}
-.son-register-page .list-group li{
+
+.profile .list-group li{
      position: relative;
 }
-.son-register-page .list-group li label{
+.profile .list-group li label{
     position: absolute;
     right: 0;
     padding-right: 20px;
-    text-align: left;
+    text-align: left; 
 }
-.son-register-page .no-registros{
-    width: 100%;
-    font-weight: 300;
-    font-size: 20px;
-    text-align: center;
-    padding-top: 30px;
-}
-.son-register-page #sons button{
+
+#sons button{
     text-align: right;
 }
-.son-register-page #sons i{
+#sons i{
     font-size: 20px;
     position: absolute;
     left: 20px;

@@ -46,7 +46,7 @@ elseif (isset($_GET['run_trabajador']) && !empty($_GET['run_trabajador']) && iss
 
     $trabajador = new TrabajadorM();
     $rut = clean($_GET['run_trabajador']);
-    if (ctype_digit($rut)):
+    if (esRut($rut)):
         $trabajador->setRun_trabajador($rut);
         $trabajador->mostrar_datos_trabajador();
         if (!empty($trabajador->getTrabajador())):
@@ -57,7 +57,8 @@ elseif (isset($_GET['run_trabajador']) && !empty($_GET['run_trabajador']) && iss
             );
             echo json_encode($trabajadores);
         else:
-            $error['titulo'] = "Se ha producido un error.";
+            $error['titulo'] = "Rut invalido y/o trabajador no registrado.";
+            $error['clase'] = "danger";
             echo json_encode($error);
         endif;
     else:
