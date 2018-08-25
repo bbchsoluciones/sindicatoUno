@@ -236,7 +236,6 @@ function perfilTrabajador(json) {
 
     $("#url_foto").attr("src", json.url_foto_perfil);
     $("#rut_t").text($.formatRut(json.run_trabajador));
-    $("#rut_tra").val(json.run_trabajador);
     $("#nombres_t").text(json.nombres_trabajador);
     $("#apellidos_t").text(json.apellidos_trabajador);
     $("#cargo_t").text(json.nombre_cargo);
@@ -263,6 +262,7 @@ $("#registrar_hijo").click(function (event) {
     event.preventDefault();
     var form = $('#formulario_agregar_hijo')[0];
     form = new FormData(form);
+    form.append("run_trabajador", $("#rut_t").text());
     form.append("registrar_hijo", 1);
     $("#registrar_hijo").prop("disabled", true);
     $.ajax({
@@ -295,11 +295,11 @@ $("#registrar_hijo").click(function (event) {
     });
 });
 $("#updateH").click(function (event) {
-    console.log("rut "+ $("#rut_tra").val());
     limpiarCampo(".msj", "small");
     event.preventDefault();
     var form = $('#formulario_modificar_hijo')[0];
     form = new FormData(form);
+    form.append("run_trabajador", $("#rut_t").text());
     form.append("actualizar_hijo", 1);
     $("#updateH").prop("disabled", true);
     $.ajax({

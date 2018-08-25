@@ -254,6 +254,24 @@
     padding-right: 20px;
     text-align: left; 
 }
+.profile_2 .list-group li{
+    position: relative;
+}
+.profile_2 .list-group li label{
+   position: absolute;
+   right: 0;
+   padding-right: 20px;
+   text-align: left; 
+}
+.profile_2 img{
+    height: 200px !important;
+}
+.profile_2 li{
+    font-size: 14px;
+}
+.profile_2 strong{
+    font-size: 14px;
+}
 
 #sons button{
     text-align: right;

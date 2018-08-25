@@ -57,11 +57,10 @@ $("#crear").click(function (event) {
         success: function (response) {
 
             try{
-                console.log(response);
             $("#crear").prop("disabled", false);
             var json = JSON.parse(response);
-
-              modalCrearNoticia(json);
+            tinyMCE.activeEditor.setContent("");
+              modalInformacion(json);
             }catch(err){
                 alert(err);
             }

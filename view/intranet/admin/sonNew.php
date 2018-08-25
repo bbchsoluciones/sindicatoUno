@@ -93,7 +93,6 @@ include 'include/header.php';
                             <input id="datepicker4" name="fec_nac_hijo" value="" class="dataSon" placeholder="Ejemplo: 24/02/1990" />
                         </div>
                         <button type="submit" class="btn btn-success" id="registrar_hijo">Registrar</button>
-                        <input id="rut_tra" val="" name="run_trabajador" class="d-none">
                     </form>
                 </div>
             </div>

@@ -140,7 +140,7 @@ elseif (isset($_POST['tipo_usuario']) &&
 
     $imagen = "";
     foreach ($_POST as $indice => $valor):
-        if (strpos($indice, 'fec') !== false):
+        if (strpos($indice, 'fec') !== false && !empty($valor)):
             $date = clean($valor);
             if (is_numeric($date)):
                 if (strpos($valor, '-')):
@@ -152,23 +152,24 @@ elseif (isset($_POST['tipo_usuario']) &&
                         $valor = DateTime::createFromFormat('d/m/Y', $valor);
                         $valor = $valor->format('Y-m-d');
                     } catch (Exception $e) {
-                        $valor = "Fecha invalida, favor usar formato Dia/Mes/Año";
+                        $valor = "Fecha invalida, formato Dia/Mes/Año";
                         $error[$indice] = $valor;
                     } else :
-                    $valor = "Fecha invalida, favor usar formato Dia/Mes/Año";
+                    $valor = "Fecha invalida, formato Dia/Mes/Año";
                     $error[$indice] = $valor;
                 endif;
 
             else:
-                $valor = "Fecha invalida, favor usar formato Dia/Mes/Año";
+                $valor = "Fecha invalida, formato Dia/Mes/Año";
                 $error[$indice] = $valor;
             endif;
         elseif ($indice === 'run_trabajador'):
             $valor = clean($valor);
         endif;
         if (empty(trim($valor)) && $indice !== "estado_trabajador"):
-            $valor = "Campo vació, favor completar";
-            $error[$indice] = $valor;
+            $valor = NULL;
+            unset($error[$valor]);
+            $data[$indice] = NULL;
         endif;
         $data[$indice] = utf8_decode(htmlspecialchars($valor));
     endforeach;
@@ -178,7 +179,6 @@ elseif (isset($_POST['tipo_usuario']) &&
         $data['vcontrasena_trabajador'] = "nula";
         unset($error['contrasena_trabajador']);
         unset($error['vcontrasena_trabajador']);
-
     elseif ($data['contrasena_trabajador'] !== $data['vcontrasena_trabajador']):
         $error['contrasena_trabajador'] = "Contraseñas no coinciden";
         $error['vcontrasena_trabajador'] = "Contraseñas no coinciden";
@@ -193,17 +193,17 @@ elseif (isset($_POST['tipo_usuario']) &&
     || $data['nombre_cargo'] == "3" && empty($data['placa_trabajador'])):
         $error['placa_trabajador'] = "Formato incorrecto o vacío";
     elseif ($data['nombre_cargo'] !== "3"):
-        $data['placa_trabajador'] = "";
+        $data['placa_trabajador'] = NULL;
     endif;
 
     //validación email
-    if (!filter_var($data['email_trabajador'], FILTER_VALIDATE_EMAIL)):
+    if (!filter_var($data['email_trabajador'], FILTER_VALIDATE_EMAIL) && !empty($data['email_trabajador'])):
         $error['email_trabajador'] = "Correo invalido!";
     endif;
 
-    if (count($error) > 0):
+    if (count($error)>0):
         $error['titulo'] = "Ha ocurrido un error!";
-        $error['mensaje'] = "Uno o más campos tienen información errónea o están vacíos.";
+        $error['mensaje'] = "Uno o más campos tienen información errónea.";
         $error['clase'] = "danger";
         echo json_encode($error);
     else:

@@ -104,22 +104,19 @@ elseif (isset($_GET['run_hijo']) && !empty($_GET['run_hijo']) && isset($_GET['mo
                 );
                 echo json_encode($hijo);
             else:
-                $error['titulo'] = "Ha ocurrido un error!";
-                $error['mensaje'] = "No hay coincidencias";
+                $error['titulo'] = "No hay coincidencias!";
                 $error['clase'] = "danger";
                 echo json_encode($error);
             endif;
 
         else:
-            $error['titulo'] = "Ha ocurrido un error!";
-            $error['mensaje'] = "rut invalido";
+            $error['titulo'] = "Rut Invalido!";
             $error['clase'] = "danger";
             echo json_encode($error);
         endif;
 
     else:
-        $error['titulo'] = "Ha ocurrido un error!";
-        $error['mensaje'] = "rut invalido";
+        $error['titulo'] = "Rut Invalido!";
         $error['clase'] = "danger";
         echo json_encode($error);
     endif;
@@ -178,7 +175,7 @@ elseif (
     $rut_hijo = clean($data['run_hijo']);
 
     if ($rut_trabajador == $rut_hijo):
-        $error['run_hijo'] = "El rut ingresado, ya se encuentra asignado!";
+        $error['run_hijo'] = "El rut del hijo(a) no puede ser el mismo que el del padre!";
     endif;
 
     if (count($error) > 0):
@@ -194,8 +191,8 @@ elseif (
         $trabajadorExiste = $trabajador->encontrar_trabajador();
         //verificar que el trabajador exista
         if ($trabajadorExiste == false):
-            $error['titulo'] = "El trabajador no existe!";
-            $error['mensaje'] = "El trabajador no existe!";
+            $error['titulo'] = "Ha ocurrido un error!";
+            $error['mensaje'] = "El rut del trabajador del no existe!";
             $error['clase'] = "danger";
             echo json_encode($error);
         elseif ($trabajadorExiste == true):
@@ -221,7 +218,7 @@ elseif (
                 else:
                     $error['titulo'] = "Oops hubo un error!";
                     $error['mensaje'] = "Información no pudo ser registrada.";
-                    $error['clase'] = "success";
+                    $error['clase'] = "danger";
                     echo json_encode($error);
                 endif;
             endif;
@@ -334,7 +331,7 @@ elseif (
         endif;
 
     endif;
-elseif (isset($_GET['run_hijo'])):
+elseif (isset($_GET['run_hijo']) && isset($_GET['eliminar_hijo'])):
     $hijo = new HijoTrabajadorM();
     $eliminado = array();
     $rut = htmlspecialchars($_GET['run_hijo']);
