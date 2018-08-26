@@ -452,7 +452,7 @@ class TrabajadorM{
 			$consulta->bindParam(':contrasena_trabajador', $this->contrasena_trabajador);
 			$consulta->bindValue(':comuna_id_comuna', null);
 			$consulta->bindParam(':tipo_usuario_id_tipo_usuario', $this->tipo_usuario_id_tipo_usuario);
-			$consulta->bindValue(':estado_trabajador_id_estado_trabajador', null);
+			$consulta->bindValue(':estado_trabajador_id_estado_trabajador', $this->estado_trabajador_id_estado_trabajador);
 			if($consulta->execute()){
 				//Registrado con éxito
 				return true;

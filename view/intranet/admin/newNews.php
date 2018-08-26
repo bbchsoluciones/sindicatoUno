@@ -35,21 +35,21 @@ include 'include/header.php';
                         <div class="card mb-3">
                             <img src="../../../assets/images/1280x720.png" class="img-fluid cover" alt="Responsive image">
                         </div>
-                        <div class="form-group ">
+                        <div class="form-group">
 
                             <label>Titulo</label>
-                            <input type="text" class="form-control" placeholder="Ejemplo: Celebración en..." id="" name="titulo" val="">
+                            <input type="text" class="form-control dataNews" placeholder="Ejemplo: Celebración en..." id="" name="titulo" val="">
                         </div>
 
                         <div class="form-group">
                             <label>Cuerpo de la noticia:</label>
-                            <textarea class="form-control" placeholder="" name="cuerpo" id="cuerpo"></textarea>
+                            <textarea class="form-control dataNews" placeholder="" name="cuerpo" id="cuerpo"></textarea>
 
                         </div>
                         <div class="form-group">
                             <span class="float-right">
-                                <input checked data-toggle="toggle" data-on="Publicada" data-off="Borrador" data-onstyle="success" data-offstyle="danger"
-                                    type="checkbox" name="publicada">
+                                <input  data-toggle="toggle" data-on="Publicada" data-off="Borrador" data-onstyle="success" data-offstyle="danger"
+                                    type="checkbox" name="publicada" id="estado">
                             </span>
                         </div>
                         <button type="submit" class="btn btn-success" id="crear">Crear Noticia</button>

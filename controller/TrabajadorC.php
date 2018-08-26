@@ -102,6 +102,7 @@ elseif (isset($_POST['tipo_usuario']) &&
         $trabajador->setApellidos_trabajador($data['apellidos_trabajador']);
         $trabajador->setContrasena_trabajador($data['contrasena_trabajador']);
         $trabajador->setTipo_usuario_id_tipo_usuario($data['tipo_usuario']);
+        $trabajador->setEstado_trabajador_id_estado_trabajador(0);
         if ($trabajador->registrar_trabajador()):
             $error['titulo'] = "Éxito!";
             $error['mensaje'] = "Información registrada correctamente.";
