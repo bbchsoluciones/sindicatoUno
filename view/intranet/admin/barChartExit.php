@@ -36,10 +36,7 @@ include('include/header.php');
                                                     <div class="form-group">
                                                         <label>Año</label>
                                                         <select id="anioIngreso" name="anioIngreso" class="form-control" onchange="graficoEgreso($('#categoriaTM option:selected').val(),$('#anioIngreso option:selected').val())">
-                                                            <option selected value="2015">2015</option>
-                                                            <option value="2016">2016</option>
-                                                            <option value="2017">2017</option>
-                                                            <option value="2018">2018</option>
+                                                            <option selected value="2018">2018</option>
                                                         </select>
                                                     </div>
                                                 </div>                                                

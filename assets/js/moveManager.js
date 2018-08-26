@@ -152,7 +152,8 @@ function insertMovimiento(run) {
                 try {               
                    
                    if(response=="true"){
-                       registradoMovimiento();
+                       //registradoMovimiento();
+                       movRegistrado();
                        
     
                    }else{

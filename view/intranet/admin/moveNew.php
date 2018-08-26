@@ -22,6 +22,7 @@
                         <!-- /.row -->
                         <div class="row">
                             <div class="col-lg-12">
+                            <div id="alertMovReg"></div>
                                 <div class="panel panel-default">
                                     <div class="panel-body">
                                         <form id="formMovimiento" role="form" action="" onsubmit="insertMovimiento(<?php echo $_SESSION['run_trabajador']; ?>);

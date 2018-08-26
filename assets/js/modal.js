@@ -67,29 +67,26 @@ function camposVacios(){
 
 }
 
-function graficoVacio(categoria,anio){
+function graficoVacio(categoria, anio) {
 
-	if(categoria==='' && anio===''){
+	if (categoria === '' && anio === '') {
 		/* Configuración Modal */
-$("#titleMsg").text('Seleccione una categoria');
-$("#cuerpoMsg").html('Por favor seleccione una categoria');
-$("#aceptarMsg").text("Aceptar");
-$("#aceptarMsg").addClass("btn-primary");
-$('#msg').modal('show');
+		$("#titleMsg").text('Seleccione una categoria');
+		$("#cuerpoMsg").html('Por favor seleccione una categoria');
+		$("#aceptarMsg").text("Aceptar");
+		$("#aceptarMsg").addClass("btn-primary");
+		$('#msg').modal('show');
 
-	}else{
+	} else {
 
 		/* Configuración Modal */
-$("#titleMsg").text('Sin resultados');
-$("#cuerpoMsg").html('No hay datos en la categoria: '+categoria+' del año '+anio);
-$("#aceptarMsg").text("Aceptar");
-$("#aceptarMsg").addClass("btn-primary");
-$('#msg').modal('show');
+		$("#titleMsg").text('Sin resultados');
+		$("#cuerpoMsg").html('No hay datos en la categoria: ' + categoria + ' del año ' + anio);
+		$("#aceptarMsg").text("Aceptar");
+		$("#aceptarMsg").addClass("btn-primary");
+		$('#msg').modal('show');
 
 	}
-
-
-
 }
 
 function modalConfirmarEliminar(nombre, funcion) {
