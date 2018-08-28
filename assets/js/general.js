@@ -1,5 +1,5 @@
 $(function () {
-    if ($('body').hasClass('newNews')) {
+    if ($('body').hasClass('newNews') || $('body').hasClass('newsManage')) {
         tinymce.init({
             selector: "#cuerpo",
             plugins: "autolink, code, textcolor colorpicker, emoticons, fullscreen, image, media, preview,searchreplace,table",

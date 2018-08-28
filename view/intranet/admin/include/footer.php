@@ -107,6 +107,8 @@
   <script src="../../../assets/js/modal.js"></script>
   <script src="../../../assets/js/newsManager.js"></script> 
 <?php elseif ($pageName[0]=="newsManage"): ?> 
+<script src="../../../assets/js/modal.js"></script>
+<script src="../../../assets/vendor/tinymce/tinymce.min.js?apiKey=ayksm51eyqs90o6zhleyi56fsus6pi22mfludruzls5hqhbk"></script>
   <script src="../../../assets/vendor/datatables/jquery.dataTables.js"></script>
   <script src="../../../assets/vendor/datatables/dataTables.bootstrap4.js"></script>
   <script src="../../../assets/vendor/datatables/dataTables.bootstrap4.js"></script>

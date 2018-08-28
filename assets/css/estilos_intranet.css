@@ -6,19 +6,27 @@
     object-fit: cover;
     height: 250px;
 }
-.cover_miniatura{
+
+.cover_miniatura {
     object-fit: cover;
     height: 60px;
     width: 100px;
-    
 }
-.blur{
+.cover_mediano {
+    object-fit: cover;
+    height: 100px;
+}
+
+.blur {
     filter: blur(20px);
 }
+
 /* Bootstrap Toggle v2.2.2 corrections for Bootsrtap 4*/
+
 .toggle-off {
     box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
 }
+
 .toggle.off {
     border-color: rgba(0, 0, 0, .25);
 }
@@ -28,7 +36,8 @@
     border: thin rgba(0, 0, 0, .25) solid;
 }
 
-.overlay_data_trabajador{
+
+.overlay_data_trabajador {
     background: #ffffff;
     position: absolute;
     display: flex;
@@ -37,40 +46,48 @@
     height: 100%;
     width: 100%;
     z-index: 700;
-    top:0;
+    top: 0;
     left: 0;
 }
-.overlay_data_hijo{
+
+.overlay_data_hijo {
     background: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 700;
-    top:0;
+    top: 0;
     left: 0;
 }
-.no-registros{
+
+.no-registros {
     width: 100%;
     font-weight: 300;
     font-size: 20px;
     text-align: center;
 }
+
 /*fin clases generales*/
+
 /* List user */
-.register-page  #usernew_wrap{
+
+.register-page #usernew_wrap {
     justify-content: center;
     display: flex;
     align-items: center;
 }
-.userManage-page .activeU{
+
+.userManage-page .activeU {
     background-color: #495057;
     color: #ffffff;
 }
-.userManage-page .btn-group-vertical{
+
+.userManage-page .btn-group-vertical {
     width: 100%;
     overflow: hidden;
 }
-.userManage-page .btn-group-vertical >.btn {
+
+.userManage-page .btn-group-vertical>.btn {
     background-color: #ffffff;
     color: #495057;
     border-radius: 0;
@@ -80,7 +97,7 @@
     outline: none !important;
 }
 
-.userManage-page .buttons-users >.btn {
+.userManage-page .buttons-users>.btn {
     background-color: #ffffff;
     color: #495057;
     border-radius: 0;
@@ -126,17 +143,18 @@
     width: 100%;
     position: relative;
 }
-.userManage-page .message{
+
+.userManage-page .message {
     font-size: 16px;
     padding: 10px 20px;
     font-weight: 400;
     border: 1px solid #ced4da;
     width: 100%;
     position: relative;
-
 }
 
-.userManage-page .fa-clipboard-list, .userManage-page .fa-sort {
+.userManage-page .fa-clipboard-list,
+.userManage-page .fa-sort {
     font-size: 20px;
     position: absolute;
     right: 26px;
@@ -165,9 +183,11 @@
 .userManage-page .card .card-img-top {
     background: #495057;
 }
-.userManage-page .card .avatar_container{
+
+.userManage-page .card .avatar_container {
     position: absolute;
 }
+
 .userManage-page .container-image .img-thumbnail {
     object-fit: cover;
     height: 160px;
@@ -184,7 +204,8 @@
 .userManage-page #loading img {
     margin: 10px 0;
 }
-.userManage-page .pager{
+
+.userManage-page .pager {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -194,31 +215,41 @@
 .userManage-page .dangerFocus:focus {
     border-color: #FF0000;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);
-  }
-  .userManage-page.custom-file{
+}
+
+.userManage-page.custom-file {
     overflow: hidden;
 }
-.userManage-page .custom-file-input ~ .custom-file-label::after {
+
+.userManage-page .custom-file-input~.custom-file-label::after {
     content: "Elegir";
 }
+
 /* END list User*/
+
 /* son */
-.buscar-padre{
+
+.buscar-padre {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.title{
+
+.title {
     font-weight: 300;
     font-size: 30px;
     padding-bottom: 10px;
 }
-.buscar-padre .input-group{
+
+.buscar-padre .input-group {
     max-width: 600px;
 }
-.info_trabajador, .info_hijo {
+
+.info_trabajador,
+.info_hijo {
     color: #495057;
 }
+
 .profile .container-image {
     display: flex;
     justify-content: center;
@@ -226,10 +257,12 @@
     border: 0;
     box-shadow: none;
 }
+
 .profile .container-image .img-thumbnail {
     height: 160px;
     width: 160px;
 }
+
 .profile .card-img-top,
 .profile .card-body {
     width: 100%;
@@ -241,69 +274,100 @@
 .profile .card-img-top {
     background: #495057;
 }
-.profile .object-fill{
+
+.profile .object-fill {
     position: absolute;
 }
 
-.profile .list-group li{
-     position: relative;
+.profile .list-group li {
+    position: relative;
 }
-.profile .list-group li label{
+
+.profile .list-group li label {
     position: absolute;
     right: 0;
     padding-right: 20px;
-    text-align: left; 
+    text-align: left;
 }
-.profile_2 .list-group li{
+
+.profile_2 .list-group li {
     position: relative;
 }
-.profile_2 .list-group li label{
-   position: absolute;
-   right: 0;
-   padding-right: 20px;
-   text-align: left; 
+
+.profile_2 .list-group li label {
+    position: absolute;
+    right: 0;
+    padding-right: 20px;
+    text-align: left;
 }
-.profile_2 img{
+
+.profile_2 img {
     height: 200px !important;
 }
-.profile_2 li{
-    font-size: 14px;
-}
-.profile_2 strong{
+
+.profile_2 li {
     font-size: 14px;
 }
 
-#sons button{
+.profile_2 strong {
+    font-size: 14px;
+}
+
+#sons button {
     text-align: right;
 }
-#sons i{
+
+#sons i {
     font-size: 20px;
     position: absolute;
     left: 20px;
 }
+.overlay_newsE{
+    background: rgba(255, 255, 255, .5);
+    position: absolute;
+    top:0;
+    height: 100%;
+    width: 100%;
+    z-index: 800;
+    display: flex;
+    justify-content: center;
+}
+.overlay_newsE .contenedor_newsE{
+    max-width:600px;
+}.overlay_newsE .contenedor_newsE form{
+    margin-top: 20px;
+    background: #495057;
+    padding: 20px;
+    position: relative;
+}.overlay_newsE .contenedor_newsE form label{
+    color:#ffffff;
+}
+.overlay_newsE .contenedor_newsE form #close_newsE{
+    position: absolute;
+    right: -20px;
+    top: -25px;
+}
 /* END son*/
 
-
-
-
-.saldo-movimiento{
+.saldo-movimiento {
     font-size: 30px;
     color: green;
     font-weight: bold;
 }
 
 /*moveManage*/
-.table-mov{
 
+.table-mov {
     font-size: 16px;
-
 }
-.table-mov>tbody>tr>td>input{
+
+.table-mov>tbody>tr>td>input {
     font-size: 16px;
     width: 117px;
-
 }
-.table-mov>tbody>tr>td>div>button{
+
+.table-mov>tbody>tr>td>div>button {
     font-size: 16px;
 }
+
 /*moveManage*/

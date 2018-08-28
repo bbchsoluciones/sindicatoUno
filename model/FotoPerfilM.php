@@ -38,7 +38,6 @@ class FotoPerfilM{
                                                 now());";
 
             endif;
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $consulta = $conn->prepare($sql);	
             $consulta->bindParam(':rut', $rut);
             $consulta->bindValue(':avatar', $this->url_foto_perfil);
