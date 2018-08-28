@@ -163,7 +163,7 @@ $("#update_news").click(function (e){
                 $('html, body').animate({
                     scrollTop: 0
                 }, 0);
-                if (json['clase'] === "danger") {
+                if (json['clase'] == "danger") {
                     Object.keys(json).forEach(function (indice) {
                         validacion_camposNews(json, indice);
                     });

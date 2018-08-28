@@ -103,6 +103,7 @@ function modalConfirmarEliminar(nombre, funcion) {
 function modalInformacion(json) {
     $("#aceptarMsg").removeClass("btn-danger");
 	$("#aceptarMsg").removeClass("btn-success");
+	$("#aceptarMsg").removeClass("btn-warning");
     $("#titleMsg").text(json.titulo);
     $("#cuerpoMsg").html(json.mensaje);
     $("#aceptarMsg").text("Aceptar");

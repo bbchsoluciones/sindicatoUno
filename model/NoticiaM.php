@@ -272,7 +272,7 @@ class NoticiaM
 					FROM noticia n
 					JOIN trabajador t
 					ON n.trabajador_run_trabajador = t.run_trabajador
-					JOIN foto_noticia fn
+					LEFT JOIN foto_noticia fn
 					ON n.id_noticia = fn.noticia_id_noticia;";
             $consulta = $conn->prepare($sql);
             $consulta->execute();
@@ -309,7 +309,7 @@ class NoticiaM
 					FROM noticia n
 					JOIN trabajador t
 					ON n.trabajador_run_trabajador = t.run_trabajador
-					JOIN foto_noticia fn
+					LEFT JOIN foto_noticia fn
                     ON n.id_noticia = fn.noticia_id_noticia
                     WHERE n.id_noticia = :id_noticia";
             $consulta = $conn->prepare($sql);
