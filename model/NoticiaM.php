@@ -279,9 +279,7 @@ class NoticiaM
             $resultado = $consulta->fetchAll();
             if ($resultado):
                 foreach ($resultado as $key => $val) {
-                    if ($val['fecha_publicacion']) {
-                        $resultado[$key]['fecha_publicacion'] = strftime("%d %b %Y, %H:%m", strtotime($val['fecha_publicacion']));
-                    }
+                    $resultado[$key]['cuerpo'] = htmlspecialchars_decode($val['cuerpo']);
                 }
                 for ($i = 0; $i < count($resultado); $i++) {
                     array_push($this->noticias, array_map("utf8_encode", $resultado[$i]));
@@ -296,6 +294,7 @@ class NoticiaM
     }
     public function mostrar_noticia()
     {
+        setlocale(LC_ALL, "es_ES", 'Spanish_Spain', 'Spanish');
         $this->noticias = array();
         try {
             $pdo = PDOConnection::instance();
@@ -303,14 +302,19 @@ class NoticiaM
             $sql = "SELECT
 					n.id_noticia,
 					fn.url_foto_noticia,
+                    fp.url_foto_perfil,
+                    t.nombres_trabajador,
 					n.titulo,
 					n.cuerpo,
+                    n.fecha_publicacion,
 					n.publicada
 					FROM noticia n
 					JOIN trabajador t
 					ON n.trabajador_run_trabajador = t.run_trabajador
 					LEFT JOIN foto_noticia fn
                     ON n.id_noticia = fn.noticia_id_noticia
+                    LEFT JOIN foto_perfil fp
+                    ON t.run_trabajador=fp.trabajador_run_trabajador
                     WHERE n.id_noticia = :id_noticia";
             $consulta = $conn->prepare($sql);
             $consulta->bindParam(':id_noticia', $this->id_noticia);

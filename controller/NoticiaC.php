@@ -60,7 +60,7 @@ if (isset($_POST['titulo']) &&
                 endif;
             else:
                 $img = true;
-                
+
             endif;
             if ($n && $img):
                 $error['tituloN'] = "Éxito!";
@@ -246,11 +246,43 @@ elseif (isset($_POST['ajax']) && isset($_POST['selectNoticia'])):
     $n = new NoticiaM();
     $n->mostrar_noticias();
     if (!empty($n->getNoticias())):
-        $n = array("data" => $n->getNoticias());
+        /*     foreach($n->getNoticias() as $row => $key):
+        if(empty($row['url_foto_noticia']) || $row['url_foto_noticia']==null):
+        $row['url_foto_noticia']=".././../assets/images/1280x720.png";
+        endif;
+        endforeach; */
+        $noticias = $n->getNoticias();
+        foreach ($noticias as $key => $val):
+            $noticias[$key]['fecha_publicacion'] = strftime("%d %b %Y, %H:%m", strtotime($val['fecha_publicacion']));
+        endforeach;
+        $n = array("data" => $noticias);
         echo json_encode($n);
     else:
         $n = array("data" => "");
         echo json_encode($n);
+    endif;
+elseif (isset($_GET['id_news']) && !empty($_GET['id_news'])):
+
+    $noticia = new NoticiaM();
+    $id_noticia = $_GET['id_news'];
+    if (ctype_digit($id_noticia)):
+        $noticia->setId_noticia($id_noticia);
+        $noticia->mostrar_noticia();
+        if (!empty($noticia->getNoticias())):
+            $noticia = $noticia->getNoticias();
+        else:
+            echo "Error";
+        endif;
+    else:
+        echo "Error";
+    endif;
+else:
+    $n = new NoticiaM();
+    $n->mostrar_noticias();
+    if (!empty($n->getNoticias())):
+        $n = $n->getNoticias();
+    else:
+        $n = array();
     endif;
 endif;
 //fin listar noticias

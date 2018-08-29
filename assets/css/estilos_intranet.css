@@ -322,6 +322,12 @@
     position: absolute;
     left: 20px;
 }
+.rowNews{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
 .overlay_newsE{
     background: rgba(255, 255, 255, .5);
     position: absolute;

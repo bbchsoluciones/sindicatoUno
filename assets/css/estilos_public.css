@@ -787,40 +787,64 @@ main {
 .news-page{
     padding-top: 100px;
 }
-.news-page .news-time{
-    font-size: 15px;
-}
-.news-page .news-time span{
-    color: #4C4C4C;
-}
-.news-page .card {
-    border-radius: 0;
-    border:0;
-    margin-bottom: 2px;
-    background-size: cover !important;
-    -webkit-background-size: cover !important;
-    -moz-background-size: cover !important;
-    -o-background-size: cover !important;
-    flex-shrink: 0 !important;
-    backface-visibility: hidden !important;
-    height:150px;
-}
-.news-page a{
-    background: rgba(1,31,75, 0.1);
-    position: absolute;
-    height: 100%;
-    width: 100%;
+.news-page .titulo a{
     text-decoration: none;
-    
+    color: rgb(5, 49, 114);
 }
-.news-page .card .overlay-title{
-    color: white;
-    font-size: 16px;
-    font-family: 'Poppins';
-    text-shadow: 0.125rem 0.125rem 0.25rem #000000;
+.news-page .news-time{
+    border: 3px solid #FFF;
+    box-shadow: 0px 0px 3px 1px grey;
+    max-width: 110px;
     position: absolute;
-    bottom:0;
-    width: 100%;
-    padding: 15px;
+    bottom:  0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+
 }
+.news-page .date{
+    font-weight: bold;
+    font-size: 11px;
+}
+.news-page .news-img-preview{
+    width: 100%;
+    height: 200px;
+}
+.news-page .news-img-preview img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
 /* FIN NEWS PAGE */
+
+/* NEWS DETAIL PAGE */
+
+.news-detail-page{
+    padding-top: 100px;
+}
+.news-detail-page .content{
+    max-width: 800px;
+    width: 100%;
+}
+.news-detail-page .header_image{
+    width: 100%;
+    position: relative;
+}
+.news-detail-page #main_news_image{
+    display: block;
+    width: 100%;
+    height: 300px;
+}
+.extra_detail img{
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+.news-font{
+    font-size: 13px;
+    font-weight: bold;
+    color: #495969;
+}
+/* FIN NEWS DETAIL PAGE*/
