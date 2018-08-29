@@ -44,6 +44,7 @@ $hora = strftime("%H:%m", strtotime($noticia['fecha_publicacion']));
             <div class="body-content">
                 <?php echo $noticia['cuerpo']; ?>
             </div>
+            <hr/>
             <div class="comments-content">
                 <div id="disqus_thread"></div>
                 <script>
