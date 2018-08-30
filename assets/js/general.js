@@ -2,9 +2,11 @@ $(function () {
     if ($('body').hasClass('newNews') || $('body').hasClass('newsManage')) {
         tinymce.init({
             selector: "#cuerpo",
-            plugins: "autolink, code, textcolor colorpicker, emoticons, fullscreen, image, media, preview,searchreplace,table",
-            toolbar: "table,forecolor backcolor, emoticons, fullscreen, image,preview,link unlink | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | undo redo | formatselect",
+            plugins: "autolink, code, textcolor colorpicker, fullscreen, image, media, preview,searchreplace,table",
+            toolbar: "fontselect,fontsizeselect,table,forecolor backcolor, fullscreen, image,preview,link unlink | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | undo redo | formatselect",
             language: 'es',
+            fontsize_formats: '8pt 10pt 12pt 14pt 18pt 24pt 36pt',
+            font_formats: 'Arial=arial,helvetica,sans-serif;Courier New=courier new,courier,monospace',
             themes: "modern",
             height: "300",
             setup: function (editor) {

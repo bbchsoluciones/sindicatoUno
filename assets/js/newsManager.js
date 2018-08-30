@@ -65,6 +65,7 @@ $("#crear").click(function (event) {
                         validacion_camposNews(json, indice);
                     });
                 } else {
+                    limpiarFormulario('#news-form');
                     limpiarCampo(".custom-file-label", "label");
                     limpiarCampo(".dataNews", "input");
                     $(".img-fluid").attr("src", "../../../assets/images/1280x720.png")
@@ -163,7 +164,7 @@ $("#update_news").click(function (e){
                 $('html, body').animate({
                     scrollTop: 0
                 }, 0);
-                if (json['clase'] === "danger") {
+                if (json['clase'] == "danger") {
                     Object.keys(json).forEach(function (indice) {
                         validacion_camposNews(json, indice);
                     });
@@ -171,6 +172,7 @@ $("#update_news").click(function (e){
                     '<strong>' + json['titulo'] + '</strong> ' + json['mensaje'] + '' +
                     '</div>').fadeIn().delay(3000).fadeOut();
                 } else {
+                    limpiarFormulario('#news-update-form');
                     limpiarCampo(".custom-file-label", "label");
                     limpiarCampo(".dataNews", "input");
                     $(".img-fluid").attr("src", "../../../assets/images/1280x720.png")
@@ -257,7 +259,7 @@ function selectNoticia() {
                 for (i = 0; i < json.data.length; i++) {
                     tabla.row.add([
                         json.data[i].id_noticia,
-                        '<div class="row justify-content-center"><img class="cover_miniatura" src="' + json.data[i].url_foto_noticia + '"></img></div>',
+                        '<div class="rowNews"><img class="cover_miniatura" src="' + json.data[i].url_foto_noticia + '"></img></div>',
                         json.data[i].titulo,
                         json.data[i].publicada,
                         json.data[i].fecha_publicacion,
