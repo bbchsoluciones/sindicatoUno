@@ -13,18 +13,18 @@ function graficoMiembros(){
             try {
                 var json = JSON.parse(response);
                 //console.log(json)
-                var ctx = document.getElementById('graficoMiembros').getContext('2d');
+                var ctx = document.getElementById('graficoMovIndex').getContext('2d');
                 var chart = new Chart(ctx, {
                     // The type of chart we want to create
                     type: 'doughnut',
 
                     // The data for our dataset
                     data: {
-                        labels: ["Hombres", "Mujeres", "Otro"],
+                        labels: ["Ingresos", "Egresos"],
                         datasets: [{
-                            backgroundColor: ['rgba(51, 81, 235, 0.85)','rgba(235, 51, 170, 0.85)','rgba(235, 183, 51, 0.85)'],
-                            borderColor: ['rgba(51, 81, 235, 0.85)','rgba(235, 51, 170, 0.85)','rgba(235, 183, 51, 0.85)'],
-                            data: [json.data[0][0].hombres, json.data[0][0].mujeres, json.data[0][0].otros],
+                            backgroundColor: ['rgba(18, 161, 8, 0.65)','rgba(255, 20, 20, 0.82)'],
+                            borderColor: ['black','black'],
+                            data: [json.data[0][0].hombres, json.data[0][0].mujeres],
                         }]
                     },
 

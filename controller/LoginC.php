@@ -38,10 +38,10 @@ if(isset($_POST['user']) && isset($_POST['pass'])):
                 //echo "Administrador";    
             elseif($t->getTrabajador()['tipo_usuario_id_tipo_usuario'] == 2):
                 //User
-                //$_SESSION['tipo_usuario'] = 2;
-                //$_SESSION['run_trabajador'] = $t->getTrabajador()['run_trabajador'];
-                //header("Location: ../view/intranet/user/index.php");     
-                header("Location: ../view/public/login.php"); 
+                session_start();
+                $_SESSION['tipo_usuario'] = 2;
+                $_SESSION['run_trabajador'] = $t->getTrabajador()['run_trabajador'];
+                header("Location: ../view/intranet/user/index.php");     
                 //echo "Usuario";          
             endif;
         else:

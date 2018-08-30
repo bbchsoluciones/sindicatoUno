@@ -504,6 +504,50 @@ class MovimientoM{
 
 	}// Cierra mostrar_movimientos_totales
 	
+	function cantidad_movimientos(){
+
+        $this->movimientos = array();
+		try{
+			$pdo = PDOConnection::instance();
+			$conn = $pdo->getConnection();
+            $sql = "SELECT COUNT(m.id_movimiento) AS total_mov,
+			(
+				SELECT COUNT(m.id_movimiento)
+				FROM movimiento m
+				JOIN nombre_movimiento nm
+				ON m.nombre_movimiento_id_nombre_movimiento = nm.id_nombre_movimiento
+				JOIN categoria_movimiento cm
+				ON nm.categoria_movimiento_id_categoria_movimiento = cm.id_categoria_movimiento
+				JOIN tipo_movimiento tm
+				ON cm.tipo_movimiento_id_tipo_movimiento = tm.id_tipo_movimiento
+				WHERE tm.id_tipo_movimiento=0
+			) AS total_ingresos,
+			(
+				SELECT COUNT(m.id_movimiento)
+				FROM movimiento m
+				JOIN nombre_movimiento nm
+				ON m.nombre_movimiento_id_nombre_movimiento = nm.id_nombre_movimiento
+				JOIN categoria_movimiento cm
+				ON nm.categoria_movimiento_id_categoria_movimiento = cm.id_categoria_movimiento
+				JOIN tipo_movimiento tm
+				ON cm.tipo_movimiento_id_tipo_movimiento = tm.id_tipo_movimiento
+				WHERE tm.id_tipo_movimiento=1
+			) AS total_egresos
+			FROM movimiento m;";
+            $consulta = $conn->prepare($sql);				
+			$consulta->execute();
+			$resultado = $consulta->fetchAll();
+			foreach ($resultado as $registros):
+                array_push($this->movimientos, array_map('utf8_encode',$registros));
+            endforeach;
+			$conn = null;
+			$consulta = null;
+
+		}catch (Exception $ex) {
+			echo "Fallo: " . $ex->getMessage();
+        }	
+
+	}// Cierra cantidad_movimientos
 
 
 

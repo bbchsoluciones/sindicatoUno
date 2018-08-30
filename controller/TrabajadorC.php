@@ -287,7 +287,23 @@ elseif (isset($_GET['run_trabajador']) && !empty($_GET['run_trabajador']) && iss
         echo "trabajador no existe";
     endif;
 // FIN ELIMINAR TRABAJADOR
+// INTRANET USER MOSTRAR DATOS TRABAJADOR
+elseif (isset($_POST['ajax']) && isset($_POST['mostrarDatosTrabajador']) && isset($_POST['run_trabajador'])):
+   
+    $run = $_POST['run_trabajador'];
+    $t = new TrabajadorM();
+    $t->setRun_trabajador($run);
+    $t->mostrar_datos_trabajador();
+    //var_dump($t->getTrabajador());  
+    if (!empty($t->getTrabajador())):
+        $t = array("data" => $t->getTrabajador());
+        echo json_encode($t);
+    else:
+        $t = array("data" => "");
+        echo json_encode($t);
+    endif;
 endif;
+
 function clean($string)
 {
     $string = str_replace('-', '', $string); // Replaces all hyphens with nothing :V.

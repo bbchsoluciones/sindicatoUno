@@ -9,10 +9,11 @@ require_once($ruta_raiz . '/connection/PDOConnection.php');
 require_once($ruta_raiz . '/controller/EncriptadorC.php');
 //Dentro de Modelo
 
-/*  $t = new TrabajadorM();
+  /* $t = new TrabajadorM();
 $t->setRun_trabajador('193412130');
-$t->login();
-var_dump($t->getTrabajador()['run_trabajador']);  */
+$t->mostrar_datos_trabajador();
+var_dump($t->getTrabajador());   */
+
 
 
 //Clase
@@ -375,6 +376,7 @@ class TrabajadorM{
 					c.id_cargo,
 					sb.id_sub_cargo,
 					c.nombre_cargo,
+					sb.nombre_subcargo,
 					t.direccion_trabajador,
 					r.id_region,
 					p.id_provincia,

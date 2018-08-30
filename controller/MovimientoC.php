@@ -72,4 +72,14 @@ elseif(isset($_POST['id_tipo']) && isset($_POST['anio'])):
         $m = array("data" => "");
         echo json_encode($m);
     endif;
+elseif(isset($_POST['ajax']) && isset($_POST['mostrarCantidadMov'])):
+        $m = new MovimientoM();
+        $m->cantidad_movimientos();
+        if (!empty($m->getMovimientos())):
+            $m = array("data" => $m->getMovimientos());
+            echo json_encode($m);
+        else:
+            $m = array("data" => "");
+            echo json_encode($m);
+        endif;
 endif;//fin
