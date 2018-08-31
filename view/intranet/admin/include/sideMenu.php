@@ -52,15 +52,23 @@
       <span>Pagina Principal</span>
     </a>
     <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-      <h6 class="dropdown-header">Inicio</h6>
-      <a class="dropdown-item" href="#"><i class="fa fa-align-justify text-info pr-3"></i>Editar</a>
+      <a class="dropdown-item" href="#"><i class="fa fa-align-justify text-info pr-3"></i>Inicio</a>
       <div class="dropdown-divider"></div>
-      <h6 class="dropdown-header">Galería</h6>
-      <a class="dropdown-item" href="#"><i class="fa fa-images text-info pr-3"></i>Administrar</a>
-      <h6 class="dropdown-header">Noticias</h6>
-      <a class="dropdown-item" href="newNews.php"><i class="fa fa-user-plus text-info pr-3"></i>Crear</a>
-      <a class="dropdown-item" href="newsManage.php"><i class="fa fa-address-card text-info pr-3"></i>Administrar</a>
+      <a class="dropdown-item" href="#"><i class="fa fa-users text-info pr-3"></i>Quiénes Somos</a>
       <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="#"><i class="fa fa-images text-info pr-3"></i>Galería</a>
     </div>
   </li>
+  <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">
+        <i class="fas fa-newspaper pr-2"></i>
+        <span>Noticias</span>
+      </a>
+      <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+        <a class="dropdown-item" href="newNews.php"><i class="fa fa-user-plus text-info pr-3"></i>Crear</a>
+        <a class="dropdown-item" href="newsManage.php"><i class="fa fa-address-card text-info pr-3"></i>Administrar</a>
+        <div class="dropdown-divider"></div>
+      </div>
+    </li>
 </ul>
