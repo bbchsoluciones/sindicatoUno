@@ -168,9 +168,9 @@ elseif (isset($_POST['tipo_usuario']) &&
             $valor = clean($valor);
         endif;
         if (empty(trim($valor)) && $indice !== "estado_trabajador"):
-            $valor = NULL;
+            $valor = null;
             unset($error[$valor]);
-            $data[$indice] = NULL;
+            $data[$indice] = null;
         endif;
         $data[$indice] = utf8_decode(htmlspecialchars($valor));
     endforeach;
@@ -194,7 +194,7 @@ elseif (isset($_POST['tipo_usuario']) &&
     || $data['nombre_cargo'] == "3" && empty($data['placa_trabajador'])):
         $error['placa_trabajador'] = "Formato incorrecto o vacío";
     elseif ($data['nombre_cargo'] !== "3"):
-        $data['placa_trabajador'] = NULL;
+        $data['placa_trabajador'] = null;
     endif;
 
     //validación email
@@ -202,7 +202,16 @@ elseif (isset($_POST['tipo_usuario']) &&
         $error['email_trabajador'] = "Correo invalido!";
     endif;
 
-    if (count($error)>0):
+    if (isset($_FILES['avatar']['name']) && !empty($_FILES['avatar']['name'])):
+        $subir = new imgUpldr;
+        $imagen = $subir->init($_FILES['avatar']);
+        if (!empty($imagen)):
+            $error['avatar'] = $imagen;
+        endif;
+
+    endif;
+
+    if (count($error) > 0):
         $error['titulo'] = "Ha ocurrido un error!";
         $error['mensaje'] = "Uno o más campos tienen información errónea.";
         $error['clase'] = "danger";
@@ -228,28 +237,25 @@ elseif (isset($_POST['tipo_usuario']) &&
         $trabajador->setEstado_trabajador_id_estado_trabajador($data['estado_trabajador']);
         $trabajador->setTelefono_trabajador($data['telefono_trabajador']);
         $trabajador->setCelular_trabajador($data['celular_trabajador']);
-        if (isset($_FILES['avatar']['name']) && !empty($_FILES['avatar']['name'])):
-            $foto = new FotoPerfilM();
-            $subir = new imgUpldr;
-            $imagen = $subir->init($_FILES['avatar']);
-            $existT = $trabajador->encontrar_trabajador();
-            $existI = $trabajador->encontrarTconImagen();
+        if (empty($imagen)):
             $accion = "";
-            if ($existT == false):
-                $data['run_trabajador'] = "No debe modificar el run_trabajador!";
-            elseif ($existI == false):
-                $accion = "insert";
-            elseif ($existI == true):
+            $foto = new FotoPerfilM();
+            $trabajador->encontrarTconImagen();
+            $avatar = "http://localhost/sindicatoUno/assets/images/" . $subir->_name;
+            $foto->setUrl_foto_perfil($avatar);
+            if (!empty($trabajador->getTrabajador()['url_foto_perfil'])):
+                $nombre_imagen = basename(parse_url($trabajador->getTrabajador()['url_foto_perfil'])['path']);
+                $split = explode(".", $nombre_imagen);
+                $name = $split[0];
+                $extension = $split[1];
+                if (ctype_digit($name)):
+                    unlink("../assets/images/" . $nombre_imagen);
+                endif;
                 $accion = "update";
-            endif;
-            if (empty($imagen) && !empty($accion)):
-                $avatar = "http://localhost/sindicatoUno/assets/images/" . $subir->_name;
-                $foto->setUrl_foto_perfil($avatar);
-                $foto->modificarFotoPerfil($accion, $data['run_trabajador']);
             else:
-                $error['avatar'] = $imagen;
+                $accion = "insert";
             endif;
-
+            $foto->modificarFotoPerfil($accion, $data['run_trabajador']);
         endif;
         if ($trabajador->actualizar_trabajador()):
             $error['titulo'] = "Éxito!";
@@ -287,14 +293,14 @@ elseif (isset($_GET['run_trabajador']) && !empty($_GET['run_trabajador']) && iss
         echo "trabajador no existe";
     endif;
 // FIN ELIMINAR TRABAJADOR
-// INTRANET USER MOSTRAR DATOS TRABAJADOR
+    // INTRANET USER MOSTRAR DATOS TRABAJADOR
 elseif (isset($_POST['ajax']) && isset($_POST['mostrarDatosTrabajador']) && isset($_POST['run_trabajador'])):
-   
+
     $run = $_POST['run_trabajador'];
     $t = new TrabajadorM();
     $t->setRun_trabajador($run);
     $t->mostrar_datos_trabajador();
-    //var_dump($t->getTrabajador());  
+    //var_dump($t->getTrabajador());
     if (!empty($t->getTrabajador())):
         $t = array("data" => $t->getTrabajador());
         echo json_encode($t);

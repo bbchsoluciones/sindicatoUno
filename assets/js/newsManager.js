@@ -57,7 +57,6 @@ $("#crear").click(function (event) {
         timeout: 600000,
         success: function (response) {
             try {
-                
                 $("#crear").prop("disabled", false);
                 var json = JSON.parse(response);
                 if (json['clase'] === "danger") {
@@ -266,7 +265,7 @@ function selectNoticia() {
                     tabla.row.add([
                         json.data[i].id_noticia,
                         '<div class="rowNews"><img class="cover_miniatura" src="' + json.data[i].url_foto_noticia + '"></img></div>',
-                        json.data[i].titulo,
+                        (json.data[i].titulo).substring(0, 25)+"...",
                         json.data[i].publicada,
                         json.data[i].fecha_publicacion,
                         json.data[i].nombres_trabajador,
