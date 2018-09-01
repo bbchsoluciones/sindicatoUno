@@ -25,7 +25,7 @@ include 'include/header.php';
                             <label>Imagen Cabecera</label>
                             <div class="input-group">
                                 <div class="custom-file" id="customFile">
-                                    <input type="file" class="custom-file-input" id="image" aria-describedby="" name="url_foto_noticia">
+                                    <input type="file" class="custom-file-input dataNews" id="image" aria-describedby="" name="url_foto_noticia">
                                     <label class="custom-file-label" for="exampleInputFile">
                                         Seleccionar Archivo
                                     </label>

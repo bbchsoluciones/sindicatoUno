@@ -91,8 +91,13 @@ function graficoVacio(categoria, anio) {
 
 function modalConfirmarEliminar(nombre, funcion) {
 
-    $("#titleConfirm").text("¿Realmente desea eliminar a " + nombre + "?");
-    $("#cuerpoConfirm").html('Presione "Borrar" si esta seguro de eliminar a esta persona.');
+	if(nombre=="noticia"){
+		$("#titleConfirm").text("¿Realmente desea eliminar esta noticia?");
+		$("#cuerpoConfirm").html('Presione "Borrar" si esta seguro de eliminar este registro.');
+	}else{
+		$("#titleConfirm").text("¿Realmente desea eliminar a " + nombre + "?");
+		$("#cuerpoConfirm").html('Presione "Borrar" si esta seguro de eliminar a esta persona.');
+	}
     $("#cancelarConfirm").text("Cancelar");
     $("#cancelarConfirm").addClass("btn-success");
     $("#aceptarConfirm").text("Borrar");
@@ -104,7 +109,11 @@ function modalInformacion(json) {
     $("#aceptarMsg").removeClass("btn-danger");
 	$("#aceptarMsg").removeClass("btn-success");
 	$("#aceptarMsg").removeClass("btn-warning");
-    $("#titleMsg").text(json.titulo);
+	if(json.hasOwnProperty("tituloN")){
+		$("#titleMsg").text(json.tituloN);
+	}else{
+		$("#titleMsg").text(json.titulo);
+	}
     $("#cuerpoMsg").html(json.mensaje);
     $("#aceptarMsg").text("Aceptar");
     $("#aceptarMsg").addClass("btn-" + json.clase);
