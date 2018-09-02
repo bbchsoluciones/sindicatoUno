@@ -175,16 +175,16 @@ elseif (isset($_POST['tipo_usuario']) &&
         $data[$indice] = utf8_decode(htmlspecialchars($valor));
     endforeach;
 
-    if (array_key_exists('contrasena_trabajador', $error) && array_key_exists('vcontrasena_trabajador', $error)):
+    /* f (array_key_exists('contrasena_trabajador', $error) && array_key_exists('vcontrasena_trabajador', $error)):
         $data['contrasena_trabajador'] = "nula";
         $data['vcontrasena_trabajador'] = "nula";
         unset($error['contrasena_trabajador']);
-        unset($error['vcontrasena_trabajador']);
-    elseif ($data['contrasena_trabajador'] !== $data['vcontrasena_trabajador']):
+        unset($error['vcontrasena_trabajador']); */
+    if ($data['contrasena_trabajador'] !== $data['vcontrasena_trabajador']):
         $error['contrasena_trabajador'] = "Contraseñas no coinciden";
         $error['vcontrasena_trabajador'] = "Contraseñas no coinciden";
     elseif ($data['contrasena_trabajador'] == $data['vcontrasena_trabajador'] &&
-    array_key_exists('contrasena_trabajador', $error) == false && array_key_exists('vcontrasena_trabajador', $error) == false):
+    !empty($data['contrasena_trabajador']) && !empty($data['vcontrasena_trabajador'])):
         $encriptador = new EncriptadorC($data['contrasena_trabajador']);
         $data['contrasena_trabajador'] = $encriptador->getClave();
     endif;
@@ -237,7 +237,7 @@ elseif (isset($_POST['tipo_usuario']) &&
         $trabajador->setEstado_trabajador_id_estado_trabajador($data['estado_trabajador']);
         $trabajador->setTelefono_trabajador($data['telefono_trabajador']);
         $trabajador->setCelular_trabajador($data['celular_trabajador']);
-        if (empty($imagen)):
+        if (isset($_FILES['avatar']['name']) && !empty($_FILES['avatar']['name'])):
             $accion = "";
             $foto = new FotoPerfilM();
             $trabajador->encontrarTconImagen();

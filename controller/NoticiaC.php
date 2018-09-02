@@ -55,7 +55,7 @@ if (isset($_POST['titulo']) &&
         $noticia->setPublicada($data['publicada']);
         $noticia->setTrabajador_run_trabajador($_SESSION['run_trabajador']);
         if ($noticia->registrar_noticia()):
-            if (empty($imagen)):
+            if (isset($_FILES['url_foto_noticia']['name']) && !empty($_FILES['url_foto_noticia']['name'])):
                 $url_foto_noticia = "http://localhost/sindicatoUno/assets/images/" . $subir->_name;
                 $noticia->setUrl_foto_noticia($url_foto_noticia);
                 $noticia->agregar_imagen("insert");
@@ -117,7 +117,7 @@ elseif (isset($_POST['id_noticia']) &&
             $noticia->setCuerpo($data['cuerpo']);
             $noticia->setPublicada($data['publicada']);
             if ($noticia->actualizar_noticia()):
-                if (empty($imagen)):
+                if (isset($_FILES['url_foto_noticia']['name']) && !empty($_FILES['url_foto_noticia']['name'])):
                     $accion = "";
                     $url_foto_noticia = "http://localhost/sindicatoUno/assets/images/" . $subir->_name;
                     $noticia->setUrl_foto_noticia($url_foto_noticia);

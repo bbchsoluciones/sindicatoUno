@@ -82,7 +82,7 @@ function mostrarTrabajador(buttonId, rut) {
 
     $('.info_user').addClass("d-none");
     limpiarFormulario("#save-form");
-    limpiarCampo("#mensaje","div");
+    limpiarCampo("#mensaje", "div");
     limpiarCampos("#allDataUser", "select", ".listaHTML");
     limpiarCampos("#allDataUser", "input", ".disabled");
     limpiarCampos("#allDataUser", "small");
@@ -180,7 +180,7 @@ function ordenarTrabajadores(pagina, accion, objeto, bool) {
     if (objeto === null || objeto === undefined || objeto === "") {
         objeto = bool;
     }
-  
+
     var parametros = {
         "accion": accion,
         "objeto": objeto,
@@ -225,7 +225,7 @@ $('#isearch').keydown(function (e) {
 });
 
 function buscarTrabajador(pagina, accion, objeto) {
-    
+
     var text = $('#isearch').val();
     if (pagina === null || pagina === undefined || pagina === "") {
         pagina = 1;
@@ -325,7 +325,7 @@ $("#registrar").click(function (event) {
 $("#actualizar_trabajador").click(function (event) {
     event.preventDefault();
     limpiarCampo(".msj", "small");
-    limpiarCampo("#mensaje","div");
+    limpiarCampo("#mensaje", "div");
     var form = $('#save-form')[0];
     form = new FormData(form);
     form.append("actualizar", 1);
@@ -340,6 +340,7 @@ $("#actualizar_trabajador").click(function (event) {
         data: form,
         timeout: 600000,
         success: function (response) {
+            console.log(response);
             $("#actualizar_trabajador").prop("disabled", false);
             var json = JSON.parse(response);
             $('html, body').animate({
@@ -353,6 +354,8 @@ $("#actualizar_trabajador").click(function (event) {
                     validacion_campos(json, indice);
                 });
             }
+            limpiarCampo("#pass", "input");
+            limpiarCampo("#vpass", "input");
 
         },
         error: function (e) {
@@ -366,13 +369,14 @@ $("#actualizar_trabajador").click(function (event) {
 $("#eliminar_trabajador").click(function (event) {
     event.preventDefault();
     var nombres = $("#nombres").val();
-    var funcion = "eliminarTrabajador('"+$("#rut").val()+"')";
-    modalConfirmarEliminar(nombres,funcion);
+    var funcion = "eliminarTrabajador('" + $("#rut").val() + "')";
+    modalConfirmarEliminar(nombres, funcion);
 });
+
 function eliminarTrabajador(rut) {
     $("#eliminar_trabajador").prop("disabled", true);
     limpiarCampo(".msj", "small");
-    limpiarCampo("#mensaje","div");
+    limpiarCampo("#mensaje", "div");
     var parametros = {
         "run_trabajador": rut,
         "eliminar": 1

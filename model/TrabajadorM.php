@@ -482,16 +482,16 @@ class TrabajadorM{
 
 			$clausula = "WHERE run_trabajador = :run_trabajador";
 
-			if($this->contrasena_trabajador!=="nula"){
+			if(!empty($this->contrasena_trabajador)):
 				$cuerpo .= ",contrasena_trabajador = :contrasena_trabajador ";
-			}
+			endif;
 
 							
 			$sql = $accion . $cuerpo .$clausula;
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$consulta = $conn->prepare($sql);
 
-			if($this->contrasena_trabajador!=="nula"):
+			if(!empty($this->contrasena_trabajador)):
 				$consulta->bindParam(':contrasena_trabajador', $this->contrasena_trabajador, PDO::PARAM_STR);
 			endif;
 
