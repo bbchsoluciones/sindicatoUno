@@ -42,7 +42,7 @@ include('include/header.php');
                                                 </div>                                                
                                             </div>
                                             <div class="row">
-                                                <div id="contenedorGraficoEgreso" class="col-12">                                                
+                                                <div id="contenedorGraficoEgreso" class="col-12 chart-container">                                                
                                                 </div>
                                             </div>                                            
                                             <div id="contenedorBotonesEgreso" class="row">                                                                                                   

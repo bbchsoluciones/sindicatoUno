@@ -380,3 +380,68 @@
 .cell-text {
     word-wrap: break-word !important;
   }
+
+
+@media only screen and (min-width:200px) and (max-width:368px) {
+    /*Se ejecutará sólo cuando la resolución horizontal se encuentre entre 200 y 575 píxeles*/
+    .chart-container {
+        position: relative;
+        margin: auto;
+        height: 80vw;
+        width: 100%;
+      }
+}
+@media only screen and (min-width:369px) and (max-width:400px) {
+    /*Se ejecutará sólo cuando la resolución horizontal se encuentre entre 200 y 575 píxeles*/
+    .chart-container {
+        position: relative;
+        margin: auto;
+        height: 79vw;
+        width: 100%;
+      }
+}
+@media only screen and (min-width:401px) and (max-width:575px) {
+    /*Se ejecutará sólo cuando la resolución horizontal se encuentre entre 200 y 767 píxeles*/
+    .chart-container {
+        position: relative;
+        margin: auto;
+        height: 60vw;
+        width: 100%;
+      }
+}
+@media only screen and (min-width:576px) and (max-width:767px) {
+    /*Se ejecutará sólo cuando la resolución horizontal se encuentre entre 200 y 767 píxeles*/
+    .chart-container {
+        position: relative;
+        margin: auto;
+        height: 60vw;
+        width: 100%;
+      }
+}
+@media only screen and (min-width:768px) and (max-width:991px) {
+    /*Se ejecutará sólo cuando la resolución horizontal se encuentre entre 200 y 575 píxeles*/
+    .chart-container {
+        position: relative;
+        margin: auto;
+        height: 60vw;
+        width: 100%;
+      }
+}
+@media only screen and (min-width:992px) and (max-width:1199px) {
+    /*Se ejecutará sólo cuando la resolución horizontal se encuentre entre 200 y 575 píxeles*/
+    .chart-container {
+        position: relative;
+        margin: auto;
+        height: 35vw;
+        width: 100%;
+      }
+}
+@media only screen and (min-width:1200px) and (max-width:1400px) {
+    /*Se ejecutará sólo cuando la resolución horizontal se encuentre entre 200 y 575 píxeles*/
+    .chart-container {
+        position: relative;
+        margin: auto;
+        height: 35vw;
+        width: 100%;
+      }
+}

@@ -51,12 +51,12 @@
   <script src="../../../assets/js/user/indexManager.js"></script>
   <script src="../../../assets/js/numberFormat.js"></script>
 <?php elseif ($pageName[0]=="userManage"): ?>
-  <script src="../../../assets/js/jquery.rut.min.js"></script>
+  <!-- <script src="../../../assets/js/jquery.rut.min.js"></script>
   <script src="../../../assets/js/user/userManager.js"></script>
   <script src="../../../assets/js/cargo.js"></script>
   <script src="../../../assets/js/comuna.js"></script>
   <script src="../../../assets/js/dataPicker.js"></script>
-  <script src="../../../assets/js/modal.js"></script>
+  <script src="../../../assets/js/modal.js"></script> -->
 <?php elseif ($pageName[0]=="sonNew"): ?>
   <script src="../../../assets/js/jquery.rut.min.js"></script>
   <script src="../../../assets/js/user/sonManager.js"></script>

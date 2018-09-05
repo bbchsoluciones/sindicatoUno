@@ -29,7 +29,7 @@ include('include/header.php');
                         </p>
                         <div class="collapse" id="collapseExample">
                             <p class="mb-0">
-                                Mantén tus datos actualizados en tu <strong><a href="" class="">perfil</a></strong> para
+                                Mantén tus datos actualizados en tu <strong><a href="userManage.php" class="">perfil</a></strong> para
                                 que podamos tener una mejor experiencia todos juntos. A continuación con el fin de hacer
                                 valer nuestro objetivo principal te mostramos la siguiente información:
                             </p>

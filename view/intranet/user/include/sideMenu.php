@@ -25,10 +25,16 @@
                 <span>Egresos</span>
               </a>
             </li>
-              <li class="nav-item dropdown">
+            <li class="nav-item">
+              <a class="nav-link" href="userManage.php">
+                <i class="fa fa-list-alt pr-2"></i>
+                <span>Perfil</span>
+              </a>
+            </li>
+             <!--  <li class="nav-item dropdown">
                 <a class="nav-link" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="fa fa-list-alt pr-2"></i>
                   <span>Perfil</span>
                 </a>
-              </li>
+              </li> -->
           </ul>

@@ -101,7 +101,6 @@ function mostrarFondo() {
     });
 
 }
-
 function selectMovimiento() {
 
     var parametros = {
@@ -159,8 +158,6 @@ function graficoIngreso() {// no olvidar recibir parametros
     var id_tipo = $('#categoriaTM option:selected').val();
     if (id_tipo === "0") {       
         
-
-        var categoria = $('#categoriaTM option:selected').text();
         var anio = $('#anioIngreso option:selected').val();
         var parametros = {
             "id_tipo": id_tipo,
@@ -173,14 +170,9 @@ function graficoIngreso() {// no olvidar recibir parametros
             data: parametros,
             success: function (response) {
                 try {
-                    $('#contenedorGraficoIngreso').html('<canvas class=" border rounded" id="graficoIngreso"></canvas>');        
-                    val="'pngIngreso'";            
-                    $('#contenedorBotonesIngreso').html('<div class="col-auto">'+
-                                                            '<button id="pngIngreso" class="btn btn-success mt-4" onclick="exportar('+val+')">Exportar a PNG</button>'+
-                                                        '</div>');
+                    $('#contenedorGraficoIngreso').html('<canvas class="border rounded" id="graficoIngreso"></canvas>');        
+                    
                     var json = JSON.parse(response);
-                    //console.log(json);
-                    //alert(json.data[2].monto_movimiento);
                     var x;
                     var ingresos = [];
                     var enero = [0];
@@ -197,7 +189,6 @@ function graficoIngreso() {// no olvidar recibir parametros
                     var diciembre = [0];
 
                     for (x = 0; x < json.data.length; x++) {
-                        //alert(numberFormat(json.egreso[0][x].monto.toString()));
                         switch (json.data[x].mes) {
                             case "1":
                                 if (enero.length === 0) { //push
@@ -287,43 +278,49 @@ function graficoIngreso() {// no olvidar recibir parametros
                     }
 
                     ingresos.push(enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre);
-                    console.log(ingresos);
+                   
 
-
-
-
-
-                    var ctx = document.getElementById('graficoIngreso').getContext('2d');
-                    var chart = new Chart(ctx, {
-                        // The type of chart we want to create
-                        type: 'bar',
-
-                        // The data for our dataset
-                        data: {
-                            labels: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
-                            datasets: [{
-                                label: json.data[0].tipo_movimiento,
-                                backgroundColor: 'rgba(38, 183, 6, 0.66)',
-                                data: ingresos,
-                                borderWidth: 2,
-                                hoverBorderWidth: 2,
-                                hoverBorderColor: 'green'
-                            }]
+                    var data = {
+                        labels: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+                        datasets: [{
+                          label: json.data[0].tipo_movimiento,
+                          backgroundColor: "rgba(82, 251, 4, 0.6)",
+                          borderColor: "rgba(48, 146, 2, 1)",
+                          borderWidth: 2,
+                          hoverBackgroundColor: "rgba(62, 191, 3, 0.6)",
+                          hoverBorderColor: "rgba(48, 146, 2, 1)",
+                          data: ingresos,
+                        }]
+                      };
+                      
+                      var options = {
+                        title: {
+                            display: true,
+                            text: json.data[0].tipo_movimiento + ' AÑO ' + json.data[0].anio,
+                            fontSize: 25
                         },
-
-                        // Configuration options go here
-                        options: {
-                            title: {
-                                display: true,
-                                text: json.data[0].tipo_movimiento + ' AÑO ' + json.data[0].anio,
-                                fontSize: 25
+                        maintainAspectRatio: false,
+                        scales: {
+                          yAxes: [{
+                            stacked: true,
+                            gridLines: {
+                              display: true,
                             }
+                          }],
+                          xAxes: [{
+                            gridLines: {
+                              display: false
+                            }
+                          }]
                         }
-                    });
-
+                      };
+                      
+                      Chart.Bar('graficoIngreso', {
+                        options: options,
+                        data: data
+                      });
 
                 } catch (err) {
-                    //graficoVacio(categoria, anio);
                     $('#contenedorGraficoIngreso').html('<div class="col-12 text-center">Sin resultados</div>');
                     $('#contenedorBotonesIngreso').empty();
                 }
@@ -333,13 +330,8 @@ function graficoIngreso() {// no olvidar recibir parametros
         });
 
     } else {
-        //$('#contenedorGraficoIngreso').html('<div class="col-12 text-center">Sin resultados</div>');
-        //graficoVacio('', '');
         var id_categoria = $('#categoriaTM option:selected').val();
     
-        
-
-        var categoria = $('#categoriaTM option:selected').text();
         var anio = $('#anioIngreso option:selected').val();
         var parametros = {
             "id_categoria": id_categoria,
@@ -353,13 +345,9 @@ function graficoIngreso() {// no olvidar recibir parametros
             success: function (response) {
                 try {
                     $('#contenedorGraficoIngreso').html('<canvas class=" border rounded" id="graficoIngreso"></canvas>');
-                    val="'pngIngreso'";            
-                    $('#contenedorBotonesIngreso').html('<div class="col-auto">'+
-                                                            '<button id="pngIngreso" class="btn btn-success mt-4" onclick="exportar('+val+')">Exportar a PNG</button>'+
-                                                        '</div>');
+                    
                     var json = JSON.parse(response);
-                    //console.log(json);
-                    //alert(json.data[2].monto_movimiento);
+                    
                     var x;
                     var ingresos = [];
                     var enero = [0];
@@ -376,7 +364,6 @@ function graficoIngreso() {// no olvidar recibir parametros
                     var diciembre = [0];
 
                     for (x = 0; x < json.data.length; x++) {
-                        //alert(numberFormat(json.egreso[0][x].monto.toString()));
                         switch (json.data[x].mes) {
                             case "1":
                                 if (enero.length === 0) { //push
@@ -466,43 +453,49 @@ function graficoIngreso() {// no olvidar recibir parametros
                     }
 
                     ingresos.push(enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre);
-                    console.log(ingresos);
-
-
-
-
-
-                    var ctx = document.getElementById('graficoIngreso').getContext('2d');
-                    var chart = new Chart(ctx, {
-                        // The type of chart we want to create
-                        type: 'bar',
-
-                        // The data for our dataset
-                        data: {
-                            labels: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
-                            datasets: [{
-                                label: json.data[0].categoria_movimiento,
-                                backgroundColor: 'rgba(38, 183, 6, 0.66)',
-                                data: ingresos,
-                                borderWidth: 2,
-                                hoverBorderWidth: 2,
-                                hoverBorderColor: 'green'
-                            }]
+                    
+                    var data = {
+                        labels: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+                        datasets: [{
+                          label: json.data[0].categoria_movimiento,
+                          backgroundColor: "rgba(82, 251, 4, 0.6)",
+                          borderColor: "rgba(48, 146, 2, 1)",
+                          borderWidth: 2,
+                          hoverBackgroundColor: "rgba(62, 191, 3, 0.6)",
+                          hoverBorderColor: "rgba(48, 146, 2, 1)",
+                          data: ingresos,
+                        }]
+                      };
+                      
+                      var options = {
+                        title: {
+                            display: true,
+                            text: json.data[0].categoria_movimiento + ' AÑO ' + json.data[0].anio,
+                            fontSize: 25
                         },
-
-                        // Configuration options go here
-                        options: {
-                            title: {
-                                display: true,
-                                text: json.data[0].categoria_movimiento + ' AÑO ' + json.data[0].anio,
-                                fontSize: 25
+                        maintainAspectRatio: false,
+                        scales: {
+                          yAxes: [{
+                            stacked: true,
+                            gridLines: {
+                              display: true,
                             }
+                          }],
+                          xAxes: [{
+                            gridLines: {
+                              display: false
+                            }
+                          }]
                         }
-                    });
+                      };
+                      
+                      Chart.Bar('graficoIngreso', {
+                        options: options,
+                        data: data
+                      });
 
 
                 } catch (err) {
-                    //graficoVacio(categoria, anio);
                     $('#contenedorGraficoIngreso').html('<div class="col-12 text-center">Sin resultados</div>');
                     $('#contenedorBotonesIngreso').empty();
 
@@ -520,8 +513,6 @@ function graficoEgreso(){// no olvidar recibir parametros
     if (id_tipo === "0") {
 
         id_tipo=1;
-
-        var categoria = $('#categoriaTM option:selected').text();
         var anio = $('#anioIngreso option:selected').val();
         var parametros = {
             "id_tipo": id_tipo,
@@ -534,14 +525,9 @@ function graficoEgreso(){// no olvidar recibir parametros
             data: parametros,
             success: function (response) {
                 try {
-                    $('#contenedorGraficoEgreso').html('<canvas class=" border rounded" id="graficoEgreso"></canvas>');                    
-                    val="'pngEgreso'";            
-                    $('#contenedorBotonesEgreso').html('<div class="col-auto">'+
-                                                            '<button id="pngEgreso" class="btn btn-success mt-4" onclick="exportar('+val+')">Exportar a PNG</button>'+
-                                                        '</div>');
+                    $('#contenedorGraficoEgreso').html('<canvas class=" border rounded" id="graficoEgreso"></canvas>');                 
                     var json = JSON.parse(response);
-                    //console.log(json);
-                    //alert(json.data[2].monto_movimiento);
+                    
                     var x;
                     var ingresos = [];
                     var enero = [0];
@@ -648,44 +634,49 @@ function graficoEgreso(){// no olvidar recibir parametros
                     }
 
                     ingresos.push(enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre);
-                    //console.log(ingresos);
+                    
 
-
-
-
-
-                    var ctx = document.getElementById('graficoEgreso').getContext('2d');
-                    var chart = new Chart(ctx, {
-                        // The type of chart we want to create
-                        type: 'bar',
-
-                        // The data for our dataset
-                        data: {
-                            labels: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
-                            datasets: [{
-                                label: json.data[0].tipo_movimiento,
-                                backgroundColor: 'rgba(236, 70, 70, 0.69)',
-                                data: ingresos,
-                                borderWidth: 2,
-                                borderColor: 'red',
-                                hoverBorderWidth: 2,
-                                hoverBorderColor: '#000'
-                            }]
+                    var data = {
+                        labels: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+                        datasets: [{
+                          label: json.data[0].tipo_movimiento,
+                          backgroundColor: "rgba(196, 3, 3, 0.54)",
+                          borderColor: "rgba(236, 4, 4, 0.85)",
+                          borderWidth: 2,
+                          hoverBackgroundColor: "rgba(196, 3, 3, 0.73)",
+                          hoverBorderColor: "rgba(236, 4, 4, 0.85)",
+                          data: ingresos,
+                        }]
+                      };
+                      
+                      var options = {
+                        title: {
+                            display: true,
+                            text: json.data[0].tipo_movimiento + ' AÑO ' + json.data[0].anio,
+                            fontSize: 25
                         },
-
-                        // Configuration options go here
-                        options: {
-                            title: {
-                                display: true,
-                                text: json.data[0].tipo_movimiento + ' AÑO ' + json.data[0].anio,
-                                fontSize: 25
+                        maintainAspectRatio: false,
+                        scales: {
+                          yAxes: [{
+                            stacked: true,
+                            gridLines: {
+                              display: true,
                             }
+                          }],
+                          xAxes: [{
+                            gridLines: {
+                              display: false
+                            }
+                          }]
                         }
-                    });
-
+                      };
+                      
+                      Chart.Bar('graficoEgreso', {
+                        options: options,
+                        data: data
+                      });
 
                 } catch (err) {
-                    //graficoVacio(categoria, anio);
                     $('#contenedorGraficoEgreso').html('<div class="col-12 text-center">Sin resultados</div>');                 
                     $('#contenedorBotonesEgreso').empty();
                 }
@@ -699,7 +690,6 @@ function graficoEgreso(){// no olvidar recibir parametros
         var id_categoria = $('#categoriaTM option:selected').val();
     
         
-        var categoria = $('#categoriaTM option:selected').text();
     var anio = $('#anioIngreso option:selected').val();
     var parametros = {
         "id_categoria": id_categoria,
@@ -713,13 +703,8 @@ function graficoEgreso(){// no olvidar recibir parametros
         success: function (response) {
             try {
                 $('#contenedorGraficoEgreso').html('<canvas class=" border rounded" id="graficoEgreso"></canvas>');                    
-                val="'pngEgreso'";            
-                $('#contenedorBotonesEgreso').html('<div class="col-auto">'+
-                                                            '<button id="pngEgreso" class="btn btn-success mt-4" onclick="exportar('+val+')">Exportar a PNG</button>'+
-                                                        '</div>');
+                
                 var json = JSON.parse(response);
-                //console.log(json);
-                //alert(json.data[2].monto_movimiento);
                 var x;
                 var ingresos = [];
                 var enero = [0];
@@ -828,38 +813,46 @@ function graficoEgreso(){// no olvidar recibir parametros
                 ingresos.push(enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre);
                 console.log(ingresos);
 
-                var ctx = document.getElementById('graficoEgreso').getContext('2d');
-                var chart = new Chart(ctx, {
-                    // The type of chart we want to create
-                    type: 'bar',
-
-                    // The data for our dataset
-                    data: {
-                        labels: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
-                        datasets: [{
-                            label: json.data[0].categoria_movimiento,
-                            backgroundColor: 'rgba(236, 70, 70, 0.69)',
-                            data: ingresos,
-                            borderWidth:2,
-                            borderColor: 'red',
-                            hoverBorderWidth:2,
-                            hoverBorderColor:'#000'
-                        }]
+                var data = {
+                    labels: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+                    datasets: [{
+                      label: json.data[0].categoria_movimiento,
+                      backgroundColor: "rgba(196, 3, 3, 0.54)",
+                      borderColor: "rgba(236, 4, 4, 0.85)",
+                      borderWidth: 2,
+                      hoverBackgroundColor: "rgba(196, 3, 3, 0.73)",
+                      hoverBorderColor: "rgba(236, 4, 4, 0.85)",
+                      data: ingresos,
+                    }]
+                  };
+                  
+                  var options = {
+                    title: {
+                        display: true,
+                        text: json.data[0].categoria_movimiento+' AÑO '+json.data[0].anio,
+                        fontSize: 25
                     },
-
-                    // Configuration options go here
-                    options: {
-                        title:{
-                            display:true,
-                            text:json.data[0].categoria_movimiento+' AÑO '+json.data[0].anio,
-                            fontSize:25
+                    maintainAspectRatio: false,
+                    scales: {
+                      yAxes: [{
+                        stacked: true,
+                        gridLines: {
+                          display: true,
                         }
+                      }],
+                      xAxes: [{
+                        gridLines: {
+                          display: false
+                        }
+                      }]
                     }
-                }); 
-               
-
+                  };
+                  
+                  Chart.Bar('graficoEgreso', {
+                    options: options,
+                    data: data
+                  });
             } catch (err) {
-                //graficoVacio(categoria,anio);
                 $('#contenedorGraficoEgreso').html('<div class="col-12 text-center">Sin resultados</div>');                 
                 $('#contenedorBotonesEgreso').empty();
             }
@@ -873,15 +866,3 @@ function graficoEgreso(){// no olvidar recibir parametros
 
     
 }// graficoEgreso()
-function exportar(val){
-    switch(val){
-        case 'pngIngreso': $("#graficoIngreso").get(0).toBlob(function(blob){
-                                saveAs(blob, "graficoIngreso.png")
-                            });
-                            break;
-        case 'pngEgreso': $("#graficoEgreso").get(0).toBlob(function(blob){
-                                saveAs(blob, "graficoEgreso.png")
-                            });
-                            break;
-    }//ciera switch
-}
