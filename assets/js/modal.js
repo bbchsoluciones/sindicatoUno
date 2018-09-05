@@ -92,8 +92,8 @@ function graficoVacio(categoria, anio) {
 
 function modalConfirmarEliminar(nombre, funcion) {
 
-	if(nombre=="noticia"){
-		$("#titleConfirm").text("¿Realmente desea eliminar esta noticia?");
+	if(nombre=="noticia" || nombre=="imagen"){
+		$("#titleConfirm").text("¿Realmente desea eliminar esta "+nombre+"?");
 		$("#cuerpoConfirm").html('Presione "Borrar" si esta seguro de eliminar este registro.');
 	}else{
 		$("#titleConfirm").text("¿Realmente desea eliminar a " + nombre + "?");

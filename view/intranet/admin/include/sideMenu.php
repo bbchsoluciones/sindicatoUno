@@ -52,11 +52,11 @@
       <span>Pagina Principal</span>
     </a>
     <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-      <a class="dropdown-item" href="#"><i class="fa fa-align-justify text-info pr-3"></i>Inicio</a>
+      <a class="dropdown-item" href="homeManage.php"><i class="fa fa-align-justify text-info pr-3"></i>Inicio</a>
       <div class="dropdown-divider"></div>
-      <a class="dropdown-item" href="#"><i class="fa fa-users text-info pr-3"></i>Quiénes Somos</a>
+      <a class="dropdown-item" href="aboutManage.php"><i class="fa fa-users text-info pr-3"></i>Quiénes Somos</a>
       <div class="dropdown-divider"></div>
-      <a class="dropdown-item" href="#"><i class="fa fa-images text-info pr-3"></i>Galería</a>
+      <a class="dropdown-item" href="galleryManage.php"><i class="fa fa-images text-info pr-3"></i>Galería</a>
     </div>
   </li>
   <li class="nav-item dropdown">

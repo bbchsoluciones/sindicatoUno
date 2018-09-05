@@ -14,11 +14,25 @@
 }
 .cover_mediano {
     object-fit: cover;
+    width: 100%;
     height: 100px;
+}
+.cover_pequeno{
+    object-fit: cover;
+    width: 100%;
+    height: 80px;
+}
+.cover_cuadrado {
+    object-fit: cover;
+    height: 120px;
+    width: 120px;
 }
 
 .blur {
     filter: blur(20px);
+}
+.cursor{
+    cursor: pointer;
 }
 
 /* Bootstrap Toggle v2.2.2 corrections for Bootsrtap 4*/
@@ -355,6 +369,33 @@
 }
 /* END son*/
 
+.add-imageC button{
+    height: 100px;
+}
+.carousel_container{
+    position: relative;
+    height: 60px;
+}
+.carousel_container .text{
+    background: rgba(255, 255, 255, 0.44);
+    position: absolute;
+    z-index: 80;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.carousel_container .text:hover{
+    background: rgba(128, 125, 125, 0.4);
+}
+.carousel_container .text h4{
+    text-shadow: 1px 1px 1px #000;
+}
+.carousel_container .active{
+    background: rgba(128, 125, 125, 0.4);
+}
 .saldo-movimiento {
     font-size: 30px;
     color: green;

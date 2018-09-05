@@ -3,6 +3,9 @@ include 'include/header.php';
 include '../../controller/NoticiaC.php';
 $fecha = ucwords(strftime("%d %b %Y", strtotime($noticia['fecha_publicacion'])));
 $hora = strftime("%H:%m", strtotime($noticia['fecha_publicacion']));
+if(empty($noticia['url_foto_noticia']) || $noticia['url_foto_noticia']==null):
+    $noticia['url_foto_noticia']=".././../assets/images/1280x720.png";
+endif;  
 ?>
 <div class="news-detail-page container">
     <h1 class="title text-center header_title" id="title">

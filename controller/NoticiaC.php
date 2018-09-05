@@ -195,7 +195,7 @@ elseif (isset($_GET['id_noticia']) && !empty($_GET['id_noticia']) && isset($_GET
         $error['clase'] = "danger";
         echo json_encode($error);
     endif;
-// FIN ELIMINAR TRABAJADOR
+// FIN ELIMINAR noticia
     //detalle noticia
 elseif (isset($_GET['id_noticia']) && !empty($_GET['id_noticia']) && isset($_GET['detalle'])):
 

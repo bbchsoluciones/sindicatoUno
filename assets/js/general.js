@@ -50,7 +50,7 @@ function limpiarCampo(id_contenedor, elemento) {
         $(id_contenedor).empty();
         $(id_contenedor).append(' <option value="0" selected>Seleccionar una...</option>');
     }else if(elemento== "img"){
-        $(id_contenedor).attr("src", "../../../assets/images/500x500.png");
+        $(id_contenedor).attr("src", "../../../assets/images/1280x720.png");
     }else if(elemento== "label"){
         $(id_contenedor).text("Seleccionar Archivo");
     }else{

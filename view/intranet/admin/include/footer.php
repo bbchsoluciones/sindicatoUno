@@ -120,6 +120,10 @@
   <script src="../../../assets/vendor/datatables/dataTables.bootstrap4.js"></script>
   <script src="../../../assets/js/newsManager.js"></script> 
   <script src="../../../assets/js/row.js"></script>
+<?php elseif ($pageName[0]=="homeManage"): ?> 
+<script src="../../../assets/js/modal.js"></script>
+<script src="../../../assets/js/spectrum.js"></script>
+<script src="../../../assets/js/homeManager.js"></script>
 <?php  endif; ?>
 <script src="../../../assets/js/general.js"></script>
 
