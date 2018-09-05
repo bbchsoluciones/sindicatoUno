@@ -71,32 +71,34 @@ include('include/header.php');
                         <i class="fas fa-table"></i>
                         Movimientos</div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered display table-mov" id="tableMov" width="100%" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                        <th>Folio</th>
-                                        <th>Tipo</th>
-                                        <th>Categoria</th>
-                                        <th>Nombre</th>
-                                        <th>Descripción</th>
-                                        <th>Monto</th>
-                                        <th>Fecha</th>
-                                    </tr>
-                                </thead>
-                                <tfoot>
-                                    <tr>
-                                        <th>Folio</th>
-                                        <th>Tipo</th>
-                                        <th>Categoria</th>
-                                        <th>Nombre</th>
-                                        <th>Descripción</th>
-                                        <th>Monto</th>
-                                        <th>Fecha</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
+                    <table id="tableMov" class="display responsive nowrap table-condensed" style="width:100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Folio</th>
+                                                                <th>Tipo</th>
+                                                                <th>Categoria</th>
+                                                                <th>Nombre</th>
+                                                                <th>Desc</th>
+                                                                <th>Monto</th>
+                                                                <th>Fecha</th>
+                                                                <!-- <th>Por</th> -->
+                                                                <!-- <th>Acción</th> -->
+                                                            </tr>
+                                                        </thead>
+                                                        <tfoot>
+                                                            <tr>
+                                                                <th>Folio</th>
+                                                                <th>Tipo</th>
+                                                                <th>Categoria</th>
+                                                                <th>Nombre</th>
+                                                                <th>Desc</th>
+                                                                <th>Monto</th>
+                                                                <th>Fecha</th>
+                                                                <!-- <th>Por</th> -->
+                                                                <!-- <th>Acción</th> -->
+                                                            </tr>
+                                                        </tfoot>
+                                                    </table>
                     </div>
                 </div>
             </div>

@@ -10,8 +10,8 @@ include('include/header.php');
         <li class="breadcrumb-item active">Mostrar Movimiento</li>
     </ol>
 
-            <div class="row">
-                    <div class="col-lg-12">
+    <div class="row">
+        <div class="col-lg-12">
                         <div class="card mb-3">
                             <div class="card-header">
                                 <i class="fa fa-table"></i> Saldo Fondo</div>
@@ -54,57 +54,73 @@ include('include/header.php');
                             </div>
                             <!-- /#page-wrapper -->
                         </div>
-                    </div>
-        
-        
-        
-        
-        
-        
-                </div>
-
-        <div class="row">
-            <!--tabla -->
-            <div class="col-lg-12">
+        </div>       
+    </div>
+    <div id="mov" class="row">
+        <!--tabla -->
+        <div class="col-lg-12">
                 <div class="card mb-3">
-                    <div class="card-header">
+                    <div id="headerMov" class="card-header">
                         <i class="fas fa-table"></i>
-                        Movimientos</div>
+                        Movimientos<!-- <div class="float-right">
+                                        <button id="btnEditar" class="btn btn-success btn-sm mr-1" disabled><i class="fas fa-pen-alt"></i></button>
+                                        <button id="btnEliminar" class="btn btn-danger btn-sm" disabled><i class="fas fa-trash-alt"></i></button>
+                                   </div> --></div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered display table-mov" id="tableMov" width="100%" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                        <th>Folio</th>
-                                        <th>Tipo</th>
-                                        <th>Categoria</th>
-                                        <th>Nombre</th>
-                                        <th>Descripción</th>
-                                        <th>Monto</th>
-                                        <th>Fecha</th>
-                                        <th>Por</th>
-                                        <th>Acción</th>
-                                    </tr>
-                                </thead>
-                                <tfoot>
-                                    <tr>
-                                        <th>Folio</th>
-                                        <th>Tipo</th>
-                                        <th>Categoria</th>
-                                        <th>Nombre</th>
-                                        <th>Descripción</th>
-                                        <th>Monto</th>
-                                        <th>Fecha</th>
-                                        <th>Por</th>
-                                        <th>Acción</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
+                            <div class="container p-0 m-0">
+                                    <div id="alertMov"></div>
+                                <div class="row justify-content-center">
+                                    <div class="col-md-12">
+                                            <table id="tableMov" class="display responsive nowrap table-condensed" style="width:100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Folio</th>
+                                                                <th>Tipo</th>
+                                                                <th>Categoria</th>
+                                                                <th>Nombre</th>
+                                                                <th>Desc</th>
+                                                                <th>Monto</th>
+                                                                <th>Fecha</th>
+                                                                <th>Por</th>
+                                                                <!-- <th>Acción</th> -->
+                                                            </tr>
+                                                        </thead>
+                                                        <tfoot>
+                                                            <tr>
+                                                                <th>Folio</th>
+                                                                <th>Tipo</th>
+                                                                <th>Categoria</th>
+                                                                <th>Nombre</th>
+                                                                <th>Desc</th>
+                                                                <th>Monto</th>
+                                                                <th>Fecha</th>
+                                                                <th>Por</th>
+                                                                <!-- <th>Acción</th> -->
+                                                            </tr>
+                                                        </tfoot>
+                                                    </table>
+                                    </div>
+                                    <div class="col-md-12 h-100  align-self-center">
+                                            <div class="row">
+                                                <div id="movSelect" class="col-12 text-center">
+                                                        Seleccione un movimiento.
+                                                </div>
+                                            </div>
+                                            <div class="row mt-2">
+                                                <div class="col-12 text-center">
+                                                    <button id="btnEditar" class="btn btn-warning mr-1" disabled><i class="fas fa-pen-alt"></i></button>
+                                                    <button id="btnEliminar" class="btn btn-danger" disabled><i class="fas fa-trash-alt"></i></button>
+                                                </div>
+                                            </div>
+                                            
+                                    </div>
+                                </div>
+                            </div>
+                            
                     </div>
                 </div>
-            </div>
         </div>
+    </div>
 
 </div>
 

@@ -1,5 +1,21 @@
 function addRowMovimiento(nombreTabla, folio, tipo, categoria, nombre, desc, monto, fecha) {
-    var t = $(nombreTabla).DataTable();
+    var t = $(nombreTabla).DataTable({
+        destroy: true,
+        "language": {
+            "sLengthMenu": "_MENU_",
+            "sSearch": "",
+            "sSearchPlaceholder": "Buscar noticia...",
+            "sInfo": "_START_ / _END_",
+            "sInfoFiltered": "",
+            "sZeroRecords": "No hay registros!",
+            "sInfoEmpty": "0",
+            "paginate": {
+                "previous": "«",
+                "next": "»"
+            }
+           
+        }
+    });
 	
     t.row.add([
         folio,

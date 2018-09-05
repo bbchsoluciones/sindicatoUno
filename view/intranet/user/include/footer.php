@@ -68,16 +68,10 @@
   <script src="../../../assets/js/dataPicker.js"></script>
   <script src="../../../assets/js/modal.js"></script>
 <?php elseif ($pageName[0]=="moveManage"): ?>
-  <script src="../../../assets/vendor/datatables/jquery.dataTables.js"></script>
-  <script src="../../../assets/vendor/datatables/dataTables.bootstrap4.js"></script>
-  <script src="../../../assets/vendor/datatables/dataTables.bootstrap4.js"></script>
-  <!-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
   <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script> -->
-  <script src="../../../assets/js/user/row.js"></script>
+  <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
   <script src="../../../assets/js/numberFormat.js"></script>
   <script src="../../../assets/js/user/moveManager.js"></script>
-  <script src="../../../assets/js/modal.js"></script>
 <?php elseif ($pageName[0]=="barChartEntry"): ?>
   <script src="../../../assets/vendor/chart/Chart.bundle.js"></script>
   <script src="../../../assets/vendor/chart/Chart.bundle.min.js"></script>
