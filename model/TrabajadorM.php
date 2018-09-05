@@ -259,26 +259,12 @@ class TrabajadorM{
 		try{
 			$pdo = PDOConnection::instance();
 			$conn = $pdo->getConnection();
-			$sql = "SELECT 	url_foto_perfil FROM trabajador
-						INNER JOIN 
-									foto_perfil 
-						ON 
-									foto_perfil.trabajador_run_trabajador = trabajador.run_trabajador
-						WHERE 
-									foto_perfil.trabajador_run_trabajador=:run_trabajador";
+			$sql = "SELECT 	url_foto_perfil FROM foto_perfil WHERE foto_perfil.trabajador_run_trabajador=:run_trabajador";
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$consulta = $conn->prepare($sql);
 			$consulta->bindParam(':run_trabajador', $this->run_trabajador);			
 			$consulta->execute();
-			$resultado = $consulta->fetch(PDO::FETCH_ASSOC);
-			//echo "Resultado consulta buscar: ".var_dump($resultado);
-			if(!empty($resultado)){
-				//Usuario Existe
-				return true;
-			}else{
-				//Usuario NO Existe
-				return false;
-			}
+			$this->trabajador = $consulta->fetch(PDO::FETCH_ASSOC);
 			$conn = null;
 			$consulta = null;
 
@@ -496,16 +482,16 @@ class TrabajadorM{
 
 			$clausula = "WHERE run_trabajador = :run_trabajador";
 
-			if($this->contrasena_trabajador!=="nula"){
+			if(!empty($this->contrasena_trabajador)):
 				$cuerpo .= ",contrasena_trabajador = :contrasena_trabajador ";
-			}
+			endif;
 
 							
 			$sql = $accion . $cuerpo .$clausula;
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$consulta = $conn->prepare($sql);
 
-			if($this->contrasena_trabajador!=="nula"):
+			if(!empty($this->contrasena_trabajador)):
 				$consulta->bindParam(':contrasena_trabajador', $this->contrasena_trabajador, PDO::PARAM_STR);
 			endif;
 

@@ -33,6 +33,16 @@ if (isset($_POST['titulo']) &&
         endif;
         $data[$indice] = utf8_decode(htmlspecialchars($valor));
     endforeach;
+
+    if (isset($_FILES['url_foto_noticia']['name']) && !empty($_FILES['url_foto_noticia']['name'])):
+        $subir = new imgUpldr;
+        $imagen = $subir->init($_FILES['url_foto_noticia']);
+        if (!empty($imagen)):
+            $error['url_foto_noticia'] = $imagen;
+        endif;
+
+    endif;
+
     if (count($error) > 0):
         $error['tituloN'] = "Ha ocurrido un error!";
         $error['mensaje'] = "Uno o más campos tienen información errónea o están vacíos.";
@@ -45,34 +55,15 @@ if (isset($_POST['titulo']) &&
         $noticia->setPublicada($data['publicada']);
         $noticia->setTrabajador_run_trabajador($_SESSION['run_trabajador']);
         if ($noticia->registrar_noticia()):
-            $n = true;
-            $img = false;
             if (isset($_FILES['url_foto_noticia']['name']) && !empty($_FILES['url_foto_noticia']['name'])):
-                $subir = new imgUpldr;
-                $imagen = $subir->init($_FILES['url_foto_noticia']);
-                if (empty($imagen)):
-                    $url_foto_noticia = "http://localhost/sindicatoUno/assets/images/" . $subir->_name;
-                    $noticia->setUrl_foto_noticia($url_foto_noticia);
-                    $noticia->agregar_imagen("insert");
-                    $img = true;
-                else:
-                    $img = false;
-                endif;
-            else:
-                $img = true;
-
+                $url_foto_noticia = "http://localhost/sindicatoUno/assets/images/" . $subir->_name;
+                $noticia->setUrl_foto_noticia($url_foto_noticia);
+                $noticia->agregar_imagen("insert");
             endif;
-            if ($n && $img):
-                $error['tituloN'] = "Éxito!";
-                $error['mensaje'] = "Noticia registrada correctamente.";
-                $error['clase'] = "success";
-                echo json_encode($error);
-            else:
-                $error['tituloN'] = "Noticia registrada con errores!";
-                $error['mensaje'] = "Archivo no corresponde a un formato admitido (jpg|jpeg|png)";
-                $error['clase'] = "warning";
-                echo json_encode($error);
-            endif;
+            $error['tituloN'] = "Éxito!";
+            $error['mensaje'] = "Noticia registrada correctamente.";
+            $error['clase'] = "success";
+            echo json_encode($error);
         endif;
     endif;
 //fin registrar noticia
@@ -85,9 +76,9 @@ elseif (isset($_POST['id_noticia']) &&
     $data = array();
     $imagen = "";
     $error = array();
-    if (!isset($_POST['publicada'])) {
+    if (!isset($_POST['publicada'])):
         $_POST['publicada'] = "off";
-    }
+    endif;
     //limpiar registros de array para luego pasarlos a uno nuevo
     foreach ($_POST as $indice => $valor):
         if ($indice == "publicada"):
@@ -102,6 +93,16 @@ elseif (isset($_POST['id_noticia']) &&
         endif;
         $data[$indice] = utf8_decode(htmlspecialchars($valor));
     endforeach;
+
+    if (isset($_FILES['url_foto_noticia']['name']) && !empty($_FILES['url_foto_noticia']['name'])):
+        $subir = new imgUpldr;
+        $imagen = $subir->init($_FILES['url_foto_noticia']);
+        if (!empty($imagen)):
+            $error['url_foto_noticia'] = $imagen;
+        endif;
+
+    endif;
+
     if (count($error) > 0):
         $error['tituloN'] = "Ha ocurrido un error!";
         $error['mensaje'] = "Uno o más campos tienen información errónea o están vacíos.";
@@ -116,47 +117,28 @@ elseif (isset($_POST['id_noticia']) &&
             $noticia->setCuerpo($data['cuerpo']);
             $noticia->setPublicada($data['publicada']);
             if ($noticia->actualizar_noticia()):
-                $n = true;
-                $img = false;
                 if (isset($_FILES['url_foto_noticia']['name']) && !empty($_FILES['url_foto_noticia']['name'])):
-                    $subir = new imgUpldr;
-                    $imagen = $subir->init($_FILES['url_foto_noticia']);
-                    if (empty($imagen)):
-                        $accion = "";
-                        $url_foto_noticia = "http://localhost/sindicatoUno/assets/images/" . $subir->_name;
-                        $noticia->setUrl_foto_noticia($url_foto_noticia);
-                        if (!empty($noticia->getNoticias()['url_foto_noticia']) && $noticia->getNoticias()['url_foto_noticia'] !== null):
-                            $nombre_imagen = basename(parse_url($noticia->getNoticias()['url_foto_noticia'])['path']);
-                            $split = explode(".", $nombre_imagen);
-                            $name = $split[0];
-                            $extension = $split[1];
-                            if (ctype_digit($name)):
-                                unlink("../assets/images/" . $nombre_imagen);
-                            endif;
-                            $accion = "update";
-                        else:
-                            $accion = "insert";
+                    $accion = "";
+                    $url_foto_noticia = "http://localhost/sindicatoUno/assets/images/" . $subir->_name;
+                    $noticia->setUrl_foto_noticia($url_foto_noticia);
+                    if (!empty($noticia->getNoticias()['url_foto_noticia']) && $noticia->getNoticias()['url_foto_noticia'] !== null):
+                        $nombre_imagen = basename(parse_url($noticia->getNoticias()['url_foto_noticia'])['path']);
+                        $split = explode(".", $nombre_imagen);
+                        $name = $split[0];
+                        $extension = $split[1];
+                        if (ctype_digit($name)):
+                            unlink("../assets/images/" . $nombre_imagen);
                         endif;
-                        $noticia->agregar_imagen($accion);
-                        $img = true;
+                        $accion = "update";
                     else:
-                        $img = false;
+                        $accion = "insert";
                     endif;
-                else:
-                    $img = true;
+                    $noticia->agregar_imagen($accion);
                 endif;
-                if ($n && $img):
-                    $error['tituloN'] = "Éxito!";
-                    $error['mensaje'] = "Noticia actualizada correctamente.";
-                    $error['clase'] = "success";
-                    echo json_encode($error);
-                else:
-                    $error['tituloN'] = "Noticia actualizada con errores!";
-                    $error['mensaje'] = "Archivo subido no corresponde a un formato admitido (jpg, jpeg, png)";
-                    $error['clase'] = "warning";
-                    echo json_encode($error);
-                endif;
-
+                $error['tituloN'] = "Éxito!";
+                $error['mensaje'] = "Noticia actualizada correctamente.";
+                $error['clase'] = "success";
+                echo json_encode($error);
             else:
                 $error['tituloN'] = "Oops, hubo un error!";
                 $error['mensaje'] = "La noticia no ha podido ser actualizada";

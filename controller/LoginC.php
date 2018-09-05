@@ -8,9 +8,9 @@ require_once($ruta_raiz . '/model/TrabajadorM.php');
 //Dentro de Controlador
 
 if(isset($_POST['user']) && isset($_POST['pass'])):
-    /* echo "User: " . $_POST['user'] . "<br>";
+     echo "User: " . $_POST['user'] . "<br>";
     echo "Pass: " . $_POST['pass'] . "<br>";
-    echo "LoginC"; */
+    echo "LoginC"; 
     $user = htmlspecialchars($_POST['user']);
     $pass = htmlspecialchars($_POST['pass']);
     $t = new TrabajadorM();
