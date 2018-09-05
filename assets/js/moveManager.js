@@ -16,6 +16,7 @@ $(function () {
 });
 //Variables
 var monto_anterior;
+var table;
 
 //Eventos
 $("#tipo_movimiento").change(function () {
@@ -31,6 +32,24 @@ $("#categoriaTM").change(function () {
     if ($.isNumeric($(this).val())) {
         mostrarNombreMovimiento($(this).val());
     }
+});
+$('#btnEliminar').click( function () {
+    //console.log('eliminar id row: '+table.row( '.selected' ).data()[0]);
+    preguntarEliminarMovimiento(table.row( '.selected' ).data()[0]);
+});
+$('#btnEditar').click( function () {
+    modalActualizar(table.row( '.selected' ).data()[0], //folio
+                    table.row( '.selected' ).data()[1], //tipo
+                    table.row( '.selected' ).data()[2], //categoria
+                    table.row( '.selected' ).data()[3], //nombre
+                    table.row( '.selected' ).data()[5] //monto
+                    );
+    /* console.log('editar id row: '+table.row( '.selected' ).data()[0]);
+    //alert(table.row( '.selected' ).data()[0].set('100'));
+    table.rows('.selected').every(function (rowIdx) {table.cell(rowIdx,5).data('$'+numberFormat('5000'));//ESTE ESTE ESTE
+  })
+  .draw();
+    // table.row( '.selected' ).data()[5].val('100'); */
 });
 
 //Funciones
@@ -169,63 +188,123 @@ function insertMovimiento(run) {
         });
     }
 }
-function selectMovimiento() {
+function borrar(eliminar){
+    if(eliminar){        
+        $('#btnEliminar').prop('disabled', true);   
+        $('#btnEditar').prop('disabled', true);                
+        deleteMovimiento(table.row( '.selected' ).data()[0]);
+        table.row('.selected').remove().draw( false );        
+        table.$('tr.selected').removeClass('selected');     
+        $('#movSelect').html('Seleccione un movimiento.');   
+    }else{
+        $('#btnEliminar').prop('disabled', true);   
+        $('#btnEditar').prop('disabled', true); 
+        table.$('tr.selected').removeClass('selected');
+        $('#movSelect').html('Seleccione un movimiento.');
+    }
+}
+function actualizar(editar, folio, monto_nuevo, monto_anterior){
+    if(editar){ 
+        if(monto_nuevo==monto_anterior){
+            $('#btnEliminar').prop('disabled', true);   
+            $('#btnEditar').prop('disabled', true);
+            //informarActualizarMovimientoFalse();
+            mover("#mov");
+            movActualizado(false);
+            table.$('tr.selected').removeClass('selected');
+            $('#movSelect').html('Seleccione un movimiento.');
+        }else{
+                $('#btnEliminar').prop('disabled', true);   
+                $('#btnEditar').prop('disabled', true);                
+                updateMovimiento(folio, monto_nuevo);    
+                table.rows('.selected').every(function (rowIdx, tableLoop, rowLoop) 
+                { 
+                    table.cell(rowIdx,5).data(monto_nuevo);
+                }).draw(false);
+                table.ajax.reload();
+                table.$('tr.selected').removeClass('selected');
+                $('#movSelect').html('Seleccione un movimiento.');
 
+        }                
+    }else{
+        $('#btnEliminar').prop('disabled', true);   
+        $('#btnEditar').prop('disabled', true); 
+        table.$('tr.selected').removeClass('selected');
+        $('#movSelect').html('Seleccione un movimiento.');
+    }
+}
+function selectMovimiento() {    
     var parametros = {
         "ajax": 'true',
         "func": 'selectMov'
     };
-
-    $.ajax({
-        url: '../../../controller/MovimientoC.php',
-        type: 'POST',
-        data: parametros,
-        success: function (response) {
-
-            clearTable('#tableMov');
-            try {
-                var json = JSON.parse(response);
-                //console.log('JSON: '+json);
-
-
-                for (i = 0; i < json.data.length; i++) {
-                    addRowMovimiento(
-                        "#tableMov",
-                        json.data[i].id_movimiento,
-                        json.data[i].tipo_movimiento,
-                        json.data[i].categoria_movimiento,
-                        json.data[i].nombre_movimiento,
-                        json.data[i].descripcion_movimiento,
-                        json.data[i].monto_movimiento,
-                        json.data[i].fecha_movimiento,
-                        json.data[i].nombres_trabajador
-                    );
-                }
+    table = $('#tableMov').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'excel', 'pdf'
+        ],
+        "language": {
+            "sProcessing":     "Procesando...",
+            "sLengthMenu":     "Ver _MENU_ registros",
+            "sZeroRecords":    "No se encontraron resultados",
+            "sEmptyTable":     "No hay movimientos registrados",
+            "sInfo":           "_START_ / _END_ (_TOTAL_ registros)",
+            "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix":    "",
+            "sSearch":         "Buscar:",
+            "sUrl":            "",
+            "sInfoThousands":  ",",
+            "sLoadingRecords": "Cargando...",
+            "oPaginate": {
+                "sFirst":    "Primero",
+                "sLast":     "Último",
+                "sNext":     "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "oAria": {
+                "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
             }
-            catch (err) {
-                $("#cuerpoTabla").empty();
-            }
+        },
+        "ajax": {
+            "url": "../../../controller/MovimientoC.php",
+            "type": "POST",
+            "data": parametros
+        },
+        "columns": [
+            { "data": "id_movimiento"},
+            { "data": "tipo_movimiento" },
+            { "data": "categoria_movimiento"},
+            { "data": "nombre_movimiento" },
+            { "data": "descripcion_movimiento"},
+            { "data": "monto_movimiento" },
+            { "data": "fecha_movimiento" },
+            { "data": "nombres_trabajador" }
+            
+        ],
+        "order": [[ 6, "desc" ]]
+    } );
+    $('#tableMov tbody').on( 'click', 'tr', function () {
+        if ( $(this).hasClass('selected') ) {
+            $(this).removeClass('selected');
+            $('#btnEliminar').prop('disabled', true);   
+            $('#btnEditar').prop('disabled', true);     
+            $('#movSelect').html('Seleccione un movimiento.');
+            
 
         }
+        else {
+            table.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');      
+            $('#btnEliminar').prop('disabled', false);      
+            $('#btnEditar').prop('disabled', false);      
+            $('#movSelect').html('Movimiento '+table.row( '.selected' ).data()[0]+' seleccionado.');     
+            
+        }    
     });
-
 }
-function updateMovimiento(folio) {
-
-
-
-    var idMonto="#montoRow"+folio;
-    var monto_nuevo = $(idMonto).val();
-
-    if(monto_anterior==monto_nuevo){
-
-        informarActualizarMovimientoFalse();
-        deshabilitar(folio);
-
-    }else{
-
-        //alert('folio: '+folio+' nuevo monto: '+monto);
-    deshabilitar(folio);
+function updateMovimiento(folio, monto_nuevo) {
 
     var parametros = {
         "id_mov": folio,
@@ -240,9 +319,12 @@ function updateMovimiento(folio) {
             try {
                
                if(response=="true"){
-                    informarActualizarMovimientoTrue();
+                    //informarActualizarMovimientoTrue();
+                    mover("#mov");
+                    movActualizado(true);
+                    $('#movSelect').html('Seleccione un movimiento.');
                    //alert('Modificado');
-                   selectMovimiento();
+                   //selectMovimiento();
                    mostrarFondo();
                }else{
                     alert('NO Modificado');
@@ -257,11 +339,33 @@ function updateMovimiento(folio) {
     });  
 
 
-    }// cierra else
+
+    /* var idMonto="#montoRow"+folio;
+    var monto_nuevo = $(idMonto).val();
+
+    if(monto_anterior==monto_nuevo){
+
+        informarActualizarMovimientoFalse();
+        deshabilitar(folio);
+
+    }else{
+
+        //alert('folio: '+folio+' nuevo monto: '+monto);
+    deshabilitar(folio);
+
+    
+
+
+    }// cierra else */
 
     
   
 
+}
+function mover(elemento){
+    $('html,body').animate({
+        scrollTop: $(elemento).offset().top
+    }, 0);
 }
 function deleteMovimiento(id_mov) {
     var parametros = {
@@ -280,7 +384,9 @@ function deleteMovimiento(id_mov) {
                
                if(response=="true"){
                    //alert('SI eliminado');
-                   selectMovimiento();
+                   mover("#mov");
+                   movEliminado();
+                   //selectMovimiento();
                    mostrarFondo();
                }else{
                    

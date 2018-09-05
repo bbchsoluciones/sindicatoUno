@@ -228,7 +228,7 @@ class MovimientoM{
 			nm.nombre_movimiento,
 			IFNULL(m.descripcion_movimiento, 'No Aplica') AS descripcion_movimiento,
 			m.monto_movimiento,
-			m.fecha_movimiento,
+			DATE_FORMAT(m.fecha_movimiento,'%d/%m/%Y') as fecha_movimiento,
 			t.nombres_trabajador
 			FROM movimiento m
 			JOIN nombre_movimiento nm

@@ -109,37 +109,49 @@ function selectMovimiento() {
         "func": 'selectMov'
     };
 
-    $.ajax({
-        url: '../../../controller/MovimientoC.php',
-        type: 'POST',
-        data: parametros,
-        success: function (response) {
-
-            clearTable('#tableMov');
-            try {
-                var json = JSON.parse(response);
-                //console.log('JSON: '+json);
-
-
-                for (i = 0; i < json.data.length; i++) {
-                    addRowMovimiento(
-                        "#tableMov",
-                        json.data[i].id_movimiento,
-                        json.data[i].tipo_movimiento,
-                        json.data[i].categoria_movimiento,
-                        json.data[i].nombre_movimiento,
-                        json.data[i].descripcion_movimiento,
-                        json.data[i].monto_movimiento,
-                        json.data[i].fecha_movimiento
-                    );
-                }
+    table = $('#tableMov').DataTable( {
+        "language": {
+            "sProcessing":     "Procesando...",
+            "sLengthMenu":     "Ver _MENU_ registros",
+            "sZeroRecords":    "No se encontraron resultados",
+            "sEmptyTable":     "No hay movimientos registrados",
+            "sInfo":           "_START_ / _END_ (_TOTAL_ registros)",
+            "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix":    "",
+            "sSearch":         "Buscar:",
+            "sUrl":            "",
+            "sInfoThousands":  ",",
+            "sLoadingRecords": "Cargando...",
+            "oPaginate": {
+                "sFirst":    "Primero",
+                "sLast":     "Último",
+                "sNext":     "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "oAria": {
+                "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
             }
-            catch (err) {
-                $("#cuerpoTabla").empty();
-            }
+        },
+        "ajax": {
+            "url": "../../../controller/MovimientoC.php",
+            "type": "POST",
+            "data": parametros
+        },
+        "columns": [
+            { "data": "id_movimiento"},
+            { "data": "tipo_movimiento" },
+            { "data": "categoria_movimiento"},
+            { "data": "nombre_movimiento" },
+            { "data": "descripcion_movimiento"},
+            { "data": "monto_movimiento" },
+            { "data": "fecha_movimiento" }
+            
+        ],
+        "order": [[ 6, "desc" ]]
+    } );
 
-        }
-    });
 
 }
 function graficoIngreso() {// no olvidar recibir parametros

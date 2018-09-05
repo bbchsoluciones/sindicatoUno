@@ -404,7 +404,7 @@
 
 /*moveManage*/
 
-.table-mov {
+/* .table-mov {
     font-size: 16px;
 }
 
@@ -416,11 +416,8 @@
 .table-mov>tbody>tr>td>div>button {
     font-size: 16px;
 }
-
+ */
 /*moveManage*/
-.row-eq-height {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display:         flex;
+.cell-text {
+    word-wrap: break-word !important;
   }
