@@ -87,7 +87,7 @@ function mostrarTrabajador(buttonId, rut) {
     limpiarCampos("#allDataUser", "input", ".disabled");
     limpiarCampos("#allDataUser", "small");
     limpiarSeleccionados("#allDataUser");
-    limpiarCampo(".custom-file-label", "label")
+    limpiarCampo(".custom-file-label", "label");
 
     var parametros = {
         "run_trabajador": rut,

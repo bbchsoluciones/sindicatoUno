@@ -36,7 +36,9 @@ endif;
     <!-- Custom styles for this template-->
     <link href="../../../assets/css/sb-admin.css" rel="stylesheet">
     <link href="../../../assets/css/estilos_intranet.css" rel="stylesheet">
+    <link href="../../../assets/css/spectrum.css" rel="stylesheet">
     <link href="../../../assets/vendor/animate/animate.css" rel="stylesheet">
+
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 
     <?php if($pageName[0]=="index"):?>
