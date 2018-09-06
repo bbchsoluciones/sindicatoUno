@@ -20,14 +20,10 @@
         <div class="container">
           <div class="carousel-caption  <?php echo $principal['carousel'][$i]['alineacion_texto']; ?>" style="color:<?php echo $principal['carousel'][$i]['color_texto']; ?>">
             <h1 data-animation="animated fadeInLeft">
-              <span>Example headline.</span>
+              <span><?php echo $principal['carousel'][$i]['titulo_']; ?></span>
             </h1>
             <p data-animation="animated  <?php echo $principal['carousel'][$i]['animacion']; ?>" class="carousel-text">
-              <span>
-                Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget
-                metus. Nullam id
-                dolor id nibh ultricies vehicula ut id elit.
-              </span>
+              <span><?php echo $principal['carousel'][$i]['descripcion_']; ?></span>
             </p>
             <p data-animation="animated fadeInUp">
               <a class="btn btn-lg btn-primary" href="<?php echo $principal['carousel'][$i]['url_link']; ?>" target="_blank" role="button">Ver más</a>
