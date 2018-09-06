@@ -288,11 +288,7 @@ function selectNoticia() {
 function validacion_camposNews(array, indice) {
     $(".dataNews").each(function () {
         if ($(this).attr("name") === indice) {
-            if ($(this).parent().hasClass("form-group")) {
-                $(this).parent().append(" <small class='msj text-danger'>" + array[indice] + "</small>");
-            }else{
-                $(this).parent().parent().parent().append(" <small class='msj text-danger'>" + array[indice] + "</small>");
-            }
+            $(this).closest(".form-group").append(" <small class='msj text-danger'>" + array[indice] + "</small>");
         }
     });
 }

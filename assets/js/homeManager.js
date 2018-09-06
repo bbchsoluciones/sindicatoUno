@@ -503,7 +503,6 @@ function eliminarCarousel(id) {
 
 function validar_camposHome(contenedor, array, indice) {
     $(".data" + contenedor).each(function () {
-        console.log($(this).attr("name"));
         if ($(this).attr("name") === indice) {
             $(this).closest(".form-group").append(" <small class='msj text-danger'>" + array[indice] + "</small>");
         }

@@ -49,7 +49,8 @@ include 'include/header.php';
                                     <label>Subir imagen</label>
                                     <div class="input-group">
                                         <div class="custom-file" id="customFile">
-                                            <input type="file" class="custom-file-input input_carousel dataCarousel" aria-describedby="" name="imagen">
+                                            <input type="file" class="custom-file-input input_carousel dataCarousel"
+                                                aria-describedby="" name="imagen">
                                             <label class="custom-file-label label_carousel" for="exampleInputFile">
                                                 Seleccionar Archivo
                                             </label>
@@ -63,6 +64,10 @@ include 'include/header.php';
                                 <div class="form-group">
                                     <label>Descripción</label>
                                     <textarea class="form-control dataCarousel" placeholder="" name="descripcion_"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Url</label>
+                                    <input type="text" class="form-control dataCarousel" id="" name="url_link" val="">
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
@@ -188,6 +193,11 @@ include 'include/header.php';
                                             <label>Descripción</label>
                                             <textarea class="form-control dataTarjeta1" placeholder="" name="descripcion_"></textarea>
                                         </div>
+                                        <div class="form-group">
+                                            <label>Url</label>
+                                            <input type="text" class="form-control dataTarjeta1" id="" name="url_link"
+                                                val="">
+                                        </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
                                                 <label>Color Fondo</label>
@@ -234,6 +244,11 @@ include 'include/header.php';
                                             <label>Descripción</label>
                                             <textarea class="form-control dataTarjeta2" placeholder="" name="descripcion_"></textarea>
                                         </div>
+                                        <div class="form-group">
+                                            <label>Url</label>
+                                            <input type="text" class="form-control dataTarjeta2" id="" name="url_link"
+                                                val="">
+                                        </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
                                                 <label>Color Fondo</label>
@@ -279,6 +294,11 @@ include 'include/header.php';
                                         <div class="form-group">
                                             <label>Descripción</label>
                                             <textarea class="form-control dataTarjeta3" placeholder="" name="descripcion_"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Url</label>
+                                            <input type="text" class="form-control dataTarjeta3" id="" name="url_link"
+                                                val="">
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-6">

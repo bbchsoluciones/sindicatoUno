@@ -115,7 +115,10 @@ main {
 .home-page .card {
     position: relative;
 }
-
+.home-page .card img{
+    object-fit: cover;
+    height: 157.5px;
+}
 .home-page .card a {
     background: #3A7290;
     border-radius: 0;
@@ -127,12 +130,10 @@ main {
     bottom: 0;
     right: 0;
 }
-
-.home-page .card .card-body {
-    background: #495969;
-    color: #fff;
+.home-page .card p{
+    height: 72px;
+    overflow: hidden;
 }
-
 .home-page .carousel-caption {
     bottom: 3rem;
     z-index: 600;

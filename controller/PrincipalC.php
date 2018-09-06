@@ -42,6 +42,7 @@ elseif (isset($_POST['id_texto']) &&
     isset($_POST['alineacion_texto']) &&
     isset($_POST['animacion']) &&
     isset($_POST['color_texto']) &&
+    isset($_POST['url_link']) &&
     isset($_POST['crear_carousel'])):
     $data = array();
     $imagen = null;
@@ -85,6 +86,7 @@ elseif (isset($_POST['id_texto']) &&
         $principal->setAnimacion($data['animacion']);
         $principal->setColor_fondo(null);
         $principal->setColor_texto($data['color_texto']);
+        $principal->setUrl_link($data['url_link']);
         if ($principal->registrar_texto()):
             $principal->setUrl_foto($imagen);
             $principal->agregar_imagen("insert");
@@ -109,6 +111,7 @@ elseif (isset($_POST['id_texto']) &&
     isset($_POST['alineacion_texto']) &&
     isset($_POST['animacion']) &&
     isset($_POST['color_texto']) &&
+    isset($_POST['url_link']) &&
     isset($_POST['actualizar_carousel'])):
 
     $data = array();
@@ -152,6 +155,7 @@ elseif (isset($_POST['id_texto']) &&
             $principal->setAnimacion($data['animacion']);
             $principal->setColor_fondo(null);
             $principal->setColor_texto($data['color_texto']);
+            $principal->setUrl_link($data['url_link']);
             if ($principal->actualizar_texto()):
                 if (isset($_FILES['imagen']['name']) && !empty($_FILES['imagen']['name'])):
                     $accion = "";
@@ -260,6 +264,7 @@ elseif (isset($_POST['id_texto']) &&
             $principal->setAnimacion(null);
             $principal->setColor_fondo(null);
             $principal->setColor_texto(null);
+            $principal->setUrl_link(null);
             if ($principal->actualizar_texto()):
                 $error['titulo'] = "Éxito!";
                 $error['mensaje'] = "Texto presentación actualizado correctamente.";
@@ -316,6 +321,7 @@ elseif (isset($_POST['id_texto']) &&
             $principal->setAnimacion(null);
             $principal->setColor_fondo(null);
             $principal->setColor_texto(null);
+            $principal->setUrl_link(null);
             if ($principal->actualizar_texto()):
                 $error['titulo'] = "Éxito!";
                 $error['mensaje'] = "Titulo destacado actualizado correctamente.";
@@ -343,7 +349,8 @@ elseif (isset($_POST['id_texto']) &&
     isset($_POST['titulo_']) &&
     isset($_POST['descripcion_']) &&
     isset($_POST['color_fondo']) &&
-    isset($_POST['color_texto'])):
+    isset($_POST['color_texto']) &&
+    isset($_POST['url_link'])):
 
     $data = array();
     $imagen = "";
@@ -383,6 +390,7 @@ elseif (isset($_POST['id_texto']) &&
             $principal->setCategoria("tarjeta");
             $principal->setColor_fondo($data['color_fondo']);
             $principal->setColor_texto($data['color_texto']);
+            $principal->setUrl_link($data['url_link']);
             if ($principal->actualizar_texto()):
                 if (isset($_FILES['imagen']['name']) && !empty($_FILES['imagen']['name'])):
                     $accion = "";
@@ -416,4 +424,39 @@ elseif (isset($_POST['id_texto']) &&
     endif;
 //fin modificar
     //tarjeta
+else:
+    $carousel = array();
+    $presentacion = array();
+    $destacado = array();
+    $tarjeta = array();
+
+    $principal = new PrincipalM();
+    $principal->setCategoria("carousel");
+    $principal->mostrar_textos();
+    if (!empty($principal->getPrincipal())):
+        $carousel = $principal->getPrincipal();
+    endif;
+    $principal->setCategoria("presentacion");
+    $principal->mostrar_textos();
+    if (!empty($principal->getPrincipal())):
+        $presentacion = $principal->getPrincipal();
+    endif;
+    $principal->setCategoria("destacado");
+    $principal->mostrar_textos();
+    if (!empty($principal->getPrincipal())):
+        $destacado = $principal->getPrincipal();
+    endif;
+    $principal->setCategoria("tarjeta");
+    $principal->mostrar_textos();
+    if (!empty($principal->getPrincipal())):
+        $tarjeta = $principal->getPrincipal();
+    endif;
+
+    $principal = array(
+        "carousel" => $carousel,
+        "presentacion" => $presentacion,
+        "destacado" => $destacado,
+        "tarjeta" => $tarjeta,
+    );
+
 endif;
