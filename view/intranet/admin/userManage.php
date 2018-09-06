@@ -73,7 +73,7 @@ include('include/header.php');
                             <label>Subir Imagen</label>
                             <div class="input-group">
                                 <div class="custom-file" id="customFile">
-                                    <input type="file" class="custom-file-input" id="image" aria-describedby="" name="avatar">
+                                    <input type="file" class="custom-file-input dataUser" id="image" aria-describedby="" name="avatar">
                                     <label class="custom-file-label" for="exampleInputFile">
                                         Seleccionar Archivo
                                     </label>

@@ -204,6 +204,8 @@ elseif (isset($_POST['tipo_usuario']) &&
 
     if (isset($_FILES['avatar']['name']) && !empty($_FILES['avatar']['name'])):
         $subir = new imgUpldr;
+        $subir->__set("_new_name",date("Ymdhis")."_noticia");
+        $subir->__set("_dest","../assets/images/");
         $imagen = $subir->init($_FILES['avatar']);
         if (!empty($imagen)):
             $error['avatar'] = $imagen;

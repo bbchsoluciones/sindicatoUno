@@ -4,17 +4,10 @@ $(function () {
         mostrarTrabajadores();
 
         $(document).on('change', '.custom-file :file', function () {
-            var input = $(this),
-                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-            input.trigger('fileselect', [label]);
-        });
-        $('.custom-file :file').on('fileselect', function (event, label) {
-            var text = $('.custom-file-label'),
-                log = label;
-            if (text.length) {
-                text.text(log);
-            } else {
-                if (log) alert(log);
+            var label = $(this).val().replace(/\\/g, '/').replace(/.*\//, '');
+            if ($('.custom-file-label').length) {
+                $('.custom-file-label').text(label);
+                readURL(this);
             }
         });
 
@@ -27,9 +20,6 @@ $(function () {
                 reader.readAsDataURL(input.files[0]);
             }
         }
-        $("#image").change(function () {
-            readURL(this);
-        });
     }
 });
 
@@ -275,12 +265,9 @@ function buscarTrabajador(pagina, accion, objeto) {
 function validacion_campos(array, indice) {
     $(".dataUser").each(function () {
         if ($(this).attr("name") === indice) {
-            if ($(this).parent().hasClass("form-group")) {
-                $(this).parent().append(" <small class='msj text-danger'>" + array[indice] + "</small>");
-            } else {
-                $(this).parent().parent().append(" <small class='msj text-danger'>" + array[indice] + "</small>");
-            }
+            $(this).closest(".form-group").append(" <small class='msj text-danger'>" + array[indice] + "</small>");
         }
+
     });
 }
 

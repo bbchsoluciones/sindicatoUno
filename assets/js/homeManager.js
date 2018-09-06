@@ -3,6 +3,7 @@ $(function () {
         listar_carousel();
         detalle_presentacion();
         detalle_titulo();
+        detalle_tarjetas();
         $("#color1, #color2, #color3").spectrum({
             showPaletteOnly: true,
             togglePaletteOnly: true,
@@ -18,69 +19,38 @@ $(function () {
                 ["#600", "#783f04", "#7f6000", "#274e13", "#0c343d", "#073763", "#20124d", "#4c1130"]
             ]
         });
-        $(document).on('change', '.custom-file :file', function () {
-            var input = $(this),
-                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-            input.trigger('fileselect', [label]);
+
+        $(".input_carousel").change(function () {
+            changeText($(this), "carousel");
         });
-        $('.custom-file-carousel :file').on('fileselect', function (event, label) {
-            var text = $('.custom-file-label-carousel'),
-                log = label;
-            if (text.length) {
-                text.text(log);
-            } else {
-                if (log) alert(log);
-            }
+        $(".input_tar1").change(function () {
+            changeText($(this), "tar1");
         });
-        $('.custom-file-TAR1 :file').on('fileselect', function (event, label) {
-            var text = $('.custom-file-label'),
-                log = label;
-            if (text.length) {
-                text.text(log);
-            } else {
-                if (log) alert(log);
-            }
+        $(".input_tar2").change(function () {
+            changeText($(this), "tar2");
         });
-        $('.custom-file-TAR2 :file').on('fileselect', function (event, label) {
-            var text = $('.custom-file-label'),
-                log = label;
-            if (text.length) {
-                text.text(log);
-            } else {
-                if (log) alert(log);
-            }
-        });
-        $('.custom-file-TAR3 :file').on('fileselect', function (event, label) {
-            var text = $('.custom-file-label'),
-                log = label;
-            if (text.length) {
-                text.text(log);
-            } else {
-                if (log) alert(log);
-            }
+        $(".input_tar3").change(function () {
+            changeText($(this), "tar3");
         });
 
-        function readURL(input,id) {
+        function changeText(input, name) {
+            var label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+            if ($('.label_' + name).length) {
+                $('.label_' + name).text(label);
+                readURL(input[0], name);
+            }
+        }
+
+        function readURL(input, name) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    $('#'+id).attr('src', e.target.result);
+                    $('.image_' + name).attr('src', e.target.result);
                 }
                 reader.readAsDataURL(input.files[0]);
             }
         }
-        $("#inputC").change(function () {
-            readURL(this,"url_foto");
-        });
-        $("#inputTAR1").change(function () {
-            readURL(this,"url_fotoTAR1");
-        });
-        $("#inputTAR2").change(function () {
-            readURL(this,"url_fotoTAR2");
-        });
-        $("#inputTAR3").change(function () {
-            readURL(this,"url_fotoTAR3");
-        });
+
     }
 });
 
@@ -112,6 +82,35 @@ function listar_carousel() {
             } catch (err) {
                 //
                 $(".carousel_list").empty();
+            }
+
+        }
+    });
+}
+
+function detalle_tarjetas() {
+    var parametros = {
+        "categoria_principal": "tarjeta",
+        "listado": 1
+    };
+    $.ajax({
+        data: parametros,
+        url: '../../../controller/PrincipalC.php',
+        type: 'GET',
+        success: function (response) {
+            try {
+                var json = JSON.parse(response);
+                Object.keys(json.principal[0][0]).forEach(function (nombreColumna) {
+                    asignarMultiplesValores("Tarjeta1", json.principal[0][0], nombreColumna);
+                });
+                Object.keys(json.principal[0][1]).forEach(function (nombreColumna) {
+                    asignarMultiplesValores("Tarjeta2", json.principal[0][1], nombreColumna);
+                });
+                Object.keys(json.principal[0][2]).forEach(function (nombreColumna) {
+                    asignarMultiplesValores("Tarjeta3", json.principal[0][2], nombreColumna);
+                });
+            } catch (err) {
+                //
             }
 
         }
@@ -182,6 +181,7 @@ function detalle_presentacion() {
         }
     });
 }
+
 function detalle_titulo() {
 
     limpiarFormulario("#tituloD_form");
@@ -214,9 +214,7 @@ function asignarMultiplesValores(contenedor, array, nombreColumna) {
         if ($(this).is("input") || $(this).is("textarea")) {
             if ($(this).attr("name") === nombreColumna) {
                 $(this).val(array[nombreColumna]);
-                if ($(this).attr("name") == "color_texto") {
-                    $(this).spectrum("set", array[nombreColumna]);
-                }
+                $(this).spectrum("set", array[nombreColumna]);
             }
 
         } else if ($(this).is("select")) {
@@ -233,9 +231,9 @@ function asignarMultiplesValores(contenedor, array, nombreColumna) {
             }
 
         } else if ($(this).is("img")) {
-            if (array[nombreColumna].length != 0 && $(this).attr("id") == nombreColumna) {
+            if (array[nombreColumna].length != 0 && $(this).hasClass(nombreColumna)) {
                 $(this).attr("src", array[nombreColumna]);
-            } else if (array[nombreColumna].length == 0 && $(this).attr("id") == nombreColumna) {
+            } else if (array[nombreColumna].length == 0 && $(this).hasClass(nombreColumna)) {
                 $(this).attr("src", "../../../assets/images/1920x1080.png");
             }
         }
@@ -322,6 +320,65 @@ $("#guardar-home").click(function (e) {
 
 });
 
+$("#guardar-tar1").click(function (e) {
+    e.preventDefault();
+    guardar_tarjeta(1);
+
+});
+$("#guardar-tar2").click(function (e) {
+    e.preventDefault();
+    guardar_tarjeta(2);
+
+});
+$("#guardar-tar3").click(function (e) {
+    e.preventDefault();
+    guardar_tarjeta(3);
+
+});
+
+function guardar_tarjeta(id) {
+
+    limpiarCampo(".msj", "small");
+    var form = $('#tarjeta_'+id)[0];
+    form = new FormData(form);
+    $("#guardar-tar"+id).prop("disabled", true);
+    $.ajax({
+        type: "POST",
+        enctype: 'multipart/form-data',
+        url: "../../../controller/PrincipalC.php",
+        processData: false, // Important!
+        contentType: false,
+        cache: false,
+        data: form,
+        timeout: 600000,
+        success: function (response) {
+            try {
+                console.log(response);
+                $("#guardar-tar"+id).prop("disabled", false);
+                var json = JSON.parse(response);
+                if (json['clase'] == "danger") {
+                    Object.keys(json).forEach(function (indice) {
+                        validar_camposHome("Tarjeta"+id, json, indice);
+                    });
+                } else {
+                    detalle_tarjetas();
+                }
+                modalInformacion(json);
+
+
+            } catch (err) {
+                //alert(err);
+            }
+
+        },
+        error: function (e) {
+            $("#guardar-tar"+id).prop("disabled", false);
+
+        }
+
+    });
+}
+
 $("#guardar-presentacion").click(function (e) {
     e.preventDefault();
     limpiarCampo(".msj", "small");
@@ -345,7 +402,7 @@ $("#guardar-presentacion").click(function (e) {
                     Object.keys(json).forEach(function (indice) {
                         validar_camposHome("Presentacion", json, indice);
                     });
-                }else{
+                } else {
                     detalle_presentacion();
                 }
                 modalInformacion(json);
@@ -388,7 +445,7 @@ $("#guardar-tituloD").click(function (e) {
                     Object.keys(json).forEach(function (indice) {
                         validar_camposHome("Titulo", json, indice);
                     });
-                }else{
+                } else {
                     detalle_titulo();
                 }
                 modalInformacion(json);
@@ -446,6 +503,7 @@ function eliminarCarousel(id) {
 
 function validar_camposHome(contenedor, array, indice) {
     $(".data" + contenedor).each(function () {
+        console.log($(this).attr("name"));
         if ($(this).attr("name") === indice) {
             $(this).closest(".form-group").append(" <small class='msj text-danger'>" + array[indice] + "</small>");
         }

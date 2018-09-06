@@ -36,6 +36,8 @@ if (isset($_POST['titulo']) &&
 
     if (isset($_FILES['url_foto_noticia']['name']) && !empty($_FILES['url_foto_noticia']['name'])):
         $subir = new imgUpldr;
+        $subir->__set("_new_name",date("Ymdhis")."_noticia");
+        $subir->__set("_dest","../assets/images/");
         $imagen = $subir->init($_FILES['url_foto_noticia']);
         if (!empty($imagen)):
             $error['url_foto_noticia'] = $imagen;
@@ -96,6 +98,8 @@ elseif (isset($_POST['id_noticia']) &&
 
     if (isset($_FILES['url_foto_noticia']['name']) && !empty($_FILES['url_foto_noticia']['name'])):
         $subir = new imgUpldr;
+        $subir->__set("_new_name",date("Ymdhis")."_noticia");
+        $subir->__set("_dest","../assets/images/");
         $imagen = $subir->init($_FILES['url_foto_noticia']);
         if (!empty($imagen)):
             $error['url_foto_noticia'] = $imagen;
@@ -228,11 +232,6 @@ elseif (isset($_POST['ajax']) && isset($_POST['selectNoticia'])):
     $n = new NoticiaM();
     $n->mostrar_noticias();
     if (!empty($n->getNoticias())):
-        /*     foreach($n->getNoticias() as $row => $key):
-        if(empty($row['url_foto_noticia']) || $row['url_foto_noticia']==null):
-        $row['url_foto_noticia']=".././../assets/images/1280x720.png";
-        endif;
-        endforeach; */
         $noticias = $n->getNoticias();
         foreach ($noticias as $key => $val):
             $noticias[$key]['fecha_publicacion'] = strftime("%d %b %Y, %H:%m", strtotime($val['fecha_publicacion']));

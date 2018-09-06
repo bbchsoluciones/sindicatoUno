@@ -5,11 +5,12 @@ require_once($ruta_raiz . '/connection/PDOConnection.php');
 class imgUpldr {
 	# Variables #
 	private $_exts = array("image/jpg", "image/jpeg", "image/png", "image/gif"); // Tipos de archivos soportados
-	private $_width = 640; // Ancho máximo por defecto
-	private $_height = 420; // Alto máximo por defecto
+	private $_width = "1920"; // Ancho máximo por defecto
+	private $_height = "1080"; // Alto máximo por defecto
 	private $_size = 10000000; // Peso máximo. MAX_FILE_SIZE sobrescribe este valor
 	private $_name = "imagen"; // Nombre por defecto 
-	private $_dest = "../assets/images/";
+	private $_new_name;
+	private $_dest;
 	private $_img;
 	private $_ext;
 	private $_r = "";
@@ -109,7 +110,7 @@ class imgUpldr {
 			break; 
 		}
 		// Asignamos el nombre a la imagen según la fecha en formato aaaammddhhiiss y la extensión
-		$this->_name = date("Ymdhis").".".$this->_ext;
+		$this->_name = $this->_new_name.".".$this->_ext;
 	}
 	public function validaTipo() {
 		// Verifica que la extensión sea permitida, según el arreglo $_exts
