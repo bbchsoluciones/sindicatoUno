@@ -341,6 +341,7 @@ function guardar_tarjeta(id) {
     limpiarCampo(".msj", "small");
     var form = $('#tarjeta_'+id)[0];
     form = new FormData(form);
+    form.append("actualizar_tarjeta", 1);
     $("#guardar-tar"+id).prop("disabled", true);
     $.ajax({
         type: "POST",

@@ -7,7 +7,7 @@ include 'include/header.php';
             <a href="#">Resumen</a>
         </li>
         <li class="breadcrumb-item active">Inicio</li>
-        <li class="breadcrumb-item active">Editar Inicio</li>
+        <li class="breadcrumb-item active">Editar</li>
     </ol>
     <div id="mensaje"></div>
     <div id="accordion" class="mb-3">

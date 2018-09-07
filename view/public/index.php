@@ -1,7 +1,6 @@
 <?php 
   include('include/header.php');
   include('../../controller/PrincipalC.php');
-  $count = 0;
 ?>
 
 <div class="home-page">

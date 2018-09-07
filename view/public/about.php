@@ -1,5 +1,6 @@
 <?php
   include('include/header.php');
+  include('../../controller/PrincipalC.php');
   ?>
 <div class="container padding-about">
   <!-- Three columns of text below the carousel -->
@@ -66,49 +67,19 @@
           <!-- /.col-lg-4 -->
   </div>
   <!-- /.row -->
+  <?php for($i=0;$i<count($principal['nosotros']);$i++): ?>
   <div class="row featurette mt-3">
-    <div class="col-md-7 align-self-center">
-      <h2 class="featurette-heading">Nosotros.
-        <span class="text-muted">Sindicato Uno Brinks.</span>
-      </h2>
-      <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo
-        cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+    <div class="col-md-7 align-self-center <?php echo $principal['nosotros'][$i]['alineacion_texto'] ?>">
+      <h2 class="featurette-heading"><?php echo $principal['nosotros'][$i]['titulo_'] ?></h2>
+      <p class="lead"><?php echo $principal['nosotros'][$i]['descripcion_'] ?></p>
     </div>
     <div class="col-md-5">
-      <img class="featurette-image img-fluid mx-auto" src="../../assets/images/500x500.png" alt="Generic placeholder image">
+      <img class="featurette-image img-fluid mx-auto" src="<?php echo $principal['nosotros'][$i]['url_foto'] ?>" alt="Generic placeholder image">
     </div>
   </div>
-
   <hr class="featurette-divider">
-
-  <div class="row featurette">
-    <div class="col-md-7 order-md-2 align-self-center">
-      <h2 class="featurette-heading">Nuestra Misión.
-        <span class="text-muted">Apoyo constante.</span>
-      </h2>
-      <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo
-        cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-    </div>
-    <div class="col-md-5 order-md-1">
-      <img class="featurette-image img-fluid mx-auto" src="../../assets/images/500x500.png" alt="Generic placeholder image">
-    </div>
-  </div>
-
-  <hr class="featurette-divider">
-
-  <div class="row featurette">
-    <div class="col-md-7 align-self-center">
-      <h2 class="featurette-heading">Nuestra Visión.
-        <span class="text-muted">Crecimiento.</span>
-      </h2>
-      <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo
-        cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-    </div>
-    <div class="col-md-5">
-      <img class="featurette-image img-fluid mx-auto" src="../../assets/images/500x500.png" alt="Generic placeholder image">
-    </div>
-  </div>
+<?php endFor; ?>
 </div>
 <?php
     include('include/footer.php');
-    ?>
+?>

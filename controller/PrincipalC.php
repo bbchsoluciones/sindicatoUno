@@ -350,7 +350,8 @@ elseif (isset($_POST['id_texto']) &&
     isset($_POST['descripcion_']) &&
     isset($_POST['color_fondo']) &&
     isset($_POST['color_texto']) &&
-    isset($_POST['url_link'])):
+    isset($_POST['url_link']) &&
+    isset($_POST['actualizar_tarjeta'])):
 
     $data = array();
     $imagen = "";
@@ -388,6 +389,8 @@ elseif (isset($_POST['id_texto']) &&
             $principal->setTitulo_($data['titulo_']);
             $principal->setDescripcion_($data['descripcion_']);
             $principal->setCategoria("tarjeta");
+            $principal->setAlineacion_texto(null);
+            $principal->setAnimacion(null);
             $principal->setColor_fondo($data['color_fondo']);
             $principal->setColor_texto($data['color_texto']);
             $principal->setUrl_link($data['url_link']);
@@ -423,8 +426,92 @@ elseif (isset($_POST['id_texto']) &&
         endif;
     endif;
 //fin modificar
-    //tarjeta
-else:
+    // fin tarjeta
+//about
+//modificar
+    elseif (isset($_POST['id_texto']) &&
+    !empty($_POST['id_texto']) &&
+    isset($_POST['titulo_']) &&
+    isset($_POST['descripcion_'])  &&
+    isset($_POST['alineacion_texto'])  &&
+    isset($_POST['actualizar_about'])):
+
+    $data = array();
+    $imagen = "";
+    $error = array();
+    foreach ($_POST as $indice => $valor):
+        if (empty(trim($valor))):
+            $valor = "Campo vacío, favor completar";
+            $error[$indice] = $valor;
+        endif;
+        $data[$indice] = utf8_decode(htmlspecialchars($valor));
+    endforeach;
+
+    if (isset($_FILES['imagen']['name']) && !empty($_FILES['imagen']['name'])):
+        $subir = new imgUpldr;
+        $subir->__set("_new_name", date("Ymdhis") . "_about");
+        $subir->__set("_dest", "../assets/images/");
+        $subida = $subir->init($_FILES['imagen']);
+        if (!empty($subida)):
+            $error['imagen'] = $subida;
+        else:
+            $imagen = "http://localhost/sindicatoUno/assets/images/" . $subir->_name;
+        endif;
+    endif;
+
+    if (count($error) > 0):
+        $error['titulo'] = "Ha ocurrido un error!";
+        $error['mensaje'] = "Uno o más campos tienen información errónea o están vacíos.";
+        $error['clase'] = "danger";
+        echo json_encode($error);
+    else:
+        $principal = new PrincipalM();
+        $principal->setId_texto($data['id_texto']);
+        $principal->mostrar_texto();
+        if (!empty($principal->getPrincipal())):
+            $principal->setTitulo_($data['titulo_']);
+            $principal->setDescripcion_($data['descripcion_']);
+            $principal->setCategoria("about");
+            $principal->setAlineacion_texto($data['alineacion_texto']);
+            $principal->setAnimacion(null);
+            $principal->setColor_fondo(null);
+            $principal->setColor_texto(null);
+            $principal->setUrl_link(null);
+            if ($principal->actualizar_texto()):
+                if (isset($_FILES['imagen']['name']) && !empty($_FILES['imagen']['name'])):
+                    $accion = "";
+                    $principal->setUrl_foto($imagen);
+                    if (!empty($principal->getPrincipal()['url_foto']) && $principal->getPrincipal()['url_foto'] !== null):
+                        $nombre_imagen = basename(parse_url($principal->getPrincipal()['url_foto'])['path']);
+                        unlink("../assets/images/" . $nombre_imagen);
+                        $accion = "update";
+                    else:
+                        $accion = "insert";
+                    endif;
+                    $principal->agregar_imagen($accion);
+                endif;
+                $error['titulo'] = "Éxito!";
+                $error['mensaje'] = "Información actualizada correctamente.";
+                $error['clase'] = "success";
+                echo json_encode($error);
+            else:
+                $error['titulo'] = "Oops, hubo un error!";
+                $error['mensaje'] = "Información no pudo ser actualizado";
+                $error['clase'] = "danger";
+                echo json_encode($error);
+            endif;
+
+        else:
+            $error['titulo'] = "Oops, hubo un error!";
+            $error['mensaje'] = "El id fue modificado";
+            $error['clase'] = "danger";
+            echo json_encode($error);
+        endif;
+    endif;
+//fin modificar
+//fin about
+//listar home
+elseif($pageName[0]=="index"):
     $carousel = array();
     $presentacion = array();
     $destacado = array();
@@ -458,5 +545,19 @@ else:
         "destacado" => $destacado,
         "tarjeta" => $tarjeta,
     );
+//fin listar home
+//listar about
+elseif($pageName[0]=="about"):
+    $nosotros = array();
+    $principal = new PrincipalM();
+    $principal->setCategoria("about");
+    $principal->mostrar_textos();
+    if (!empty($principal->getPrincipal())):
+        $nosotros = $principal->getPrincipal();
+    endif;
 
+    $principal = array(
+        "nosotros" => $nosotros
+    );
+//fin listar about
 endif;
