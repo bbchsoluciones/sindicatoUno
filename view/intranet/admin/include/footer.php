@@ -124,6 +124,9 @@
 <script src="../../../assets/js/modal.js"></script>
 <script src="../../../assets/js/spectrum.js"></script>
 <script src="../../../assets/js/homeManager.js"></script>
+<?php elseif ($pageName[0]=="aboutManage"): ?> 
+<script src="../../../assets/js/modal.js"></script>
+<script src="../../../assets/js/aboutManager.js"></script>
 <?php  endif; ?>
 <script src="../../../assets/js/general.js"></script>
 

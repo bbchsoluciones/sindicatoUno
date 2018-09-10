@@ -36,7 +36,7 @@ include('include/header.php');
                 <button type="button" class="btn btn-primary" id="close_newsE"><i class="fa fa-times"></i></button>
                 <div id="mensaje"></div>
                 <div class="form-group">
-                    <div class="jumbotron jumbotron-fluid">
+                    <div class="jumbotron jumbotron-fluid p-2">
                         <div class="container">
                             <h1 class="display-5 text-center">
                                 <i class="fa fa-newspaper pr-4"></i>Editar noticia</h1>
