@@ -127,6 +127,8 @@
 <?php elseif ($pageName[0]=="aboutManage"): ?> 
 <script src="../../../assets/js/modal.js"></script>
 <script src="../../../assets/js/aboutManager.js"></script>
+<?php elseif ($pageName[0]=="galleryManage"): ?> 
+<script src="../../../assets/js/galleryManager.js"></script>
 <?php  endif; ?>
 <script src="../../../assets/js/general.js"></script>
 
