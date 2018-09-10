@@ -81,7 +81,7 @@ elseif (isset($_POST['tipo_usuario']) &&
             $error[$indice] = $valor;
         endif;
         if (empty(trim($valor))):
-            $valor = "Campo vació, favor completar";
+            $valor = "Campo vacío, favor completar";
             $error[$indice] = $valor;
         endif;
         $data[$indice] = utf8_decode(htmlspecialchars($valor));
@@ -265,6 +265,152 @@ elseif (isset($_POST['tipo_usuario']) &&
         endif;
     endif;
 // FIN MODIFICAR TRABAJADOR
+
+// MODIFICAR TRABAJADOR USER
+elseif (isset($_POST['email_trabajador']) &&
+    isset($_POST['nombres_trabajador']) &&
+    isset($_POST['apellidos_trabajador']) &&
+    isset($_POST['nombre_cargo']) &&
+    isset($_POST['nombre_subcargo']) &&
+    isset($_POST['contrasena_trabajador']) &&
+    isset($_POST['vcontrasena_trabajador']) &&
+    isset($_POST['direccion_trabajador']) &&
+    isset($_POST['nombre_comuna']) &&
+    isset($_POST['fec_nac_trabajador']) &&
+    isset($_POST['genero_trabajador']) &&
+    isset($_POST['estado_civil_trabajador']) &&
+    isset($_POST['fec_ing_emp_trabajador']) &&
+    isset($_POST['fec_ing_sin_trabajador']) &&
+    isset($_POST['telefono_trabajador']) &&
+    isset($_POST['celular_trabajador']) &&
+    isset($_POST['run_trabajador']) &&
+    isset($_POST['actualizar'])):
+
+    $imagen = "";
+    foreach ($_POST as $indice => $valor):
+        if (strpos($indice, 'fec') !== false && !empty($valor)):
+            $date = clean($valor);
+            if (is_numeric($date)):
+                if (strpos($valor, '-')):
+                    $valor = str_replace("-", "/", $valor);
+                endif;
+                $fecha = explode("/", $valor);
+                if (checkdate($fecha[1], $fecha[0], $fecha[2])):
+                    try {
+                        $valor = DateTime::createFromFormat('d/m/Y', $valor);
+                        $valor = $valor->format('Y-m-d');
+                    } catch (Exception $e) {
+                        $valor = "Fecha invalida, formato Dia/Mes/Año";
+                        $error[$indice] = $valor;
+                    } else :
+                    $valor = "Fecha invalida, formato Dia/Mes/Año";
+                    $error[$indice] = $valor;
+                endif;
+
+            else:
+                $valor = "Fecha invalida, formato Dia/Mes/Año";
+                $error[$indice] = $valor;
+            endif;
+        elseif ($indice === 'run_trabajador'):
+            $valor = clean($valor);
+        endif;
+        if (empty(trim($valor)) && $indice !== "estado_trabajador"):
+            $valor = null;
+            unset($error[$valor]);
+            $data[$indice] = null;
+        endif;
+        $data[$indice] = utf8_decode(htmlspecialchars($valor));
+    endforeach;
+
+    /* f (array_key_exists('contrasena_trabajador', $error) && array_key_exists('vcontrasena_trabajador', $error)):
+        $data['contrasena_trabajador'] = "nula";
+        $data['vcontrasena_trabajador'] = "nula";
+        unset($error['contrasena_trabajador']);
+        unset($error['vcontrasena_trabajador']); */
+    if ($data['contrasena_trabajador'] !== $data['vcontrasena_trabajador']):
+        $error['contrasena_trabajador'] = "Contraseñas no coinciden";
+        $error['vcontrasena_trabajador'] = "Contraseñas no coinciden";
+    elseif ($data['contrasena_trabajador'] == $data['vcontrasena_trabajador'] &&
+    !empty($data['contrasena_trabajador']) && !empty($data['vcontrasena_trabajador'])):
+        $encriptador = new EncriptadorC($data['contrasena_trabajador']);
+        $data['contrasena_trabajador'] = $encriptador->getClave();
+    endif;
+
+    //validación placa vigilante
+    if ($data['nombre_cargo'] == "3" && ctype_digit($data['placa_trabajador']) == false
+    || $data['nombre_cargo'] == "3" && empty($data['placa_trabajador'])):
+        $error['placa_trabajador'] = "Formato incorrecto o vacío";
+    elseif ($data['nombre_cargo'] !== "3"):
+        $data['placa_trabajador'] = null;
+    endif;
+
+    //validación email
+    if (!filter_var($data['email_trabajador'], FILTER_VALIDATE_EMAIL) && !empty($data['email_trabajador'])):
+        $error['email_trabajador'] = "Correo invalido!";
+    endif;
+
+    if (isset($_FILES['avatar']['name']) && !empty($_FILES['avatar']['name'])):
+        $subir = new imgUpldr;
+        $imagen = $subir->init($_FILES['avatar']);
+        if (!empty($imagen)):
+            $error['avatar'] = $imagen;
+        endif;
+
+    endif;
+
+    if (count($error) > 0):
+        $error['titulo'] = "Ha ocurrido un error!";
+        $error['mensaje'] = "Uno o más campos tienen información errónea.";
+        $error['clase'] = "danger";
+        echo json_encode($error);
+    else:
+
+        $trabajador = new TrabajadorM();
+        $trabajador->setRun_trabajador($data['run_trabajador']);
+        $trabajador->setTipo_usuario_id_tipo_usuario(2);
+        $trabajador->setEmail_trabajador($data['email_trabajador']);
+        $trabajador->setNombres_trabajador($data['nombres_trabajador']);
+        $trabajador->setApellidos_trabajador($data['apellidos_trabajador']);
+        $trabajador->setSub_cargo_id_sub_cargo($data['nombre_subcargo']);
+        $trabajador->setContrasena_trabajador($data['contrasena_trabajador']);
+        $trabajador->setDireccion_trabajador($data['direccion_trabajador']);
+        $trabajador->setComuna_id_comuna($data['nombre_comuna']);
+        $trabajador->setFec_nac_trabajador($data['fec_nac_trabajador']);
+        $trabajador->setPlaca_trabajador($data['placa_trabajador']);
+        $trabajador->setGenero_trabajador($data['genero_trabajador']);
+        $trabajador->setEstado_civil_trabajador($data['estado_civil_trabajador']);
+        $trabajador->setFec_ing_emp_trabajador($data['fec_ing_emp_trabajador']);
+        $trabajador->setFec_ing_sin_trabajador($data['fec_ing_sin_trabajador']);
+        $trabajador->setTelefono_trabajador($data['telefono_trabajador']);
+        $trabajador->setCelular_trabajador($data['celular_trabajador']);
+        if (isset($_FILES['avatar']['name']) && !empty($_FILES['avatar']['name'])):
+            $accion = "";
+            $foto = new FotoPerfilM();
+            $trabajador->encontrarTconImagen();
+            $avatar = "http://localhost/sindicatoUno/assets/images/" . $subir->_name;
+            $foto->setUrl_foto_perfil($avatar);
+            if (!empty($trabajador->getTrabajador()['url_foto_perfil'])):
+                $nombre_imagen = basename(parse_url($trabajador->getTrabajador()['url_foto_perfil'])['path']);
+                $split = explode(".", $nombre_imagen);
+                $name = $split[0];
+                $extension = $split[1];
+                if (ctype_digit($name)):
+                    unlink("../assets/images/" . $nombre_imagen);
+                endif;
+                $accion = "update";
+            else:
+                $accion = "insert";
+            endif;
+            $foto->modificarFotoPerfil($accion, $data['run_trabajador']);
+        endif;
+        if ($trabajador->actualizar_trabajador()):
+            $error['titulo'] = "Éxito!";
+            $error['mensaje'] = "Información actualiza correctamente.";
+            $error['clase'] = "success";
+            echo json_encode($error);
+        endif;
+    endif;
+// MODIFICAR TRABAJADOR USER
 
 // ELIMINAR TRABAJADOR
 

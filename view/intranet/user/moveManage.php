@@ -6,8 +6,7 @@ include('include/header.php');
         <li class="breadcrumb-item">
             <a href="index.php">Resumen</a>
         </li>
-        <li class="breadcrumb-item active">Movimiento</li>
-        <li class="breadcrumb-item active">Mostrar Movimiento</li>
+        <li class="breadcrumb-item active">Movimientos</li>
     </ol>
 
             <div class="row">

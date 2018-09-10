@@ -50,6 +50,12 @@ endif;
       window.onload = function () {
         <?php if($pageName[0]=="index"):?>
           mostrarDatosTrabajador(<?php echo $_SESSION['run_trabajador']; ?>);
+        <?php elseif($pageName[0]=="userManage"):?>
+          mostrarTrabajador(<?php echo $_SESSION['run_trabajador']; ?>);
+        <?php elseif($pageName[0]=="sonNew"):?>
+          buscarPadre(<?php echo $_SESSION['run_trabajador']; ?>);
+        <?php elseif($pageName[0]=="sonManage"):?>
+          buscarHijo(<?php echo $_SESSION['run_trabajador']; ?>);
         <?php endif;?>
       }
         
@@ -98,7 +104,7 @@ endif;
           <i class="fas fa-user-circle fa-fw"></i>            
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-            <a class="dropdown-item" href="userManage.php">Mi Cuenta</a>
+            <a class="dropdown-item" href="index.php">Mi Cuenta</a>
             <!-- <a class="dropdown-item" href="#">Activity Log</a> -->
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Cerrar Sesión</a>
