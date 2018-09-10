@@ -7,12 +7,12 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-   <?php
+  <?php
   $pageName = basename($_SERVER['PHP_SELF']);
   $pageName = explode(".", $pageName);
   ?>
   <?php if($pageName[0]=="login"): ?>
-  
+
   <?php endif; ?>
   <link rel="icon" href="../../../../favicon.ico">
 
@@ -35,8 +35,8 @@
           <a class="navbar-brand logo" href="index.php">
             <img src="../../assets/images/logo.png">
           </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
-            aria-expanded="false" aria-label="Toggle navigation">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
@@ -58,16 +58,44 @@
               <li class="nav-item">
                 <a id="btn" class="nav-link" href="contact.php">Contacto</a>
               </li>
-              <!---->
-              <li class="nav-item mb-md-0 mb-sm-3 mb-3">
-                <a id="btn" class="btn btn-success" href="login.php">Inicio de sesión</a>
-              </li>
-              <!--
-              <li class="nav-item">
-                <a id="btn" class="nav-link" href="login.php">
-                  <i class="fas fa-user"></i> Inicio de sesión</a>
-              </li>
-              -->
+              <?php 
+                if(!isset($_SESSION)):
+                  session_start();//inicia sesion si está vacío
+                endif;
+                if(isset($_SESSION['tipo_usuario']))://sesion iniciada
+                  if($_SESSION['tipo_usuario'] == 0):
+              ?>
+                    <li class="nav-item">
+                      <a id="btn" class="nav-link" href="../intranet/superadmin/index.php">
+                      Mi Cuenta <i class="fas fa-user-circle fa-fw"></i>
+                      </a>
+                    </li>
+              <?php
+                  elseif($_SESSION['tipo_usuario'] == 1):
+              ?>
+                    <li class="nav-item">
+                      <a id="btn" class="nav-link" href="../intranet/admin/index.php">
+                      Mi Cuenta <i class="fas fa-user-circle fa-fw"></i>
+                      </a>
+                    </li>
+              <?php
+                  elseif($_SESSION['tipo_usuario'] == 2):
+              ?>
+                    <li class="nav-item">
+                      <a id="btn" class="nav-link" href="../intranet/user/index.php">
+                      Mi Cuenta <i class="fas fa-user-circle fa-fw"></i>
+                      </a>
+                    </li>
+              <?php
+                  endif;
+                else://
+              ?>
+                  <li class="nav-item mb-md-0 mb-sm-3 mb-3">
+                    <a id="btn" class="btn btn-success" href="login.php">Inicio de sesión</a>
+                  </li>
+              <?php 
+                endif; 
+              ?>
             </ul>
           </div>
         </div>

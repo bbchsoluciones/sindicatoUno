@@ -506,3 +506,12 @@
         width: 100%;
       }
 }
+@media (min-width: 1401px) {
+    /* acá van las reglas CSS que aplican para este media query */
+    .chart-container {
+        position: relative;
+        margin: auto;
+        height: 35vw;
+        width: 100%;
+      }
+  }

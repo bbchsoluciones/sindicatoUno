@@ -79,7 +79,7 @@ if (isset($_GET['run']) && !empty($_GET['run']) && isset($_GET['detalle'])):
         endif;
 
     else:
-        $error['titulo'] = "Rut invalido!";
+        $error['titulo'] = "Rut inválido!";
         $error['clase'] = "danger";
         echo json_encode($error);
     endif;
@@ -110,13 +110,13 @@ elseif (isset($_GET['run_hijo']) && !empty($_GET['run_hijo']) && isset($_GET['mo
             endif;
 
         else:
-            $error['titulo'] = "Rut Invalido!";
+            $error['titulo'] = "Rut Inválido!";
             $error['clase'] = "danger";
             echo json_encode($error);
         endif;
 
     else:
-        $error['titulo'] = "Rut Invalido!";
+        $error['titulo'] = "Rut Inválido!";
         $error['clase'] = "danger";
         echo json_encode($error);
     endif;
@@ -150,22 +150,22 @@ elseif (
                         $valor = DateTime::createFromFormat('d/m/Y', $valor);
                         $valor = $valor->format('Y-m-d');
                     } catch (Exception $e) {
-                        $valor = "Fecha invalida, favor usar formato Dia/Mes/Año";
+                        $valor = "Fecha inválida, favor usar formato Dia/Mes/Año";
                         $error[$indice] = $valor;
                     } else :
-                    $valor = "Fecha invalida, favor usar formato Dia/Mes/Año";
+                    $valor = "Fecha inválida, favor usar formato Dia/Mes/Año";
                     $error[$indice] = $valor;
                 endif;
             else:
-                $valor = "Fecha invalida, favor usar formato Dia/Mes/Año";
+                $valor = "Fecha inválida, favor usar formato Dia/Mes/Año";
                 $error[$indice] = $valor;
             endif;
         elseif ($indice == 'run_hijo' && esRut($valor) == false || $indice == "run_trabajador" && esRut($valor) == false):
-            $valor = "Rut invalido";
+            $valor = "Rut inválido";
             $error[$indice] = $valor;
         endif;
         if (empty(trim($valor)) || strpos($valor, "...") == true):
-            $valor = "Campo vació o invalido, favor completar";
+            $valor = "Campo vacío o inválido, favor completar";
             $error[$indice] = $valor;
         endif;
         $data[$indice] = utf8_decode(htmlspecialchars($valor));
@@ -256,22 +256,22 @@ elseif (
                         $valor = DateTime::createFromFormat('d/m/Y', $valor);
                         $valor = $valor->format('Y-m-d');
                     } catch (Exception $e) {
-                        $valor = "Fecha invalida, favor usar formato Dia/Mes/Año";
+                        $valor = "Fecha inválida, favor usar formato Dia/Mes/Año";
                         $error[$indice] = $valor;
                     } else :
-                    $valor = "Fecha invalida, favor usar formato Dia/Mes/Año";
+                    $valor = "Fecha inválida, favor usar formato Dia/Mes/Año";
                     $error[$indice] = $valor;
                 endif;
             else:
-                $valor = "Fecha invalida, favor usar formato Dia/Mes/Año";
+                $valor = "Fecha inválida, favor usar formato Dia/Mes/Año";
                 $error[$indice] = $valor;
             endif;
         elseif ($indice == 'run_hijo' && esRut($valor) == false || $indice == "run_trabajador" && esRut($valor) == false):
-            $valor = "Rut invalido";
+            $valor = "Rut inválido";
             $error[$indice] = $valor;
         endif;
         if (empty(trim($valor)) || strpos($valor, "...") == true):
-            $valor = "Campo vació o invalido, favor completar";
+            $valor = "Campo vacío o inválido, favor completar";
             $error[$indice] = $valor;
         endif;
         $data[$indice] = utf8_decode(htmlspecialchars($valor));

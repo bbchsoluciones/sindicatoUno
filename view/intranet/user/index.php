@@ -6,7 +6,6 @@ include('include/header.php');
     <li class="breadcrumb-item">
         <a href="index.php">Resumen</a>
     </li>
-    <li class="breadcrumb-item active">Inicio</li>
 </ol>
 <div class="row">
     <div class="col-md-12 col-12">
@@ -14,7 +13,10 @@ include('include/header.php');
             <div class="card-header">
                 <i class="far fa-address-card"></i>
                 Bienvenida</div>
-            <div class="card-body">
+                    <div id="loadBienvenida" class="loadData_container text-center mt-3 mb-3">
+                        <img src="../../../assets/images/loading.gif" width="50">
+                    </div>
+            <div id="cardBienvenida" class="card-body d-none animated fadeIn">
                 <div class="container m-0">
                     <div class="row">
                         <h1 id="saludoTra">Hola!</h1>
@@ -46,13 +48,23 @@ include('include/header.php');
             <div class="card-header bg-warning ">
                 <i class="far fa-money-bill-alt"></i>
                 Movimientos</div>
-            <div class="card-body p-2 d-flex align-items-center">
+            <div class="card-body p-2 d-flex align-items-center">      
+                        
+                
                 <div class="container">
-                    <div class="row">
+                
+                    <div id="loadMovimientos" class="row justify-content-center">
+                        <div class="loadData_container">
+                            <img src="../../../assets/images/loading.gif" width="50">
+                        </div>
+                
+                    </div>
+                
+                    <div id="cardMovimientos" class="row d-none animated fadeIn">
                         <div class="col-md-12">
                             <div class="row justify-content-center text-dark font-weight-bold text-center">
                                 <h4>Año 2018</h4>
-                            </div>                            
+                            </div>
                             <div class="row justify-content-center text-center">
                                 <h3><a id="cantIngresos" class="text-success" href="barChartEntry.php">0 Ingresos</a></h3>
                             </div>
@@ -75,7 +87,13 @@ include('include/header.php');
                 Saldo</div>
             <div class="card-body p-2 d-flex align-items-center">
                 <div class="container">
-                    <div class="row">
+                    <div id="loadFondo" class="row justify-content-center">
+                        <div class="loadData_container">
+                            <img src="../../../assets/images/loading.gif" width="50">
+                        </div>
+                
+                    </div>
+                    <div id="cardFondo" class="row d-none animated fadeIn">
                         <div class="col-md-12">
                             <div class="row justify-content-center text-dark font-weight-bold text-center">
                                 <h4>Fondo</h4>
@@ -182,7 +200,14 @@ include('include/header.php');
                 Datos personales</div>
             <div class="card-body p-3">
 
-                <div class="form-row">
+                    <div id="loadDatos" class="row justify-content-center">
+                            <div class="loadData_container">
+                                <img src="../../../assets/images/loading.gif" width="50">
+                            </div>
+                    
+                        </div>
+
+                <div id="cardDatos" class="form-row d-none animated fadeIn">
                     <div class="form-group col-md-4 col-sm-6">
                         <label class="" for="inputEmail4">Nombres</label>
                         <input type="text" disabled class="form-control" id="nombresTra">
