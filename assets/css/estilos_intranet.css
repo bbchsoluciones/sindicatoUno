@@ -6,7 +6,11 @@
     object-fit: cover;
     height: 250px;
 }
-
+.cover_img_preview{
+    object-fit: cover;
+    width: 40px;
+    height: 40px;
+}
 .cover_miniatura {
     object-fit: cover;
     height: 60px;
@@ -80,7 +84,13 @@
     font-size: 20px;
     text-align: center;
 }
+.custom-file {
+    overflow: hidden;
+}
 
+.custom-file-input~.custom-file-label::after {
+    content: "Elegir";
+}
 /*fin clases generales*/
 
 /* List user */
@@ -229,14 +239,6 @@
 .userManage-page .dangerFocus:focus {
     border-color: #FF0000;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);
-}
-
-.userManage-page.custom-file {
-    overflow: hidden;
-}
-
-.userManage-page .custom-file-input~.custom-file-label::after {
-    content: "Elegir";
 }
 
 /* END list User*/
@@ -401,7 +403,25 @@
     color: green;
     font-weight: bold;
 }
-
+/* layout.css Style */
+.upload-drop-zone {
+    height: 200px;
+    border-width: 2px;
+    margin-bottom: 20px;
+  }
+  
+  /* skin.css Style*/
+  .upload-drop-zone {
+    color: #ccc;
+    border-style: dashed;
+    border-color: #ccc;
+    line-height: 200px;
+    text-align: center
+  }
+  .upload-drop-zone.drop {
+    color: #222;
+    border-color: #222;
+  }
 /*moveManage*/
 
 /* .table-mov {
