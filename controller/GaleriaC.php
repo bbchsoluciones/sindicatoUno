@@ -22,6 +22,7 @@ if (isset($_FILES['file']) && !empty($_FILES['file'])):
         $data['titulo'] = "Error";
         $data['imagen_nombre'] = $_FILES['file']['name']." => ".$subida;
         $data['clase'] = "danger";
+        $data['icono'] = "times";
     else:
         $galeria = new GaleriaM();
         $galeria->setUrl_foto_galeria($imagen);
@@ -30,22 +31,26 @@ if (isset($_FILES['file']) && !empty($_FILES['file'])):
             $data['titulo'] = 'Éxito';
             $data['imagen_nombre'] = $_FILES['file']['name'];
             $data['clase'] = "success";
+            $data['icono'] = "check";
         else:
             $data['titulo'] = "Error";
             $data['imagen_nombre'] = $_FILES['file']['name'];
             $data['clase'] = "danger";
+            $data['icono'] = "times";
         endif;
     endif;
     if (in_array("danger", $data)):
         $mensaje['titulo'] = "Ha ocurrido un error!";
         $mensaje['mensaje'] = "Uno o más archivos no han podido ser subidos!.";
         $mensaje['clase'] = "danger";
+        $mensaje['icono'] = "times";
         $json = array("mensaje" => $mensaje, "imagen" => $data);
         echo json_encode($json);
     else:
         $mensaje['titulo'] = "Éxito!";
         $mensaje['mensaje'] = "Archivo(s) subido(s) correctamente.";
         $mensaje['clase'] = "success";
+        $mensaje['icono'] = "check";
         $json = array("mensaje" => $mensaje, "imagen" => $data);
         echo json_encode($json);
     endif;

@@ -37,7 +37,7 @@ if (isset($_POST['titulo']) &&
     if (isset($_FILES['url_foto_noticia']['name']) && !empty($_FILES['url_foto_noticia']['name'])):
         $subir = new imgUpldr;
         $subir->__set("_new_name",date("Ymdhis")."_noticia");
-        $subir->__set("_dest","../assets/images/");
+        $subir->__set("_dest","../assets/images/noticia/");
         $imagen = $subir->init($_FILES['url_foto_noticia']);
         if (!empty($imagen)):
             $error['url_foto_noticia'] = $imagen;
@@ -58,7 +58,7 @@ if (isset($_POST['titulo']) &&
         $noticia->setTrabajador_run_trabajador($_SESSION['run_trabajador']);
         if ($noticia->registrar_noticia()):
             if (isset($_FILES['url_foto_noticia']['name']) && !empty($_FILES['url_foto_noticia']['name'])):
-                $url_foto_noticia = "http://localhost/sindicatoUno/assets/images/" . $subir->_name;
+                $url_foto_noticia = "http://localhost/sindicatoUno/assets/images/noticia/" . $subir->_name;
                 $noticia->setUrl_foto_noticia($url_foto_noticia);
                 $noticia->agregar_imagen("insert");
             endif;
@@ -99,7 +99,7 @@ elseif (isset($_POST['id_noticia']) &&
     if (isset($_FILES['url_foto_noticia']['name']) && !empty($_FILES['url_foto_noticia']['name'])):
         $subir = new imgUpldr;
         $subir->__set("_new_name",date("Ymdhis")."_noticia");
-        $subir->__set("_dest","../assets/images/");
+        $subir->__set("_dest","../assets/images/noticia/");
         $imagen = $subir->init($_FILES['url_foto_noticia']);
         if (!empty($imagen)):
             $error['url_foto_noticia'] = $imagen;
@@ -123,16 +123,11 @@ elseif (isset($_POST['id_noticia']) &&
             if ($noticia->actualizar_noticia()):
                 if (isset($_FILES['url_foto_noticia']['name']) && !empty($_FILES['url_foto_noticia']['name'])):
                     $accion = "";
-                    $url_foto_noticia = "http://localhost/sindicatoUno/assets/images/" . $subir->_name;
+                    $url_foto_noticia = "http://localhost/sindicatoUno/assets/images/noticia/" . $subir->_name;
                     $noticia->setUrl_foto_noticia($url_foto_noticia);
                     if (!empty($noticia->getNoticias()['url_foto_noticia']) && $noticia->getNoticias()['url_foto_noticia'] !== null):
                         $nombre_imagen = basename(parse_url($noticia->getNoticias()['url_foto_noticia'])['path']);
-                        $split = explode(".", $nombre_imagen);
-                        $name = $split[0];
-                        $extension = $split[1];
-                        if (ctype_digit($name)):
-                            unlink("../assets/images/" . $nombre_imagen);
-                        endif;
+                        unlink("../assets/images/noticia/" . $nombre_imagen);
                         $accion = "update";
                     else:
                         $accion = "insert";

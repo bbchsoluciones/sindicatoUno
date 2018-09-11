@@ -211,12 +211,7 @@ class NoticiaM
             $consulta->bindParam(':id_noticia', $this->id_noticia);
             if ($consulta->execute()) {
                 $nombre_imagen = basename(parse_url($this->url_foto_noticia)['path']); 
-                $split = explode(".", $nombre_imagen);
-                $name = $split[0];
-                $extension = $split[1];
-                if(ctype_digit($name)):
-                    unlink("../assets/images/".$nombre_imagen);
-                endif;
+                unlink("../assets/images/noticia/".$nombre_imagen);
                 return true;
             } else {
                 //Error
