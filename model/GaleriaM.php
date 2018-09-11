@@ -65,10 +65,9 @@ class GaleriaM
                                 trabajador_run_trabajador)
                         VALUES
                                 (:url_foto_galeria,
-                                :trabajador_run_trabajador";
-
+                                :trabajador_run_trabajador)";
             $consulta = $conn->prepare($sql);
-            $consulta->bindParam(':trabajador_run_trabajador', $trabajador_run_trabajador);
+            $consulta->bindParam(':trabajador_run_trabajador', $this->trabajador_run_trabajador);
             $consulta->bindValue(':url_foto_galeria', $this->url_foto_galeria);
             if ($consulta->execute()):
                 return true;
@@ -97,7 +96,7 @@ class GaleriaM
                         WHERE   trabajador_run_trabajador=:trabajador_run_trabajador";
 
             $consulta = $conn->prepare($sql);
-            $consulta->bindParam(':trabajador_run_trabajador', $trabajador_run_trabajador);
+            $consulta->bindParam(':trabajador_run_trabajador', $this->trabajador_run_trabajador);
             $consulta->bindValue(':url_foto_galeria', $this->url_foto_galeria);
             if ($consulta->execute()):
                 return true;

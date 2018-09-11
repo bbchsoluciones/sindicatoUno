@@ -204,8 +204,8 @@ elseif (isset($_POST['tipo_usuario']) &&
 
     if (isset($_FILES['avatar']['name']) && !empty($_FILES['avatar']['name'])):
         $subir = new imgUpldr;
-        $subir->__set("_new_name",date("Ymdhis")."_noticia");
-        $subir->__set("_dest","../assets/images/");
+        $subir->__set("_new_name",date("Ymdhis")."_avatar");
+        $subir->__set("_dest","../assets/images/avatar/");
         $imagen = $subir->init($_FILES['avatar']);
         if (!empty($imagen)):
             $error['avatar'] = $imagen;
@@ -243,16 +243,11 @@ elseif (isset($_POST['tipo_usuario']) &&
             $accion = "";
             $foto = new FotoPerfilM();
             $trabajador->encontrarTconImagen();
-            $avatar = "http://localhost/sindicatoUno/assets/images/" . $subir->_name;
+            $avatar = "http://localhost/sindicatoUno/assets/images/avatar/" . $subir->_name;
             $foto->setUrl_foto_perfil($avatar);
             if (!empty($trabajador->getTrabajador()['url_foto_perfil'])):
                 $nombre_imagen = basename(parse_url($trabajador->getTrabajador()['url_foto_perfil'])['path']);
-                $split = explode(".", $nombre_imagen);
-                $name = $split[0];
-                $extension = $split[1];
-                if (ctype_digit($name)):
-                    unlink("../assets/images/" . $nombre_imagen);
-                endif;
+                unlink("../assets/images/avatar/" . $nombre_imagen);
                 $accion = "update";
             else:
                 $accion = "insert";
@@ -353,6 +348,8 @@ elseif (isset($_POST['email_trabajador']) &&
 
     if (isset($_FILES['avatar']['name']) && !empty($_FILES['avatar']['name'])):
         $subir = new imgUpldr;
+        $subir->__set("_new_name",date("Ymdhis")."_avatar");
+        $subir->__set("_dest","../assets/images/avatar/");
         $imagen = $subir->init($_FILES['avatar']);
         if (!empty($imagen)):
             $error['avatar'] = $imagen;
@@ -389,16 +386,11 @@ elseif (isset($_POST['email_trabajador']) &&
             $accion = "";
             $foto = new FotoPerfilM();
             $trabajador->encontrarTconImagen();
-            $avatar = "http://localhost/sindicatoUno/assets/images/" . $subir->_name;
+            $avatar = "http://localhost/sindicatoUno/assets/images/avatar/" . $subir->_name;
             $foto->setUrl_foto_perfil($avatar);
             if (!empty($trabajador->getTrabajador()['url_foto_perfil'])):
                 $nombre_imagen = basename(parse_url($trabajador->getTrabajador()['url_foto_perfil'])['path']);
-                $split = explode(".", $nombre_imagen);
-                $name = $split[0];
-                $extension = $split[1];
-                if (ctype_digit($name)):
-                    unlink("../assets/images/" . $nombre_imagen);
-                endif;
+                unlink("../assets/images/avatar/" . $nombre_imagen);
                 $accion = "update";
             else:
                 $accion = "insert";

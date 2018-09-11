@@ -29,38 +29,50 @@ $(function () {
 
     $("#js-upload-submit").click(function (e) {
         e.preventDefault();
-
-        var form = new FormData();
-        for (var i = 0; i < storedFiles.length; i++) {
-            form.append("files[]", storedFiles[i]);
-        }
         $("#js-upload-submit").prop("disabled", true);
-        $.ajax({
-            type: "POST",
-            enctype: 'multipart/form-data',
-            url: "../../../controller/GaleriaC.php",
-            processData: false, // Important!
-            contentType: false,
-            cache: false,
-            data: form,
-            timeout: 600000,
-            success: function (response) {
-                try {
-                    $("#js-upload-submit").prop("disabled", false);
-                    console.log(response);
-                    var json = JSON.parse(response);
+        var form = new FormData();
+        var total = 100;
+        var porcentaje = 0;
+        var acum = 0;
+        for (var i = 0; i < storedFiles.length; i++) {
 
-                } catch (err) {
-                    //alert(err);
+            form.append("file", storedFiles[i]);
+           
+            $.ajax({
+                type: "POST",
+                enctype: 'multipart/form-data',
+                url: "../../../controller/GaleriaC.php",
+                processData: false, // Important!
+                contentType: false,
+                cache: false,
+                data: form,
+                timeout: 600000,
+                success: function (response) {
+                    try {
+                        if(i===0){
+                            porcentaje = 0;
+                        }else{
+                            porcentaje +=parseFloat(total / storedFiles.length)
+                        }
+                        for (acum; acum < porcentaje; acum++) {
+                            $('.progress-bar').css("width", Math.ceil(acum / 10) * 10 + "%");
+                        }
+                        var json = JSON.parse(response);
+                        $('.list-group').append(' <a href="#" class="list-group-item list-group-item-' + json.imagen.clase + '"><span class="badge alert-' + json.imagen.clase + ' pull-right">' + json.imagen.titulo + '</span>' + json.imagen.imagen_nombre + '</a>');
+                    } catch (err) {
+                        //alert(err);
+                    }
+
+                },
+                error: function (e) {
+
                 }
 
-            },
-            error: function (e) {
-                $("#js-upload-submit").prop("disabled", false);
+            });
 
-            }
 
-        });
+        }
+        $("#js-upload-submit").prop("disabled", false);
 
     });
 
