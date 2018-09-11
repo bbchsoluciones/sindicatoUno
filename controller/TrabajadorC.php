@@ -1,5 +1,10 @@
 <?php
 
+                if(!isset($_SESSION)):
+                  session_start();//inicia sesion si está vacío
+                endif;
+              
+
 $ruta_raiz = dirname(dirname(__FILE__));
 require_once $ruta_raiz . '/model/TrabajadorM.php';
 require_once $ruta_raiz . '/model/subirImagenM.php';
@@ -368,8 +373,8 @@ elseif (isset($_POST['email_trabajador']) &&
     else:
 
         $trabajador = new TrabajadorM();
-        $trabajador->setRun_trabajador($data['run_trabajador']);
-        $trabajador->setTipo_usuario_id_tipo_usuario(2);
+        $trabajador->setRun_trabajador($data['run_trabajador']);        
+        $trabajador->setTipo_usuario_id_tipo_usuario($_SESSION['tipo_usuario']);
         $trabajador->setEmail_trabajador($data['email_trabajador']);
         $trabajador->setNombres_trabajador($data['nombres_trabajador']);
         $trabajador->setApellidos_trabajador($data['apellidos_trabajador']);

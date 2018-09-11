@@ -127,6 +127,24 @@
 <?php elseif ($pageName[0]=="aboutManage"): ?> 
 <script src="../../../assets/js/modal.js"></script>
 <script src="../../../assets/js/aboutManager.js"></script>
+<?php elseif ($pageName[0]=="userManageProfile"): ?>
+  <script src="../../../assets/js/jquery.rut.min.js"></script>
+  <script src="../../../assets/js/userManagerProfile.js"></script>
+  <script src="../../../assets/js/paginador.js"></script>
+  <script src="../../../assets/js/cargo.js"></script>
+  <script src="../../../assets/js/comuna.js"></script>
+  <script src="../../../assets/js/dataPicker.js"></script>
+  <script src="../../../assets/js/modal.js"></script>
+<?php elseif ($pageName[0]=="sonNewProfile"): ?>
+  <script src="../../../assets/js/jquery.rut.min.js"></script>
+  <script src="../../../assets/js/sonManagerProfile.js"></script>
+  <script src="../../../assets/js/dataPicker.js"></script>
+  <script src="../../../assets/js/modal.js"></script>
+<?php elseif ($pageName[0]=="sonManageProfile"): ?>
+  <script src="../../../assets/js/jquery.rut.min.js"></script>
+  <script src="../../../assets/js/sonManagerProfile.js"></script>
+  <script src="../../../assets/js/dataPicker.js"></script>
+  <script src="../../../assets/js/modal.js"></script>
 <?php  endif; ?>
 <script src="../../../assets/js/general.js"></script>
 

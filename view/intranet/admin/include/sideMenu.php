@@ -71,4 +71,10 @@
         <div class="dropdown-divider"></div>
       </div>
     </li>
+    <li class="nav-item">
+      <a class="nav-link" href="userManageProfile.php">
+        <i class="fas fa-user"></i>
+        <span class="pl-2">Perfil</span>
+      </a>
+    </li>
 </ul>

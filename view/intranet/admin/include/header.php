@@ -49,6 +49,19 @@ endif;
     <link href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css" rel="stylesheet">
     <?php endif;?>
 
+    <script>
+      window.onload = function () {
+        <?php if($pageName[0]=="userManageProfile"):?>
+          mostrarTrabajador(<?php echo $_SESSION['run_trabajador']; ?>);
+        <?php elseif($pageName[0]=="sonNewProfile"):?>
+          buscarPadre(<?php echo $_SESSION['run_trabajador']; ?>);
+        <?php elseif($pageName[0]=="sonManageProfile"):?>
+          buscarHijo(<?php echo $_SESSION['run_trabajador']; ?>);
+        <?php endif;?>
+      }
+        
+    </script>
+
   </head>
   <body id="page-top" class="<?php echo $pageName[0]; ?>">
 
