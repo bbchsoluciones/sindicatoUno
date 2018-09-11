@@ -47,19 +47,15 @@ include 'include/header.php';
 
             <!-- Progress Bar -->
             <div class="progress">
-                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
-                    style="width: 60%;">
-                    <span class="sr-only">60% Complete</span>
-                </div>
+            <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+              <span class="sr-only"></span>
             </div>
+          </div>
 
             <!-- Upload Finished -->
             <div class="js-upload-finished my-3">
                 <h5>Archivos subidos</h5>
-                <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-success"><span class="badge alert-success pull-right">Success</span>image-01.jpg</a>
-                    <a href="#" class="list-group-item list-group-item-success"><span class="badge alert-success pull-right">Success</span>image-02.jpg</a>
-                </div>
+                <div class="list-group"></div>
             </div>
         </div>
     </div>

@@ -260,7 +260,6 @@ class TrabajadorM{
 			$pdo = PDOConnection::instance();
 			$conn = $pdo->getConnection();
 			$sql = "SELECT 	url_foto_perfil FROM foto_perfil WHERE foto_perfil.trabajador_run_trabajador=:run_trabajador";
-			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$consulta = $conn->prepare($sql);
 			$consulta->bindParam(':run_trabajador', $this->run_trabajador);			
 			$consulta->execute();
@@ -488,7 +487,6 @@ class TrabajadorM{
 
 							
 			$sql = $accion . $cuerpo .$clausula;
-			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$consulta = $conn->prepare($sql);
 
 			if(!empty($this->contrasena_trabajador)):

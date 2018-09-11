@@ -3,35 +3,51 @@
 $ruta_raiz = dirname(dirname(__FILE__));
 require_once $ruta_raiz . '/model/GaleriaM.php';
 require_once $ruta_raiz . '/model/subirImagenM.php';
+if (!isset($_SESSION)):
+    session_start();
+endif;
 
-if (isset($_FILES['files']) && !empty($_FILES['files'])):
+if (isset($_FILES['file']) && !empty($_FILES['file'])):
     $imagen = null;
-    $error = array();
-    $count = count($_FILES["files"]['name']);
+    $data = array();
+    $mensaje = array();
+    $json = array();
 
-    //limpiar registros de array para luego pasarlos a uno nuevo
-    for($i=0;$i<$count;$i++):
-        $_FILES['imagen_'.$i]['name'] = $_FILES['files']['name'][$i];
-        $_FILES['imagen_'.$i]['type'] = $_FILES['files']['type'][$i];
-        $_FILES['imagen_'.$i]['tmp_name'] = $_FILES['files']['tmp_name'][$i];
-        $_FILES['imagen_'.$i]['error'] = $_FILES['files']['error'][$i];
-        $_FILES['imagen_'.$i]['size'] = $_FILES['files']['size'][$i];
-    endfor;
-    unset($_FILES['files']);
-
- 
-    for($i=0;$i<count($_FILES);$i++):
-        $subir = new imgUpldr;
-        $subir->__set("_new_name", date("Ymdhis") .$i. "_galeria");
-        $subir->__set("_dest", "../assets/images/");
-        $subida[$i] = $subir->init($_FILES['imagen_'.$i]);
-        $imagen[$i] = "http://localhost/sindicatoUno/assets/images/" . $subir->_name;
-        if (!empty($subida[$i])):
-            $error['imagen_'.$i] = $subida[$i];
+    $subir = new imgUpldr;
+    $subir->__set("_new_name", date("Ymdhis") .rand(1,1000). "_galeria");
+    $subir->__set("_dest", "../assets/images/galeria/");
+    $subida = $subir->init($_FILES['file']);
+    $imagen = "http://localhost/sindicatoUno/assets/images/" . $subir->_name;
+    if (!empty($subida)):
+        $data['titulo'] = "Error";
+        $data['imagen_nombre'] = $_FILES['file']['name']." => ".$subida;
+        $data['clase'] = "danger";
+    else:
+        $galeria = new GaleriaM();
+        $galeria->setUrl_foto_galeria($imagen);
+        $galeria->setTrabajador_run_trabajador($_SESSION['run_trabajador']);
+        if ($galeria->agregar_imagen()):
+            $data['titulo'] = 'Éxito';
+            $data['imagen_nombre'] = $_FILES['file']['name'];
+            $data['clase'] = "success";
         else:
-
+            $data['titulo'] = "Error";
+            $data['imagen_nombre'] = $_FILES['file']['name'];
+            $data['clase'] = "danger";
         endif;
-        sleep(2);
-    endfor;
-
+    endif;
+    if (in_array("danger", $data)):
+        $mensaje['titulo'] = "Ha ocurrido un error!";
+        $mensaje['mensaje'] = "Uno o más archivos no han podido ser subidos!.";
+        $mensaje['clase'] = "danger";
+        $json = array("mensaje" => $mensaje, "imagen" => $data);
+        echo json_encode($json);
+    else:
+        $mensaje['titulo'] = "Éxito!";
+        $mensaje['mensaje'] = "Archivo(s) subido(s) correctamente.";
+        $mensaje['clase'] = "success";
+        $json = array("mensaje" => $mensaje, "imagen" => $data);
+        echo json_encode($json);
+    endif;
+    sleep(1);
 endif;
