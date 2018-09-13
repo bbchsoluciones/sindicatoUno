@@ -10,7 +10,6 @@ endif;
 if (isset($_FILES['file']) && !empty($_FILES['file'])):
     $imagen = null;
     $data = array();
-    $mensaje = array();
     $json = array();
 
     $subir = new imgUpldr;
@@ -39,20 +38,20 @@ if (isset($_FILES['file']) && !empty($_FILES['file'])):
             $data['icono'] = "times";
         endif;
     endif;
-    if (in_array("danger", $data)):
-        $mensaje['titulo'] = "Ha ocurrido un error!";
-        $mensaje['mensaje'] = "Uno o más archivos no han podido ser subidos!.";
-        $mensaje['clase'] = "danger";
-        $mensaje['icono'] = "times";
-        $json = array("mensaje" => $mensaje, "imagen" => $data);
-        echo json_encode($json);
-    else:
-        $mensaje['titulo'] = "Éxito!";
-        $mensaje['mensaje'] = "Archivo(s) subido(s) correctamente.";
-        $mensaje['clase'] = "success";
-        $mensaje['icono'] = "check";
-        $json = array("mensaje" => $mensaje, "imagen" => $data);
-        echo json_encode($json);
-    endif;
+    echo json_encode($data);
     sleep(1);
+    elseif (isset($_POST['listado'])):
+        $galeria = new NoticiaM();
+        $n->mostrar_noticias();
+        if (!empty($n->getNoticias())):
+            $noticias = $n->getNoticias();
+            foreach ($noticias as $key => $val):
+                $noticias[$key]['fecha_publicacion'] = strftime("%d %b %Y, %H:%m", strtotime($val['fecha_publicacion']));
+            endforeach;
+            $n = array("data" => $noticias);
+            echo json_encode($n);
+        else:
+            $n = array("data" => "");
+            echo json_encode($n);
+        endif;
 endif;

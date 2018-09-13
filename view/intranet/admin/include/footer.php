@@ -145,6 +145,8 @@
   <script src="../../../assets/js/sonManagerProfile.js"></script>
   <script src="../../../assets/js/dataPicker.js"></script>
   <script src="../../../assets/js/modal.js"></script>
+<?php elseif ($pageName[0]=="newGallery"): ?> 
+<script src="../../../assets/js/galleryManager.js"></script>
 <?php elseif ($pageName[0]=="galleryManage"): ?> 
 <script src="../../../assets/js/galleryManager.js"></script>
 <?php  endif; ?>

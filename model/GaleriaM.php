@@ -10,6 +10,7 @@ class GaleriaM
     private $url_foto_galeria;
     private $trabajador_run_trabajador;
     private $destacado;
+    private $galeria;
 
     public function __construct()
     {
@@ -54,7 +55,36 @@ class GaleriaM
     {
         $this->destacado = $destacado;
     }
+    public function getGaleria()
+    {
+        return $this->$galeria;
+    }
+    public function setGaleria($galeria)
+    {
+        $this->$galeria = $galeria;
+    }
+    public function mostrar_galeria()
+    {
+        $this->noticias = array();
+        try {
+            $pdo = PDOConnection::instance();
+            $conn = $pdo->getConnection();
+            $sql = "SELECT * FROM foto_galeria ";
+            $consulta = $conn->prepare($sql);
+            $consulta->execute();
+            $resultado = $consulta->fetchAll();
+            if ($resultado):
+                for ($i = 0; $i < count($resultado); $i++) {
+                    array_push($this->galeria, array_map("utf8_encode", $resultado[$i]));
+                }
+            endif;
+            $conn = null;
+            $consulta = null;
 
+        } catch (Exception $ex) {
+            echo "Fallo: " . $ex->getMessage();
+        }
+    }
     public function agregar_imagen()
     {
         try {

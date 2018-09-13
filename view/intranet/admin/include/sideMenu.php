@@ -55,8 +55,6 @@
       <a class="dropdown-item" href="homeManage.php"><i class="fa fa-align-justify text-info pr-3"></i>Inicio</a>
       <div class="dropdown-divider"></div>
       <a class="dropdown-item" href="aboutManage.php"><i class="fa fa-users text-info pr-3"></i>Quiénes Somos</a>
-      <div class="dropdown-divider"></div>
-      <a class="dropdown-item" href="galleryManage.php"><i class="fa fa-images text-info pr-3"></i>Galería</a>
     </div>
   </li>
   <li class="nav-item dropdown">
@@ -68,6 +66,18 @@
       <div class="dropdown-menu" aria-labelledby="pagesDropdown">
         <a class="dropdown-item" href="newNews.php"><i class="fa fa-user-plus text-info pr-3"></i>Crear</a>
         <a class="dropdown-item" href="newsManage.php"><i class="fa fa-address-card text-info pr-3"></i>Administrar</a>
+        <div class="dropdown-divider"></div>
+      </div>
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">
+        <i class="fa fa-images pr-2"></i>
+        <span>Galeria</span>
+      </a>
+      <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+        <a class="dropdown-item" href="newGallery.php"><i class="fas fa-file-upload text-info pr-3"></i>Subir</a>
+        <a class="dropdown-item" href="galleryManage.php"><i class="far fa-images text-info pr-3"></i>Administrar</a>
         <div class="dropdown-divider"></div>
       </div>
     </li>
