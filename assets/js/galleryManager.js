@@ -28,6 +28,7 @@ $(function () {
     }
 
     $("#js-upload-submit").click(function (e) {
+        console.log(storedFiles);
         e.preventDefault();
         $("#js-upload-submit").prop("disabled", true);
         var form = new FormData();
@@ -37,7 +38,7 @@ $(function () {
         for (var i = 0; i < storedFiles.length; i++) {
 
             form.append("file", storedFiles[i]);
-           
+
             $.ajax({
                 type: "POST",
                 enctype: 'multipart/form-data',
@@ -49,10 +50,10 @@ $(function () {
                 timeout: 600000,
                 success: function (response) {
                     try {
-                        if(i===0){
+                        if (i === 0) {
                             porcentaje = 0;
-                        }else{
-                            porcentaje +=parseFloat(total / storedFiles.length)
+                        } else {
+                            porcentaje += parseFloat(total / storedFiles.length)
                         }
                         for (acum; acum < porcentaje; acum++) {
                             $('.progress-bar').css("width", Math.ceil(acum / 10) * 10 + "%");
@@ -94,18 +95,18 @@ function validateImage(input) {
     for (var i = 0; i < files.length; i++) {
         if (files[i].type == "image/png" || files[i].type == "image/jpg" || files[i].type == "image/jpeg") {
             count = count + 1;
-            readURL(files, i, count);
+            readURL(files, i);
+            storedFiles.push(files[i]);
+            $('.label_upload').text(count + " Archivos seleccionados.");
         }
     }
 }
 
-function readURL(files, i, count) {
-    $('.label_upload').text(count + " Archivos seleccionados.");
-    storedFiles.push(files[i]);
+function readURL(files, i) {
     var reader = new FileReader();
     reader.onload = function (e) {
         $(".img-preview").append('<div class="form-group my-0 mr-2 position-relative" id="imagen_' + i + '">' +
-            '<div class="text-danger cursor" style="position:absolute;top:-10px;right:-3px;" onclick="removeImage(' + i + ')">' +
+            '<div class="text-danger cursor img_prev" style="position:absolute;top:-10px;right:-3px;" onclick="removeImage(' + i + ')">' +
             '<i class="fa fa-times"></i>' +
             '</div>' +
             '<img src="' + e.target.result + '" alt="" class="rounded cover_img_preview img-thumbnail">' +
@@ -131,4 +132,9 @@ function removeImage(id) {
         $('.label_upload').text(count + " Archivos seleccionados.");
     }
     $("#imagen_" + id).remove();
+    $('.img-preview').empty();
+    for(var i=0;i<storedFiles.length;i++){
+        readURL(storedFiles, i);
+    }
+
 }
