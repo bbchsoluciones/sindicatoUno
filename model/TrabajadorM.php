@@ -7,6 +7,12 @@
 $ruta_raiz = dirname(dirname(__FILE__));
 require_once($ruta_raiz . '/connection/PDOConnection.php');
 require_once($ruta_raiz . '/controller/EncriptadorC.php');
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;	
+require $ruta_raiz.'/assets/vendor/phpmailer/src/Exception.php';
+require $ruta_raiz.'/assets/vendor/phpmailer/src/PHPMailer.php';
+require $ruta_raiz.'/assets/vendor/phpmailer/src/SMTP.php';
 //Dentro de Modelo
 
   /* $t = new TrabajadorM();
@@ -14,7 +20,8 @@ $t->setRun_trabajador('193412130');
 $t->mostrar_datos_trabajador();
 var_dump($t->getTrabajador());   */
 
-
+/* $t = new TrabajadorM();
+$t->enviarCorreo("braulio.briones@gmail.com", "Braulio Briones", "19.341.213-0", "1234");  */
 
 //Clase
 class TrabajadorM{
@@ -626,5 +633,330 @@ class TrabajadorM{
         }	
 		
 	}// Cierra login()   
+
+	public function enviarCorreo($destinatario, $nombre, $rut, $clave) {
+	
+		$mail = new PHPMailer(true);                              // Passing `true` enables exceptions
+		try {
+			//Server settings
+			$mail->SMTPDebug = 0;                                 // Enable verbose debug output
+			$mail->isSMTP();                                      // Set mailer to use SMTP
+			$mail->Host = "smtp.gmail.com";  // Specify main and backup SMTP servers
+			$mail->SMTPAuth = true;                               // Enable SMTP authentication
+			$mail->Username = "bbchsoluciones@gmail.com";                 // SMTP username
+			$mail->Password = "Santiago2014";                           // SMTP password
+			$mail->SMTPSecure = "ssl";                            // Enable TLS encryption, `ssl` also accepted
+			$mail->Port = 465;                                    // TCP port to connect to
+
+			//Recipients
+			$mail->setFrom("bbchsoluciones@gmail.com", "bbchsoluciones@gmail.com");
+			//$mail->setFrom('bbchsoluciones@gmail.com');
+			//$mail->addAddress($destinatario, $destinatario);     // Add a recipient
+			$mail->addAddress($destinatario);     // Add a recipient
+			//$mail->addReplyTo('info@example.com', 'Information');
+			//$mail->addCC('cc@example.com');
+			//$mail->addBCC('bcc@example.com');
+
+			//Attachments
+			//$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+			//$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+
+			//Content
+			$mail->isHTML(true);                                  // Set email format to HTML
+			$mail->Subject = 'SINABRINKS';
+			$body = '<!DOCTYPE html>
+            <html>
+            <head>
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+                <style type="text/css">
+                    body {
+                        margin: 0;
+                        padding: 0;
+                        min-width: 100%!important;
+                        text-align: justify;
+                    }
+            
+                    img {
+                        height: auto;
+                    }
+            
+                    .content {
+                        width: 100%;
+                        max-width: 600px;
+                    }
+            
+            
+                    .header {
+                        padding: 20px;
+                        font-weight: bold;
+                        font-family: Sans-serif;
+                        font-size: 25px;
+                        border-bottom: 1px solid #f2eeed;
+                    }
+            
+                    .innerpadding {
+                        padding: 30px 30px 30px 30px;
+                    }
+            
+                    .innerpadding2 {
+                        padding: 20px;
+                    }
+            
+                    .borderbottom {
+                        border-bottom: 1px solid #f2eeed;
+                    }
+            
+                    .subhead {
+                        font-size: 15px;
+                        color: #ffffff;
+                        font-family: sans-serif;
+                        letter-spacing: 10px;
+                    }
+            
+                    .h1,
+                    .h2,
+                    .bodycopy {
+                        color: #153643;
+                        font-family: sans-serif;
+                    }
+            
+                    .h1 {
+                        font-size: 33px;
+                        line-height: 38px;
+                        font-weight: bold;
+                    }
+            
+                    .h2 {
+                        padding: 0 0 15px 0;
+                        font-size: 20px;
+                        line-height: 24px;
+                        font-weight: bold;
+                    }
+            
+                    .bodycopy {
+                        font-size: 16px;
+                        line-height: 22px;
+                    }
+            
+                    .button {
+                        text-align: center;
+                        font-size: 18px;
+                        font-family: sans-serif;
+                        font-weight: bold;
+            
+                    }
+            
+                    .button a {
+                        display: block;
+                        padding: 10px 0;
+                        margin-top: 20px;
+                        background: #5f86e8;
+                        color: #ffffff;
+                        text-decoration: none;
+                        width: 100%;
+                    }
+            
+                    .footer {
+                        padding: 20px 30px 15px 30px;
+                    }
+            
+                    .footercopy {
+                        font-family: sans-serif;
+                        font-size: 14px;
+                        color: #8e8e8e;
+                    }
+            
+                    .footer a {
+                        color: #8e8e8e;
+                        text-decoration: none;
+                    }
+            
+                    .label {
+                        width: 100%;
+                        padding: 10px 0;
+                    }
+            
+                    .input {
+                        border: 1px solid #f2eeed;
+                        height: 30px;
+                        width: 100%;
+                        padding: 5px 20px;
+                    }
+            
+                    .bordeSuperior {
+                        border-top: 10px solid #5f86e8;
+                    }
+            
+                    @media only screen and (max-width: 550px),
+                    screen and (max-device-width: 550px) {
+                        body[yahoo] .hide {
+                            display: none!important;
+                        }
+                        body[yahoo] .buttonwrapper {
+                            background-color: transparent!important;
+                        }
+                        body[yahoo] .button {
+                            padding: 0px!important;
+                        }
+                        body[yahoo] .button a {
+                            background-color: #e05443;
+                            padding: 15px 15px 13px!important;
+                        }
+                    }
+                </style>
+            </head>
+            
+            <body yahoo bgcolor="#ededed">
+                <table width="100%" bgcolor="#ededed" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td>
+                            <!--[if (gte mso 9)|(IE)]>
+                  <table width="600" align="center" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                      <td>
+                <![endif]-->
+                            <table bgcolor="#ffffff" class="content" align="center" cellpadding="0" cellspacing="0" border="0">
+                                <tr>
+                                    <td bgcolor="#ededed" class="header">
+                                        <table width="70" align="center" border="0" cellpadding="0" cellspacing="0">
+                                            <tr height="50">
+                                                <td>
+                                                    <font color="#5f86e8">SINABRINKS</font>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <!--[if (gte mso 9)|(IE)]>
+                        <table width="425" align="left" cellpadding="0" cellspacing="0" border="0">
+                          <tr>
+                            <td>
+                      <![endif]-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="bordeSuperior innerpadding borderbottom">
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                            <tr>
+                                                <td class="h2">
+                                                    Hola '.$nombre.'!
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bodycopy" style="text-align: justify;">
+                                                    Se ha vinculado una cuenta de usuario a tu RUT para que puedas ingresar al sistema.
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="bodycopy innerpadding2" style="text-align: justify;">
+                                        Tus datos para el inicio de sesion son los siguientes:
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="innerpadding borderbottom">
+                                        <table class="col380" align="center" border="0" cellpadding="0" cellspacing="0" style="width: 100%; max-width: 300px;">
+                                            <tr>
+                                                <td>
+                                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                        <tr>
+                                                            <td class="bodycopy label">
+                                                                Usuario:
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="input">
+                                                                '.$rut.'
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="bodycopy label">
+                                                                Clave:
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="input">
+                                                                '.$clave.'
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="button" height="45">
+                                                                <a href="http://localhost/sindicatouno/view/public/login.php">Iniciar Sesión</a>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+            
+            
+                                        <!--[if (gte mso 9)|(IE)]>
+                            </td>
+                          </tr>
+                      </table>
+                      <![endif]-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="innerpadding bodycopy" style="text-align: justify;">
+                                        Este correo fue generado de manera automática, agradecemos no responder al remitente que aparece en este mensaje, para mayor
+                                        información comunicarse con la administración. Si usted no es el propietario del correo electrónico
+                                        mencionado, por favor, ignore este mensaje.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="footer" bgcolor="#ededed">
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                            <tr>
+                                                <td align="center" class="footercopy" style="text-align: justify;">
+                                                    Hecho por BBCHSOLUCIONES 2018. Todos los derechos reservados
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="center" style="padding: 20px 0 0 0;">
+                                                    <table border="0" cellspacing="0" cellpadding="0">
+                                                        <tr>
+                                                            <td width="37" style="text-align: center; padding: 0 10px 0 10px;">
+                                                                <a href="http://www.facebook.com/">
+                                                                    Facebook
+                                                                </a>
+                                                            </td>
+                                                            <td width="37" style="text-align: center; padding: 0 10px 0 10px;">
+                                                                <a href="http://www.twitter.com/">
+                                                                    Twitter
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                            <!--[if (gte mso 9)|(IE)]>
+                      </td>
+                    </tr>
+                </table>
+                <![endif]-->
+                        </td>
+                    </tr>
+                </table>
+            </body>
+            
+            </html>';
+			$mail->Body = $body;
+			if($mail->send()):
+				return true;
+			else:
+				return false;
+			endif;
+			
+			//echo 'Message has been sent';
+		} catch (Exception $e) {
+			//echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+			
+		}
+	}// cierra enviarCorreo()
 	
 }// Cierra clase TrabajadorM.php

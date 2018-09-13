@@ -22,3 +22,22 @@ function movEliminado() {
         'Movimiento eliminado con éxito.' +
         '</div>').fadeIn().delay(1000).fadeOut();
 }// movEliminado()
+
+function alertCorreo(estado) {
+    if(estado==true){
+        $("#alertCorreo").html('<div class="alert alert-success" role="alert">' +
+        'Correo enviado con éxito.' +
+        '</div>').fadeIn().delay(1000).fadeOut();
+    }
+    if(estado==false){
+        $("#alertCorreo").html('<div class="alert alert-danger" role="alert">' +
+        'Correo no enviado.' +
+        '</div>').fadeIn().delay(1000).fadeOut();
+    }
+    if(estado==="vacio"){
+        $("#alertCorreo").html('<div class="alert alert-danger" role="alert">' +
+        'Campo correo vacío.' +
+        '</div>').fadeIn().delay(1000).fadeOut();
+    }
+    
+}// correoEnviado()

@@ -297,8 +297,50 @@ $("#registrar").click(function (event) {
                     validacion_campos(json, indice);
                 });
             } else {
-                limpiarCampos("#usernew_container", "input");
-                limpiarSeleccionado("#tipo_usuario");
+                
+                $('#form-registrar').addClass('d-none');
+                $('#correo').removeClass('d-none');
+                $('#correo').html('<div class="col-lg-8 col-md-10 col-12">'+
+                '<div class="row justify-content-center mb-1">'+
+                    '<div class="col-auto">'+
+                        '<h3>Envío de contraseña</h3>'+
+                    '</div>'+
+                '</div>'+                
+                '<div>'+
+                    '<div class="form-row mb-1">'+
+                        '<div class="col-lg-3 col-md-4 col-sm-3 col-12">'+
+                            '<label for="rut">Rut</label>'+
+                            '<input type="text" class="form-control" id="rut" name="rut" value="'+$("input[name=run_trabajador]").val()+'" placeholder="11.111.111-1" disabled>'+
+                        '</div>'+
+                        '<div class="col-lg-4 col-md-4 col-sm-4 col-12">'+
+                            '<label for="nombres">Nombres</label>'+
+                            '<input type="text" class="form-control" id="nombres" name="nombres" value="'+$("input[name=nombres_trabajador]").val()+'" placeholder="Juan Carlos" disabled>'+
+                        '</div>'+
+                        '<div class="col-lg-5 col-md-4 col-sm-5 col-12">'+
+                            '<label for="apellidos">Apellidos</label>'+
+                            '<input type="text" class="form-control" id="apellidos" name="apellidos" value="'+$("input[name=apellidos_trabajador]").val()+'" placeholder="Pérez González" disabled>'+
+                        '</div>'+
+                    '</div>'+
+                    '<div class="form-row mb-3">'+
+                        '<div class="col">'+
+                            '<label for="correoUser">Correo Electrónico</label>'+
+                            '<input type="email" class="form-control" id="correoUser" name="correoUser" placeholder="Ejemplo:'+ 'sindicato@brinks.cl">'+
+                        '</div>'+        
+                    '</div>'+
+                    '<div class="form-row">'+
+                        '<div class="col-6">'+
+                                '<button id="btnNoEnviar" onclick="noEnviarCorreo()" class="btn btn-block btn-danger">No Enviar</button>'+
+                        '</div>'+        
+                        '<div class="col-6">'+
+                                '<button id="btnEnviar" onclick="enviarCorreo()" class="btn btn-block btn-success">Enviar Correo</button>'+
+                        '</div>'+        
+                    '</div>'+
+                '</div>'+
+            '</div>');
+
+            /* limpiarCampos("#usernew_container", "input");
+                limpiarSeleccionado("#tipo_usuario"); */
+
             }
 
         },
@@ -308,6 +350,87 @@ $("#registrar").click(function (event) {
 
     });
 });
+
+function noEnviarCorreo(){
+    limpiarCampos("#usernew_container", "input");
+    limpiarSeleccionado("#tipo_usuario");
+    $('#correo').empty();
+    $('#correo').addClass('d-none');
+    $('#form-registrar').removeClass('d-none');
+}
+
+function mover(elemento){
+    $('html,body').animate({
+        scrollTop: $(elemento).offset().top
+    }, 0);
+}
+
+function enviarCorreo() {
+
+    if ($.trim($('#correoUser').val()) == '') {
+        //correo vacio
+        alertCorreo("vacio");
+        mover('body');
+        //correo vacio
+        
+    } else {
+        var nombres = $('#nombres').val();
+        var primerNombre = nombres.split(' ');
+        var apellidos = $('#apellidos').val();
+        var primerApellido = apellidos.split(' ');
+        // atributos
+        var destinatario = $('#correoUser').val();
+        var nombre = primerNombre[0] + ' ' + primerApellido[0];
+        var rut = $('#rut').val();
+        var pass = $('#password').val();
+        //limpiar
+        limpiarCampos("#usernew_container", "input");
+        limpiarSeleccionado("#tipo_usuario");
+
+        $('#correo').addClass('d-none');
+        $('#load').html('<div id="loadMovimientos" class="row justify-content-center">' +
+            '<div class="loadData_container">' +
+            '<img src="../../../assets/images/loading.gif" width="50">' +
+            '</div>' +
+
+            '</div>');
+
+        var parametros = {
+            "destinatario": destinatario,
+            "nombre": nombre,
+            "rut": rut,
+            "pass": pass
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: '../../../controller/TrabajadorC.php',
+            data: parametros,
+            success: function (response) {
+
+                console.log(response);
+                if (response === "true") {
+                    $('#load').empty();
+                    $('#correo').empty();
+                    $('#form-registrar').removeClass('d-none');
+                    alertCorreo(true);
+                    mover('body');
+                } else {
+                    $('#load').empty();
+                    $('#correo').removeClass('d-none');
+                    alertCorreo(false);
+                    mover('body');
+
+                }
+
+            }
+        });
+
+    }
+
+
+
+}
 
 $("#actualizar_trabajador").click(function (event) {
     event.preventDefault();
