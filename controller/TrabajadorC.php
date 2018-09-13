@@ -453,6 +453,20 @@ elseif (isset($_POST['ajax']) && isset($_POST['mostrarDatosTrabajador']) && isse
         $t = array("data" => "");
         echo json_encode($t);
     endif;
+elseif (isset($_POST['destinatario']) && isset($_POST['nombre']) && isset($_POST['rut']) && isset($_POST['pass'])):
+    $destinatario = $_POST['destinatario'];
+    $nombre = $_POST['nombre'];
+    $rut = $_POST['rut'];
+    $pass = $_POST['pass'];
+    $t = new TrabajadorM();
+    if ($t->enviarCorreo($destinatario, $nombre, $rut, $pass)):
+        echo "true";
+    else:
+        echo "false";
+    endif;
+
+
+
 endif;
 
 function clean($string)

@@ -54,6 +54,7 @@
   <script src="../../../assets/js/userManager.js"></script>
   <script src="../../../assets/js/sonManager.js"></script> 
   <script src="../../../assets/js/modal.js"></script> 
+  <script src="../../../assets/js/alert.js"></script>
 <?php elseif ($pageName[0]=="userManage"): ?>
   <script src="../../../assets/js/jquery.rut.min.js"></script>
   <script src="../../../assets/js/userManager.js"></script>
