@@ -349,8 +349,7 @@ main {
 }
 .gallery .card {
     border-radius: 0;
-    border:5px solid rgba(92, 92, 92, 0.7);;
-    box-shadow: 0 0 5px rgba(92, 92, 92, 0.7);
+    border:5px solid rgba(255, 255, 255, 0.3);
     background-size: cover !important;
     -webkit-background-size: cover !important;
     -moz-background-size: cover !important;

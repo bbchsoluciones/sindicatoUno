@@ -80,7 +80,7 @@ class GaleriaM
         try {
             $pdo = PDOConnection::instance();
             $conn = $pdo->getConnection();
-            $sql = "SELECT * FROM foto_galeria";
+            $sql = "SELECT * FROM foto_galeria ORDER BY id_foto_galeria DESC";
             $consulta = $conn->prepare($sql);
             $consulta->execute();
             $resultado = $consulta->fetchAll();
