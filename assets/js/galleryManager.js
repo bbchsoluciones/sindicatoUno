@@ -39,56 +39,59 @@ $(function () {
             var porcentaje = 0;
             var acum = 0;
             var lastE = 0;
-            for (var i = 0; i < storedFiles.length; i++) {
+            if (storedFiles.length > 0) {
+                for (var i = 0; i < storedFiles.length; i++) {
 
-                form.append("file", storedFiles[i]);
+                    form.append("file", storedFiles[i]);
 
-                $.ajax({
-                    type: "POST",
-                    enctype: 'multipart/form-data',
-                    url: "../../../controller/GaleriaC.php",
-                    processData: false, // Important!
-                    contentType: false,
-                    cache: false,
-                    data: form,
-                    success: function (response) {
-                        try {
-                            porcentaje += parseFloat(total / storedFiles.length)
-                            for (acum; acum < porcentaje; acum++) {
-                                $('.progress-bar').css("width", Math.ceil(acum / 10) * 10 + "%");
+                    $.ajax({
+                        type: "POST",
+                        enctype: 'multipart/form-data',
+                        url: "../../../controller/GaleriaC.php",
+                        processData: false, // Important!
+                        contentType: false,
+                        cache: false,
+                        data: form,
+                        success: function (response) {
+                            try {
+                                porcentaje += parseFloat(total / storedFiles.length)
+                                for (acum; acum < porcentaje; acum++) {
+                                    $('.progress-bar').css("width", Math.ceil(acum / 10) * 10 + "%");
+                                }
+                                var json = JSON.parse(response);
+
+                                $('.list-uploaded').append('<div class="row uploaded" id="msg-' + lastE + '">' +
+                                    '<div class="col-md-10 text-' + json.clase + '"><span><i class="fas fa-file-image pr-2"></i>Archivo: ' + json.imagen_nombre + '</span></div>' +
+                                    '<div class="col-md-2 text-' + json.clase + '"><span class="float-right"><i class="fas fa-' + json.icono + ' pr-2"></i>' + json.titulo + '</span></div>' +
+                                    '</div><hr/>');
+                                lastE += 1;
+                                if ($("#msg-" + (storedFiles.length - 1)).length) {
+                                    setTimeout(function () {
+                                        $("#js-upload-submit").prop("disabled", false);
+                                        count = 0;
+                                        storedFiles.length = 0;
+                                    }, 800);
+
+                                }
+
+                            } catch (err) {
+                                //alert(err);
                             }
-                            var json = JSON.parse(response);
 
-                            $('.list-uploaded').append('<div class="row uploaded" id="msg-' + lastE + '">' +
-                                '<div class="col-md-10 text-' + json.clase + '"><span><i class="fas fa-file-image pr-2"></i>Archivo: ' + json.imagen_nombre + '</span></div>' +
-                                '<div class="col-md-2 text-' + json.clase + '"><span class="float-right"><i class="fas fa-' + json.icono + ' pr-2"></i>' + json.titulo + '</span></div>' +
-                                '</div><hr/>');
-                            lastE += 1;
-                            if ($("#msg-" + (storedFiles.length - 1)).length) {
-                                setTimeout(function () {
-                                    $("#js-upload-submit").prop("disabled", false);
-                                    count = 0;
-                                    storedFiles.length = 0;
-                                }, 800);
 
-                            }
+                        },
+                        error: function (e) {
 
-                        } catch (err) {
-                            //alert(err);
                         }
 
 
-                    },
-                    error: function (e) {
-
-                    }
+                    });
 
 
-                });
-
-
-            } //end for
-
+                } //end for
+            }else{
+                $("#js-upload-submit").prop("disabled", false);
+            }
 
         });
 

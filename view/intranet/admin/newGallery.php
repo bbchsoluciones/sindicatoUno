@@ -34,7 +34,7 @@ include 'include/header.php';
                 </div>
                 <div class="form-row rounded p-2 img-preview"></div>
                 <div class="d-flex justify-content-center align-items-center">
-                    <button type="submit" class="btn btn-primary" id="js-upload-submit">Subir Archivos</button>
+                    <button type="submit" class="btn btn-primary mb-3" id="js-upload-submit">Subir Archivos</button>
                 </div>
             </form>
 
