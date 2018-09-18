@@ -96,50 +96,6 @@ class GaleriaM
             echo "Fallo: " . $ex->getMessage();
         }
     }
-    public function mostrar_galeria_top()
-    {
-        $this->galeria = array();
-        try {
-            $pdo = PDOConnection::instance();
-            $conn = $pdo->getConnection();
-            $sql = "SELECT * FROM foto_galeria WHERE destacado=1 ORDER BY id_foto_galeria DESC";
-            $consulta = $conn->prepare($sql);
-            $consulta->execute();
-            $resultado = $consulta->fetchAll();
-            if ($resultado):
-                for ($i = 0; $i < count($resultado); $i++) {
-                    array_push($this->galeria, array_map("utf8_encode", $resultado[$i]));
-                }
-            endif;
-            $conn = null;
-            $consulta = null;
-
-        } catch (Exception $ex) {
-            echo "Fallo: " . $ex->getMessage();
-        }
-    }
-    public function mostrar_galeria_normal()
-    {
-        $this->galeria = array();
-        try {
-            $pdo = PDOConnection::instance();
-            $conn = $pdo->getConnection();
-            $sql = "SELECT * FROM foto_galeria WHERE destacado!=1 ORDER BY id_foto_galeria DESC";
-            $consulta = $conn->prepare($sql);
-            $consulta->execute();
-            $resultado = $consulta->fetchAll();
-            if ($resultado):
-                for ($i = 0; $i < count($resultado); $i++) {
-                    array_push($this->galeria, array_map("utf8_encode", $resultado[$i]));
-                }
-            endif;
-            $conn = null;
-            $consulta = null;
-
-        } catch (Exception $ex) {
-            echo "Fallo: " . $ex->getMessage();
-        }
-    }
     public function mostrar_imagen()
     {
         $this->galeria = array();

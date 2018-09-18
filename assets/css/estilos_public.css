@@ -348,9 +348,9 @@ main {
     color: #ccc;
 }
 .gallery .card {
-    border:5px solid #4C4C4C;
-    box-shadow: 0 0 5px rgb(102, 100, 100);
     border-radius: 0;
+    border:5px solid rgba(92, 92, 92, 0.7);;
+    box-shadow: 0 0 5px rgba(92, 92, 92, 0.7);
     background-size: cover !important;
     -webkit-background-size: cover !important;
     -moz-background-size: cover !important;

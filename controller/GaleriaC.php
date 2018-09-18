@@ -110,19 +110,9 @@ elseif (isset($_GET['listado'])):
     endif;
 elseif(isset($_GET['listado_publico'])):
     $galeria = new GaleriaM();
-    $galeriaTOP = array();
-    $galeriaNOTOP = array();
-    $galeria->mostrar_galeria_top();
+    $galeria->mostrar_galeria();
     if (!empty($galeria->getGaleria())):
-        $galeriaTOP = $galeria->getGaleria();
+        $galeria = array("galeria" => $galeria->getGaleria());
     endif;
-    $galeria->mostrar_galeria_normal();
-    if (!empty($galeria->getGaleria())):
-        $galeriaNOTOP = $galeria->getGaleria();
-    endif;
-    $images = array(
-        "galeria_destacada" => $galeriaTOP,
-        "galeria_normal" => $galeriaNOTOP
-    );
-    echo json_encode($images);
+    echo json_encode($galeria);
 endif;

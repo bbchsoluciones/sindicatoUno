@@ -550,6 +550,7 @@ class TrabajadorM
             $conn = $pdo->getConnection();
             $accion = "UPDATE trabajador SET ";
 
+            //generar cuerpo de la consulta
             foreach ($cleaned as $key => $valor):
                 $sql_rows[$key] = $key."=:".$key;
                 reset($cleaned);
@@ -563,8 +564,11 @@ class TrabajadorM
             endforeach;
 
             $clausula = "WHERE run_trabajador = :run_trabajador";
+
             $sql = $accion . $cuerpo . $clausula;
             $consulta = $conn->prepare($sql);
+
+            //genera los parametros
             foreach ($cleaned as $key => &$valor):
                 $consulta->bindParam(':'.$key, $valor);
             endforeach;

@@ -1,6 +1,5 @@
 <?php
 include 'include/header.php';
-include '../../controller/GaleriaC.php';
 ?>
 <div class="gallery">
 
@@ -21,47 +20,9 @@ include '../../controller/GaleriaC.php';
       </div>
     </div>
     <div class="row m-0">
-      <?php if (!empty($galeriaTOP[0]['id_foto_galeria'])): ?>
+      <div class="col-md-6 pl-0 p-0 topMain"></div>
       <div class="col-md-6 p-0">
-        <div class="card big" style="background: url('<?php echo $galeriaTOP[0]['url_foto_galeria']; ?>') top center">
-          <a class="cursor" onclick="currentSlide(0,1)">
-            <div class="overlay-card animated fadeIn" style="display:none">
-              <div class="container h-100">
-                <div class="row align-items-center h-100">
-                  <div class="col-8 mx-auto">
-                    <div class="text-center">
-                      <i class="fa fa-search-plus animated zoomIn"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-      <?php endif;?>
-      <div class="col-md-6 p-0">
-        <div class="row m-0">
-          <?php for ($i = 1; $i < count($galeriaTOP); $i++): ?>
-          <div class="col-md-6 p-0">
-            <div class="card normal" style="background: url('<?php echo $galeriaTOP[$i]['url_foto_galeria']; ?>') top center">
-              <a class="cursor" onclick="currentSlide(<?php echo $i; ?>,1)">
-                <div class="overlay-card animated fadeIn" style="display:none">
-                  <div class="container h-100">
-                    <div class="row align-items-center h-100">
-                      <div class="col-8 mx-auto">
-                        <div class="text-center">
-                          <i class="fa fa-search-plus animated zoomIn"></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-          <?php endfor;?>
-        </div>
+        <div class="row m-0 topSecondary"></div>
       </div>
     </div>
     <div class="gallery-header">
@@ -78,54 +39,23 @@ include '../../controller/GaleriaC.php';
         </div>
       </div>
     </div>
-    <div class="row m-0">
-      <?php for ($i = 0; $i < count($galeriaNOTOP); $i++): ?>
-      <div class="col-md-4 p-0">
-        <div class="card normal" style="background: url('<?php echo $galeriaNOTOP[$i]['url_foto_galeria']; ?>') top center">
-          <a class="cursor" onclick="currentSlide(<?php echo $i; ?>,2)">
-            <div class="overlay-card animated fadeIn" style="display:none">
-              <div class="container h-100">
-                <div class="row align-items-center h-100">
-                  <div class="col-8 mx-auto">
-                    <div class="text-center">
-                      <i class="fa fa-search-plus animated zoomIn"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-      <?php endfor;?>
-    </div>
+    <div class="row m-0 galeria_normal"></div>
   </div>
 
-  <div class="overlay-carousel d-none animated fadeIn">
+  <div class="overlay-carousel d-none">
     <div class="overlay-container-carousel">
-
       <div class="container">
-        <div class="slidesContainer">
-          <?php $c=0; ?>
-          <?php for ($i = 0; $i < count($galeri); $i++): $c+=1; ?>
-          <div class="mySlides1 animated fadeIn" id="slide_ <?php echo $i; ?>">
-            <div class="numbertext">
-              <?php echo $c."/".count($galeriaTOP); ?>
-            </div>
-            <img src="<?php echo $galeriaTOP[$i]['url_foto_galeria']; ?>">
+        <div class="slidesContainer"></div>
+        <div class="arrows">
+          <div class="left-arrow">
+            <span class="prev cursor" onclick="plusSlides(-1)">
+              <i class="fa fa-chevron-left"></i>
+            </span>
           </div>
-          <?php endfor; ?>
-          <div class="arrows">
-            <div class="left-arrow">
-              <span class="prev cursor" onclick="plusSlides(-1)">
-                <i class="fa fa-chevron-left"></i>
-              </span>
-            </div>
-            <div class="right-arrow">
-              <span class="next cursor" onclick="plusSlides(1)">
-                <i class="fa fa-chevron-right"></i>
-              </span>
-            </div>
+          <div class="right-arrow">
+            <span class="next cursor" onclick="plusSlides(1)">
+              <i class="fa fa-chevron-right"></i>
+            </span>
           </div>
         </div>
         <div class="overlay-close cursor">
@@ -134,6 +64,7 @@ include '../../controller/GaleriaC.php';
       </div>
     </div>
   </div>
+</div>
 </div>
 
 <?php
