@@ -11,6 +11,7 @@ class GaleriaM
     private $trabajador_run_trabajador;
     private $destacado;
     private $galeria;
+    private $total_destacado;
 
     public function __construct()
     {
@@ -57,19 +58,29 @@ class GaleriaM
     }
     public function getGaleria()
     {
-        return $this->$galeria;
+        return $this->galeria;
     }
+
     public function setGaleria($galeria)
     {
-        $this->$galeria = $galeria;
+        $this->galeria = $galeria;
+    }
+    public function getTotal_destacado()
+    {
+        return $this->total_destacado;
+    }
+
+    public function setTotal_destacado($total_destacado)
+    {
+        $this->total_destacado = $total_destacado;
     }
     public function mostrar_galeria()
     {
-        $this->noticias = array();
+        $this->galeria = array();
         try {
             $pdo = PDOConnection::instance();
             $conn = $pdo->getConnection();
-            $sql = "SELECT * FROM foto_galeria ";
+            $sql = "SELECT * FROM foto_galeria";
             $consulta = $conn->prepare($sql);
             $consulta->execute();
             $resultado = $consulta->fetchAll();
@@ -85,20 +96,99 @@ class GaleriaM
             echo "Fallo: " . $ex->getMessage();
         }
     }
-    public function agregar_imagen()
+    public function mostrar_galeria_top()
+    {
+        $this->galeria = array();
+        try {
+            $pdo = PDOConnection::instance();
+            $conn = $pdo->getConnection();
+            $sql = "SELECT * FROM foto_galeria WHERE destacado=1 ORDER BY id_foto_galeria DESC";
+            $consulta = $conn->prepare($sql);
+            $consulta->execute();
+            $resultado = $consulta->fetchAll();
+            if ($resultado):
+                for ($i = 0; $i < count($resultado); $i++) {
+                    array_push($this->galeria, array_map("utf8_encode", $resultado[$i]));
+                }
+            endif;
+            $conn = null;
+            $consulta = null;
+
+        } catch (Exception $ex) {
+            echo "Fallo: " . $ex->getMessage();
+        }
+    }
+    public function mostrar_galeria_normal()
+    {
+        $this->galeria = array();
+        try {
+            $pdo = PDOConnection::instance();
+            $conn = $pdo->getConnection();
+            $sql = "SELECT * FROM foto_galeria WHERE destacado!=1 ORDER BY id_foto_galeria DESC";
+            $consulta = $conn->prepare($sql);
+            $consulta->execute();
+            $resultado = $consulta->fetchAll();
+            if ($resultado):
+                for ($i = 0; $i < count($resultado); $i++) {
+                    array_push($this->galeria, array_map("utf8_encode", $resultado[$i]));
+                }
+            endif;
+            $conn = null;
+            $consulta = null;
+
+        } catch (Exception $ex) {
+            echo "Fallo: " . $ex->getMessage();
+        }
+    }
+    public function mostrar_imagen()
+    {
+        $this->galeria = array();
+        try {
+            $pdo = PDOConnection::instance();
+            $conn = $pdo->getConnection();
+            $sql = "SELECT * FROM foto_galeria WHERE id_foto_galeria=:id_foto_galeria";
+            $consulta = $conn->prepare($sql);
+            $consulta->bindParam(':id_foto_galeria', $this->id_foto_galeria);
+            $consulta->execute();
+            $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
+            if ($resultado):
+                $this->galeria = array_map("utf8_encode", $resultado);
+            endif;
+            $conn = null;
+            $consulta = null;
+
+        } catch (Exception $ex) {
+            echo "Fallo: " . $ex->getMessage();
+        }
+    }
+    public function contador_destacado()
     {
         try {
             $pdo = PDOConnection::instance();
             $conn = $pdo->getConnection();
-            $sql = "INSERT INTO foto_galeria
-                                (url_foto_galeria,
-                                trabajador_run_trabajador)
-                        VALUES
-                                (:url_foto_galeria,
-                                :trabajador_run_trabajador)";
+            $sql = "SELECT count(*) FROM foto_galeria WHERE destacado=1";
             $consulta = $conn->prepare($sql);
-            $consulta->bindParam(':trabajador_run_trabajador', $this->trabajador_run_trabajador);
-            $consulta->bindValue(':url_foto_galeria', $this->url_foto_galeria);
+            $consulta->execute();
+            $this->total_destacado = $consulta->fetchColumn();
+            $conn = null;
+            $consulta = null;
+
+        } catch (Exception $ex) {
+            echo "Fallo: " . $ex->getMessage();
+        }
+    }
+    public function actualizar_destacado()
+    {
+        try {
+            $pdo = PDOConnection::instance();
+            $conn = $pdo->getConnection();
+            $sql = "UPDATE foto_galeria
+                        SET     destacado=:destacado
+                        WHERE   id_foto_galeria=:id_foto_galeria";
+
+            $consulta = $conn->prepare($sql);
+            $consulta->bindParam(':id_foto_galeria', $this->id_foto_galeria);
+            $consulta->bindValue(':destacado', $this->destacado);
             if ($consulta->execute()):
                 return true;
             else:
@@ -114,20 +204,50 @@ class GaleriaM
         }
 
     }
-    public function modificar_imagen()
+    public function eliminar_imagen()
+    {
+
+        try {
+            $pdo = PDOConnection::instance();
+            $conn = $pdo->getConnection();
+            $sql = "DELETE FROM foto_galeria
+                                     WHERE id_foto_galeria=:id_foto_galeria";
+            $consulta = $conn->prepare($sql);
+            $consulta->bindParam(':id_foto_galeria', $this->id_foto_galeria);
+            if ($consulta->execute()) {
+                $nombre_imagen = basename(parse_url($this->url_foto_galeria)['path']);
+                unlink("../assets/images/galeria/" . $nombre_imagen);
+                return true;
+            } else {
+                //Error
+                return false;
+            }
+            $conn = null;
+            $consulta = null;
+
+        } catch (Exception $ex) {
+            echo "Fallo: " . $ex->getMessage();
+        }
+
+    }
+
+    public function agregar_imagen()
     {
         try {
             $pdo = PDOConnection::instance();
             $conn = $pdo->getConnection();
-            $sql = "UPDATE foto_galeria
-                        SET
-                                url_foto_galeria=:url_foto_galeria,
-                                destacado=:destacado
-                        WHERE   trabajador_run_trabajador=:trabajador_run_trabajador";
-
+            $sql = "INSERT INTO foto_galeria
+                                (url_foto_galeria,
+                                trabajador_run_trabajador,
+                                destacado)
+                        VALUES
+                                (:url_foto_galeria,
+                                :trabajador_run_trabajador,
+                                :destacado)";
             $consulta = $conn->prepare($sql);
             $consulta->bindParam(':trabajador_run_trabajador', $this->trabajador_run_trabajador);
             $consulta->bindValue(':url_foto_galeria', $this->url_foto_galeria);
+            $consulta->bindValue(':destacado', $this->destacado);
             if ($consulta->execute()):
                 return true;
             else:

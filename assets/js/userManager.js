@@ -49,7 +49,7 @@ function mostrarTrabajadores(pagina) {
                 $("#objeto").text(json.objeto.valor);
                 paginador(json.cantidad_total[0], pagina, registrosPorPagina);
                 for (i = 0; i < json.trabajador[0].length; i++) {
-                    $('#listUsers').append('<button type="button" class="btn btn-secondary" id="worker' + i + '" onclick="mostrarTrabajador(' + i + ',' + json.trabajador[0][i].run_trabajador + ')">' + $.formatRut(json.trabajador[0][i].run_trabajador) + " " + json.trabajador[0][i].nombres_trabajador + '<i class="fa fa-edit text-secondary"></i></button>');
+                    $('#listUsers').append('<button type="button" class="btn btn-secondary" id="worker' + i + '" onclick="mostrarTrabajador(' + i + ",'"  + json.trabajador[0][i].run_trabajador +  "'" + ')">' + $.formatRut(json.trabajador[0][i].run_trabajador) + " " + json.trabajador[0][i].nombres_trabajador + '<i class="fa fa-edit text-secondary"></i></button>');
                     if (i === 0) {
                         mostrarTrabajador(i, json.trabajador[0][i].run_trabajador);
                     }
@@ -192,7 +192,7 @@ function ordenarTrabajadores(pagina, accion, objeto, bool) {
                 $("#objeto").text(json.objeto.valor);
                 paginador(json.cantidad_total[0], pagina, registrosPorPagina);
                 for (i = 0; i < json.trabajador[0].length; i++) {
-                    $('#listUsers').append('<button type="button" class="btn btn-secondary" id="worker' + i + '" onclick="mostrarTrabajador(' + i + ',' + json.trabajador[0][i].run_trabajador + ')">' + $.formatRut(json.trabajador[0][i].run_trabajador) + " " + json.trabajador[0][i].nombres_trabajador + '<i class="fa fa-edit text-secondary"></i></button>');
+                    $('#listUsers').append('<button type="button" class="btn btn-secondary" id="worker' + i + '" onclick="mostrarTrabajador(' + i + ",'"  + json.trabajador[0][i].run_trabajador +  "'" + ')">' + $.formatRut(json.trabajador[0][i].run_trabajador) + " " + json.trabajador[0][i].nombres_trabajador + '<i class="fa fa-edit text-secondary"></i></button>');
                     if (i === 0) {
                         mostrarTrabajador(i, json.trabajador[0][i].run_trabajador);
                     }
@@ -246,7 +246,7 @@ function buscarTrabajador(pagina, accion, objeto) {
                     $("#objeto").text(json.objeto.valor);
                     paginador(json.cantidad_total[0], pagina, registrosPorPagina);
                     for (i = 0; i < json.trabajador[0].length; i++) {
-                        $('#listUsers').append('<button type="button" class="btn btn-secondary" id="worker' + i + '" onclick="mostrarTrabajador(' + i + ',' + json.trabajador[0][i].run_trabajador + ')">' + $.formatRut(json.trabajador[0][i].run_trabajador) + " " + json.trabajador[0][i].nombres_trabajador + '<i class="fa fa-edit text-secondary"></i></button>');
+                        $('#listUsers').append('<button type="button" class="btn btn-secondary" id="worker' + i + '" onclick="mostrarTrabajador(' + i + ",'"  + json.trabajador[0][i].run_trabajador +  "'" + ')">' + $.formatRut(json.trabajador[0][i].run_trabajador) + " " + json.trabajador[0][i].nombres_trabajador + '<i class="fa fa-edit text-secondary"></i></button>');
                         if (i === 0) {
                             mostrarTrabajador(i, json.trabajador[0][i].run_trabajador);
                         }
@@ -450,7 +450,6 @@ $("#actualizar_trabajador").click(function (event) {
         data: form,
         timeout: 600000,
         success: function (response) {
-            console.log(response);
             $("#actualizar_trabajador").prop("disabled", false);
             var json = JSON.parse(response);
             $('html, body').animate({

@@ -354,7 +354,6 @@ function guardar_tarjeta(id) {
         timeout: 600000,
         success: function (response) {
             try {
-                console.log(response);
                 $("#guardar-tar"+id).prop("disabled", false);
                 var json = JSON.parse(response);
                 if (json['clase'] == "danger") {
@@ -485,7 +484,6 @@ function eliminarCarousel(id) {
         data: parametros,
         success: function (response) {
             try {
-                console.log(response)
                 var json = JSON.parse(response);
                 if (json.clase == "success") {
                     limpiarCarousel();

@@ -200,9 +200,9 @@ include('include/header.php');
                         <div class="form-group col-md-4">
                             <label for="inputEcivil">Estado del usuario</label>
                             <select id="estado_cuenta" class="form-control dataUser listaHTML" name="estado_trabajador">
-                                <option value="0">Pendiente</option>
-                                <option value="1">Inactivo</option>
-                                <option value="2">Activo</option>
+                                <option value="0">Inactivo</option>
+                                <option value="1">Activo</option>
+                                <option value="2">Pendiente</option>
                             </select>
                         </div>
                     </div>

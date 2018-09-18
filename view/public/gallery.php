@@ -1,5 +1,6 @@
-<?php 
-  include('include/header.php');
+<?php
+include 'include/header.php';
+include '../../controller/GaleriaC.php';
 ?>
 <div class="gallery">
 
@@ -10,7 +11,8 @@
         <div class="row align-items-center h-100">
           <div class="col-8 mx-auto">
             <h4 class="text-center">Destacadas</h4>
-            <p class="text-justify">Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto
+            <p class="text-justify">Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de
+              texto. Lorem Ipsum ha sido el texto
               de relleno estándar de las industrias desde el año 1500, cuando un impresor
             </p>
 
@@ -19,9 +21,10 @@
       </div>
     </div>
     <div class="row m-0">
+      <?php if (!empty($galeriaTOP[0]['id_foto_galeria'])): ?>
       <div class="col-md-6 p-0">
-        <div class="card big" style="background: url('../../assets/images/1280x720.png') top center">
-          <a href="#" class="photos">
+        <div class="card big" style="background: url('<?php echo $galeriaTOP[0]['url_foto_galeria']; ?>') top center">
+          <a class="cursor" onclick="currentSlide(0,1)">
             <div class="overlay-card animated fadeIn" style="display:none">
               <div class="container h-100">
                 <div class="row align-items-center h-100">
@@ -32,18 +35,17 @@
                   </div>
                 </div>
               </div>
-              <div class="title text-center animated fadeInUp">
-                Imagen 1
-              </div>
             </div>
           </a>
         </div>
       </div>
+      <?php endif;?>
       <div class="col-md-6 p-0">
         <div class="row m-0">
+          <?php for ($i = 1; $i < count($galeriaTOP); $i++): ?>
           <div class="col-md-6 p-0">
-            <div class="card small" style="background: url('../../assets/images/1280x720.png') top center">
-              <a href="#" class="photos">
+            <div class="card normal" style="background: url('<?php echo $galeriaTOP[$i]['url_foto_galeria']; ?>') top center">
+              <a class="cursor" onclick="currentSlide(<?php echo $i; ?>,1)">
                 <div class="overlay-card animated fadeIn" style="display:none">
                   <div class="container h-100">
                     <div class="row align-items-center h-100">
@@ -54,73 +56,11 @@
                       </div>
                     </div>
                   </div>
-                  <div class="title text-center animated fadeInUp">
-                    Imagen 1
-                  </div>
                 </div>
               </a>
             </div>
           </div>
-          <div class="col-md-6 p-0">
-            <div class="card small" style="background: url('../../assets/images/1280x720.png') top center">
-              <a href="#" class="photos">
-                <div class="overlay-card animated fadeIn" style="display:none">
-                  <div class="container h-100">
-                    <div class="row align-items-center h-100">
-                      <div class="col-8 mx-auto">
-                        <div class="text-center">
-                          <i class="fa fa-search-plus animated zoomIn"></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="title text-center animated fadeInUp">
-                    Imagen 1
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="col-md-6 p-0">
-            <div class="card small" style="background: url('../../assets/images/1280x720.png') top center">
-              <a href="#" class="photos">
-                <div class="overlay-card animated fadeIn" style="display:none">
-                  <div class="container h-100">
-                    <div class="row align-items-center h-100">
-                      <div class="col-8 mx-auto">
-                        <div class="text-center">
-                          <i class="fa fa-search-plus animated zoomIn"></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="title text-center animated fadeInUp">
-                    Imagen 1
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="col-md-6 p-0">
-            <div class="card small" style="background: url('../../assets/images/1280x720.png') top center">
-              <a href="#" class="photos">
-                <div class="overlay-card animated fadeIn" style="display:none">
-                  <div class="container h-100">
-                    <div class="row align-items-center h-100">
-                      <div class="col-8 mx-auto">
-                        <div class="text-center">
-                          <i class="fa fa-search-plus animated zoomIn"></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="title text-center animated fadeInUp">
-                    Imagen 1
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
+          <?php endfor;?>
         </div>
       </div>
     </div>
@@ -129,7 +69,8 @@
         <div class="row align-items-center h-100">
           <div class="col-8 mx-auto">
             <h4 class="text-center">Últimas</h4>
-            <p class="text-justify">Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto
+            <p class="text-justify">Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de
+              texto. Lorem Ipsum ha sido el texto
               de relleno estándar de las industrias desde el año 1500, cuando un impresor
             </p>
 
@@ -138,9 +79,10 @@
       </div>
     </div>
     <div class="row m-0">
+      <?php for ($i = 0; $i < count($galeriaNOTOP); $i++): ?>
       <div class="col-md-4 p-0">
-        <div class="card normal" style="background: url('../../assets/images/1280x720.png') top center">
-          <a href="#">
+        <div class="card normal" style="background: url('<?php echo $galeriaNOTOP[$i]['url_foto_galeria']; ?>') top center">
+          <a class="cursor" onclick="currentSlide(<?php echo $i; ?>,2)">
             <div class="overlay-card animated fadeIn" style="display:none">
               <div class="container h-100">
                 <div class="row align-items-center h-100">
@@ -151,114 +93,11 @@
                   </div>
                 </div>
               </div>
-              <div class="title text-center animated fadeInUp">
-                Imagen 1
-              </div>
             </div>
           </a>
         </div>
       </div>
-      <div class="col-md-4 p-0">
-        <div class="card normal" style="background: url('../../assets/images/1280x720.png') top center">
-          <a href="#">
-            <div class="overlay-card animated fadeIn" style="display:none">
-              <div class="container h-100">
-                <div class="row align-items-center h-100">
-                  <div class="col-8 mx-auto">
-                    <div class="text-center">
-                      <i class="fa fa-search-plus animated zoomIn"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="title text-center animated fadeInUp">
-                Imagen 1
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-      <div class="col-md-4 p-0">
-        <div class="card normal" style="background: url('../../assets/images/1280x720.png') top center">
-          <a href="#">
-            <div class="overlay-card animated fadeIn" style="display:none">
-              <div class="container h-100">
-                <div class="row align-items-center h-100">
-                  <div class="col-8 mx-auto">
-                    <div class="text-center">
-                      <i class="fa fa-search-plus animated zoomIn"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="title text-center animated fadeInUp">
-                Imagen 1
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-      <div class="col-md-4 p-0">
-        <div class="card normal" style="background: url('../../assets/images/1280x720.png') top center">
-          <a href="#">
-            <div class="overlay-card animated fadeIn" style="display:none">
-              <div class="container h-100">
-                <div class="row align-items-center h-100">
-                  <div class="col-8 mx-auto">
-                    <div class="text-center">
-                      <i class="fa fa-search-plus animated zoomIn"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="title text-center animated fadeInUp">
-                Imagen 1
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-      <div class="col-md-4 p-0">
-        <div class="card normal" style="background: url('../../assets/images/1280x720.png') top center">
-          <a href="#">
-            <div class="overlay-card animated fadeIn" style="display:none">
-              <div class="container h-100">
-                <div class="row align-items-center h-100">
-                  <div class="col-8 mx-auto">
-                    <div class="text-center">
-                      <i class="fa fa-search-plus animated zoomIn"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="title text-center animated fadeInUp">
-                Imagen 1
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-      <div class="col-md-4 p-0">
-        <div class="card normal" style="background: url('../../assets/images/1280x720.png') top center">
-          <a href="#">
-            <div class="overlay-card animated fadeIn" style="display:none">
-              <div class="container h-100">
-                <div class="row align-items-center h-100">
-                  <div class="col-8 mx-auto">
-                    <div class="text-center">
-                      <i class="fa fa-search-plus animated zoomIn"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="title text-center animated fadeInUp">
-                Imagen 1
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-
+      <?php endfor;?>
     </div>
   </div>
 
@@ -266,40 +105,27 @@
     <div class="overlay-container-carousel">
 
       <div class="container">
-        <div class="mySlides">
-          <div class="numbertext">1 / 6</div>
-          <img src="../../assets/images/1280x720.png">
-        </div>
-        <div class="mySlides">
-          <div class="numbertext">2 / 6</div>
-          <img src="../../assets/images/1920x1080.png">
-        </div>
-        <div class="mySlides">
-          <div class="numbertext">3 / 6</div>
-          <img src="../../assets/images/1280x720.png">
-        </div>
-        <div class="mySlides">
-          <div class="numbertext">4 / 6</div>
-          <img src="../../assets/images/720x1280.png">
-        </div>
-        <div class="mySlides">
-          <div class="numbertext">5 / 6</div>
-          <img src="../../assets/images/480x840.png">
-        </div>
-        <div class="mySlides">
-          <div class="numbertext">6 / 6</div>
-          <img src="../../assets/images/500x500.png">
-        </div>
-        <div class="arrows">
-          <div class="left-arrow">
-            <span class="prev cursor" onclick="plusSlides(-1)">
-              <i class="fa fa-chevron-left"></i>
-            </span>
+        <div class="slidesContainer">
+          <?php $c=0; ?>
+          <?php for ($i = 0; $i < count($galeri); $i++): $c+=1; ?>
+          <div class="mySlides1 animated fadeIn" id="slide_ <?php echo $i; ?>">
+            <div class="numbertext">
+              <?php echo $c."/".count($galeriaTOP); ?>
+            </div>
+            <img src="<?php echo $galeriaTOP[$i]['url_foto_galeria']; ?>">
           </div>
-          <div class="right-arrow">
-            <span class="next cursor" onclick="plusSlides(1)">
-              <i class="fa fa-chevron-right"></i>
-            </span>
+          <?php endfor; ?>
+          <div class="arrows">
+            <div class="left-arrow">
+              <span class="prev cursor" onclick="plusSlides(-1)">
+                <i class="fa fa-chevron-left"></i>
+              </span>
+            </div>
+            <div class="right-arrow">
+              <span class="next cursor" onclick="plusSlides(1)">
+                <i class="fa fa-chevron-right"></i>
+              </span>
+            </div>
           </div>
         </div>
         <div class="overlay-close cursor">
@@ -310,6 +136,6 @@
   </div>
 </div>
 
-<?php 
-  include('include/footer.php');
+<?php
+include 'include/footer.php';
 ?>

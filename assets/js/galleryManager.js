@@ -96,15 +96,16 @@ $(function () {
             var file = ["input", $(this)];
             validateImage(file);
         });
-    }else{
-        $(".fa-star").click(function() {
-            $(this).toggleClass("far fa");
-            if($(this).hasClass("far")){
-                $("#destacado").val(0);
-            }else{
-                $("#destacado").val(1);
-            }
-          });
+    } else {
+        mostrar_galeria();
+        var slideIndex = 1;
+
+        $(".overlay-close").click(function () {
+            $('.overlay-carousel').addClass("d-none");
+            $('body').removeClass("no-scroll");
+            $("#content-wrapper").removeClass("p-0");
+            $(".container-fluid").removeClass("p-0");
+        });
     }
 });
 
@@ -142,7 +143,6 @@ function readURL(files, i) {
 
 function removeImage(id) {
     var iterator = storedFiles.keys();
-    var num = 0;
     for (let key of iterator) {
         if (key === id) {
             storedFiles.splice(key, 1);
@@ -159,6 +159,183 @@ function removeImage(id) {
     $('.img-preview').empty();
     for (var i = 0; i < storedFiles.length; i++) {
         readURL(storedFiles, i);
+    }
+
+}
+
+function mostrar_galeria() {
+    limpiarCampo("#list-images", "div");
+    var parametros = {
+        "listado": "1"
+    };
+    $.ajax({
+        data: parametros,
+        url: '../../../controller/GaleriaC.php',
+        type: 'GET',
+        success: function (response) {
+            try {
+
+                var json = JSON.parse(response);
+                var favorito = null;
+                var c = 0;
+                var destacado = 0;
+                var totalDestacado = parseInt(json.total);
+                for (var i = 0; i < json.galeria.length; i++) {
+                    c += 1;
+                    destacado = parseInt(json.galeria[i].destacado);
+                    if (destacado === 1) {
+                        favorito = '<button class="destacado btn btn-primary" id="top_' + i + '" onclick="fav(' + i + ')">';
+                        favorito += '<i class="fa fa-star pl-2"></i>';
+                        favorito += '</button>';
+                        $("#destacado_" + i).val(1);
+                    } else if (destacado !== 1 && totalDestacado < 5) {
+                        favorito = '<button class="destacado btn btn-primary" id="top_' + i + '" onclick="fav(' + i + ')">';
+                        favorito += '<i class="far fa-star pl-2"></i>';
+                        favorito += '</button>';
+                        $("#destacado_" + i).val(0);
+                    } else {
+                        favorito = "";
+                    }
+                    $("#list-images").append('<div class="col-md-4 p-2">' +
+                        '<input id="destacado_' + i + '" type="text" class="d-none" value="">' +
+                        '<input id="id_foto_galeria_' + i + '" type="text" class="d-none" value="' + json.galeria[i].id_foto_galeria + '">' +
+                        '<div class="card normal" style="background: url(' + json.galeria[i].url_foto_galeria + ') top center no-repeat">' +
+                        '<a class="cursor" onclick="currentSlide(' + i + ')">' +
+                        '<div class="overlay-card animated fadeIn" style="display:none">' +
+                        '<div class="container h-100">' +
+                        '<div class="row align-items-center h-100">' +
+                        '<div class="col-8 mx-auto">' +
+                        '<div class="text-center"><i class="fa fa-search-plus animated zoomIn"></i></div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</a>' +
+                        favorito +
+                        '<button class="del-img btn btn-danger" id="trash_' + i + '" onclick="eliminar_confirmar(' + i + ",'" + json.galeria[i].nombre_imagen + "'" + ')"><i class="fa fa-trash pr-2"></i></button>' +
+                        '<span class="name bg-info text-light">' + json.galeria[i].nombre_imagen + '</span>' +
+                        '</div>' +
+                        '</div>');
+                    $(".slidesContainer").append('<div class="mySlides animated fadeIn" id="slide_' + i + '">' +
+                        '<div class="numbertext">' + c + ' / ' + json.galeria.length + '</div>' +
+                        '<img src="' + json.galeria[i].url_foto_galeria + '">' +
+                        '</div>');
+                }
+
+            } catch (err) {}
+
+        }
+    });
+}
+
+
+function fav(id) {
+    $($("#top_" + id)).find("i").toggleClass("far fa");
+    if ($("#top_" + id).find("i").hasClass("far")) {
+        $("#destacado_" + id).val(0);
+    } else {
+        $("#destacado_" + id).val(1);
+    }
+    actualizar_destacado(id);
+}
+
+function actualizar_destacado(id) {
+    $("#top_" + id).prop("disabled", true);
+    var parametros = {
+        id_foto_galeria: $("#id_foto_galeria_" + id).val(),
+        destacado: $("#destacado_" + id).val(),
+        modificar_destacado: 1
+    }
+    $.ajax({
+        data: parametros,
+        url: "../../../controller/GaleriaC.php",
+        type: "GET",
+        success: function (response) {
+            try {
+                $("#top_" + id).prop("disabled", false);
+                mostrar_galeria();
+                var json = JSON.parse(response);
+                if (json['clase'] == "danger") {
+                    modalInformacion(json);
+                }
+
+            } catch (err) {
+                //alert(err);
+            }
+
+        },
+        error: function (e) {
+            $("#top_" + id).prop("disabled", false);
+
+        }
+
+    });
+}
+
+function eliminar_confirmar(id, nombre) {
+    var nombre = nombre;
+    var funcion = "eliminar_imagen('" + id + "')";
+    modalConfirmarEliminarImagenG(nombre, funcion);
+}
+
+function eliminar_imagen(id) {
+    $("#trash_" + id).prop("disabled", true);
+    var parametros = {
+        id_foto_galeria: $("#id_foto_galeria_" + id).val(),
+        eliminar_imagen: 1
+    }
+    $.ajax({
+        data: parametros,
+        url: "../../../controller/GaleriaC.php",
+        type: "GET",
+        success: function (response) {
+            try {
+                $("#trash_" + id).prop("disabled", false);
+                mostrar_galeria();
+                var json = JSON.parse(response);
+                modalInformacion(json);
+
+
+            } catch (err) {
+                //alert(err);
+            }
+
+        },
+        error: function (e) {
+            $("#trash_" + id).prop("disabled", false);
+
+        }
+
+    });
+}
+// Next/previous controls
+function plusSlides(n) {
+    slideIndex += n;
+    showSlides(slideIndex);
+}
+
+// Thumbnail image controls    
+function currentSlide(n) {
+    $('body').addClass("no-scroll");
+    $('.overlay-carousel').removeClass("d-none");
+
+    showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+    var i;
+    var slides = $(".mySlides");
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+    if (n < 0) {
+        slides[slides.length - 1].style.display = "block";
+        slideIndex = slides.length - 1;
+    } else if (n > slides.length - 1) {
+        slides[0].style.display = "block";
+        slideIndex = 0;
+    } else if (n >= 0 && n < slides.length) {
+        slides[n].style.display = "block";
     }
 
 }
