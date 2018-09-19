@@ -46,20 +46,20 @@ include 'include/header.php';
     <div class="overlay-container-carousel">
       <div class="container">
         <div class="slidesContainer"></div>
-        <div class="arrows">
-          <div class="left-arrow">
-            <span class="prev cursor" onclick="plusSlides(-1)">
-              <i class="fa fa-chevron-left"></i>
-            </span>
-          </div>
-          <div class="right-arrow">
-            <span class="next cursor" onclick="plusSlides(1)">
-              <i class="fa fa-chevron-right"></i>
-            </span>
-          </div>
-        </div>
         <div class="overlay-close cursor">
           <i class="fa fa-times"></i>
+        </div>
+      </div>
+      <div class="arrows">
+        <div class="left-arrow">
+          <span class="prev cursor" onclick="plusSlides(-1)">
+            <i class="fa fa-chevron-left"></i>
+          </span>
+        </div>
+        <div class="right-arrow">
+          <span class="next cursor" onclick="plusSlides(1)">
+            <i class="fa fa-chevron-right"></i>
+          </span>
         </div>
       </div>
     </div>
