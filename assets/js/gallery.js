@@ -72,7 +72,7 @@ function mostrar_galeria() {
                 '</a>' +
                 '</div>');
             } else {
-              $(".topSecondary").append('<div class="col-md-6 p-0">' +
+              $(".topSecondary").append('<div class="col-md-6 sec_top">' +
                 '<div class="card normal" style="background: url(' + json.galeria[i].url_foto_galeria + ') top center">' +
                 '<a class="cursor" onclick="currentSlide(' + c + ')">' +
                 '<div class="overlay-card animated fadeIn" style="display:none">' +
@@ -104,7 +104,7 @@ function mostrar_galeria() {
           if (parseInt(json.galeria[i].destacado) !== 1) {
             c+=1;
             n+=1;
-            $(".galeria_normal").append('<div class="col-md-4 p-0">' +
+            $(".galeria_normal").append('<div class="col-md-4 sec_top">' +
               '<div class="card normal" style="background: url(' + json.galeria[i].url_foto_galeria + ') top center">' +
               '<a class="cursor" onclick="currentSlide(' + c + ')">' +
               '<div class="overlay-card animated fadeIn" style="display:none">' +

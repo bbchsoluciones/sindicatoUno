@@ -20,7 +20,7 @@ include 'include/header.php';
       </div>
     </div>
     <div class="row m-0">
-      <div class="col-md-6 pl-0 p-0 topMain"></div>
+      <div class="col-md-6 topMain"></div>
       <div class="col-md-6 p-0">
         <div class="row m-0 topSecondary"></div>
       </div>
