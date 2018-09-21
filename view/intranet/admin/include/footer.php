@@ -152,6 +152,14 @@
 <?php elseif ($pageName[0]=="galleryManage"): ?> 
 <script src="../../../assets/js/modal.js"></script>
 <script src="../../../assets/js/galleryManager.js"></script>
+<?php elseif ($pageName[0]=="imageApproval"): ?> 
+<script src="../../../assets/js/modal.js"></script>
+<script src="../../../assets/js/jquery.rut.min.js"></script>
+<script src="../../../assets/js/userManager.js"></script>
+<?php elseif ($pageName[0]=="imageApprovalHistory"): ?> 
+<script src="../../../assets/js/modal.js"></script>
+<script src="../../../assets/js/jquery.rut.min.js"></script>
+<script src="../../../assets/js/userManager.js"></script>
 <?php  endif; ?>
 <script src="../../../assets/js/general.js"></script>
 

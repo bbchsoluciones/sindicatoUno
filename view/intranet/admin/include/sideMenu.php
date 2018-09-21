@@ -16,6 +16,9 @@
       <h6 class="dropdown-header">Trabajador(a):</h6>
       <a class="dropdown-item" href="userNew.php"><i class="fa fa-user-plus text-info pr-3"></i>Registrar</a>
       <a class="dropdown-item" href="userManage.php"><i class="fa fa-address-card text-info pr-3"></i>Administrar</a>
+      <h6 class="dropdown-header">Solicitudes</h6>
+      <a class="dropdown-item" href="imageApproval.php"><i class="fa fa-comment-alt text-info pr-3"></i>Pendientes</a>
+      <a class="dropdown-item" href="imageApprovalHistory.php"><i class="fa fa-clock text-info pr-3"></i>Historial</a>
       <div class="dropdown-divider"></div>
       <h6 class="dropdown-header">Hijo(a):</h6>
       <a class="dropdown-item" href="sonNew.php"><i class="fa fa-user-plus text-info pr-3"></i>Registrar</a>

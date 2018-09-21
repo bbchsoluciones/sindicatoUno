@@ -20,6 +20,10 @@ $(function () {
                 reader.readAsDataURL(input.files[0]);
             }
         }
+    } else if ($('body').hasClass('imageApproval')) {
+        listar_solicitudes();
+    } else if ($('body').hasClass('imageApprovalHistory')) {
+        listar_solicitudes_historial();
     }
 });
 
@@ -49,7 +53,7 @@ function mostrarTrabajadores(pagina) {
                 $("#objeto").text(json.objeto.valor);
                 paginador(json.cantidad_total[0], pagina, registrosPorPagina);
                 for (i = 0; i < json.trabajador[0].length; i++) {
-                    $('#listUsers').append('<button type="button" class="btn btn-secondary" id="worker' + i + '" onclick="mostrarTrabajador(' + i + ",'"  + json.trabajador[0][i].run_trabajador +  "'" + ')">' + $.formatRut(json.trabajador[0][i].run_trabajador) + " " + json.trabajador[0][i].nombres_trabajador + '<i class="fa fa-edit text-secondary"></i></button>');
+                    $('#listUsers').append('<button type="button" class="btn btn-secondary" id="worker' + i + '" onclick="mostrarTrabajador(' + i + ",'" + json.trabajador[0][i].run_trabajador + "'" + ')">' + $.formatRut(json.trabajador[0][i].run_trabajador) + " " + json.trabajador[0][i].nombres_trabajador + '<i class="fa fa-edit text-secondary"></i></button>');
                     if (i === 0) {
                         mostrarTrabajador(i, json.trabajador[0][i].run_trabajador);
                     }
@@ -192,7 +196,7 @@ function ordenarTrabajadores(pagina, accion, objeto, bool) {
                 $("#objeto").text(json.objeto.valor);
                 paginador(json.cantidad_total[0], pagina, registrosPorPagina);
                 for (i = 0; i < json.trabajador[0].length; i++) {
-                    $('#listUsers').append('<button type="button" class="btn btn-secondary" id="worker' + i + '" onclick="mostrarTrabajador(' + i + ",'"  + json.trabajador[0][i].run_trabajador +  "'" + ')">' + $.formatRut(json.trabajador[0][i].run_trabajador) + " " + json.trabajador[0][i].nombres_trabajador + '<i class="fa fa-edit text-secondary"></i></button>');
+                    $('#listUsers').append('<button type="button" class="btn btn-secondary" id="worker' + i + '" onclick="mostrarTrabajador(' + i + ",'" + json.trabajador[0][i].run_trabajador + "'" + ')">' + $.formatRut(json.trabajador[0][i].run_trabajador) + " " + json.trabajador[0][i].nombres_trabajador + '<i class="fa fa-edit text-secondary"></i></button>');
                     if (i === 0) {
                         mostrarTrabajador(i, json.trabajador[0][i].run_trabajador);
                     }
@@ -246,7 +250,7 @@ function buscarTrabajador(pagina, accion, objeto) {
                     $("#objeto").text(json.objeto.valor);
                     paginador(json.cantidad_total[0], pagina, registrosPorPagina);
                     for (i = 0; i < json.trabajador[0].length; i++) {
-                        $('#listUsers').append('<button type="button" class="btn btn-secondary" id="worker' + i + '" onclick="mostrarTrabajador(' + i + ",'"  + json.trabajador[0][i].run_trabajador +  "'" + ')">' + $.formatRut(json.trabajador[0][i].run_trabajador) + " " + json.trabajador[0][i].nombres_trabajador + '<i class="fa fa-edit text-secondary"></i></button>');
+                        $('#listUsers').append('<button type="button" class="btn btn-secondary" id="worker' + i + '" onclick="mostrarTrabajador(' + i + ",'" + json.trabajador[0][i].run_trabajador + "'" + ')">' + $.formatRut(json.trabajador[0][i].run_trabajador) + " " + json.trabajador[0][i].nombres_trabajador + '<i class="fa fa-edit text-secondary"></i></button>');
                         if (i === 0) {
                             mostrarTrabajador(i, json.trabajador[0][i].run_trabajador);
                         }
@@ -297,49 +301,49 @@ $("#registrar").click(function (event) {
                     validacion_campos(json, indice);
                 });
             } else {
-                
+
                 $('#form-registrar').addClass('d-none');
                 $('#correo').removeClass('d-none');
-                $('#correo').html('<div class="col-lg-8 col-md-10 col-12">'+
-                '<div class="row justify-content-center mb-1">'+
-                    '<div class="col-auto">'+
-                        '<h3>Envío de contraseña</h3>'+
-                    '</div>'+
-                '</div>'+                
-                '<div>'+
-                    '<div class="form-row mb-1">'+
-                        '<div class="col-lg-3 col-md-4 col-sm-3 col-12">'+
-                            '<label for="rut">Rut</label>'+
-                            '<input type="text" class="form-control" id="rut" name="rut" value="'+$("input[name=run_trabajador]").val()+'" placeholder="11.111.111-1" disabled>'+
-                        '</div>'+
-                        '<div class="col-lg-4 col-md-4 col-sm-4 col-12">'+
-                            '<label for="nombres">Nombres</label>'+
-                            '<input type="text" class="form-control" id="nombres" name="nombres" value="'+$("input[name=nombres_trabajador]").val()+'" placeholder="Juan Carlos" disabled>'+
-                        '</div>'+
-                        '<div class="col-lg-5 col-md-4 col-sm-5 col-12">'+
-                            '<label for="apellidos">Apellidos</label>'+
-                            '<input type="text" class="form-control" id="apellidos" name="apellidos" value="'+$("input[name=apellidos_trabajador]").val()+'" placeholder="Pérez González" disabled>'+
-                        '</div>'+
-                    '</div>'+
-                    '<div class="form-row mb-3">'+
-                        '<div class="col">'+
-                            '<label for="correoUser">Correo Electrónico</label>'+
-                            '<input type="email" class="form-control" id="correoUser" name="correoUser" placeholder="Ejemplo:'+ 'sindicato@brinks.cl">'+
-                        '</div>'+        
-                    '</div>'+
-                    '<div class="form-row">'+
-                        '<div class="col-6">'+
-                                '<button id="btnNoEnviar" onclick="noEnviarCorreo()" class="btn btn-block btn-danger">No Enviar</button>'+
-                        '</div>'+        
-                        '<div class="col-6">'+
-                                '<button id="btnEnviar" onclick="enviarCorreo()" class="btn btn-block btn-success">Enviar Correo</button>'+
-                        '</div>'+        
-                    '</div>'+
-                '</div>'+
-            '</div>');
+                $('#correo').html('<div class="col-lg-8 col-md-10 col-12">' +
+                    '<div class="row justify-content-center mb-1">' +
+                    '<div class="col-auto">' +
+                    '<h3>Envío de contraseña</h3>' +
+                    '</div>' +
+                    '</div>' +
+                    '<div>' +
+                    '<div class="form-row mb-1">' +
+                    '<div class="col-lg-3 col-md-4 col-sm-3 col-12">' +
+                    '<label for="rut">Rut</label>' +
+                    '<input type="text" class="form-control" id="rut" name="rut" value="' + $("input[name=run_trabajador]").val() + '" placeholder="11.111.111-1" disabled>' +
+                    '</div>' +
+                    '<div class="col-lg-4 col-md-4 col-sm-4 col-12">' +
+                    '<label for="nombres">Nombres</label>' +
+                    '<input type="text" class="form-control" id="nombres" name="nombres" value="' + $("input[name=nombres_trabajador]").val() + '" placeholder="Juan Carlos" disabled>' +
+                    '</div>' +
+                    '<div class="col-lg-5 col-md-4 col-sm-5 col-12">' +
+                    '<label for="apellidos">Apellidos</label>' +
+                    '<input type="text" class="form-control" id="apellidos" name="apellidos" value="' + $("input[name=apellidos_trabajador]").val() + '" placeholder="Pérez González" disabled>' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="form-row mb-3">' +
+                    '<div class="col">' +
+                    '<label for="correoUser">Correo Electrónico</label>' +
+                    '<input type="email" class="form-control" id="correoUser" name="correoUser" placeholder="Ejemplo:' + 'sindicato@brinks.cl">' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="form-row">' +
+                    '<div class="col-6">' +
+                    '<button id="btnNoEnviar" onclick="noEnviarCorreo()" class="btn btn-block btn-danger">No Enviar</button>' +
+                    '</div>' +
+                    '<div class="col-6">' +
+                    '<button id="btnEnviar" onclick="enviarCorreo()" class="btn btn-block btn-success">Enviar Correo</button>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>');
 
-            /* limpiarCampos("#usernew_container", "input");
-                limpiarSeleccionado("#tipo_usuario"); */
+                /* limpiarCampos("#usernew_container", "input");
+                    limpiarSeleccionado("#tipo_usuario"); */
 
             }
 
@@ -351,7 +355,7 @@ $("#registrar").click(function (event) {
     });
 });
 
-function noEnviarCorreo(){
+function noEnviarCorreo() {
     limpiarCampos("#usernew_container", "input");
     limpiarSeleccionado("#tipo_usuario");
     $('#correo').empty();
@@ -359,7 +363,7 @@ function noEnviarCorreo(){
     $('#form-registrar').removeClass('d-none');
 }
 
-function mover(elemento){
+function mover(elemento) {
     $('html,body').animate({
         scrollTop: $(elemento).offset().top
     }, 0);
@@ -372,7 +376,7 @@ function enviarCorreo() {
         alertCorreo("vacio");
         mover('body');
         //correo vacio
-        
+
     } else {
         var nombres = $('#nombres').val();
         var primerNombre = nombres.split(' ');
@@ -516,3 +520,173 @@ $("input#rut_trabajador").rut({
     formatOn: 'keyup',
     ignoreControlKeys: false
 });
+
+function listar_solicitudes() {
+    limpiarCampo(".request", "div");
+    limpiarCampo(".mensaje", "h6");
+    var parametros = {
+        "solicitudes_pendientes": 1
+    };
+    $.ajax({
+        data: parametros,
+        url: '../../../controller/TrabajadorC.php',
+        type: 'GET',
+        success: function (response) {
+            try {
+                var json = JSON.parse(response);
+                if (json.mensaje) {
+                    $(".mensaje").html(json.mensaje).fadeIn();
+                }
+                for (var i = 0; i < json.length; i++) {
+                    $(".request").append('<form id="form_foto_' + i + '">' +
+                        '<div class="image_approval border mx-auto position-relative mb-5">' +
+                        '<div class="name d-none">' + json[i].nombres_trabajador + '</div>' +
+                        '<input type="text" class="d-none" name="id_foto_perfil" value="' + json[i].id_foto_perfil + '">' +
+                        '<div class="row contenedor">' +
+                        '<div class="col-md-12">' +
+                        '<div class="row m-0 p-0">' +
+                        '<div class="col-md-4 pr-0 pl-4 py-4 m-0">' +
+                        '<div class="avatar_container">' +
+                        '<div class="avatar">' +
+                        '<img class="cover_avatar img-thumbnail" src="' + json[i].url_foto_perfil + '">' +
+                        '<label class="rut_flotante">' + $.formatRut(json[i].run_trabajador) + '</label>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="col-md-8 p-4 m-0"><textarea name="observacion" class="form-control" id="comment" placeholder="Observaciones (Opcional)"></textarea></div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="action border">' +
+                        '<div class="action-buttons">' +
+                        '<button class="float-left btn aprobar" type="submit">' +
+                        '<h5 class="m-0"><i class="fa fa-check"></i></h5>' +
+                        '</button>' +
+                        '<button class="float-left btn rechazar" type="submit">' +
+                        '<h5 class="m-0"><i class="fas fa-times"></i></h5>' +
+                        '</button>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</form>');
+                }
+
+                activarBoton();
+            } catch (err) {
+                //
+            }
+
+        }
+    });
+}
+
+function listar_solicitudes_historial() {
+    var parametros = {
+        "solicitudes_historial": 1
+    };
+    $.ajax({
+        data: parametros,
+        url: '../../../controller/TrabajadorC.php',
+        type: 'GET',
+        success: function (response) {
+            try {
+                var json = JSON.parse(response);
+                if (json.mensaje) {
+                    $(".mensaje").html(json.mensaje).fadeIn();
+                }
+                for (var i = 0; i < json.length; i++) {
+                    $(".request").append('<div class="image_approval border mx-auto position-relative mb-5">' +
+                        '<div class="name d-none">' + json[i].nombres_trabajador + '</div>' +
+                        '<input type="text" class="d-none" name="id_foto_perfil" value="' + json[i].id_foto_perfil + '">' +
+                        '<div class="row contenedor">' +
+                        '<div class="col-md-12">' +
+                        '<div class="row m-0 p-0">' +
+                        '<div class="col-md-4 p-4 m-0">' +
+                        '<div class="avatar_container">' +
+                        '<div class="avatar">' +
+                        '<img class="cover_avatar img-thumbnail" src="' + json[i].url_foto_perfil + '">' +
+                        '<label class="rut_flotante">' + $.formatRut(json[i].run_trabajador) + '</label>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="col-md-8 p-4 m-0"><textarea disabled name="observacion" class="form-control" id="comment" placeholder="Observaciones (Opcional)">' + json[i].observacion + '</textarea></div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="action border">' +
+                        '<div class="action-buttons">' +
+                        '<button class="float-left btn rechazar" disabled>' +
+                        '<h5 class="m-0"><i class="' + json[i].estado_foto_perfil + '"></i></h5>' +
+                        '</button>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>');
+                }
+
+            } catch (err) {
+                //
+            }
+
+        }
+    });
+}
+
+function activarBoton() {
+    $(".aprobar").click(function (e) {
+        e.preventDefault();
+        var nombres = $(this).closest("form").find("div.name").text();
+        var accion = "aprobar";
+        var form = JSON.stringify($(this).closest("form").attr("id"));
+        var estado = "'aprobada'";
+        var funcion = "cambiar_solicitud(" + form + ',' + estado + ")";
+        modarlConfirmarCambio(nombres, accion, funcion);
+    });
+    $(".rechazar").click(function (e) {
+        e.preventDefault();
+        var nombres = $(this).closest("form").find("div.name").text();
+        var accion = "rechazar";
+        var form = JSON.stringify($(this).closest("form").attr("id"));
+        var estado = "'rechazada'";
+        var funcion = "cambiar_solicitud(" + form + ',' + estado + ")";
+        modarlConfirmarCambio(nombres, accion, funcion);
+    });
+}
+
+function cambiar_solicitud(form_id, estado) {
+    var form = $('#' + form_id)[0];
+    form = new FormData(form);
+    form.append("actualizar_estado", 1);
+    form.append("estado", estado);
+    $("#" + form_id).find("button").prop("disabled", true);
+    $.ajax({
+        type: "POST",
+        url: '../../../controller/TrabajadorC.php',
+        processData: false, // Important!
+        contentType: false,
+        cache: false,
+        data: form,
+        timeout: 600000,
+        success: function (response) {
+            try {
+                $("#" + form_id).find("button").prop("disabled", false);
+                $("#" + form_id).delay(300).fadeOut();
+                var json = JSON.parse(response);
+                if (json.mensaje) {
+                    $(".mensaje").html(json.mensaje).delay(500).fadeOut();
+                }
+                setTimeout(function(){
+                    listar_solicitudes();
+                },800);
+
+            } catch (err) {
+                alert(err);
+            }
+
+        },
+        error: function (e) {
+            $("#" + form_id).find("button").prop("disabled", false);
+
+        }
+
+    });
+}

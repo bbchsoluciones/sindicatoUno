@@ -118,6 +118,17 @@ function modalConfirmarEliminarImagenG(nombre, funcion) {
 	$("#aceptarConfirm").attr("onclick", funcion);
 	$('#confirm').modal('show');
 }
+function modarlConfirmarCambio(nombre,accion,funcion) {
+
+	$("#titleConfirm").text("¿Realmente desea " + accion + " la imagen de "+nombre+"?");
+	$("#cuerpoConfirm").html('Presione "Aceptar" si desea continuar.');
+	$("#cancelarConfirm").text("Cancelar");
+	$("#cancelarConfirm").addClass("btn-success");
+	$("#aceptarConfirm").text("Aceptar");
+	$("#aceptarConfirm").addClass("btn-primary");
+	$("#aceptarConfirm").attr("onclick", funcion);
+	$('#confirm').modal('show');
+}
 
 function modalInformacion(json) {
 	$("#aceptarMsg").removeClass("btn-danger");

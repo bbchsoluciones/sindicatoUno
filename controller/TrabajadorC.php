@@ -1,9 +1,8 @@
 <?php
 
-                if(!isset($_SESSION)):
-                  session_start();//inicia sesion si está vacío
-                endif;
-              
+if (!isset($_SESSION)):
+    session_start(); //inicia sesion si está vacío
+endif;
 
 $ruta_raiz = dirname(dirname(__FILE__));
 require_once $ruta_raiz . '/model/TrabajadorM.php';
@@ -181,10 +180,10 @@ elseif (isset($_POST['tipo_usuario']) &&
     endforeach;
 
     /* f (array_key_exists('contrasena_trabajador', $error) && array_key_exists('vcontrasena_trabajador', $error)):
-        $data['contrasena_trabajador'] = "nula";
-        $data['vcontrasena_trabajador'] = "nula";
-        unset($error['contrasena_trabajador']);
-        unset($error['vcontrasena_trabajador']); */
+    $data['contrasena_trabajador'] = "nula";
+    $data['vcontrasena_trabajador'] = "nula";
+    unset($error['contrasena_trabajador']);
+    unset($error['vcontrasena_trabajador']); */
     if ($data['contrasena_trabajador'] !== $data['vcontrasena_trabajador']):
         $error['contrasena_trabajador'] = "Contraseñas no coinciden";
         $error['vcontrasena_trabajador'] = "Contraseñas no coinciden";
@@ -209,8 +208,8 @@ elseif (isset($_POST['tipo_usuario']) &&
 
     if (isset($_FILES['avatar']['name']) && !empty($_FILES['avatar']['name'])):
         $subir = new imgUpldr;
-        $subir->__set("_new_name",date("Ymdhis"));
-        $subir->__set("_dest","../assets/images/avatar/");
+        $subir->__set("_new_name", date("Ymdhis"));
+        $subir->__set("_dest", "../assets/images/avatar/");
         $imagen = $subir->init($_FILES['avatar']);
         if (!empty($imagen)):
             $error['avatar'] = $imagen;
@@ -250,6 +249,8 @@ elseif (isset($_POST['tipo_usuario']) &&
             $trabajador->encontrarTconImagen();
             $avatar = "http://localhost/sindicatoUno/assets/images/avatar/" . $subir->_name;
             $foto->setUrl_foto_perfil($avatar);
+            $foto->setTrabajador_run_trabajador($data['run_trabajador']);
+            $foto->setEstado_foto_perfil("pendiente");
             if (!empty($trabajador->getTrabajador()['url_foto_perfil'])):
                 $nombre_imagen = basename(parse_url($trabajador->getTrabajador()['url_foto_perfil'])['path']);
                 unlink("../assets/images/avatar/" . $nombre_imagen);
@@ -257,7 +258,7 @@ elseif (isset($_POST['tipo_usuario']) &&
             else:
                 $accion = "insert";
             endif;
-            $foto->modificarFotoPerfil($accion, $data['run_trabajador']);
+            $foto->modificarFotoPerfil($accion);
         endif;
         if ($trabajador->actualizar_trabajador()):
             $error['titulo'] = "Éxito!";
@@ -325,10 +326,10 @@ elseif (isset($_POST['email_trabajador']) &&
     endforeach;
 
     /* f (array_key_exists('contrasena_trabajador', $error) && array_key_exists('vcontrasena_trabajador', $error)):
-        $data['contrasena_trabajador'] = "nula";
-        $data['vcontrasena_trabajador'] = "nula";
-        unset($error['contrasena_trabajador']);
-        unset($error['vcontrasena_trabajador']); */
+    $data['contrasena_trabajador'] = "nula";
+    $data['vcontrasena_trabajador'] = "nula";
+    unset($error['contrasena_trabajador']);
+    unset($error['vcontrasena_trabajador']); */
     if ($data['contrasena_trabajador'] !== $data['vcontrasena_trabajador']):
         $error['contrasena_trabajador'] = "Contraseñas no coinciden";
         $error['vcontrasena_trabajador'] = "Contraseñas no coinciden";
@@ -353,8 +354,8 @@ elseif (isset($_POST['email_trabajador']) &&
 
     if (isset($_FILES['avatar']['name']) && !empty($_FILES['avatar']['name'])):
         $subir = new imgUpldr;
-        $subir->__set("_new_name",date("Ymdhis"));
-        $subir->__set("_dest","../assets/images/avatar/");
+        $subir->__set("_new_name", date("Ymdhis"));
+        $subir->__set("_dest", "../assets/images/avatar/");
         $imagen = $subir->init($_FILES['avatar']);
         if (!empty($imagen)):
             $error['avatar'] = $imagen;
@@ -370,7 +371,7 @@ elseif (isset($_POST['email_trabajador']) &&
     else:
 
         $trabajador = new TrabajadorM();
-        $trabajador->setRun_trabajador($data['run_trabajador']);        
+        $trabajador->setRun_trabajador($data['run_trabajador']);
         $trabajador->setTipo_usuario_id_tipo_usuario($_SESSION['tipo_usuario']);
         $trabajador->setEmail_trabajador($data['email_trabajador']);
         $trabajador->setNombres_trabajador($data['nombres_trabajador']);
@@ -465,7 +466,70 @@ elseif (isset($_POST['destinatario']) && isset($_POST['nombre']) && isset($_POST
         echo "false";
     endif;
 
+elseif (isset($_GET['solicitudes_pendientes'])):
+    $error = array();
+    $perfil = new FotoPerfilM();
+    $perfil->listar_solicitudes_pendientes();
+    if (!empty($perfil->getFotos())):
+        $perfil = $perfil->getFotos();
+        echo json_encode($perfil);
+    else:
+        $error['mensaje'] = "No se encontraron solicitudes pendientes";
+        echo json_encode($error);
+    endif;
+elseif (isset($_GET['solicitudes_historial'])):
+    $error = array();
+    $class = null;
+    $perfil = new FotoPerfilM();
+    $perfil->listar_solicitudes_historial();
+    if (!empty($perfil->getFotos())):
+        $perfilUser = $perfil->getFotos();
+        foreach ($perfilUser as $index => $value):
+            if ($perfilUser[$index]['estado_foto_perfil'] == "aprobada"):
+                $class = "fa fa-check";
+            else:
+                $class = "fas fa-times";
+            endif;
+            $perfilUser[$index]['estado_foto_perfil'] = $class;
+        endforeach;
+        echo json_encode($perfilUser);
+    else:
+        $error['mensaje'] = "No se encontraron registros";
+        echo json_encode($error);
+    endif;
+elseif (isset($_POST['id_foto_perfil']) &&
+    isset($_POST['id_foto_perfil']) &&
+    isset($_POST['estado']) &&
+    isset($_POST['observacion'])):
 
+    $data = array();
+    foreach ($_POST as $indice => $valor):
+        $data[$indice] = utf8_decode(htmlspecialchars($valor));
+    endforeach;
+    $perfil = new FotoPerfilM();
+    $perfil->setId_foto_perfil($data['id_foto_perfil']);
+    $perfil->detalle_solicitud();
+    if (!empty($perfil->getFotos())):
+        $perfil->setObservacion($data['observacion']);
+        $perfil->setEstado_foto_perfil($data['estado']);
+        if ($perfil->actualizar_solicitud()):
+            $error['titulo'] = "Éxito!";
+            $error['mensaje'] = "Solicitud " . $data['estado'] . " correctamente.";
+            $error['clase'] = "success";
+            echo json_encode($error);
+        else:
+            $error['titulo'] = "Oops, hubo un error!";
+            $error['mensaje'] = "El estado de la solicitud no pudo ser actualizado.";
+            $error['clase'] = "danger";
+            echo json_encode($error);
+        endif;
+
+    else:
+        $error['titulo'] = "Oops, hubo un error!";
+        $error['mensaje'] = "El id fue modificado";
+        $error['clase'] = "danger";
+        echo json_encode($error);
+    endif;
 
 endif;
 

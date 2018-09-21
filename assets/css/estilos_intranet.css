@@ -646,6 +646,61 @@
     word-wrap: break-word !important;
 }
 
+/*  IMAGE APPROVAL */
+.image_approval{
+    max-width: 700px;
+}
+.image_approval .contenedor{
+    overflow: hidden;
+}
+.image_approval .avatar_container{
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.image_approval .avatar_container .avatar{
+    height: 130px;
+    width: 170px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.image_approval .avatar_container .avatar img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+.image_approval .avatar_container .rut_flotante{
+    background: #495057;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+    border: 2px solid #ffffff;
+    color: #cccccc;
+    font-size: 15px;
+    padding: 2px 10px;
+    line-height: 15px;
+    position: absolute;
+    bottom: -20px;
+}
+.image_approval textarea.form-control{
+    height: 130px;
+    width: 100%;
+}
+.image_approval .action{
+    position: absolute;
+    top: -26px;
+    right: 0;
+}
+.image_approval .action button{
+    border: 0;
+    background: #fff;
+    padding: 0 5px;
+}
+
+/* END IMAGE APPROVAL */
 
 @media only screen and (min-width:200px) and (max-width:368px) {
 
