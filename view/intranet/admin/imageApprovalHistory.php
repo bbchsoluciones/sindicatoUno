@@ -8,7 +8,7 @@ include 'include/header.php';
         </li>
         <li class="breadcrumb-item active">Usuario</li>
         <li class="breadcrumb-item active">Solicitudes</li>
-        <li class="breadcrumb-item active">Entrada</li>
+        <li class="breadcrumb-item active">Historial</li>
     </ol>
     <h4 class="text-center text-secondary my-5">Hostorial Solicitudes</h4>
     <div class="request_container">
