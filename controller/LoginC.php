@@ -8,11 +8,9 @@ require_once($ruta_raiz . '/model/TrabajadorM.php');
 //Dentro de Controlador
 
 if(isset($_POST['user']) && isset($_POST['pass'])):
-     echo "User: " . $_POST['user'] . "<br>";
-    echo "Pass: " . $_POST['pass'] . "<br>";
-    echo "LoginC"; 
     $user = htmlspecialchars($_POST['user']);
     $pass = htmlspecialchars($_POST['pass']);
+    $error = array();
     $t = new TrabajadorM();
     $t->setRun_trabajador($user);
     if($t->encontrar_trabajador()):
@@ -45,15 +43,16 @@ if(isset($_POST['user']) && isset($_POST['pass'])):
                 //echo "Usuario";          
             endif;
         else:
-            //Contraseña incorrecta
-            echo "Contraseña incorrecta";
-            //header("Location: ../view/public/login.php");
+            $error['titulo'] = "Oops, hubo un error!";
+            $error['mensaje'] = "Contraseña incorrecta";
+            $error['clase'] = "danger";
         endif;
     else:
-        //Trabajador no registado en BD
-        echo "Trabajador no registrado en BD";
-        //header("Location: ../view/public/login.php");
+        $error['titulo'] = "Oops, hubo un error!";
+        $error['mensaje'] = "Usuario no registrado";
+        $error['clase'] = "danger";
     endif;
+    echo json_encode($error);
 else:
     //user y pass vacios
     echo "Campos vacíos";

@@ -22,15 +22,16 @@
 <body>
     <div class="login-page">
         <div class="login">
+            <div id="mensaje"></div>
             <div class="overlay-image"></div>
             <div class="cabecera">
                 <span data-animation="animated bounceOut">Autentificar</span>
             </div>
-            <form class="form-login" action="../../controller/LoginC.php" method="post">
+            <form class="form-login" id="form_login" action="" method="post">
                 <div class="form-group fill-line">
                     <label for="title">Identificador</label>
                     <div class="input-container">
-                        <input type="text" id="user" name="user" placeholder="Ingrese identificador">
+                        <input type="text" id="user" name="run_trabajador" placeholder="Ingrese identificador">
                         <div class="line1"></div>
                     </div>
                 </div>
@@ -38,12 +39,12 @@
                 <div class="form-group fill-line">
                     <label for="title">Contraseña</label>
                     <div class="input-container">
-                        <input type="password" id="pass" name="pass" placeholder="Ingrese contraseña">
+                        <input type="password" id="pass" name="contrasena_trabajador" placeholder="Ingrese contraseña">
                         <div class="line2"></div>
                     </div>
                 </div>
                 <div class="clear"></div>
-<!--                 <div class="remember">
+                <!--                 <div class="remember">
                     <div class="float-left">
                         <label class="customcheck">
                             Recordarme
@@ -57,7 +58,7 @@
                 </div>
                 <div class="clear"></div> -->
                 <div class="btn-container">
-                    <button type="submit" class="btn btn-success">Entrar</button>
+                    <button type="submit" class="btn btn-success" id="iniciar_sesion">Entrar</button>
                 </div>
             </form>
             <a type="button" class="back btn" href="index.php">

@@ -26,6 +26,8 @@
 <script src="../../assets/js/contactManager.js"></script>
 <script src="../../assets/js/alert.js"></script>
 <script src="../../assets/js/general.js"></script>
+<?php elseif ($pageName[0]=="login"): ?> 
+<script src="../../assets/js/userManager.js"></script>
 <?php endif; ?>
 <!--
   <script src="assets/js/sticky-header-navbar.js"></script>

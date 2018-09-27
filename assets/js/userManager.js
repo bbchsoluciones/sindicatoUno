@@ -480,6 +480,46 @@ $("#actualizar_trabajador").click(function (event) {
     });
 
 });
+$("#iniciar_sesion").click(function (event) {
+    event.preventDefault();
+    limpiarCampo("#mensaje", "div");
+    limpiarCampo(".msj", "small");
+    var form = $('#form_login')[0];
+    form = new FormData(form);
+    $("#iniciar_sesion").prop("disabled", true);
+    $.ajax({
+        type: "POST",
+        url: "../../controller/LoginC.php.php",
+        processData: false, // Important!
+        contentType: false,
+        cache: false,
+        data: form,
+        timeout: 600000,
+        success: function (response) {
+            console.log(response);
+            $("#iniciar_sesion").prop("disabled", false);
+            var json = JSON.parse(response);
+            $('html, body').animate({
+                scrollTop: 0
+            }, 0);
+            $("#mensaje").html('<div class="alert alert-' + json['clase'] + '" role="alert">' +
+                '<strong>' + json['titulo'] + '</strong> ' + json['mensaje'] + '' +
+                '</div>').fadeIn().delay(3000).fadeOut();
+            if (json['clase'] === "danger") {
+                Object.keys(json).forEach(function (indice) {
+                    validacion_campos(json, indice);
+                });
+            }
+            limpiarCampo("#pass", "input");
+        },
+        error: function (e) {
+            $("#iniciar_sesion").prop("disabled", false);
+
+        }
+
+    });
+
+});
 $("#eliminar_trabajador").click(function (event) {
     event.preventDefault();
     var nombres = $("#nombres").val();
