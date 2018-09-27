@@ -41,13 +41,13 @@
       <a class="dropdown-item" href="barChartExit.php"><i class="fas fa-chart-bar text-info pr-3"></i>Egresos</a>
     </div>
   </li>
-  <li class="nav-item dropdown">
+<!--   <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
       aria-expanded="false">
       <i class="fa fa-list-alt pr-2"></i>
       <span>Reportes</span>
     </a>
-  </li>
+  </li> -->
   <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
       aria-expanded="false">
