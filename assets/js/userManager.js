@@ -597,7 +597,6 @@ function listar_solicitudes_historial() {
                 }
                 for (var i = 0; i < json.length; i++) {
                     $(".request").append('<div class="image_approval border mx-auto position-relative mb-5">' +
-                        '<div class="name d-none">' + json[i].nombres_trabajador + '</div>' +
                         '<input type="text" class="d-none" name="id_foto_perfil" value="' + json[i].id_foto_perfil + '">' +
                         '<div class="row contenedor">' +
                         '<div class="col-md-12">' +

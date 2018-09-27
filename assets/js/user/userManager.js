@@ -30,6 +30,8 @@ $(function () {
         $("#image").change(function () {
             readURL(this);
         });
+    }else if ($('body').hasClass('imageApproval')) {
+        listar_solicitudes_historial();
     }
 });
 
@@ -63,6 +65,7 @@ function mostrarTrabajador(rut) {
         success: function (response) {
             setTimeout(function () {
                 try {
+                    console.log(response);
                     $('.overlay_data_trabajador').addClass("d-none");
                     $('.info_user').removeClass("d-none");
                     var json = JSON.parse(response);
@@ -156,6 +159,7 @@ $("#actualizar_trabajador").click(function (event) {
         data: form,
         timeout: 600000,
         success: function (response) {
+            console.log(response);
             $("#actualizar_trabajador").prop("disabled", false);
             var json = JSON.parse(response);
             $('html, body').animate({
@@ -182,6 +186,55 @@ $("#actualizar_trabajador").click(function (event) {
     });
 
 });
+
+function listar_solicitudes_historial() {
+    var parametros = {
+        "solicitudes_historial_user": 1
+    };
+    $.ajax({
+        data: parametros,
+        url: '../../../controller/TrabajadorC.php',
+        type: 'GET',
+        success: function (response) {
+            try {
+                var json = JSON.parse(response);
+                console.log(json);
+                if (json.mensaje) {
+                    $(".mensaje").html(json.mensaje).fadeIn();
+                }else if(json){
+                    $(".request").append('<div class="image_approval border mx-auto position-relative mb-5">' +
+                        '<div class="row contenedor">' +
+                        '<div class="col-md-12">' +
+                        '<div class="row m-0 p-0">' +
+                        '<div class="col-md-4 p-4 m-0">' +
+                        '<div class="avatar_container">' +
+                        '<div class="avatar">' +
+                        '<img class="cover_avatar img-thumbnail" src="' + json.url_foto_perfil + '">' +
+                        '<label class="rut_flotante">foto rechazada</label>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="col-md-8 p-4 m-0"><textarea disabled name="observacion" class="form-control" id="comment" placeholder="Observaciones del administrador...">' + json.observacion + '</textarea></div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="action border">' +
+                        '<div class="action-buttons">' +
+                        '<button class="float-left btn rechazar" disabled>' +
+                        '<h5 class="m-0"><i class="' + json.estado_foto_perfil + '"></i></h5>' +
+                        '</button>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>');
+                }
+
+            } catch (err) {
+                //
+            }
+
+        }
+    });
+}
 
 $("input#rut_trabajador").rut({
     formatOn: 'keyup',

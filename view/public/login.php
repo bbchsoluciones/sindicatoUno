@@ -43,7 +43,7 @@
                     </div>
                 </div>
                 <div class="clear"></div>
-                <div class="remember">
+<!--                 <div class="remember">
                     <div class="float-left">
                         <label class="customcheck">
                             Recordarme
@@ -55,7 +55,7 @@
                         <span class="cursor">¿Olvidaste tu contraseña?</span>
                     </div>
                 </div>
-                <div class="clear"></div>
+                <div class="clear"></div> -->
                 <div class="btn-container">
                     <button type="submit" class="btn btn-success">Entrar</button>
                 </div>

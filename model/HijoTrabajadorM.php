@@ -301,7 +301,7 @@ class HijoTrabajadorM{
 		}catch (Exception $ex) {
 			echo "Fallo: " . $ex->getMessage();
         }		
-	}zz
+	}
 
 
 }

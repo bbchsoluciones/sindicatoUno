@@ -57,9 +57,19 @@ elseif (isset($_GET['run_trabajador']) && !empty($_GET['run_trabajador']) && iss
         $trabajador->setRun_trabajador($rut);
         $trabajador->mostrar_datos_trabajador();
         if (!empty($trabajador->getTrabajador())):
+            $perfilUser = $trabajador->getTrabajador();
+            $foto = "";
+            foreach ($perfilUser as $index => $row):
+                if ($index == 'estado_foto_perfil' && $row == "rechazada"):
+                    $foto = "";
+                elseif ($index == 'estado_foto_perfil' && $row == "aprobada"):
+                    $foto = $perfilUser['url_foto_perfil'];
+                endif;
+            endforeach;
+            $perfilUser['url_foto_perfil'] = $foto;
             $trabajadores = array(
                 "trabajador" => array(
-                    $trabajador->getTrabajador(),
+                    $perfilUser,
                 ),
             );
             echo json_encode($trabajadores);
@@ -253,7 +263,7 @@ elseif (isset($_POST['tipo_usuario']) &&
             $trabajador->encontrarTconImagen();
             $foto->setUrl_foto_perfil($avatar);
             $foto->setTrabajador_run_trabajador($data['run_trabajador']);
-            $foto->setEstado_foto_perfil("pendiente");
+            $foto->setEstado_foto_perfil("aprobada");
             $trabajador->encontrarTconImagen();
             $old_imagen = $trabajador->getTrabajador();
             if (!empty($old_imagen)):
@@ -266,6 +276,11 @@ elseif (isset($_POST['tipo_usuario']) &&
             $foto->modificarFotoPerfil($accion);
         endif;
         if ($trabajador->actualizar_trabajador()):
+            $n = new NotificacionesM();
+            $n->setRun_trabajador($data['run_trabajador']);
+            $n->setTipo("user");
+            $n->eliminar_notificacion();
+
             $error['titulo'] = "Éxito!";
             $error['mensaje'] = "Información actualiza correctamente.";
             $error['clase'] = "success";
@@ -422,6 +437,9 @@ elseif (isset($_POST['email_trabajador']) &&
                 $n = new NotificacionesM();
                 $n->setRun_trabajador($data['run_trabajador']);
                 $n->setDescripcion("Solicitud pendiente");
+                $n->setTipo("user");
+                $n->eliminar_notificacion();
+                $n->setTipo("admin");
                 $n->eliminar_notificacion();
                 $n->registrar_notificacion();
                 $options = array(
@@ -434,7 +452,8 @@ elseif (isset($_POST['email_trabajador']) &&
                     '605862',
                     $options
                 );
-                $notificacion['message'] = 'Aprobacion pendiente';
+                $notificacion['title'] = 'Solicitud pendiente';
+                $notificacion['message'] = "Trabajador: " . $data['nombres_trabajador'];
                 $notificacion['image'] = $avatar;
                 $notificacion['url'] = 'http://localhost/sindicatoUno/view/intranet/admin/imageApproval.php';
                 $pusher->trigger('my-channel', 'my-event', $notificacion);
@@ -533,6 +552,27 @@ elseif (isset($_GET['solicitudes_historial'])):
         $error['mensaje'] = "No se encontraron registros";
         echo json_encode($error);
     endif;
+elseif (isset($_GET['solicitudes_historial_user'])):
+    $error = array();
+    $class = null;
+    $perfil = new FotoPerfilM();
+    $perfil->setTrabajador_run_trabajador($_SESSION['run_trabajador']);
+    $perfil->detalle_solicitud_user();
+    if (!empty($perfil->getFotos())):
+        $perfilUser = $perfil->getFotos();
+        foreach ($perfilUser as $index => $row):
+            if ($index == 'estado_foto_perfil' && $row == "aprobada"):
+                $class = "fa fa-check";
+            else:
+                $class = "fas fa-times";
+            endif;
+            $perfilUser['estado_foto_perfil'] = $class;
+        endforeach;
+        echo json_encode($perfilUser);
+    else:
+        $error['mensaje'] = "No se encontraron registros";
+        echo json_encode($error);
+    endif;
 elseif (isset($_POST['actualizar_estado']) &&
     isset($_POST['id_foto_perfil']) &&
     isset($_POST['estado']) &&
@@ -549,13 +589,31 @@ elseif (isset($_POST['actualizar_estado']) &&
         $perfil->setObservacion($data['observacion']);
         $perfil->setEstado_foto_perfil($data['estado']);
         if ($perfil->actualizar_solicitud()):
-
-            if ($data['estado'] == "rechazada"):
-                //
-            endif;
             $n = new NotificacionesM();
-            $n->setRun_trabajador($perfil->getFotos()['trabajador_run_trabajador']);
+            $run_trabajador = $perfil->getFotos()['trabajador_run_trabajador'];
+            $n->setRun_trabajador($run_trabajador);
+            $n->setTipo("admin");
             $n->eliminar_notificacion();
+            if ($data['estado'] == "rechazada"):
+                $n->setDescripcion("Solicitud rechazada");
+                $n->setTipo("user");
+                $n->registrar_notificacion();
+                $options = array(
+                    'cluster' => 'us2',
+                    'useTLS' => false,
+                );
+                $pusher = new Pusher\Pusher(
+                    '007aa358a604a98ed413',
+                    '00e69b3c91fd9e02248f',
+                    '605862',
+                    $options
+                );
+                $notificacion['title'] = 'Imagen rechazada';
+                $notificacion['message'] = 'Se recomienda volver a subir una nueva foto';
+                $notificacion['image'] = $perfil->getFotos()['url_foto_perfil'];
+                $notificacion['url'] = '#';
+                $pusher->trigger('user_' . $run_trabajador, 'my-event', $notificacion);
+            endif;
 
             $error['titulo'] = "Éxito!";
             $error['mensaje'] = "Solicitud " . $data['estado'] . " correctamente.";

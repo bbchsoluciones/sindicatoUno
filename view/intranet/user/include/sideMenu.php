@@ -7,6 +7,12 @@
                 <span>Resumen</span>
               </a>
             </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="imageApproval.php">
+                <i class="fas fa-envelope pr-2"></i>
+                <span>Solicitudes</span>
+              </a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="moveManage.php">
                 <i class="fa fa-money-bill-alt pr-2"></i>

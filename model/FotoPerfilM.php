@@ -77,7 +77,8 @@ class FotoPerfilM
             if ($accion == "update"):
                 $sql = "UPDATE foto_perfil  SET     url_foto_perfil=:avatar,
                                                     fec_subida_perfil=now(),
-                                                    estado_foto_perfil=:estado_foto_perfil
+                                                    estado_foto_perfil=:estado_foto_perfil,
+                                                    observacion=NULL
                                             WHERE   trabajador_run_trabajador=:rut";
             else:
 
@@ -93,6 +94,7 @@ class FotoPerfilM
                                                 :estado_foto_perfil);";
 
             endif;
+/*             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); */
             $consulta = $conn->prepare($sql);
             $consulta->bindParam(':rut', $this->trabajador_run_trabajador);
             $consulta->bindValue(':avatar', $this->url_foto_perfil);
@@ -174,6 +176,27 @@ class FotoPerfilM
             $sql = "SELECT * FROm foto_perfil WHERE id_foto_perfil=:id_foto_perfil";
             $consulta = $conn->prepare($sql);
             $consulta->bindParam(':id_foto_perfil', $this->id_foto_perfil);
+            $consulta->execute();
+            $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
+            if ($resultado) {
+                $this->fotos = array_map("utf8_encode", $resultado);
+            }
+            $conn = null;
+            $consulta = null;
+
+        } catch (Exception $ex) {
+            echo "Fallo: " . $ex->getMessage();
+        }
+    }
+    public function detalle_solicitud_user()
+    {
+        $this->fotos = array();
+        try {
+            $pdo = PDOConnection::instance();
+            $conn = $pdo->getConnection();
+            $sql = "SELECT * FROm foto_perfil WHERE trabajador_run_trabajador=:trabajador_run_trabajador AND estado_foto_perfil='rechazada'";
+            $consulta = $conn->prepare($sql);
+            $consulta->bindParam(':trabajador_run_trabajador', $this->trabajador_run_trabajador);
             $consulta->execute();
             $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
             if ($resultado) {

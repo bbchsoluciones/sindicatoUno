@@ -12,6 +12,7 @@ class NotificacionesM
     private $descripcion;
     private $fecha;
     private $notificaciones;
+    private $tipo;
 
     public function getId_notificaciones()
     {
@@ -62,6 +63,13 @@ class NotificacionesM
     {
         $this->fecha = $fecha;
     }
+    public function getTipo(){
+		return $this->tipo;
+	}
+
+	public function setTipo($tipo){
+		$this->tipo = $tipo;
+	}
     public function getNotificaciones()
     {
         return $this->notificaciones;
@@ -72,7 +80,7 @@ class NotificacionesM
         $this->notificaciones = $notificaciones;
     }
 
-    public function listar_notificaciones()
+    public function listar_notificaciones_admin()
     {
         $this->notificaciones = array();
         try {
@@ -81,8 +89,36 @@ class NotificacionesM
             $conn = $pdo->getConnection();
             $sql = "SELECT * FROM notificaciones n 
                             INNER JOIN foto_perfil f
-                    ON n.run_trabajador=f.trabajador_run_trabajador ";
+                    ON n.run_trabajador=f.trabajador_run_trabajador
+                    WHERE n.tipo='admin'";
             $consulta = $conn->prepare($sql);
+            $consulta->execute();
+            $resultado = $consulta->fetchAll();
+            if ($resultado):
+                for ($i = 0; $i < count($resultado); $i++):
+                    array_push($this->notificaciones, array_map("utf8_encode", $resultado[$i]));
+                endfor;
+            endif;
+            $conn = null;
+            $consulta = null;
+
+        } catch (Exception $ex) {
+            echo "Fallo: " . $ex->getMessage();
+        }
+    }
+    public function listar_notificaciones_user()
+    {
+        $this->notificaciones = array();
+        try {
+
+            $pdo = PDOConnection::instance();
+            $conn = $pdo->getConnection();
+            $sql = "SELECT * FROM notificaciones n 
+                            INNER JOIN foto_perfil f
+                    ON n.run_trabajador=f.trabajador_run_trabajador 
+                    WHERE n.run_trabajador=:run_trabajador AND n.tipo='user'";
+            $consulta = $conn->prepare($sql);
+            $consulta->bindParam(':run_trabajador', $this->run_trabajador);
             $consulta->execute();
             $resultado = $consulta->fetchAll();
             if ($resultado):
@@ -109,13 +145,16 @@ class NotificacionesM
                                 (run_trabajador,
                                 visto,
                                 descripcion,
+                                tipo,
                                 fecha)	
                 VALUES  (:run_trabajador,
                         0,
                         :descripcion,
+                        :tipo,
                         now())";
             $consulta = $conn->prepare($sql);
             $consulta->bindParam(':run_trabajador', $this->run_trabajador);
+            $consulta->bindParam(':tipo', $this->tipo);
             $consulta->bindValue(':descripcion', $this->descripcion);
             if ($consulta->execute()) {
                 $this->id_texto = $conn->lastInsertId();
@@ -137,9 +176,10 @@ class NotificacionesM
         try {
             $pdo = PDOConnection::instance();
             $conn = $pdo->getConnection();
-            $sql = "DELETE FROM notificaciones WHERE run_trabajador=:run_trabajador";
+            $sql = "DELETE FROM notificaciones WHERE run_trabajador=:run_trabajador AND tipo=:tipo";
             $consulta = $conn->prepare($sql);
             $consulta->bindParam(':run_trabajador', $this->run_trabajador);
+            $consulta->bindParam(':tipo', $this->tipo);
             if ($consulta->execute()) {
                 return true;
             } else {
