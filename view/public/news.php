@@ -24,12 +24,12 @@
         ?>
 
         <div class="row pt-5">
-            <div class="col-4 news-img-preview">
+            <div class="col-md-4 p-3 news-img-preview">
                 <a href="newsdetail.php?id_news=<?php echo $row['id_noticia']?>" class="">
                     <img src="<?php echo $row['url_foto_noticia']; ?>" alt="" class="">
                 </a>
             </div>
-            <div class="col-8">
+            <div class="col-md-8 p-3">
                 <div class="row">
                     <div class="col-12">
                         <h3 class="titulo"><a href="newsdetail.php?id_news=<?php echo $row['id_noticia']?>"><?php echo $row['titulo']; ?></a></h3>
@@ -37,7 +37,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <p class="subtitulo"><?php echo substr(strip_tags(stripslashes($row['cuerpo'])),0,290)."...";?></p>
+                        <p class="subtitulo"><?php echo substr(strip_tags(stripslashes($row['cuerpo'])),0,200)."...";?></p>
                     </div>
                 </div>
 
