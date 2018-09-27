@@ -24,7 +24,23 @@ endif;
   $pageName = explode(".", $pageName);
   ?>
 
-    <title>SB Admin - Dashboard</title>
+    <!-- title -->
+    <?php if ($pageName[0]=="index"): ?>
+      <title>Resúmen</title>
+    <?php elseif ($pageName[0]=="userManage"): ?>
+      <title>Perfil</title>
+    <?php elseif ($pageName[0]=="sonNew"): ?>
+      <title>Registrar Hijo</title>
+    <?php elseif ($pageName[0]=="sonManage"): ?>
+      <title>Administrar Hijos</title>
+    <?php elseif ($pageName[0]=="moveManage"): ?>
+      <title>Movimientos</title>
+    <?php elseif ($pageName[0]=="barChartEntry"): ?>
+      <title>Gráfico Ingresos</title>
+    <?php elseif ($pageName[0]=="barChartExit"): ?>
+      <title>Gráfico Egresos</title>
+    <?php endif; ?>
+    <!-- title -->
 
     <!-- Bootstrap core CSS-->
     <link href="../../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">

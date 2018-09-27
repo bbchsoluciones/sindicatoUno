@@ -19,12 +19,57 @@ endif;
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-  <?php
-  $pageName = basename($_SERVER['PHP_SELF']);
-  $pageName = explode(".", $pageName);
-  ?>
+    <?php
+      $pageName = basename($_SERVER['PHP_SELF']);
+      $pageName = explode(".", $pageName);
+    ?>
+    <!-- title -->
+    <?php if ($pageName[0]=="index"): ?>
+      <title>Resúmen</title>
+    <?php elseif ($pageName[0]=="userNew"): ?>
+      <title>Registrar Trabajador</title>
+    <?php elseif ($pageName[0]=="userManage"): ?>
+      <title>Administrar Trabajadores</title>
+    <?php elseif ($pageName[0]=="sonNew"): ?>
+      <title>Registrar Hijo</title>
+    <?php elseif ($pageName[0]=="sonManage"): ?>
+      <title>Administrar Hijos</title>
+    <?php elseif ($pageName[0]=="moveNew"): ?>
+      <title>Registrar Movimiento</title>
+    <?php elseif ($pageName[0]=="moveManage"): ?>
+      <title>Administrar Movimientos</title>
+    <?php elseif ($pageName[0]=="barChartEntry"): ?>
+      <title>Gráfico Ingresos</title>
+    <?php elseif ($pageName[0]=="barChartExit"): ?>
+      <title>Gráfico Egresos</title>
+    <?php elseif ($pageName[0]=="newNews"): ?>
+      <title>Crear Noticia</title>
+    <?php elseif ($pageName[0]=="newsManage"): ?>
+      <title>Administrar Noticias</title> 
+    <?php elseif ($pageName[0]=="homeManage"): ?>
+      <title>Administrar Inicio</title> 
+    <?php elseif ($pageName[0]=="aboutManage"): ?>
+      <title>Administrar Quiénes Somos</title> 
+    <?php elseif ($pageName[0]=="userManageProfile"): ?>
+      <title>Perfil</title>
+    <?php elseif ($pageName[0]=="sonNewProfile"): ?>
+      <title>Registrar Hijo</title>
+    <?php elseif ($pageName[0]=="sonManageProfile"): ?>
+      <title>Administrar Hijos</title>
+    <?php elseif ($pageName[0]=="newGallery"): ?>
+      <title>Galería</title> 
+    <?php elseif ($pageName[0]=="galleryManage"): ?>
+      <title>Administrar Galería</title> 
+    <?php elseif ($pageName[0]=="imageApproval"): ?>
+      <title>Solicitudes Pendientes</title> 
+    <?php elseif ($pageName[0]=="imageApprovalHistory"): ?>
+      <title>Historial Solicitudes</title> 
+    <?php endif; ?>
+    <!-- title -->
 
-    <title>SB Admin - Dashboard</title>
+
+
+    
 
     <!-- Bootstrap core CSS-->
     <link href="../../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -41,17 +86,14 @@ endif;
 
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 
-    <?php if($pageName[0]=="moveManage"):?>
-    
-    
-    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css" rel="stylesheet">
-    <?php endif;?>
-    <?php if($pageName[0]=="index"):?>   
-    
-    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
+    <?php if($pageName[0]=="moveManage"):?>   
+      <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
+      <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
+      <link href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css" rel="stylesheet">
+    <?php endif;?>  
+    <?php if($pageName[0]=="index"):?>       
+      <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
+      <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
     <?php endif;?>
 
     <script>
@@ -65,8 +107,7 @@ endif;
         <?php elseif($pageName[0]=="index"):?>
           mostrarDatosTrabajador(<?php echo $_SESSION['run_trabajador']; ?>);
         <?php endif;?>
-      }
-        
+      }        
     </script>
 
   </head>

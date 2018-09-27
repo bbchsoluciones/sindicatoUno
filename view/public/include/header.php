@@ -16,7 +16,19 @@
   <?php endif; ?>
   <link rel="icon" href="../../../../favicon.ico">
 
-  <title>Carousel Template for Bootstrap</title>
+  <!-- title -->
+  <?php if ($pageName[0]=="index"): ?>
+      <title>Inicio</title>
+    <?php elseif ($pageName[0]=="about"): ?>
+      <title>Quiénes Somos</title>
+    <?php elseif ($pageName[0]=="news"): ?>
+      <title>Noticias</title>
+    <?php elseif ($pageName[0]=="gallery"): ?>
+      <title>Galería</title>
+    <?php elseif ($pageName[0]=="contact"): ?>
+      <title>Contacto</title>
+    <?php endif; ?>
+    <!-- title -->
 
   <!-- Bootstrap core CSS -->
   <link href="../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
