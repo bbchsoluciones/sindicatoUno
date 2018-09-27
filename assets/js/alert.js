@@ -41,3 +41,17 @@ function alertCorreo(estado) {
     }
     
 }// correoEnviado()
+
+function alertContacto(estado) {
+    if(estado==true){
+        $("#alertContacto").html('<div class="alert alert-success mb-1" role="alert">' +
+        'Correo enviado con éxito.' +
+        '</div>').fadeIn().delay(1000).fadeOut();
+    }
+    if(estado==false){
+        $("#alertContacto").html('<div class="alert alert-danger mb-1" role="alert">' +
+        'Correo no enviado, verifique datos.' +
+        '</div>').fadeIn().delay(1000).fadeOut();
+    }
+    
+}// correoEnviado()

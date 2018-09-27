@@ -41,6 +41,22 @@ function limpiarCampos(id_contenedor,elemento,excepcion) {
         }
 
 }
+function limpiarCamposContacto(id_contenedor,elemento,excepcion) {
+
+    if(elemento == "input"){
+         $(id_contenedor).find(elemento).not(excepcion).val("");
+     }else if(elemento == "select"){
+         $(id_contenedor).find(elemento).not(excepcion).empty();
+         $(id_contenedor).find(elemento).not(excepcion).append(' <option value="asunto" selected="">Asunto</option>'+
+         '<option value="integracion">Integración al Sindicato</option>'+
+         '<option value="reclamo">Reclamo</option>'+
+         '<option value="sugerencia">Sugerencia</option>'+
+         '<option value="felicitacion">Felicitaciones</option>');
+     }else{
+         $(id_contenedor).find(elemento).empty();
+     }
+
+}
 
 function limpiarCampo(id_contenedor, elemento) {
 

@@ -39,16 +39,15 @@
 <!-- Core plugin JavaScript-->
 <script src="../../../assets/js/sb-admin.js"></script>
 <?php     if ($pageName[0]=="index"): ?>
-  <script src="../../../assets/vendor/datatables/jquery.dataTables.js"></script>
-  <script src="../../../assets/vendor/datatables/dataTables.bootstrap4.js"></script>
-  <script src="../../../assets/vendor/datatables/dataTables.bootstrap4.js"></script>
-  <script src="../../../assets/js/barChartIndex.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
   <script src="../../../assets/js/row.js"></script>
+  <script src="../../../assets/js/indexManager.js"></script>
+  <script src="../../../assets/js/numberFormat.js"></script>
   <script src="../../../assets/vendor/chart/Chart.bundle.js"></script>
   <script src="../../../assets/vendor/chart/Chart.bundle.min.js"></script>
   <script src="../../../assets/vendor/chart/Chart.js"></script>
   <script src="../../../assets/vendor/chart/Chart.min.js"></script>
-  <script src="../../../assets/js/indexManager.js"></script>
 <?php elseif ($pageName[0]=="userNew"): ?>
   <script src="../../../assets/js/jquery.rut.min.js"></script>
   <script src="../../../assets/js/userManager.js"></script>

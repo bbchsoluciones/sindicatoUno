@@ -48,6 +48,11 @@ endif;
     <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css" rel="stylesheet">
     <?php endif;?>
+    <?php if($pageName[0]=="index"):?>   
+    
+    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
+    <?php endif;?>
 
     <script>
       window.onload = function () {
@@ -57,6 +62,8 @@ endif;
           buscarPadre(<?php echo $_SESSION['run_trabajador']; ?>);
         <?php elseif($pageName[0]=="sonManageProfile"):?>
           buscarHijo(<?php echo $_SESSION['run_trabajador']; ?>);
+        <?php elseif($pageName[0]=="index"):?>
+          mostrarDatosTrabajador(<?php echo $_SESSION['run_trabajador']; ?>);
         <?php endif;?>
       }
         

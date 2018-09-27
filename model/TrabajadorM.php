@@ -702,15 +702,15 @@ class TrabajadorM
             //Server settings
             $mail->SMTPDebug = 0; // Enable verbose debug output
             $mail->isSMTP(); // Set mailer to use SMTP
-            $mail->Host = "smtp.gmail.com"; // Specify main and backup SMTP servers
+            $mail->Host = "mail.sinabrinks.cl"; // Specify main and backup SMTP servers
             $mail->SMTPAuth = true; // Enable SMTP authentication
-            $mail->Username = "bbchsoluciones@gmail.com"; // SMTP username
-            $mail->Password = "Santiago2014"; // SMTP password
+            $mail->Username = "no-reply@sinabrinks.cl"; // SMTP username
+            $mail->Password = "Santiago2018"; // SMTP password
             $mail->SMTPSecure = "ssl"; // Enable TLS encryption, `ssl` also accepted
             $mail->Port = 465; // TCP port to connect to
 
             //Recipients
-            $mail->setFrom("bbchsoluciones@gmail.com", "bbchsoluciones@gmail.com");
+            $mail->setFrom("no-reply@sinabrinks.cl", "no-reply@sinabrinks.cl");
             //$mail->setFrom('bbchsoluciones@gmail.com');
             //$mail->addAddress($destinatario, $destinatario);     // Add a recipient
             $mail->addAddress($destinatario); // Add a recipient
