@@ -470,10 +470,50 @@ $("#actualizar_trabajador").click(function (event) {
             }
             limpiarCampo("#pass", "input");
             limpiarCampo("#vpass", "input");
-            limpiarCampo(".custom-file-label","label");
+            limpiarCampo(".custom-file-label", "label");
         },
         error: function (e) {
             $("#actualizar_trabajador").prop("disabled", false);
+
+        }
+
+    });
+
+});
+$("#iniciar_sesion").click(function (event) {
+    event.preventDefault();
+    limpiarCampo("#mensaje", "div");
+    var form = $('#form_login')[0];
+    form = new FormData(form);
+    $("#iniciar_sesion").prop("disabled", true);
+    $.ajax({
+        type: "POST",
+        url: "../../controller/LoginC.php",
+        processData: false, // Important!
+        contentType: false,
+        cache: false,
+        data: form,
+        timeout: 600000,
+        success: function (response) {
+            console.log(response);
+            $("#iniciar_sesion").prop("disabled", false);
+            var json = JSON.parse(response);
+            $('html, body').animate({
+                scrollTop: 0
+            }, 0);
+            if (json.clase) {
+                $("#mensaje").html('<div class="rounded-0 alert alert-' + json['clase'] + '" role="alert">' +
+                    '<strong>' + json['titulo'] + '</strong> ' + json['mensaje'] + '' +
+                    '</div>').fadeIn().delay(5000).fadeOut();
+                limpiarCampo("#pass", "input");
+            }
+            if (json.pagina) {
+                window.location = json.pagina;
+            }
+        },
+        error: function (e) {
+            $("#iniciar_sesion").prop("disabled", false);
+            alert(JSON.stringify(e));
 
         }
 
@@ -674,10 +714,10 @@ function cambiar_solicitud(form_id, estado) {
                 if (json.mensaje) {
                     $(".mensaje").html(json.mensaje).delay(500).fadeOut();
                 }
-                setTimeout(function(){
+                setTimeout(function () {
                     listar_solicitudes();
                     listar_notificaciones();
-                },800);
+                }, 800);
 
             } catch (err) {
                 alert(err);
