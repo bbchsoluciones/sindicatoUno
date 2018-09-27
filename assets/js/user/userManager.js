@@ -156,7 +156,6 @@ $("#actualizar_trabajador").click(function (event) {
         data: form,
         timeout: 600000,
         success: function (response) {
-            //console.log('RESPONSE ACTUALIZAR: '+response);
             $("#actualizar_trabajador").prop("disabled", false);
             var json = JSON.parse(response);
             $('html, body').animate({
@@ -172,6 +171,7 @@ $("#actualizar_trabajador").click(function (event) {
             }
             limpiarCampo("#pass", "input");
             limpiarCampo("#vpass", "input");
+            limpiarCampo(".custom-file-label","label");
 
         },
         error: function (e) {

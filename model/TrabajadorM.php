@@ -308,22 +308,24 @@ class TrabajadorM
 
     public function encontrarTconImagen()
     {
-
         try {
             $pdo = PDOConnection::instance();
             $conn = $pdo->getConnection();
-            $sql = "SELECT 	url_foto_perfil FROM foto_perfil WHERE foto_perfil.trabajador_run_trabajador=:run_trabajador";
+            $sql = "SELECT url_foto_perfil FROM foto_perfil WHERE trabajador_run_trabajador=:run_trabajador";
             $consulta = $conn->prepare($sql);
             $consulta->bindParam(':run_trabajador', $this->run_trabajador);
             $consulta->execute();
-            $this->trabajador = $consulta->fetch(PDO::FETCH_ASSOC);
+            $resultado = $consulta->fetchColumn();
+            if ($resultado) {
+                $this->trabajador = $resultado;
+            }
             $conn = null;
             $consulta = null;
 
         } catch (Exception $ex) {
             echo "Fallo: " . $ex->getMessage();
         }
-    } // Cierra encontrar_trabajador
+    }
 
     public function contarTrabajores($accion, $objeto)
     {
@@ -334,7 +336,7 @@ class TrabajadorM
             $sql = "SELECT count(*) from trabajador ";
             if ($accion == "buscar"):
                 $sql .= "WHERE run_trabajador LIKE concat('%', :texto, '%')
-										OR nombres_trabajador LIKE concat('%', :texto, '%')";
+											OR nombres_trabajador LIKE concat('%', :texto, '%')";
 
             endif;
 
@@ -367,7 +369,7 @@ class TrabajadorM
             if ($accion != "todo"):
                 if ($accion == "buscar"):
                     $sql .= "WHERE run_trabajador LIKE concat('%', :texto, '%')
-												OR nombres_trabajador LIKE concat('%', :texto, '%')";
+														OR nombres_trabajador LIKE concat('%', :texto, '%')";
                 elseif ($accion == "filtrar"):
                     if ($objeto == 'true'):
                         $order = "ORDER BY nombres_trabajador ASC";
@@ -516,7 +518,7 @@ class TrabajadorM
     {
 
         try {
-            $cuerpo = NULL;
+            $cuerpo = null;
             $cleaned = array();
             $sql_rows = array();
             $values = array(
@@ -541,18 +543,17 @@ class TrabajadorM
             );
             //limpiar listado y dejar solamente aquellos que no estan vacios
             foreach ($values as $key => $valor):
-                if (!empty($valor)):
+                if ($valor!=""):
                     $cleaned[$key] = $valor;
                 endif;
             endforeach;
-
             $pdo = PDOConnection::instance();
             $conn = $pdo->getConnection();
             $accion = "UPDATE trabajador SET ";
 
             //generar cuerpo de la consulta
             foreach ($cleaned as $key => $valor):
-                $sql_rows[$key] = $key."=:".$key;
+                $sql_rows[$key] = $key . "=:" . $key;
                 reset($cleaned);
                 end($cleaned);
                 if ($key !== key($cleaned)):
@@ -560,7 +561,7 @@ class TrabajadorM
                 else:
                     $sql_rows[$key] .= " ";
                 endif;
-                $cuerpo .=$sql_rows[$key];
+                $cuerpo .= $sql_rows[$key];
             endforeach;
 
             $clausula = "WHERE run_trabajador = :run_trabajador";
@@ -570,7 +571,7 @@ class TrabajadorM
 
             //genera los parametros
             foreach ($cleaned as $key => &$valor):
-                $consulta->bindParam(':'.$key, $valor);
+                $consulta->bindParam(':' . $key, $valor);
             endforeach;
             $consulta->bindParam(':run_trabajador', $this->run_trabajador, PDO::PARAM_STR);
             if ($consulta->execute()):

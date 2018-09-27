@@ -8,7 +8,10 @@ $ruta_raiz = dirname(dirname(__FILE__));
 require_once $ruta_raiz . '/model/TrabajadorM.php';
 require_once $ruta_raiz . '/model/subirImagenM.php';
 require_once $ruta_raiz . '/model/FotoPerfilM.php';
+require_once $ruta_raiz . '/model/NotificacionesM.php';
+require $ruta_raiz . '/model/vendor/autoload.php';
 require_once 'EncriptadorC.php';
+error_reporting(E_ALL);
 //MOSTRAR TRABAJORES CON/SIN FILTROS
 $error = array();
 $data = array();
@@ -211,6 +214,7 @@ elseif (isset($_POST['tipo_usuario']) &&
         $subir->__set("_new_name", date("Ymdhis"));
         $subir->__set("_dest", "../assets/images/avatar/");
         $imagen = $subir->init($_FILES['avatar']);
+        $avatar = "http://localhost/sindicatoUno/assets/images/avatar/" . $subir->_name;
         if (!empty($imagen)):
             $error['avatar'] = $imagen;
         endif;
@@ -247,12 +251,13 @@ elseif (isset($_POST['tipo_usuario']) &&
             $accion = "";
             $foto = new FotoPerfilM();
             $trabajador->encontrarTconImagen();
-            $avatar = "http://localhost/sindicatoUno/assets/images/avatar/" . $subir->_name;
             $foto->setUrl_foto_perfil($avatar);
             $foto->setTrabajador_run_trabajador($data['run_trabajador']);
             $foto->setEstado_foto_perfil("pendiente");
-            if (!empty($trabajador->getTrabajador()['url_foto_perfil'])):
-                $nombre_imagen = basename(parse_url($trabajador->getTrabajador()['url_foto_perfil'])['path']);
+            $trabajador->encontrarTconImagen();
+            $old_imagen = $trabajador->getTrabajador();
+            if (!empty($old_imagen)):
+                $nombre_imagen = basename(parse_url($old_imagen)['path']);
                 unlink("../assets/images/avatar/" . $nombre_imagen);
                 $accion = "update";
             else:
@@ -357,6 +362,7 @@ elseif (isset($_POST['email_trabajador']) &&
         $subir->__set("_new_name", date("Ymdhis"));
         $subir->__set("_dest", "../assets/images/avatar/");
         $imagen = $subir->init($_FILES['avatar']);
+        $avatar = "http://localhost/sindicatoUno/assets/images/avatar/" . $subir->_name;
         if (!empty($imagen)):
             $error['avatar'] = $imagen;
         endif;
@@ -369,7 +375,6 @@ elseif (isset($_POST['email_trabajador']) &&
         $error['clase'] = "danger";
         echo json_encode($error);
     else:
-
         $trabajador = new TrabajadorM();
         $trabajador->setRun_trabajador($data['run_trabajador']);
         $trabajador->setTipo_usuario_id_tipo_usuario($_SESSION['tipo_usuario']);
@@ -388,22 +393,53 @@ elseif (isset($_POST['email_trabajador']) &&
         $trabajador->setFec_ing_sin_trabajador($data['fec_ing_sin_trabajador']);
         $trabajador->setTelefono_trabajador($data['telefono_trabajador']);
         $trabajador->setCelular_trabajador($data['celular_trabajador']);
+        $uploaded = false;
         if (isset($_FILES['avatar']['name']) && !empty($_FILES['avatar']['name'])):
             $accion = "";
+            $estado = "";
             $foto = new FotoPerfilM();
-            $trabajador->encontrarTconImagen();
-            $avatar = "http://localhost/sindicatoUno/assets/images/avatar/" . $subir->_name;
             $foto->setUrl_foto_perfil($avatar);
-            if (!empty($trabajador->getTrabajador()['url_foto_perfil'])):
-                $nombre_imagen = basename(parse_url($trabajador->getTrabajador()['url_foto_perfil'])['path']);
+            $foto->setTrabajador_run_trabajador($data['run_trabajador']);
+            if ($_SESSION['tipo_usuario'] != 1):
+                $estado = "pendiente";
+            else:
+                $estado = "aprobada";
+            endif;
+            $foto->setEstado_foto_perfil($estado);
+            $trabajador->encontrarTconImagen();
+            $old_imagen = $trabajador->getTrabajador();
+            if (!empty($old_imagen)):
+                $nombre_imagen = basename(parse_url($old_imagen)['path']);
                 unlink("../assets/images/avatar/" . $nombre_imagen);
                 $accion = "update";
             else:
                 $accion = "insert";
             endif;
-            $foto->modificarFotoPerfil($accion, $data['run_trabajador']);
+            $uploaded = $foto->modificarFotoPerfil($accion);
         endif;
         if ($trabajador->actualizar_trabajador()):
+            if ($uploaded && $_SESSION['tipo_usuario'] != 1):
+                $n = new NotificacionesM();
+                $n->setRun_trabajador($data['run_trabajador']);
+                $n->setDescripcion("Solicitud pendiente");
+                $n->eliminar_notificacion();
+                $n->registrar_notificacion();
+                $options = array(
+                    'cluster' => 'us2',
+                    'useTLS' => false,
+                );
+                $pusher = new Pusher\Pusher(
+                    '007aa358a604a98ed413',
+                    '00e69b3c91fd9e02248f',
+                    '605862',
+                    $options
+                );
+                $notificacion['message'] = 'Aprobacion pendiente';
+                $notificacion['image'] = $avatar;
+                $notificacion['url'] = 'http://localhost/sindicatoUno/view/intranet/admin/imageApproval.php';
+                $pusher->trigger('my-channel', 'my-event', $notificacion);
+            endif;
+
             $error['titulo'] = "Éxito!";
             $error['mensaje'] = "Información actualiza correctamente.";
             $error['clase'] = "success";
@@ -465,7 +501,7 @@ elseif (isset($_POST['destinatario']) && isset($_POST['nombre']) && isset($_POST
     else:
         echo "false";
     endif;
-
+//SOLICITUDES
 elseif (isset($_GET['solicitudes_pendientes'])):
     $error = array();
     $perfil = new FotoPerfilM();
@@ -497,7 +533,7 @@ elseif (isset($_GET['solicitudes_historial'])):
         $error['mensaje'] = "No se encontraron registros";
         echo json_encode($error);
     endif;
-elseif (isset($_POST['id_foto_perfil']) &&
+elseif (isset($_POST['actualizar_estado']) &&
     isset($_POST['id_foto_perfil']) &&
     isset($_POST['estado']) &&
     isset($_POST['observacion'])):
@@ -513,6 +549,14 @@ elseif (isset($_POST['id_foto_perfil']) &&
         $perfil->setObservacion($data['observacion']);
         $perfil->setEstado_foto_perfil($data['estado']);
         if ($perfil->actualizar_solicitud()):
+
+            if ($data['estado'] == "rechazada"):
+                //
+            endif;
+            $n = new NotificacionesM();
+            $n->setRun_trabajador($perfil->getFotos()['trabajador_run_trabajador']);
+            $n->eliminar_notificacion();
+
             $error['titulo'] = "Éxito!";
             $error['mensaje'] = "Solicitud " . $data['estado'] . " correctamente.";
             $error['clase'] = "success";
@@ -532,7 +576,7 @@ elseif (isset($_POST['id_foto_perfil']) &&
     endif;
 
 endif;
-
+//FIN SOLICITUDES
 function clean($string)
 {
     $string = str_replace('-', '', $string); // Replaces all hyphens with nothing :V.

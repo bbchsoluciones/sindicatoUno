@@ -75,24 +75,22 @@ class FotoPerfilM
             $pdo = PDOConnection::instance();
             $conn = $pdo->getConnection();
             if ($accion == "update"):
-                $sql = "UPDATE foto_perfil
-			                                    SET
-			                                            url_foto_perfil=:avatar,
-			                                            fec_subida_perfil=now(),
-			                                            estado_foto_perfil=:estado_foto_perfil
-			                                    WHERE   trabajador_run_trabajador=:rut";
+                $sql = "UPDATE foto_perfil  SET     url_foto_perfil=:avatar,
+                                                    fec_subida_perfil=now(),
+                                                    estado_foto_perfil=:estado_foto_perfil
+                                            WHERE   trabajador_run_trabajador=:rut";
             else:
 
                 $sql = "INSERT INTO foto_perfil
-			                                                (url_foto_perfil,
-			                                                trabajador_run_trabajador,
-			                                                fec_subida_perfil,
-			                                                estado_foto_perfil)
-			                                        VALUES
-			                                                (:avatar,
-			                                                :rut,
-			                                                now(),
-			                                                :estado_foto_perfil);";
+                                                (url_foto_perfil,
+                                                trabajador_run_trabajador,
+                                                fec_subida_perfil,
+                                                estado_foto_perfil)
+                                        VALUES
+                                                (:avatar,
+                                                :rut,
+                                                now(),
+                                                :estado_foto_perfil);";
 
             endif;
             $consulta = $conn->prepare($sql);
@@ -131,7 +129,7 @@ class FotoPerfilM
             $consulta->execute();
             $resultado = $consulta->fetchAll();
             for ($i = 0; $i < count($resultado); $i++) {
-                array_push($this->fotos, array_map('utf8_encode',$resultado[$i]));
+                array_push($this->fotos, array_map('utf8_encode', $resultado[$i]));
             }
             $conn = null;
             $consulta = null;
@@ -158,7 +156,7 @@ class FotoPerfilM
             $consulta->execute();
             $resultado = $consulta->fetchAll();
             for ($i = 0; $i < count($resultado); $i++) {
-                array_push($this->fotos, array_map('utf8_encode',$resultado[$i]));
+                array_push($this->fotos, array_map('utf8_encode', $resultado[$i]));
             }
             $conn = null;
             $consulta = null;
@@ -179,7 +177,7 @@ class FotoPerfilM
             $consulta->execute();
             $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
             if ($resultado) {
-               $this->fotos =  array_map("utf8_encode", $resultado);
+                $this->fotos = array_map("utf8_encode", $resultado);
             }
             $conn = null;
             $consulta = null;
@@ -197,13 +195,13 @@ class FotoPerfilM
             $pdo = PDOConnection::instance();
             $conn = $pdo->getConnection();
             $sql = "UPDATE foto_perfil SET estado_foto_perfil=:estado_foto_perfil";
-            if(!empty($this->observacion)):
+            if (!empty($this->observacion)):
                 $campo = ",observacion=:observacion";
             endif;
             $where = "WHERE id_foto_perfil=:id_foto_perfil";
             $sql = $sql . $separador . $campo . $separador . $where;
             $consulta = $conn->prepare($sql);
-            if(!empty($this->observacion)):
+            if (!empty($this->observacion)):
                 $consulta->bindParam(':observacion', $this->observacion);
             endif;
             $consulta->bindParam(':id_foto_perfil', $this->id_foto_perfil);
