@@ -93,8 +93,6 @@
 <?php endif;?>
 <script src="../../../assets/js/general.js"></script>
 <script>
-// Enable pusher logging - don't include this in production
-Pusher.logToConsole = true;
 
 var pusher = new Pusher('007aa358a604a98ed413', {
     cluster: 'us2',
