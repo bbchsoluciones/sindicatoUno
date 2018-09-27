@@ -229,7 +229,7 @@ function eliminarNoticia(id) {
     });
 }
 
-function selectNoticia() {
+/* function selectNoticia() {
     $("tbody").empty();
     clearTable('#tablaNoticias');
     var parametros = {
@@ -246,18 +246,28 @@ function selectNoticia() {
                 var tabla = $("#tablaNoticias").DataTable({
                     destroy: true,
                     "language": {
-                        "sLengthMenu": "_MENU_",
-                        "sSearch": "",
-                        "sSearchPlaceholder": "Buscar noticia...",
-                        "sInfo": "_START_ / _END_",
-                        "sInfoFiltered": "",
-                        "sZeroRecords": "No hay registros!",
-                        "sInfoEmpty": "0",
-                        "paginate": {
-                            "previous": "«",
-                            "next": "»"
+                        "sProcessing":     "Procesando...",
+                        "sLengthMenu":     "Ver _MENU_ registros",
+                        "sZeroRecords":    "No se encontraron noticias",
+                        "sEmptyTable":     "No hay noticias registradas",
+                        "sInfo":           "_START_ / _END_ (_TOTAL_ registros)",
+                        "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+                        "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                        "sInfoPostFix":    "",
+                        "sSearch":         "Buscar:",
+                        "sUrl":            "",
+                        "sInfoThousands":  ",",
+                        "sLoadingRecords": "Cargando...",
+                        "oPaginate": {
+                            "sFirst":    "Primero",
+                            "sLast":     "Último",
+                            "sNext":     "Siguiente",
+                            "sPrevious": "Anterior"
+                        },
+                        "oAria": {
+                            "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
                         }
-                       
                     }
                 });
                 var json = JSON.parse(response);
@@ -283,6 +293,71 @@ function selectNoticia() {
         }
     });
 
+} */
+
+function selectNoticia() {    
+    var parametros = {
+        "ajax": 'true',
+        "selectNoticia": 'selectNoticia'
+    };
+    table = $('#tablaNoticias').DataTable( {
+        destroy: true,
+        "language": {
+            "sProcessing":     "Procesando...",
+            "sLengthMenu":     "Ver _MENU_ registros",
+            "sZeroRecords":    "No se encontraron resultados",
+            "sEmptyTable":     "No hay movimientos registrados",
+            "sInfo":           "_START_ / _END_ (_TOTAL_ registros)",
+            "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix":    "",
+            "sSearch":         "Buscar:",
+            "sUrl":            "",
+            "sInfoThousands":  ",",
+            "sLoadingRecords": "Cargando...",
+            "oPaginate": {
+                "sFirst":    "Primero",
+                "sLast":     "Último",
+                "sNext":     "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "oAria": {
+                "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            }
+        },
+        "ajax": {
+            "url": "../../../controller/NoticiaC.php",
+            "type": "POST",
+            "data": parametros
+        },
+        "columns": [
+            { "data": "id_noticia"},
+            {
+                "render": function (data, type, data, meta) {
+                    return '<div class="rowNews"><img class="cover_miniatura" src="' + data.url_foto_noticia + '"></img></div>';
+                }
+            },
+            {
+                "render": function (data, type, data, meta) {
+                    return (data.titulo).substring(0, 25)+"...";
+                }
+            },
+            { "data": "publicada" },
+            { "data": "fecha_publicacion"},
+            { "data": "nombres_trabajador"},
+            {
+                "render": function (data, type, data, meta) {
+                    return '<div class="row justify-content-center">' +
+                    '<button onClick="buscarN(' + data.id_noticia + ')" class="btn btn-success mr-2"><i class="fas fa-pen-alt"></i></button>' +
+                    '<button id="eliminarN" onClick="eliminarN(' + data.id_noticia + ')" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>' +
+                    '</div>';
+                }
+            }
+            
+        ],
+        "order": [[ 0, "desc" ]]
+    } );
 }
 
 function validacion_camposNews(array, indice) {

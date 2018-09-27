@@ -117,9 +117,8 @@
 <?php elseif ($pageName[0]=="newsManage"): ?> 
 <script src="../../../assets/js/modal.js"></script>
 <script src="../../../assets/vendor/tinymce/tinymce.min.js?apiKey=ayksm51eyqs90o6zhleyi56fsus6pi22mfludruzls5hqhbk"></script>
-  <script src="../../../assets/vendor/datatables/jquery.dataTables.js"></script>
-  <script src="../../../assets/vendor/datatables/dataTables.bootstrap4.js"></script>
-  <script src="../../../assets/vendor/datatables/dataTables.bootstrap4.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
   <script src="../../../assets/js/newsManager.js"></script> 
   <script src="../../../assets/js/row.js"></script>
 <?php elseif ($pageName[0]=="homeManage"): ?> 
