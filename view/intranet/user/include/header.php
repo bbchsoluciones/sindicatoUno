@@ -26,7 +26,7 @@ $pageName = explode(".", $pageName);
 
     <!-- title -->
     <?php if ($pageName[0]=="index"): ?>
-      <title>Resúmen</title>
+      <title>Resumen</title>
     <?php elseif ($pageName[0]=="userManage"): ?>
       <title>Perfil</title>
     <?php elseif ($pageName[0]=="sonNew"): ?>

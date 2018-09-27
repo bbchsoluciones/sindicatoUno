@@ -25,7 +25,7 @@ endif;
     ?>
     <!-- title -->
     <?php if ($pageName[0]=="index"): ?>
-      <title>Resúmen</title>
+      <title>Resumen</title>
     <?php elseif ($pageName[0]=="userNew"): ?>
       <title>Registrar Trabajador</title>
     <?php elseif ($pageName[0]=="userManage"): ?>
