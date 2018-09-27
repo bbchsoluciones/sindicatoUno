@@ -1,12 +1,12 @@
 <?php
-if(!isset($_SESSION)):
-  session_start();//inicia sesion si está vacío
+if (!isset($_SESSION)):
+    session_start(); //inicia sesion si está vacío
 endif;
 
-if(!isset($_SESSION['tipo_usuario']))://Detectar salto de login
-  header("Location: ../../public/login.php");
-elseif($_SESSION['tipo_usuario'] != 2):// no es usuario user
-  header("Location: ../../public/login.php");
+if (!isset($_SESSION['tipo_usuario'])): //Detectar salto de login
+    header("Location: ../../public/login.php");
+elseif ($_SESSION['tipo_usuario'] != 2): // no es usuario user
+    header("Location: ../../public/login.php");
 endif;
 ?>
 <!DOCTYPE html>
@@ -20,9 +20,9 @@ endif;
     <meta name="description" content="">
     <meta name="author" content="">
   <?php
-  $pageName = basename($_SERVER['PHP_SELF']);
-  $pageName = explode(".", $pageName);
-  ?>
+$pageName = basename($_SERVER['PHP_SELF']);
+$pageName = explode(".", $pageName);
+?>
 
     <title>SB Admin - Dashboard</title>
 
@@ -39,8 +39,8 @@ endif;
     <link href="../../../assets/vendor/animate/animate.css" rel="stylesheet">
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 
-    <?php if($pageName[0]=="moveManage"):?>   
-    
+    <?php if ($pageName[0] == "moveManage"): ?>
+
     <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
     <?php endif;?>
@@ -48,19 +48,19 @@ endif;
 
     <script>
       window.onload = function () {
-        <?php if($pageName[0]=="index"):?>
+        <?php if ($pageName[0] == "index"): ?>
           mostrarDatosTrabajador(<?php echo $_SESSION['run_trabajador']; ?>);
-        <?php elseif($pageName[0]=="userManage"):?>
+        <?php elseif ($pageName[0] == "userManage"): ?>
           mostrarTrabajador(<?php echo $_SESSION['run_trabajador']; ?>);
-        <?php elseif($pageName[0]=="sonNew"):?>
+        <?php elseif ($pageName[0] == "sonNew"): ?>
           buscarPadre(<?php echo $_SESSION['run_trabajador']; ?>);
-        <?php elseif($pageName[0]=="sonManage"):?>
+        <?php elseif ($pageName[0] == "sonManage"): ?>
           buscarHijo(<?php echo $_SESSION['run_trabajador']; ?>);
         <?php endif;?>
       }
-        
+
     </script>
-    
+
 
   </head>
   <body id="page-top" class="<?php echo $pageName[0]; ?>">
@@ -73,35 +73,18 @@ endif;
         <i class="fas fa-bars"></i>
       </button>
 
-      <ul class="navbar-nav ml-auto">
+       <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown no-arrow mx-1">
           <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <span class="badge badge-danger">7</span>  
+          <span class="badge badge-danger" id="contador_notificaciones"></span>
           <i class="fas fa-bell fa-fw"></i>
           </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </li>
-        <li class="nav-item dropdown no-arrow mx-1">
-          <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <span class="badge badge-danger">7</span>  
-          <i class="fas fa-envelope fa-fw"></i>
-          </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
+          <div class="dropdown-menu dropdown-menu-right" id="notificaciones" aria-labelledby="alertsDropdown"></div>
         </li>
         <li class="nav-item dropdown no-arrow">
           <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <!-- <span class="badge badge-danger">7</span>   -->
-          <i class="fas fa-user-circle fa-fw"></i>            
+          <i class="fas fa-user-circle fa-fw"></i>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
             <a class="dropdown-item" href="index.php">Mi Cuenta</a>
@@ -116,7 +99,7 @@ endif;
 
     <div id="wrapper">
 
-<?php include('sideMenu.php') ?>    
+<?php include 'sideMenu.php'?>
 
       <div id="content-wrapper">
 
