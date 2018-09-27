@@ -27,6 +27,8 @@
       <title>Galería</title>
     <?php elseif ($pageName[0]=="contact"): ?>
       <title>Contacto</title>
+    <?php elseif ($pageName[0]=="newsdetail"): ?>
+      <title>Detalle Noticia</title>
     <?php endif; ?>
     <!-- title -->
 
