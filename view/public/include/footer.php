@@ -22,6 +22,11 @@
 <script src="../../assets/js/active-button.js"></script>
 <script src="../../assets/js/scroll0.js"></script>
 <script src="../../assets/js/gallery.js"></script>
+<?php if($pageName[0]=="contact"): ?> 
+<script src="../../assets/js/contactManager.js"></script>
+<script src="../../assets/js/alert.js"></script>
+<script src="../../assets/js/general.js"></script>
+<?php endif; ?>
 <!--
   <script src="assets/js/sticky-header-navbar.js"></script>
   <script src="assets/js/scroll0.js"></script>
