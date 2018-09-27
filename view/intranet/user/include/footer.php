@@ -88,6 +88,8 @@
   <script src="../../../assets/vendor/chart/Chart.min.js"></script>
   <script src="../../../assets/js/user/moveManager.js"></script>
   <script src="../../../assets/vendor/FileSaver/FileSaver.js"></script>
+  <?php elseif ($pageName[0] == "imageApproval"): ?>
+  <script src="../../../assets/js/user/userManager.js"></script>
 <?php endif;?>
 <script src="../../../assets/js/general.js"></script>
 <script>
@@ -161,7 +163,7 @@ function listar_notificaciones() {
                     }
                 }
 
-                if(json.length>=4){
+                if(json.length>4){
                     if((json.length-4)===0){
                         noti='Notificación';
                     }else{

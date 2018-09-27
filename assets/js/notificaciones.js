@@ -68,7 +68,7 @@ function listar_notificaciones() {
                     }
                 }
 
-                if(json.length>=4){
+                if(json.length>4){
                     if((json.length-4)===0){
                         noti='Notificación';
                     }else{

@@ -410,6 +410,7 @@ class TrabajadorM
             $conn = $pdo->getConnection();
             $sql = "SELECT
 					f.url_foto_perfil,
+                    f.estado_foto_perfil,
 					tu.tipo_usuario,
 					t.run_trabajador,
 					t.email_trabajador,

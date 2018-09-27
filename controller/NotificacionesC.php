@@ -13,7 +13,7 @@ if (isset($_GET['notificaciones'])):
     $timeZone = null;
     $notificacion = new NotificacionesM();
     $timeAgo = new Westsworld\TimeAgo(); 
-    $notificacion->listar_notificaciones();
+    $notificacion->listar_notificaciones_admin();
     if (!empty($notificacion->getNotificaciones())):
         $notificacion = $notificacion->getNotificaciones();
         foreach ($notificacion as $key => $val):
@@ -24,18 +24,17 @@ if (isset($_GET['notificaciones'])):
         $error['mensaje'] = "Nada por aquí.";
         echo json_encode($error);
     endif;
-endif;
-if (isset($_GET['notificaciones_user'])):
+elseif (isset($_GET['notificaciones_user'])):
     $error = array();
     $timeZone = null;
     $notificacion = new NotificacionesM();
     $timeAgo = new Westsworld\TimeAgo(); 
     $notificacion->setRun_trabajador($_SESSION['run_trabajador']);
-    $notificacion->listar_notificacion();
+    $notificacion->listar_notificaciones_user();
     if (!empty($notificacion->getNotificaciones())):
         $notificacion = $notificacion->getNotificaciones();
-        foreach ($notificacion as $row):
-            $notificacion['fecha'] =  $timeAgo->inWords(new DateTime($row['fecha']));
+        foreach ($notificacion as $key => $val):
+            $notificacion[$key]['fecha'] =  $timeAgo->inWords(new DateTime($val['fecha']));
         endforeach;
         echo json_encode($notificacion);
     else:
