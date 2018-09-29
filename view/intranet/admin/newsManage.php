@@ -57,7 +57,7 @@ include('include/header.php');
     <div class="overlay_newsE d-none">
         <div class="contenedor_newsE">
             <form action="" method="post" id="news-update-form" class="animated fadeIn" autocomplete="off" enctype="multipart/form-data">
-                <button type="button" class="btn btn-primary" id="close_newsE"><i class="fa fa-times"></i></button>
+                <button type="button" class="btn btn-success rounded-0" id="close_newsE"><i class="fa fa-times"></i></button>
                 <div id="mensaje"></div>
                 <div class="form-group">
                     <div class="jumbotron jumbotron-fluid p-2">

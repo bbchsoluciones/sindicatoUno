@@ -5,40 +5,18 @@ include 'include/header.php';
 
 
   <div class="container">
-    <div class="gallery-header">
-      <div class="container h-100">
-        <div class="row align-items-center h-100">
-          <div class="col-8 mx-auto">
-            <h4 class="text-center">Destacadas</h4>
-            <p class="text-justify">Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de
-              texto. Lorem Ipsum ha sido el texto
-              de relleno estándar de las industrias desde el año 1500, cuando un impresor
-            </p>
 
-          </div>
-        </div>
-      </div>
-    </div>
+    <h4 class="text-center">Destacadas</h4>
+
     <div class="row m-0">
       <div class="col-md-6 topMain"></div>
       <div class="col-md-6 p-0">
         <div class="row m-0 topSecondary"></div>
       </div>
     </div>
-    <div class="gallery-header">
-      <div class="container h-100">
-        <div class="row align-items-center h-100">
-          <div class="col-8 mx-auto">
-            <h4 class="text-center">Últimas</h4>
-            <p class="text-justify">Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de
-              texto. Lorem Ipsum ha sido el texto
-              de relleno estándar de las industrias desde el año 1500, cuando un impresor
-            </p>
 
-          </div>
-        </div>
-      </div>
-    </div>
+    <h4 class="text-center">Últimas</h4>
+
     <div class="row m-0 galeria_normal"></div>
   </div>
 

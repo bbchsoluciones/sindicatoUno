@@ -10,7 +10,7 @@ include 'include/header.php';
         <li class="breadcrumb-item active">Solicitudes</li>
         <li class="breadcrumb-item active">Historial</li>
     </ol>
-    <h4 class="text-center text-secondary my-5">Historial Solicitudes</h4>
+    <h4 class="text-center text-secondary my-5">Últimas Solicitudes</h4>
     <div class="request_container">
         <h6 class="text-dark text-center animated fadeInDown mensaje mb-4"></h6>
        <div class="request"></div>

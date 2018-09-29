@@ -390,6 +390,7 @@
 
 .overlay_newsE .contenedor_newsE {
     max-width: 600px;
+    width: auto;
 }
 
 .overlay_newsE .contenedor_newsE form {
@@ -405,9 +406,10 @@
 
 .overlay_newsE .contenedor_newsE form #close_newsE {
     position: absolute;
-    right: -20px;
-    top: -25px;
+    right: 0;
+    top: 0;
 }
+
 
 /* END son*/
 

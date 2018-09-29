@@ -177,7 +177,6 @@ function mostrar_galeria() {
         type: 'GET',
         success: function (response) {
             try {
-
                 var json = JSON.parse(response);
                 var favorito = null;
                 var c = 0;
@@ -243,6 +242,8 @@ function fav(id) {
 }
 
 function actualizar_destacado(id) {
+    var height = $("#list-images").height()+"px";
+    $("#list-images").css("height",height);
     $("#top_" + id).prop("disabled", true);
     var parametros = {
         id_foto_galeria: $("#id_foto_galeria_" + id).val(),
@@ -261,7 +262,6 @@ function actualizar_destacado(id) {
                 if (json['clase'] == "danger") {
                     modalInformacion(json);
                 }
-
             } catch (err) {
                 //alert(err);
             }
