@@ -73,14 +73,9 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="../../assets/vendor/jquery/jquery-3.3.1.min.js"></script>
     <script src="../../assets/vendor/bootstrap/js/bootstrap.min.js"></script>
-    <script src="../../assets/js/carousel-animation.js"></script>
-    <script src="../../assets/js/active-button.js"></script>
     <script src="../../assets/js/general.js"></script>
-    <script src="../../assets/js/userManager.js"></script>
-    <!--
-        <script src="assets/js/sticky-header-navbar.js"></script>
-        <script src="assets/js/scroll0.js"></script>
-        -->
+    <script src="../../assets/js/login.js"></script>
+
 </body>
 
 </html>

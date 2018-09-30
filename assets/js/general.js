@@ -2,15 +2,17 @@ $(function () {
     if ($('body').hasClass('newNews') || $('body').hasClass('newsManage')) {
         tinymce.init({
             selector: "#cuerpo",
+            menubar: false,
             plugins: "autoresize,autolink, code, textcolor colorpicker, fullscreen, image, media, preview,searchreplace,table",
-            toolbar: "fontselect,fontsizeselect,table,forecolor backcolor, fullscreen, image,preview,link unlink | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | undo redo | formatselect",
+            toolbar1: "formatselect,fontsizeselect",
+            toolbar2: "formatselect,link unlink | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | undo redo",
+            toolbar3: "table,forecolor backcolor, fullscreen, image, media,preview",
             language: 'es',
             fontsize_formats: '8pt 10pt 12pt 14pt 18pt 24pt 36pt',
             font_formats: 'Arial=arial,helvetica,sans-serif;Courier New=courier new,courier,monospace',
             themes: "modern",
             height: "300",
             width: '100%',
-            min_width: 400,
             image_title: true,
             // enable automatic uploads of images represented by blob or data URIs
             automatic_uploads: true,

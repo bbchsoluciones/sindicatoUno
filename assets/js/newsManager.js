@@ -121,7 +121,6 @@ function buscarN(id){
         success: function (response) {
             try {
                 var json = JSON.parse(response);
-                $(".card-body").css("min-height","1000px");
                 $("#id_noticia").val(json.noticia[0].id_noticia);
                 $("#imagen_noticia").attr("src",json.noticia[0].url_foto_noticia);
                 $("#titulo_noticia").val(json.noticia[0].titulo);

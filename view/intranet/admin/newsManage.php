@@ -15,19 +15,6 @@ include('include/header.php');
             <i class="fas fa-table"></i> Noticias
         </div>
         <div class="card-body">
-            <!-- <table class="table table-bordered display" id="tablaNoticias" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Imagen</th>
-                        <th>Titulo</th>
-                        <th>Estado</th>
-                        <th>Fecha</th>
-                        <th>Por</th>
-                        <th>Acción</th>
-                    </tr>
-                </thead>
-            </table> -->
             <table id="tablaNoticias" class="display responsive nowrap table-condensed" style="width:100%">
                 <thead>
                     <tr>

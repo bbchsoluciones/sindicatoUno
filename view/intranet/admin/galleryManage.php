@@ -15,6 +15,7 @@ include 'include/header.php';
       <img src="../../../assets/images/load_data.gif" width="100">
     </div>
   </div>
+  <div id="mensaje"></div>
   <div class="row m-0" id="list-images"></div>
   <div class="overlay-carousel d-none">
     <div class="overlay-container-carousel">

@@ -379,13 +379,15 @@
 
 .overlay_newsE {
     background: rgba(255, 255, 255, .5);
-    position: absolute;
+    position: fixed;
     top: 0;
+    left:0;
     height: 100%;
     width: 100%;
     z-index: 800;
     display: flex;
     justify-content: center;
+    overflow-y: scroll;
 }
 
 .overlay_newsE .contenedor_newsE {
@@ -395,6 +397,7 @@
 
 .overlay_newsE .contenedor_newsE form {
     margin-top: 20px;
+    margin-bottom: 100px;
     background: #495057;
     padding: 20px;
     position: relative;

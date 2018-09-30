@@ -279,6 +279,7 @@ function eliminar_confirmar(id, nombre) {
     var nombre = nombre;
     var funcion = "eliminar_imagen('" + id + "')";
     modalConfirmarEliminarImagenG(nombre, funcion);
+    limpiarCampo("#mensaje","div");
 }
 
 function eliminar_imagen(id) {
@@ -296,7 +297,9 @@ function eliminar_imagen(id) {
                 $("#trash_" + id).prop("disabled", false);
                 mostrar_galeria();
                 var json = JSON.parse(response);
-                modalInformacion(json);
+                $("#mensaje").html('<div class="rounded-0 alert alert-' + json['clase'] + '" role="alert">' +
+                '<strong>' + json['titulo'] + '</strong> ' + json['mensaje'] + '' +
+                '</div>').fadeIn().delay(5000).fadeOut();
 
 
             } catch (err) {
