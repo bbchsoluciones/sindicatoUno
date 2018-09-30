@@ -369,7 +369,8 @@
     position: absolute;
     left: 20px;
 }
-
+/* END son*/
+/* NEWS */
 .rowNews {
     display: flex;
     justify-content: center;
@@ -396,10 +397,11 @@
 }
 
 .overlay_newsE .contenedor_newsE form {
+    border-radius: 5px;
     margin-top: 20px;
     margin-bottom: 100px;
     background: #495057;
-    padding: 20px;
+    padding: 13px;
     position: relative;
 }
 
@@ -412,9 +414,16 @@
     right: 0;
     top: 0;
 }
+@media only screen and (min-width:200px) and (max-width:400px) {
+    .jumbotron{
+        padding: 10px !important;
+    }
+    .jumbotron h1{
+        font-size: 20px;
+    }
+}
 
-
-/* END son*/
+/* END NEWS */
 
 .add-imageC button {
     height: 100px;
