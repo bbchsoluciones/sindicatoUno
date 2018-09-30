@@ -1,7 +1,7 @@
 <?php
 include 'include/header.php';
 ?>
-    <div class="register-page">
+    <div class="registerNews-page">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
                 <a href="#">Resumen</a>
@@ -9,15 +9,15 @@ include 'include/header.php';
             <li class="breadcrumb-item active">Noticias</li>
             <li class="breadcrumb-item active">Crear noticia</li>
         </ol>
-        <div class="container p-5">
+        <div class="container news_container">
             <div class="row mb-5">
-                <div class="col-md-12" id="usernew_container">
+                <div class="col-md-12 p-1">
                     <form action="" method="post" id="news-form" autocomplete="off" enctype="multipart/form-data">
                         <div class="form-group">
                             <div class="jumbotron jumbotron-fluid">
                                 <div class="container">
                                     <h1 class="display-4 text-center">
-                                        <i class="fa fa-newspaper pr-4"></i>Crear noticia</h1>
+                                        <i class="fa fa-newspaper pr-2"></i>Crear noticia</h1>
                                 </div>
                             </div>
                         </div>

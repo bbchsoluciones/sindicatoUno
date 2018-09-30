@@ -414,14 +414,19 @@
     right: 0;
     top: 0;
 }
-@media only screen and (min-width:200px) and (max-width:400px) {
+@media only screen and (min-width:200px) and (max-width:500px) {
     .jumbotron{
         padding: 10px !important;
     }
     .jumbotron h1{
         font-size: 20px;
     }
+
+    .news_container{
+        padding: 0;
+    }
 }
+
 
 /* END NEWS */
 
