@@ -481,6 +481,7 @@ class TrabajadorM
 											sub_cargo_id_sub_cargo,
 											contrasena_trabajador,
 											comuna_id_comuna,
+                                            email_trabajador,
 											tipo_usuario_id_tipo_usuario,
 											estado_trabajador_id_estado_trabajador)
 					VALUES (:run_trabajador,
@@ -489,6 +490,7 @@ class TrabajadorM
 							:sub_cargo_id_sub_cargo,
 							:contrasena_trabajador,
 							:comuna_id_comuna,
+                            :email_trabajador,
 							:tipo_usuario_id_tipo_usuario,
 							:estado_trabajador_id_estado_trabajador);";
             $consulta = $conn->prepare($sql);
@@ -498,6 +500,7 @@ class TrabajadorM
             $consulta->bindValue(':sub_cargo_id_sub_cargo', null);
             $consulta->bindParam(':contrasena_trabajador', $this->contrasena_trabajador);
             $consulta->bindValue(':comuna_id_comuna', null);
+            $consulta->bindValue(':email_trabajador', $this->email_trabajador);
             $consulta->bindParam(':tipo_usuario_id_tipo_usuario', $this->tipo_usuario_id_tipo_usuario);
             $consulta->bindValue(':estado_trabajador_id_estado_trabajador', $this->estado_trabajador_id_estado_trabajador);
             if ($consulta->execute()) {
@@ -924,7 +927,7 @@ class TrabajadorM
                                                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                                         <tr>
                                                             <td class="bodycopy label">
-                                                                Usuario:
+                                                                Identificador:
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -934,7 +937,7 @@ class TrabajadorM
                                                         </tr>
                                                         <tr>
                                                             <td class="bodycopy label">
-                                                                Clave:
+                                                                Contraseña:
                                                             </td>
                                                         </tr>
                                                         <tr>

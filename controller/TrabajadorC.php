@@ -90,20 +90,27 @@ elseif (isset($_POST['tipo_usuario']) &&
     isset($_POST['apellidos_trabajador']) &&
     isset($_POST['contrasena_trabajador']) &&
     isset($_POST['run_trabajador']) &&
+    isset($_POST['email']) &&
     isset($_POST['registrar'])):
-
     foreach ($_POST as $indice => $valor):
         if ($indice == 'run_trabajador' && esRut($valor) == false):
             $valor = "Rut invalido";
             $error[$indice] = $valor;
         endif;
         if (empty(trim($valor))):
-            $valor = "Campo vacío, favor completar";
-            $error[$indice] = $valor;
+            if($indice != 'email'):
+                $valor = "Campo vacío, favor completar";
+                $error[$indice] = $valor;
+            endif;
         endif;
         $data[$indice] = utf8_decode(htmlspecialchars($valor));
     endforeach;
-
+    if(!empty(trim($_POST['email']))):
+        if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)):
+            $valor = "Correo inválido, favor verificar";
+            $error['email'] = $valor;
+        endif;
+    endif;
     if (count($error) > 0):
         $error['titulo'] = "Ha ocurrido un error!";
         $error['mensaje'] = "Uno o más campos tienen información errónea o están vacíos.";
@@ -120,10 +127,23 @@ elseif (isset($_POST['tipo_usuario']) &&
         $trabajador->setContrasena_trabajador($data['contrasena_trabajador']);
         $trabajador->setTipo_usuario_id_tipo_usuario($data['tipo_usuario']);
         $trabajador->setEstado_trabajador_id_estado_trabajador(0);
+        if(!empty(trim($_POST['email']))):
+            $trabajador->setEmail_trabajador($_POST['email']);
+        else:
+            $trabajador->setEmail_trabajador(null);
+        endif;        
         if ($trabajador->registrar_trabajador()):
             $error['titulo'] = "Éxito!";
-            $error['mensaje'] = "Información registrada correctamente.";
+            $error['mensaje'] = "Trabajador registrado correctamente.";
             $error['clase'] = "success";
+            if($trabajador->getEmail_trabajador() != null):
+                $nombres = explode(" ", $trabajador->getNombres_trabajador());
+                if($trabajador->enviarCorreo($trabajador->getEmail_trabajador(), $nombres[0], $trabajador->getRun_trabajador(), $_POST['contrasena_trabajador'])):
+                    $error['mensaje'] = "Trabajador registrado correctamente. Correo enviado.";
+                else:
+                    $error['mensaje'] = "Trabajador registrado correctamente. Correo NO enviado.";
+                endif;
+            endif;
             echo json_encode($error);
         else:
             $error['titulo'] = "Oops hubo un error!";
