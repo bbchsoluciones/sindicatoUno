@@ -14,17 +14,18 @@
                 endif;  
                 $fecha = ucwords(strftime("%d %b %Y", strtotime($row['fecha_publicacion'])));
                 $hora = strftime("%H:%m", strtotime($row['fecha_publicacion']));
+                $title = preg_replace('#[^0-9a-z_-]#i', '-', cleanString($row['titulo']));
         ?>
 
         <div class="row pt-5">
             <div class="col-md-4 p-3 news-img-preview">
-                <a href="newsdetail.php?id_news=<?php echo $row['id_noticia'];?>&title=<?php echo $row['titulo']; ?>"
+                <a href="newsdetail.php?id_news=<?php echo $row['id_noticia'];?>&title=<?php echo substr($title, 0, 150); ?>"
                     class="">
                     <img src="<?php echo $row['url_foto_noticia']; ?>" alt="" class="">
                 </a>
             </div>
             <div class="col-md-8 p-3" style="overflow:hidden">
-                <h3 class="titulo"><a href="newsdetail.php?id_news=<?php echo $row['id_noticia']?>">
+                <h3 class="titulo"><a href="newsdetail.php?id_news=<?php echo $row['id_noticia'];?>&title=<?php echo substr($title, 0, 150); ?>">
                         <?php echo $row['titulo']; ?></a></h3>
                 <p class="subtitulo">
                     <?php echo substr(strip_tags(stripslashes($row['cuerpo'])),0,200)."...";?>

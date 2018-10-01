@@ -61,7 +61,7 @@
                     <button type="submit" class="btn btn-success" id="iniciar_sesion">Entrar</button>
                 </div>
             </form>
-            <a type="button" class="back" href="index.php">
+            <a class="back" href="index.php">
                 <i class="fa fa-chevron-left "></i>
                 Volver
             </a>

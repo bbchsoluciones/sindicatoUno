@@ -28,7 +28,7 @@
     <?php elseif ($pageName[0]=="contact"): ?>
       <title>Contacto</title>
     <?php elseif ($pageName[0]=="newsdetail"): ?>
-      <title>Detalle Noticia</title>
+      <title><?php echo substr($_GET['title'], 0, 150);?></title>
     <?php endif; ?>
     <!-- title -->
 

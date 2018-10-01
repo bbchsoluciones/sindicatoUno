@@ -32,7 +32,7 @@ $("#iniciar_sesion").click(function (event) {
                     limpiarCampo("#pass", "input");
                 }
 
-            }, 3000);
+            }, 1500);
 
         },
         error: function (e) {
