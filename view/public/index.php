@@ -62,7 +62,6 @@
 
   <div class="cards">
     <div class="container">
-
       <div class="row">
         <?php foreach($principal['tarjeta'] as $tarjeta): ?>
         <div class="col-md-4 mb-md-0 mb-5">
@@ -83,6 +82,12 @@
         <?php endforeach; ?>
       </div>
     </div>
+  </div>
+  <div class="afiliados">
+      <h3 class="text-info text-center pb-5"><i class="fa fa-handshake pr-3"></i>Afiliados</h3>
+      <div class="cont_afiliado d-flex justify-content-center align-items-center">
+        <a href="http://www.neolegal.cl/" target="_blank"><img src="../../assets/images/principal/neologo.png" alt="neolegal logo"></a>
+      </div>
   </div>
 </div>
 <?php 

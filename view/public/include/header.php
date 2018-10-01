@@ -33,12 +33,12 @@
     <!-- title -->
 
   <!-- Bootstrap core CSS -->
-  <link href="../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../assets/vendor/bootstrap/css/bootstrap.min.css?ver=<?php echo time(); ?>" rel="stylesheet">
   <!-- FontAwesome -->
-  <link href="../../assets/vendor/fontawesome/css/all.css" rel="stylesheet">
+  <link href="../../assets/vendor/fontawesome/css/all.css?ver=<?php echo time(); ?>" rel="stylesheet">
   <!-- Custom styles for this template -->
-  <link href="../../assets/css/estilos_public.css" rel="stylesheet">
-  <link href="../../assets/vendor/animate/animate.css" rel="stylesheet">
+  <link href="../../assets/css/estilos_public.css?ver=<?php echo time(); ?>" rel="stylesheet">
+  <link href="../../assets/vendor/animate/animate.css?ver=<?php echo time(); ?>" rel="stylesheet">
 </head>
 
 <body>

@@ -30,7 +30,7 @@ body {
 
 main {
     overflow: auto;
-    padding-bottom: 150px;
+    padding-bottom: 80px;
 }
 
 .toTop {
@@ -72,6 +72,22 @@ main {
 }
 .alert-minimalist > [data-notify="message"] {
 	font-size: 80%;
+}
+.overlay_fullscreen{
+    position: fixed;
+    background: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+}
+.overlay_fullscreen img{
+    width: 150px;
+    height: 150px;
 }
 /* FIN GENERALES */
 
@@ -224,6 +240,11 @@ main {
     }
 }
 
+.home-page .afiliados .cont_afiliado img{
+    object-fit: cover;
+    width: 350px;
+    height: 100px;
+}
 /* FIN INICIO */
 
 .fondo-contact {
@@ -347,7 +368,7 @@ main {
 .gallery {
     width: 100%;
     height: 100%;
-    padding-top: 66px;
+    padding-top: 100px;
     z-index: 2;
 }
 

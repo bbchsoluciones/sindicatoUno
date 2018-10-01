@@ -49,7 +49,6 @@ function mostrar_galeria() {
     success: function (response) {
       try {
         var json = JSON.parse(response);
-        console.log(json);
         var c = 0;
         var n = 0;
         for (var i = 0; i < json.galeria.length; i++) {
@@ -96,7 +95,6 @@ function mostrar_galeria() {
               '<img src="' + json.galeria[i].url_foto_galeria + '">' +
               '</div>');
               c++;
-              console.log(c)
           }
         }
         c--;

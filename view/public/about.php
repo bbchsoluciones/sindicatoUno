@@ -4,7 +4,7 @@
   ?>
 <div class="container padding-about">
   <!-- Three columns of text below the carousel -->
-  
+  <h3 class="text-secondary pb-5"><i class="fa fa-users pr-3"></i>Quiénes Somos</h3>
   <div class="row justify-content-center">
     <div class="col-lg-3 text-center">
       <img class="rounded-circle" src="https://www.diariojuridico.com/wp-content/uploads/2014/10/daniel-rueda-silva-fotocarnet2.jpg" alt="Generic

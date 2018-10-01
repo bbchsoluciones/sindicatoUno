@@ -68,13 +68,18 @@
         </div>
     </div>
 
+    <div class="overlay_fullscreen d-none">
+  <img src="../../assets/images/loading_2.gif" alt="loading">
+</div>
     <!-- Bootstrap core JavaScript
           ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="../../assets/vendor/jquery/jquery-3.3.1.min.js"></script>
-    <script src="../../assets/vendor/bootstrap/js/bootstrap.min.js"></script>
-    <script src="../../assets/js/general.js"></script>
-    <script src="../../assets/js/login.js"></script>
+    <script src="../../assets/vendor/jquery/jquery-3.3.1.min.js?ver=<?php echo time(); ?>"></script>
+    <script src="../../assets/vendor/bootstrap/js/bootstrap.min.js?ver=<?php echo time(); ?>"></script>
+    <script src="../../assets/js/general.js?ver=<?php echo time(); ?>"></script>
+    <script src="../../assets/js/login.js?ver=<?php echo time(); ?>"></script>
+
+    
 
 </body>
 
