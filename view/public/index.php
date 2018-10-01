@@ -19,9 +19,9 @@
         <div class="container">
           <div class="carousel-caption  <?php echo $principal['carousel'][$i]['alineacion_texto']; ?>" style="color:<?php echo $principal['carousel'][$i]['color_texto']; ?>">
             <h1 data-animation="animated fadeInLeft">
-              <span><?php echo $principal['carousel'][$i]['titulo_']; ?></span>
+              <span style="text-shadow: 1px 1px 1px #000;"><?php echo $principal['carousel'][$i]['titulo_']; ?></span>
             </h1>
-            <p data-animation="animated  <?php echo $principal['carousel'][$i]['animacion']; ?>" class="carousel-text">
+            <p style="text-shadow: 1px 1px 1px #000;" data-animation="animated  <?php echo $principal['carousel'][$i]['animacion']; ?>" class="carousel-text">
               <span><?php echo $principal['carousel'][$i]['descripcion_']; ?></span>
             </p>
             <p data-animation="animated fadeInUp">

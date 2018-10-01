@@ -61,9 +61,9 @@ elseif (isset($_POST['id_texto']) &&
     if (isset($_FILES['imagen']['name']) && !empty($_FILES['imagen']['name'])):
         $subir = new imgUpldr;
         $subir->__set("_new_name", date("Ymdhis") . "_carousel");
-        $subir->__set("_dest", "../assets/images/");
+        $subir->__set("_dest", "../assets/images/principal/");
         $subida = $subir->init($_FILES['imagen']);
-        $imagen = "http://localhost/sindicatoUno/assets/images/" . $subir->_name;
+        $imagen = "http://localhost/sindicatoUno/assets/images/principal/" . $subir->_name;
         if (!empty($subida)):
             $error['imagen'] = $subida;
         endif;
@@ -129,12 +129,12 @@ elseif (isset($_POST['id_texto']) &&
     if (isset($_FILES['imagen']['name']) && !empty($_FILES['imagen']['name'])):
         $subir = new imgUpldr;
         $subir->__set("_new_name", date("Ymdhis") . "_carousel");
-        $subir->__set("_dest", "../assets/images/");
+        $subir->__set("_dest", "../assets/images/principal/");
         $subida = $subir->init($_FILES['imagen']);
         if (!empty($subida)):
             $error['imagen'] = $subida;
         else:
-            $imagen = "http://localhost/sindicatoUno/assets/images/" . $subir->_name;
+            $imagen = "http://localhost/sindicatoUno/assets/images/principal/" . $subir->_name;
         endif;
     endif;
 
@@ -162,7 +162,7 @@ elseif (isset($_POST['id_texto']) &&
                     $principal->setUrl_foto($imagen);
                     if (!empty($principal->getPrincipal()['url_foto']) && $principal->getPrincipal()['url_foto'] !== null):
                         $nombre_imagen = basename(parse_url($principal->getPrincipal()['url_foto'])['path']);
-                        unlink("../assets/images/" . $nombre_imagen);
+                        unlink("../assets/images/principal/" . $nombre_imagen);
                         $accion = "update";
                     else:
                         $accion = "insert";
@@ -367,12 +367,12 @@ elseif (isset($_POST['id_texto']) &&
     if (isset($_FILES['imagen']['name']) && !empty($_FILES['imagen']['name'])):
         $subir = new imgUpldr;
         $subir->__set("_new_name", date("Ymdhis") . "_tarjeta");
-        $subir->__set("_dest", "../assets/images/");
+        $subir->__set("_dest", "../assets/images/principal/");
         $subida = $subir->init($_FILES['imagen']);
         if (!empty($subida)):
             $error['imagen'] = $subida;
         else:
-            $imagen = "http://localhost/sindicatoUno/assets/images/" . $subir->_name;
+            $imagen = "http://localhost/sindicatoUno/assets/images/principal/" . $subir->_name;
         endif;
     endif;
 
@@ -400,7 +400,7 @@ elseif (isset($_POST['id_texto']) &&
                     $principal->setUrl_foto($imagen);
                     if (!empty($principal->getPrincipal()['url_foto']) && $principal->getPrincipal()['url_foto'] !== null):
                         $nombre_imagen = basename(parse_url($principal->getPrincipal()['url_foto'])['path']);
-                        unlink("../assets/images/" . $nombre_imagen);
+                        unlink("../assets/images/principal/" . $nombre_imagen);
                         $accion = "update";
                     else:
                         $accion = "insert";
@@ -450,12 +450,12 @@ elseif (isset($_POST['id_texto']) &&
     if (isset($_FILES['imagen']['name']) && !empty($_FILES['imagen']['name'])):
         $subir = new imgUpldr;
         $subir->__set("_new_name", date("Ymdhis") . "_about");
-        $subir->__set("_dest", "../assets/images/");
+        $subir->__set("_dest", "../assets/images/principal/");
         $subida = $subir->init($_FILES['imagen']);
         if (!empty($subida)):
             $error['imagen'] = $subida;
         else:
-            $imagen = "http://localhost/sindicatoUno/assets/images/" . $subir->_name;
+            $imagen = "http://localhost/sindicatoUno/assets/images/principal/" . $subir->_name;
         endif;
     endif;
 
@@ -483,7 +483,7 @@ elseif (isset($_POST['id_texto']) &&
                     $principal->setUrl_foto($imagen);
                     if (!empty($principal->getPrincipal()['url_foto']) && $principal->getPrincipal()['url_foto'] !== null):
                         $nombre_imagen = basename(parse_url($principal->getPrincipal()['url_foto'])['path']);
-                        unlink("../assets/images/" . $nombre_imagen);
+                        unlink("../assets/images/principal/" . $nombre_imagen);
                         $accion = "update";
                     else:
                         $accion = "insert";

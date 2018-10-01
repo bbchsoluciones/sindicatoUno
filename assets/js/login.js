@@ -17,7 +17,6 @@ $("#iniciar_sesion").click(function (event) {
         },
         success: function (response) {
             setTimeout(function () {
-                $('.overlay_fullscreen').toggleClass("d-none");
                 $("#iniciar_sesion").prop("disabled", false);
                 var json = JSON.parse(response);
                 $('html, body').animate({
@@ -26,6 +25,7 @@ $("#iniciar_sesion").click(function (event) {
                 if (json.pagina != null || json.pagina !== undefined) {
                     window.location = json.pagina;
                 } else if (json.clase != null || json.clase !== undefined) {
+                    $('.overlay_fullscreen').toggleClass("d-none");
                     $("#mensaje").html('<div class="rounded-0 alert alert-' + json['clase'] + '" role="alert">' +
                         '<strong>' + json['titulo'] + '</strong> ' + json['mensaje'] + '' +
                         '</div>').fadeIn().delay(5000).fadeOut();

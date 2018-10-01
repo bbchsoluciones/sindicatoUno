@@ -358,7 +358,7 @@ class PrincipalM
             $consulta->bindParam(':id_texto', $this->id_texto);
             if ($consulta->execute()) {
                 $nombre_imagen = basename(parse_url($this->url_foto)['path']);
-                unlink("../assets/images/" . $nombre_imagen);
+                unlink("../assets/images/principal/" . $nombre_imagen);
                 return true;
             } else {
                 //Error

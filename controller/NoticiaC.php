@@ -36,7 +36,7 @@ if (isset($_POST['titulo']) &&
 
     if (isset($_FILES['url_foto_noticia']['name']) && !empty($_FILES['url_foto_noticia']['name'])):
         $subir = new imgUpldr;
-        $subir->__set("_new_name",date("Ymdhis")."_noticia");
+        $subir->__set("_new_name",date("Ymdhis"));
         $subir->__set("_dest","../assets/images/noticia/");
         $imagen = $subir->init($_FILES['url_foto_noticia']);
         if (!empty($imagen)):
@@ -98,7 +98,7 @@ elseif (isset($_POST['id_noticia']) &&
 
     if (isset($_FILES['url_foto_noticia']['name']) && !empty($_FILES['url_foto_noticia']['name'])):
         $subir = new imgUpldr;
-        $subir->__set("_new_name",date("Ymdhis")."_noticia");
+        $subir->__set("_new_name",date("Ymdhis"));
         $subir->__set("_dest","../assets/images/noticia/");
         $imagen = $subir->init($_FILES['url_foto_noticia']);
         if (!empty($imagen)):
