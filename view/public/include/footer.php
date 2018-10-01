@@ -34,12 +34,12 @@
     </div>
   </div>
 </div>
-<footer class="footer pt-4 pb-3">
-  <div class="container">
-    <p class="float-right">
+<footer class="footer">
+  <div class="container py-4">
+    <span class="float-right">
       Sitio Desarrollado por BBCHSOLUCIONES
-    </p>
-    <p>&copy; 2018-2019 Todos los derechos reservados</p>
+    </span>
+    <span>&copy; 2018-2019 Todos los derechos reservados</span>
   </div>
 </footer>
 
