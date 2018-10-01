@@ -4,6 +4,7 @@ include 'include/header.php';
 <div class="gallery">
   <div class="container">
     <h3 class="text-secondary"><i class="fa fa-images pr-3"></i>Galería</h3>
+    <div class="no_registros d-flex justify-content-center"></div>
     <div class="row m-0">
       <div class="col-md-6 topMain"></div>
       <div class="col-md-6 p-0">

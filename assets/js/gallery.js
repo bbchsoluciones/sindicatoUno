@@ -51,27 +51,59 @@ function mostrar_galeria() {
         var json = JSON.parse(response);
         var c = 0;
         var n = 0;
-        for (var i = 0; i < json.galeria.length; i++) {
-          if (parseInt(json.galeria[i].destacado) === 1) {
-            n+=1;
-            if (c === 0) {
-              $(".topMain").append('<div class="card big" style="background: url(' + json.galeria[i].url_foto_galeria + ') top center">' +
-                '<a class="cursor" onclick="currentSlide(' + c + ')">' +
-                '<div class="overlay-card animated fadeIn" style="display:none">' +
-                '<div class="container h-100">' +
-                '<div class="row align-items-center h-100">' +
-                '<div class="col-8 mx-auto">' +
-                '<div class="text-center">' +
-                '<i class="fa fa-search-plus animated zoomIn"></i>' +
-                '</div>' +
-                '</div>' +
-                '</div>' +
-                '</div>' +
-                '</div>' +
-                '</a>' +
+        if (json.galeria !==null && json.galeria !==undefined && json.galeria.length>0) {
+          for (var i = 0; i < json.galeria.length; i++) {
+            if (parseInt(json.galeria[i].destacado) === 1) {
+              n += 1;
+              if (c === 0) {
+                $(".topMain").append('<div class="card big" style="background: url(' + json.galeria[i].url_foto_galeria + ') top center">' +
+                  '<a class="cursor" onclick="currentSlide(' + c + ')">' +
+                  '<div class="overlay-card animated fadeIn" style="display:none">' +
+                  '<div class="container h-100">' +
+                  '<div class="row align-items-center h-100">' +
+                  '<div class="col-8 mx-auto">' +
+                  '<div class="text-center">' +
+                  '<i class="fa fa-search-plus animated zoomIn"></i>' +
+                  '</div>' +
+                  '</div>' +
+                  '</div>' +
+                  '</div>' +
+                  '</div>' +
+                  '</a>' +
+                  '</div>');
+              } else {
+                $(".topSecondary").append('<div class="col-md-6 sec_top">' +
+                  '<div class="card normal" style="background: url(' + json.galeria[i].url_foto_galeria + ') top center">' +
+                  '<a class="cursor" onclick="currentSlide(' + c + ')">' +
+                  '<div class="overlay-card animated fadeIn" style="display:none">' +
+                  '<div class="container h-100">' +
+                  '<div class="row align-items-center h-100">' +
+                  '<div class="col-8 mx-auto">' +
+                  '<div class="text-center">' +
+                  '<i class="fa fa-search-plus animated zoomIn"></i>' +
+                  '</div>' +
+                  '</div>' +
+                  '</div>' +
+                  '</div>' +
+                  '</div>' +
+                  '</a>' +
+                  '</div>' +
+                  '</div>');
+              }
+
+              $(".slidesContainer").append('<div class="mySlides animated fadeIn" id="slide_' + c + '">' +
+                '<div class="numbertext">' + n + ' / ' + json.galeria.length + '</div>' +
+                '<img src="' + json.galeria[i].url_foto_galeria + '">' +
                 '</div>');
-            } else {
-              $(".topSecondary").append('<div class="col-md-6 sec_top">' +
+              c++;
+            }
+          }
+          c--;
+          for (var i = 0; i < json.galeria.length; i++) {
+            if (parseInt(json.galeria[i].destacado) !== 1) {
+              c += 1;
+              n += 1;
+              $(".galeria_normal").append('<div class="col-md-4 sec_top">' +
                 '<div class="card normal" style="background: url(' + json.galeria[i].url_foto_galeria + ') top center">' +
                 '<a class="cursor" onclick="currentSlide(' + c + ')">' +
                 '<div class="overlay-card animated fadeIn" style="display:none">' +
@@ -88,42 +120,14 @@ function mostrar_galeria() {
                 '</a>' +
                 '</div>' +
                 '</div>');
+              $(".slidesContainer").append('<div class="mySlides animated fadeIn" id="slide_' + c + '">' +
+                '<div class="numbertext">' + n + ' / ' + json.galeria.length + '</div>' +
+                '<img src="' + json.galeria[i].url_foto_galeria + '">' +
+                '</div>');
             }
-            
-            $(".slidesContainer").append('<div class="mySlides animated fadeIn" id="slide_' + c + '">' +
-              '<div class="numbertext">' + n + ' / ' + json.galeria.length + '</div>' +
-              '<img src="' + json.galeria[i].url_foto_galeria + '">' +
-              '</div>');
-              c++;
           }
-        }
-        c--;
-        for (var i = 0; i < json.galeria.length; i++) {
-          if (parseInt(json.galeria[i].destacado) !== 1) {
-            c+=1;
-            n+=1;
-            $(".galeria_normal").append('<div class="col-md-4 sec_top">' +
-              '<div class="card normal" style="background: url(' + json.galeria[i].url_foto_galeria + ') top center">' +
-              '<a class="cursor" onclick="currentSlide(' + c + ')">' +
-              '<div class="overlay-card animated fadeIn" style="display:none">' +
-              '<div class="container h-100">' +
-              '<div class="row align-items-center h-100">' +
-              '<div class="col-8 mx-auto">' +
-              '<div class="text-center">' +
-              '<i class="fa fa-search-plus animated zoomIn"></i>' +
-              '</div>' +
-              '</div>' +
-              '</div>' +
-              '</div>' +
-              '</div>' +
-              '</a>' +
-              '</div>' +
-              '</div>');
-            $(".slidesContainer").append('<div class="mySlides animated fadeIn" id="slide_' + c + '">' +
-              '<div class="numbertext">' + n + ' / ' + json.galeria.length + '</div>' +
-              '<img src="' + json.galeria[i].url_foto_galeria + '">' +
-              '</div>');
-          }
+        } else {
+          $(".no_registros").html('<h5 class="text-secondary mt-5">No hay contenido que mostrar en estos momentos.</h5>');
         }
 
       } catch (err) {}

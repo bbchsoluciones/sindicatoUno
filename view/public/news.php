@@ -4,6 +4,7 @@
 ?>
 <div class="news-page container">
     <h3 class="text-secondary"><i class="fa fa-newspaper pr-3"></i>Noticias</h3>
+    <?php    if(!empty($n)): ?>
     <div class="row">
         <?php 
         
@@ -44,6 +45,16 @@
             endif;
             endforeach; ?>
         </div>
+        <?php     
+        else:
+        ?>
+        <div class="no_registros d-flex justify-content-center">
+            <h5 class="text-secondary mt-5">
+            No hay contenido que mostrar en estos momentos.
+            </h5>
+        </div>
+        <?php
+    endif;?>
     </div>
     <?php
     include('include/footer.php');

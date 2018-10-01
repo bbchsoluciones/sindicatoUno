@@ -16,6 +16,7 @@ include 'include/header.php';
     </div>
   </div>
   <div id="mensaje"></div>
+  <div class="no_registros d-flex justify-content-center"></div>
   <div class="row m-0" id="list-images"></div>
   <div class="overlay-carousel d-none">
     <div class="overlay-container-carousel">

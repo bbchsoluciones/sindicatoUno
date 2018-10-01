@@ -89,7 +89,7 @@ $(function () {
 
 
                 } //end for
-            }else{
+            } else {
                 $("#js-upload-submit").prop("disabled", false);
             }
 
@@ -182,46 +182,50 @@ function mostrar_galeria() {
                 var c = 0;
                 var destacado = 0;
                 var totalDestacado = parseInt(json.total);
-                for (var i = 0; i < json.galeria.length; i++) {
-                    c += 1;
-                    destacado = parseInt(json.galeria[i].destacado);
-                    if (destacado === 1) {
-                        favorito = '<button class="destacado btn btn-primary" id="top_' + i + '" onclick="fav(' + i + ')">';
-                        favorito += '<i class="fa fa-star pl-2"></i>';
-                        favorito += '</button>';
-                        $("#destacado_" + i).val(1);
-                    } else if (destacado !== 1 && totalDestacado < 5) {
-                        favorito = '<button class="destacado btn btn-primary" id="top_' + i + '" onclick="fav(' + i + ')">';
-                        favorito += '<i class="far fa-star pl-2"></i>';
-                        favorito += '</button>';
-                        $("#destacado_" + i).val(0);
-                    } else {
-                        favorito = "";
+                if (json.galeria !== null && json.galeria !== undefined && json.galeria.length > 0) {
+                    for (var i = 0; i < json.galeria.length; i++) {
+                        c += 1;
+                        destacado = parseInt(json.galeria[i].destacado);
+                        if (destacado === 1) {
+                            favorito = '<button class="destacado btn btn-primary" id="top_' + i + '" onclick="fav(' + i + ')">';
+                            favorito += '<i class="fa fa-star pl-2"></i>';
+                            favorito += '</button>';
+                            $("#destacado_" + i).val(1);
+                        } else if (destacado !== 1 && totalDestacado < 5) {
+                            favorito = '<button class="destacado btn btn-primary" id="top_' + i + '" onclick="fav(' + i + ')">';
+                            favorito += '<i class="far fa-star pl-2"></i>';
+                            favorito += '</button>';
+                            $("#destacado_" + i).val(0);
+                        } else {
+                            favorito = "";
+                        }
+                        $("#list-images").append('<div class="col-md-4 p-2">' +
+                            '<input id="destacado_' + i + '" type="text" class="d-none" value="">' +
+                            '<input id="id_foto_galeria_' + i + '" type="text" class="d-none" value="' + json.galeria[i].id_foto_galeria + '">' +
+                            '<div class="card normal" style="background: url(' + json.galeria[i].url_foto_galeria + ') top center no-repeat">' +
+                            '<a class="cursor" onclick="currentSlide(' + i + ')">' +
+                            '<div class="overlay-card animated fadeIn" style="display:none">' +
+                            '<div class="container h-100">' +
+                            '<div class="row align-items-center h-100">' +
+                            '<div class="col-8 mx-auto">' +
+                            '<div class="text-center"><i class="fa fa-search-plus animated zoomIn"></i></div>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>' +
+                            '</a>' +
+                            favorito +
+                            '<button class="del-img btn btn-danger" id="trash_' + i + '" onclick="eliminar_confirmar(' + i + ",'" + json.galeria[i].nombre_imagen + "'" + ')"><i class="fa fa-trash pr-2"></i></button>' +
+                            '<span class="name bg-info text-light">' + json.galeria[i].nombre_imagen + '</span>' +
+                            '</div>' +
+                            '</div>');
+                        $(".slidesContainer").append('<div class="mySlides animated fadeIn" id="slide_' + i + '">' +
+                            '<div class="numbertext">' + c + ' / ' + json.galeria.length + '</div>' +
+                            '<img src="' + json.galeria[i].url_foto_galeria + '">' +
+                            '</div>');
                     }
-                    $("#list-images").append('<div class="col-md-4 p-2">' +
-                        '<input id="destacado_' + i + '" type="text" class="d-none" value="">' +
-                        '<input id="id_foto_galeria_' + i + '" type="text" class="d-none" value="' + json.galeria[i].id_foto_galeria + '">' +
-                        '<div class="card normal" style="background: url(' + json.galeria[i].url_foto_galeria + ') top center no-repeat">' +
-                        '<a class="cursor" onclick="currentSlide(' + i + ')">' +
-                        '<div class="overlay-card animated fadeIn" style="display:none">' +
-                        '<div class="container h-100">' +
-                        '<div class="row align-items-center h-100">' +
-                        '<div class="col-8 mx-auto">' +
-                        '<div class="text-center"><i class="fa fa-search-plus animated zoomIn"></i></div>' +
-                        '</div>' +
-                        '</div>' +
-                        '</div>' +
-                        '</div>' +
-                        '</a>' +
-                        favorito +
-                        '<button class="del-img btn btn-danger" id="trash_' + i + '" onclick="eliminar_confirmar(' + i + ",'" + json.galeria[i].nombre_imagen + "'" + ')"><i class="fa fa-trash pr-2"></i></button>' +
-                        '<span class="name bg-info text-light">' + json.galeria[i].nombre_imagen + '</span>' +
-                        '</div>' +
-                        '</div>');
-                    $(".slidesContainer").append('<div class="mySlides animated fadeIn" id="slide_' + i + '">' +
-                        '<div class="numbertext">' + c + ' / ' + json.galeria.length + '</div>' +
-                        '<img src="' + json.galeria[i].url_foto_galeria + '">' +
-                        '</div>');
+                } else {
+                    $(".no_registros").html('<h5 class="text-secondary mt-5">No hay contenido que mostrar en estos momentos.</h5>');
                 }
 
             } catch (err) {}
@@ -242,8 +246,8 @@ function fav(id) {
 }
 
 function actualizar_destacado(id) {
-    var height = $("#list-images").height()+"px";
-    $("#list-images").css("height",height);
+    var height = $("#list-images").height() + "px";
+    $("#list-images").css("height", height);
     $("#top_" + id).prop("disabled", true);
     var parametros = {
         id_foto_galeria: $("#id_foto_galeria_" + id).val(),
@@ -279,10 +283,11 @@ function eliminar_confirmar(id, nombre) {
     var nombre = nombre;
     var funcion = "eliminar_imagen('" + id + "')";
     modalConfirmarEliminarImagenG(nombre, funcion);
-    limpiarCampo("#mensaje","div");
+    limpiarCampo("#mensaje", "div");
 }
 
 function eliminar_imagen(id) {
+    limpiarCampo("#mensaje", "div");
     $("#trash_" + id).prop("disabled", true);
     var parametros = {
         id_foto_galeria: $("#id_foto_galeria_" + id).val(),
@@ -298,8 +303,8 @@ function eliminar_imagen(id) {
                 mostrar_galeria();
                 var json = JSON.parse(response);
                 $("#mensaje").html('<div class="rounded-0 alert alert-' + json['clase'] + '" role="alert">' +
-                '<strong>' + json['titulo'] + '</strong> ' + json['mensaje'] + '' +
-                '</div>').fadeIn().delay(5000).fadeOut();
+                    '<strong>' + json['titulo'] + '</strong> ' + json['mensaje'] + '' +
+                    '</div>').fadeIn().delay(5000).fadeOut();
 
 
             } catch (err) {
