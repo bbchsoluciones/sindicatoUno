@@ -29,17 +29,29 @@ if (isset($_POST['run_trabajador']) && isset($_POST['contrasena_trabajador'])):
                     //echo "SuperAdmin";
                 elseif ($t->getTrabajador()['tipo_usuario_id_tipo_usuario'] == 1):
                     //Admin
-                    session_start();
-                    $_SESSION['tipo_usuario'] = 1;
-                    $_SESSION['run_trabajador'] = $t->getTrabajador()['run_trabajador'];
-                    $data['pagina'] =  "http://localhost/sindicatoUno/view/intranet/admin/index.php";
+                    if ($t->getTrabajador()['estado_trabajador_id_estado_trabajador'] == 0):
+                        $data['titulo'] = "Oops, hubo un error!";
+                        $data['mensaje'] = "Cuenta inactiva.";
+                        $data['clase'] = "danger";
+                    else:
+                        session_start();
+                        $_SESSION['tipo_usuario'] = 1;
+                        $_SESSION['run_trabajador'] = $t->getTrabajador()['run_trabajador'];
+                        $data['pagina'] =  "http://localhost/sindicatoUno/view/intranet/admin/index.php";
+                    endif;                    
                     //echo "Administrador";
                 elseif ($t->getTrabajador()['tipo_usuario_id_tipo_usuario'] == 2):
                     //User
-                    session_start();
-                    $_SESSION['tipo_usuario'] = 2;
-                    $_SESSION['run_trabajador'] = $t->getTrabajador()['run_trabajador'];
-                    $data['pagina'] = "http://localhost/sindicatoUno/view/intranet/user/index.php";
+                    if ($t->getTrabajador()['estado_trabajador_id_estado_trabajador'] == 0):
+                        $data['titulo'] = "Oops, hubo un error!";
+                        $data['mensaje'] = "Cuenta inactiva.";
+                        $data['clase'] = "danger";
+                    else:
+                        session_start();
+                        $_SESSION['tipo_usuario'] = 2;
+                        $_SESSION['run_trabajador'] = $t->getTrabajador()['run_trabajador'];
+                        $data['pagina'] = "http://localhost/sindicatoUno/view/intranet/user/index.php";
+                    endif;                    
                     //echo "Usuario";
                 endif;
             else:

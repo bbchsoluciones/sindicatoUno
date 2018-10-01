@@ -7,7 +7,7 @@ include('include/header.php');
                     <a href="index.php">Resumen</a>
                 </li>
                 <li class="breadcrumb-item active">Usuario</li>
-                <li class="breadcrumb-item active">Nuevo Usuario</li>
+                <li class="breadcrumb-item active">Registrar</li>
             </ol>
 
         <div id="alertCorreo"></div>
@@ -65,27 +65,35 @@ include('include/header.php');
                             </div>
                             <div class="form-group ">
                                 <label for="rut">Rut</label>
-                                <input type="text" class="form-control dataUser" placeholder="Rut" id="rut_trabajador" name="run_trabajador">
+                                <input type="text" class="form-control dataUser" placeholder="Rut" id="rut_trabajador" name="run_trabajador" value="">
                             </div>
+
+                            <div class="form-group">
+                                <label for="nomb">Nombres</label>
+                                <input type="text" class="form-control dataUser" placeholder="Nombres" name="nombres_trabajador" value="">
+                            </div>
+                            <div class="form-group">
+                                <label for="ape">Apellidos</label>
+                                <input type="text" class="form-control dataUser" placeholder="Apellidos" name="apellidos_trabajador" value="">
+                            </div>
+
                             <div class="form-group">
                                 <label for="contra">Contraseña</label>
                                 <div class="input-group">
                                     <input type="password" id="password" class="form-control dataUser" placeholder="Contraseña" aria-label="" aria-describedby="basic-addon2"
-                                        name="contrasena_trabajador">
+                                        name="contrasena_trabajador" value="">
                                     <div class="input-group-append">
                                         <button class="btn btn-outline-secondary" type="button" id="genPass">Generar</button>
                                     </div>
                                 </div>
         
                             </div>
+
                             <div class="form-group">
-                                <label for="nomb">Nombres</label>
-                                <input type="text" class="form-control dataUser" placeholder="Nombres" name="nombres_trabajador">
+                                <label for="email">Email</label>
+                                <input type="text" class="form-control dataUser" placeholder="Email (Opcional)" name="email" value="">
                             </div>
-                            <div class="form-group">
-                                <label for="ape">Apellidos</label>
-                                <input type="text" class="form-control dataUser" placeholder="Apellidos" name="apellidos_trabajador">
-                            </div>
+                            
                             <div class="form-group ">
                                 <label>Tipo de Usuario </label>
                                 <select id="tipo_usuario" class="form-control dataUser" name="tipo_usuario">
@@ -93,6 +101,10 @@ include('include/header.php');
                                     <option value="1">Administrador</option>
                                     <option value="2">Usuario</option>
                                 </select>
+                            </div>
+
+                            <div id="loadRegistrar" class="form-group text-center d-none">
+                                <img src="../../../assets/images/loading.gif" width="35">
                             </div>
         
                             <button type="submit" class="btn btn-success" id="registrar">Crear Usuario</button>

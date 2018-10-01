@@ -4,10 +4,10 @@ include 'include/header.php';
     <div class="registerNews-page">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="#">Resumen</a>
+                <a href="index.php">Resumen</a>
             </li>
             <li class="breadcrumb-item active">Noticias</li>
-            <li class="breadcrumb-item active">Crear noticia</li>
+            <li class="breadcrumb-item active">Crear</li>
         </ol>
         <div class="container news_container">
             <div class="row mb-5">

@@ -4,10 +4,10 @@ include('include/header.php');
 <div class="userManage-page">
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
-            <a href="#">Resumen</a>
+            <a href="index.php">Resumen</a>
         </li>
         <li class="breadcrumb-item active">Usuario</li>
-        <li class="breadcrumb-item active">Administrar Usuario</li>
+        <li class="breadcrumb-item active">Administrar</li>
     </ol>
 
     <div class="row mb-5">
