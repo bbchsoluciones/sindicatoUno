@@ -7,7 +7,7 @@
                 <span>Resumen</span>
               </a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item">
               <a class="nav-link" href="imageApproval.php">
                 <i class="fas fa-envelope pr-2"></i>
                 <span>Solicitudes</span>
