@@ -118,6 +118,10 @@ function mostrarTrabajador(buttonId, rut) {
                     Object.keys(json).forEach(function (nombreColumna) {
                         asignarMultiplesValores(json, nombreColumna);
                     });
+                    var etop = $('.info_user').offset().top;
+                    $('html, body').animate({
+                        scrollTop: etop
+                    }, 1000);
 
                 } catch (err) {
                     //alert(err)
