@@ -1,6 +1,6 @@
 <?php
-  include('include/header.php');
-  include('../../controller/PrincipalC.php');
+   require_once('include/header.php');
+   require_once('../../controller/PrincipalC.php');
   ?>
 <div class="container padding-about">
   <!-- Three columns of text below the carousel -->
@@ -80,5 +80,5 @@
 <?php endFor; ?>
 </div>
 <?php
-    include('include/footer.php');
+     require_once('include/footer.php');
 ?>

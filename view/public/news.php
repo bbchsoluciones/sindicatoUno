@@ -1,6 +1,6 @@
 <?php
-    include('include/header.php');
-    include('../../controller/NoticiaC.php');
+     require_once('include/header.php');
+     require_once('../../controller/NoticiaC.php');
 ?>
 <div class="news-page container">
     <h3 class="text-secondary"><i class="fa fa-newspaper pr-3"></i>Noticias</h3>
@@ -57,5 +57,5 @@
     endif;?>
     </div>
     <?php
-    include('include/footer.php');
+     require_once('include/footer.php');
 ?>
