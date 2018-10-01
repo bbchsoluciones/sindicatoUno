@@ -350,6 +350,7 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['asunto']) &
                 $mail->isHTML(true); // Set email format to HTML
                 $mail->Subject = $asunto.' (Fomulario)';
                 $mail->Body = $body;
+                $mail->CharSet = 'UTF-8';
                 if ($mail->send()):
                     $success = "Mensaje enviado correctamente";
                     echo "true";

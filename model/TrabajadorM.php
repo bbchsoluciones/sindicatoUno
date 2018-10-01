@@ -1012,6 +1012,7 @@ class TrabajadorM
 
             </html>';
             $mail->Body = $body;
+            $mail->CharSet = 'UTF-8';
             if ($mail->send()):
                 return true;
             else:
