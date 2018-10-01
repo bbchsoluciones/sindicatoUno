@@ -1,6 +1,6 @@
 <?php
-include 'include/header.php';
-include '../../controller/NoticiaC.php';
+ require_once('include/header.php');
+ require_once('../../controller/NoticiaC.php');
 if (!empty($noticia)):
     $fecha = ucwords(strftime("%d %b %Y", strtotime($noticia['fecha_publicacion'])));
     $hora = strftime("%H:%m", strtotime($noticia['fecha_publicacion']));
@@ -83,5 +83,5 @@ else:
     header("HTTP/1.0 404 Not Found");
     exit();
 endif;
-include 'include/footer.php';
+require_once('include/footer.php');
 ?>

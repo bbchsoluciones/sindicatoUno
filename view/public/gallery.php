@@ -1,5 +1,5 @@
 <?php
-include 'include/header.php';
+ require_once('include/header.php');
 ?>
 <div class="gallery">
   <div class="container">
@@ -40,5 +40,5 @@ include 'include/header.php';
 </div>
 
 <?php
-include 'include/footer.php';
+ require_once('include/footer.php');
 ?>
