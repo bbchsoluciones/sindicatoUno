@@ -67,7 +67,6 @@ include('include/header.php');
                                         <button id="btnEliminar" class="btn btn-danger btn-sm" disabled><i class="fas fa-trash-alt"></i></button>
                                    </div> --></div>
                     <div class="card-body">
-                            <div class="container p-0 m-0">
                                     <div id="alertMov"></div>
                                 <div class="row justify-content-center">
                                     <div class="col-md-12">
@@ -115,7 +114,6 @@ include('include/header.php');
                                             
                                     </div>
                                 </div>
-                            </div>
                             
                     </div>
                 </div>
