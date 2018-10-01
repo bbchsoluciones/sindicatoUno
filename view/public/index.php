@@ -52,7 +52,7 @@
     </div>
   </div>
 
-  <div class="home-text bg-info text-white">
+  <div class="home-text" style="background:#454545;color:#ccc;">
     <div class="container">
       <h1 class="text-center p-5">
         <?php echo $principal['destacado'][0]['titulo_']; ?>

@@ -130,9 +130,18 @@ main {
 /*     position: relative;
     margin-top: -100px;
     height: 100px; */
+    background: #525252;
+    color: #fff;
     clear: both;
 }
-
+.extra_footer{
+    background: #313131;
+    color: #fff;
+}
+.extra_footer div{
+    color: #ccc;
+    font-size: 15px;
+}
 /* FIN FOOTER */
 
 /* INICIO */
