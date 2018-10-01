@@ -2,21 +2,14 @@
 include 'include/header.php';
 ?>
 <div class="gallery">
-
-
   <div class="container">
-
-    <h4 class="text-center">Destacadas</h4>
-
+    <h3 class="text-secondary pt-5"><i class="fa fa-images pr-3"></i>Galería</h3>
     <div class="row m-0">
       <div class="col-md-6 topMain"></div>
       <div class="col-md-6 p-0">
         <div class="row m-0 topSecondary"></div>
       </div>
     </div>
-
-    <h4 class="text-center">Últimas</h4>
-
     <div class="row m-0 galeria_normal"></div>
   </div>
 
