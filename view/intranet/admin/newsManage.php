@@ -4,10 +4,10 @@ include('include/header.php');
 <div class="newsManage-page pr-0 position-relative">
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
-            <a href="#">Resumen</a>
+            <a href="index.php">Resumen</a>
         </li>
         <li class="breadcrumb-item active">Noticias</li>
-        <li class="breadcrumb-item active">Mostrar Noticias</li>
+        <li class="breadcrumb-item active">Administrar</li>
     </ol>
 
     <div class="card mb-3">

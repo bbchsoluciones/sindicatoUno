@@ -4,10 +4,10 @@ include 'include/header.php';
 <div class="homeManage-page pr-0 position-relative">
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
-            <a href="#">Resumen</a>
+            <a href="index.php">Resumen</a>
         </li>
+        <li class="breadcrumb-item active">Página Principal</li>
         <li class="breadcrumb-item active">Inicio</li>
-        <li class="breadcrumb-item active">Editar</li>
     </ol>
     <div id="mensaje"></div>
     <div id="accordion" class="mb-3">

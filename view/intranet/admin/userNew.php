@@ -7,7 +7,7 @@ include('include/header.php');
                     <a href="index.php">Resumen</a>
                 </li>
                 <li class="breadcrumb-item active">Usuario</li>
-                <li class="breadcrumb-item active">Nuevo Usuario</li>
+                <li class="breadcrumb-item active">Registrar</li>
             </ol>
 
         <div id="alertCorreo"></div>

@@ -4,11 +4,10 @@ include 'include/header.php';
     <div class="son-register-page">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="#">Resumen</a>
+                <a href="index.php">Resumen</a>
             </li>
             <li class="breadcrumb-item active">Usuario</li>
-            <li class="breadcrumb-item active">Hijo</li>
-            <li class="breadcrumb-item active">Registrar</li>
+            <li class="breadcrumb-item active">Registrar Hijo</li>
         </ol>
         <div class="container">
             <div class="text-center title">Ingresar rut trabajador: </div>

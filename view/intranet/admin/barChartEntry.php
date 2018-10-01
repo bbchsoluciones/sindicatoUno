@@ -4,7 +4,7 @@ include('include/header.php');
 <div class="register-page">
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
-            <a href="#">Resumen</a>
+            <a href="index.php">Resumen</a>
         </li>
         <li class="breadcrumb-item active">Movimiento</li>
         <li class="breadcrumb-item active">Gráfico Ingreso</li>
