@@ -34,7 +34,7 @@
     </div>
   </div>
 </div>
-<footer class="footer py-3">
+<footer class="footer pt-4 pb-3">
   <div class="container">
     <p class="float-right">
       Sitio Desarrollado por BBCHSOLUCIONES
