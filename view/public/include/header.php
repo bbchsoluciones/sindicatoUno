@@ -55,7 +55,7 @@
           </button>
           <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
             <ul id="botonera" class="navbar-nav menu_buttons">
-              <li class="nav-item active">
+              <li class="nav-item">
                 <a id="btn" class="nav-link" href="index.php">Inicio
                   <span class="sr-only">(current)</span>
                 </a>
