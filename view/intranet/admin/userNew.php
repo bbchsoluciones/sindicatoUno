@@ -13,8 +13,8 @@ include('include/header.php');
     <div id="alertCorreo"></div>
     <div id="load"></div>
 
-    <div id="form-registrar" class="row padding-register">
-        <div class="col-12" id="usernew_container">
+    <div class="user_registrar_container">
+        <div class="usernew_container">
             <form action="" method="POST" id="register_form">
                 <div class="form-group">
                     <div class="jumbotron jumbotron-fluid">
