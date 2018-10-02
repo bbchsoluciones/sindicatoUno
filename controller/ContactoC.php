@@ -337,7 +337,7 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['asunto']) &
                 $mail->setFrom("no-reply@sinabrinks.cl", "no-reply@sinabrinks.cl");
                 //$mail->setFrom('bbchsoluciones@gmail.com');
                 //$mail->addAddress($destinatario, $destinatario);     // Add a recipient
-                $mail->addAddress("braulio.briones@gmail.com"); // Add a recipient
+                $mail->addAddress("info@sinabrinks.cl"); // Add a recipient
                 //$mail->addReplyTo('info@example.com', 'Information');
                 //$mail->addCC('cc@example.com');
                 //$mail->addBCC('bcc@example.com');
