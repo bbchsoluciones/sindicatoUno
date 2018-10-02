@@ -312,7 +312,7 @@ $("#registrar").click(function (event) {
                     validacion_campos(json, indice);
                 });
             } else {
-                limpiarCampos("#usernew_container", "input");
+                limpiarCampos("#register_form", "input");
                 limpiarSeleccionado("#tipo_usuario");
             }
 
