@@ -974,7 +974,7 @@ class TrabajadorM
                                     <td class="footer" bgcolor="#ededed">
                                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                             <tr>
-                                                <td align="center" class="footercopy" style="text-align: justify;">
+                                                <td align="center" class="footercopy" style="text-align: center;">
                                                     Hecho por BBCHSOLUCIONES 2018. Todos los derechos reservados
                                                 </td>
                                             </tr>
