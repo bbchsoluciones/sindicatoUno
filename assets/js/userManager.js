@@ -53,9 +53,9 @@ function mostrarTrabajadores(pagina) {
                 $("#objeto").text(json.objeto.valor);
                 paginador(json.cantidad_total[0], pagina, registrosPorPagina);
                 for (i = 0; i < json.trabajador[0].length; i++) {
-                    $('#listUsers').append('<button type="button" class="btn btn-secondary" id="worker' + i + '" onclick="mostrarTrabajador(' + i + ",'" + json.trabajador[0][i].run_trabajador + "'" + ')">' + $.formatRut(json.trabajador[0][i].run_trabajador) + " " + json.trabajador[0][i].nombres_trabajador + '<i class="fa fa-edit text-secondary"></i></button>');
+                    $('#listUsers').append('<button type="button" class="btn btn-secondary" id="worker' + i + '" onclick="mostrarTrabajador(' + i + ",'" + json.trabajador[0][i].run_trabajador + "',1" + ')">' + $.formatRut(json.trabajador[0][i].run_trabajador) + " " + json.trabajador[0][i].nombres_trabajador + '<i class="fa fa-edit text-secondary"></i></button>');
                     if (i === 0) {
-                        mostrarTrabajador(i, json.trabajador[0][i].run_trabajador);
+                        mostrarTrabajador(i, json.trabajador[0][i].run_trabajador, 0);
                     }
                 }
             } catch (err) {
@@ -72,7 +72,7 @@ function activeUser(buttonId) {
     $("#" + id).addClass("active");
 }
 
-function mostrarTrabajador(buttonId, rut) {
+function mostrarTrabajador(buttonId, rut, click) {
 
     $('.info_user').addClass("d-none");
     limpiarFormulario("#save-form");
@@ -118,10 +118,12 @@ function mostrarTrabajador(buttonId, rut) {
                     Object.keys(json).forEach(function (nombreColumna) {
                         asignarMultiplesValores(json, nombreColumna);
                     });
-                    var etop = $('.info_user').offset().top;
-                    $('html, body').animate({
-                        scrollTop: etop
-                    }, 1000);
+                    if (click === 1) {
+                        var etop = $('.info_user').offset().top;
+                        $('html, body').animate({
+                            scrollTop: etop
+                        }, 1000);
+                    }
 
                 } catch (err) {
                     //alert(err)
@@ -200,9 +202,9 @@ function ordenarTrabajadores(pagina, accion, objeto, bool) {
                 $("#objeto").text(json.objeto.valor);
                 paginador(json.cantidad_total[0], pagina, registrosPorPagina);
                 for (i = 0; i < json.trabajador[0].length; i++) {
-                    $('#listUsers').append('<button type="button" class="btn btn-secondary" id="worker' + i + '" onclick="mostrarTrabajador(' + i + ",'" + json.trabajador[0][i].run_trabajador + "'" + ')">' + $.formatRut(json.trabajador[0][i].run_trabajador) + " " + json.trabajador[0][i].nombres_trabajador + '<i class="fa fa-edit text-secondary"></i></button>');
+                    $('#listUsers').append('<button type="button" class="btn btn-secondary" id="worker' + i + '" onclick="mostrarTrabajador(' + i + ",'" + json.trabajador[0][i].run_trabajador + "',1" + ')">' + $.formatRut(json.trabajador[0][i].run_trabajador) + " " + json.trabajador[0][i].nombres_trabajador + '<i class="fa fa-edit text-secondary"></i></button>');
                     if (i === 0) {
-                        mostrarTrabajador(i, json.trabajador[0][i].run_trabajador);
+                        mostrarTrabajador(i, json.trabajador[0][i].run_trabajador, 0);
                     }
                 }
             } catch (err) {
@@ -254,9 +256,9 @@ function buscarTrabajador(pagina, accion, objeto) {
                     $("#objeto").text(json.objeto.valor);
                     paginador(json.cantidad_total[0], pagina, registrosPorPagina);
                     for (i = 0; i < json.trabajador[0].length; i++) {
-                        $('#listUsers').append('<button type="button" class="btn btn-secondary" id="worker' + i + '" onclick="mostrarTrabajador(' + i + ",'" + json.trabajador[0][i].run_trabajador + "'" + ')">' + $.formatRut(json.trabajador[0][i].run_trabajador) + " " + json.trabajador[0][i].nombres_trabajador + '<i class="fa fa-edit text-secondary"></i></button>');
+                        $('#listUsers').append('<button type="button" class="btn btn-secondary" id="worker' + i + '" onclick="mostrarTrabajador(' + i + ",'" + json.trabajador[0][i].run_trabajador + "',1" + ')">' + $.formatRut(json.trabajador[0][i].run_trabajador) + " " + json.trabajador[0][i].nombres_trabajador + '<i class="fa fa-edit text-secondary"></i></button>');
                         if (i === 0) {
-                            mostrarTrabajador(i, json.trabajador[0][i].run_trabajador);
+                            mostrarTrabajador(i, json.trabajador[0][i].run_trabajador, 0);
                         }
                     }
                 } catch (err) {
@@ -286,20 +288,20 @@ $("#registrar").click(function (event) {
     var form = $('#register_form')[0];
     form = new FormData(form);
     form.append("registrar", 1);
-    $("#register_form input, select, button").each(function(){
+    $("#register_form input, select, button").each(function () {
         $(this).prop("disabled", true);
     });
-    $('#loadRegistrar').removeClass('d-none');    
+    $('#loadRegistrar').removeClass('d-none');
     $.ajax({
         type: "POST",
         url: "../../../controller/TrabajadorC.php",
-        processData: false, 
+        processData: false,
         contentType: false,
         cache: false,
         data: form,
         timeout: 600000,
         success: function (response) {
-            $("#register_form input, select, button").each(function(){
+            $("#register_form input, select, button").each(function () {
                 $(this).prop("disabled", false);
             });
             $('#loadRegistrar').addClass('d-none');
@@ -311,7 +313,7 @@ $("#registrar").click(function (event) {
                 });
             } else {
                 limpiarCampos("#usernew_container", "input");
-                    limpiarSeleccionado("#tipo_usuario");
+                limpiarSeleccionado("#tipo_usuario");
             }
 
         },
