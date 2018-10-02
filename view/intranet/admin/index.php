@@ -60,7 +60,6 @@ include('include/header.php');
         </div>
         <div id="miembrosIndex" class="mr-5 text-bold"></div>
         <div id="activosIndex" class="mr-5 text-success font-weight-bold" style="font-size: 12px;"></div>
-        <div id="pendientesIndex" class="mr-5 text-warning font-weight-bold" style="font-size: 12px;"></div>
         <div id="inactivosIndex" class="mr-5 text-danger font-weight-bold" style="font-size: 12px;"></div>
       </div>
       <a id="btnMiembros" class="card-footer text-white clearfix small z-1 d-none" href="userManage.php">

@@ -167,7 +167,6 @@ function selectDatosTrabajador() {
                     $('#btnMiembros').removeClass("d-none");
                     $('#miembrosIndex').html(json.data[0][0].total+" Miembros");
                     $('#activosIndex').html(json.data[0][0].activos+" Activos");
-                    $('#pendientesIndex').html(json.data[0][0].pendientes+" Pendientes");
                     $('#inactivosIndex').html(json.data[0][0].inactivos+" Inactivos");
     
                 } catch (err) {

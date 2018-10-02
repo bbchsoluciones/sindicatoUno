@@ -11,7 +11,7 @@ include('include/header.php');
     </ol>
 
     <div class="row mb-5">
-        <div class="col-md-3 mb-5">
+        <div class="col-xl-3 col-lg-4 col-md-12 mb-5">
             <div class="btn-group-vertical">
                 <div class="label">Ordenar
                     <i class="fa fa-sort text-secondary"></i>
@@ -49,7 +49,7 @@ include('include/header.php');
 
 
 
-        <div class="col-md-9" id="allDataUser">
+        <div class="col-xl-9 col-lg-8 col-md-12" id="allDataUser">
             <div class="overlay_data_trabajador d-none">
                 <div class="loadData_container">
                     <img src="../../../assets/images/load_data.gif" width="100">
